@@ -1,5 +1,5 @@
 // ============================================
-// CENTRAL DE FERRAMENTAS
+// FERRAMENTAS - ADM
 // ============================================
 
 document.addEventListener("DOMContentLoaded", () => {
