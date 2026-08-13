@@ -1,4 +1,10 @@
 /* ============================================
+   FERRAMENTAS ADM
+   DARK PREMIUM SYSTEM UI
+============================================ */
+
+
+/* ============================================
    RESET
 ============================================ */
 
@@ -10,11 +16,39 @@
 
 
 /* ============================================
+   VARIÁVEIS
+============================================ */
+
+:root {
+
+    --bg: #07111f;
+    --bg-secondary: #0b1728;
+
+    --panel: rgba(15, 27, 44, 0.88);
+
+    --panel-light: rgba(255, 255, 255, 0.97);
+
+    --primary: #3b82f6;
+    --primary-light: #60a5fa;
+
+    --text: #172033;
+    --text-light: #94a3b8;
+    --text-white: #f8fafc;
+
+    --border-dark: rgba(148, 163, 184, 0.12);
+    --border-light: #e5eaf0;
+
+}
+
+
+/* ============================================
    HTML
 ============================================ */
 
 html {
+
     scroll-behavior: smooth;
+
 }
 
 
@@ -23,6 +57,8 @@ html {
 ============================================ */
 
 body {
+
+    min-height: 100vh;
 
     font-family:
         Inter,
@@ -33,58 +69,24 @@ body {
         Arial,
         sans-serif;
 
-    min-height: 100vh;
+    color: var(--text-white);
 
-    color: #172033;
-
-    background-color: #eef2f6;
-
-    /*
-       Fundo técnico:
-       - cinza azulado
-       - grade discreta
-       - aparência de sistema
-    */
-
-    background-image:
+    background:
 
         linear-gradient(
-            rgba(255,255,255,0.55) 1px,
-            transparent 1px
-        ),
-
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,0.55) 1px,
-            transparent 1px
-        ),
-
-        radial-gradient(
-            circle at 15% 10%,
-            rgba(37,99,235,0.07),
-            transparent 28%
-        ),
-
-        radial-gradient(
-            circle at 85% 85%,
-            rgba(15,118,110,0.05),
-            transparent 30%
+            135deg,
+            #06101d 0%,
+            #0a1627 48%,
+            #07111f 100%
         );
 
-    background-size:
-        32px 32px,
-        32px 32px,
-        auto,
-        auto;
-
-    background-attachment: fixed;
-
     overflow-x: hidden;
+
 }
 
 
 /* ============================================
-   FUNDO DECORATIVO
+   FUNDO DO SISTEMA
 ============================================ */
 
 .background {
@@ -93,27 +95,87 @@ body {
 
     inset: 0;
 
-    overflow: hidden;
+    z-index: 0;
 
     pointer-events: none;
 
-    z-index: 0;
+    overflow: hidden;
+
 }
 
 
 /* ============================================
-   FORMAS DO FUNDO
+   GRID TÉCNICO
+============================================ */
+
+.background::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+
+        linear-gradient(
+            rgba(148, 163, 184, 0.045) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(148, 163, 184, 0.045) 1px,
+            transparent 1px
+        );
+
+    background-size: 42px 42px;
+
+    opacity: 0.55;
+
+}
+
+
+/* ============================================
+   LINHAS HORIZONTAIS
+============================================ */
+
+.background::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    top: 32%;
+
+    height: 1px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(59,130,246,0.12),
+            transparent
+        );
+
+}
+
+
+/* ============================================
+   FORMAS DECORATIVAS
 ============================================ */
 
 .background-shape {
 
     position: absolute;
 
-    border-radius: 50%;
-
     pointer-events: none;
 
-    opacity: 0.5;
 }
 
 
@@ -123,22 +185,25 @@ body {
 
 .shape-one {
 
-    width: 480px;
+    width: 600px;
 
-    height: 480px;
+    height: 1px;
 
-    top: -300px;
+    top: 19%;
 
-    right: -180px;
+    left: -100px;
 
     background:
-        radial-gradient(
-            circle,
-            rgba(37,99,235,0.09),
-            transparent 68%
+
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(59,130,246,0.25),
+            transparent
         );
 
-    filter: blur(3px);
+    transform: rotate(-8deg);
+
 }
 
 
@@ -148,22 +213,25 @@ body {
 
 .shape-two {
 
-    width: 520px;
+    width: 500px;
 
-    height: 520px;
+    height: 1px;
 
-    bottom: -350px;
+    right: -100px;
 
-    left: -250px;
+    bottom: 25%;
 
     background:
-        radial-gradient(
-            circle,
-            rgba(16,185,129,0.07),
-            transparent 68%
+
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(96,165,250,0.15),
+            transparent
         );
 
-    filter: blur(3px);
+    transform: rotate(8deg);
+
 }
 
 
@@ -173,22 +241,21 @@ body {
 
 .shape-three {
 
-    width: 350px;
+    width: 220px;
 
-    height: 350px;
+    height: 220px;
 
-    top: 42%;
+    top: 8%;
 
-    right: -230px;
+    right: 7%;
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(59,130,246,0.045),
-            transparent 68%
-        );
+    border:
 
-    filter: blur(3px);
+        1px solid
+        rgba(96,165,250,0.08);
+
+    transform: rotate(45deg);
+
 }
 
 
@@ -206,7 +273,8 @@ body {
 
     margin: 0 auto;
 
-    padding: 42px 0 30px;
+    padding: 34px 0 30px;
+
 }
 
 
@@ -216,32 +284,69 @@ body {
 
 .header {
 
-    display: flex;
+    position: relative;
 
-    justify-content: space-between;
+    display: flex;
 
     align-items: center;
 
+    justify-content: space-between;
+
     gap: 30px;
 
-    padding: 24px 30px;
+    padding: 21px 25px;
 
     background:
-        rgba(255,255,255,0.94);
+
+        linear-gradient(
+            135deg,
+            rgba(17,32,52,0.96),
+            rgba(10,23,39,0.94)
+        );
 
     border:
-        1px solid
-        rgba(203,213,225,0.75);
 
-    border-radius: 18px;
+        1px solid
+        var(--border-dark);
+
+    border-radius: 20px;
 
     box-shadow:
-        0 10px 30px rgba(15,23,42,0.06),
-        0 2px 5px rgba(15,23,42,0.03);
 
-    backdrop-filter: blur(12px);
+        0 25px 70px
+        rgba(0,0,0,0.25),
 
-    -webkit-backdrop-filter: blur(12px);
+        inset 0 1px 0
+        rgba(255,255,255,0.035);
+
+}
+
+
+/* linha superior */
+
+.header::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 25px;
+
+    right: 25px;
+
+    height: 1px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(96,165,250,0.35),
+            transparent
+        );
+
 }
 
 
@@ -255,7 +360,8 @@ body {
 
     align-items: center;
 
-    gap: 17px;
+    gap: 16px;
+
 }
 
 
@@ -267,9 +373,9 @@ body {
 
     position: relative;
 
-    width: 60px;
+    width: 58px;
 
-    height: 60px;
+    height: 58px;
 
     flex-shrink: 0;
 
@@ -279,18 +385,24 @@ body {
 
     justify-content: center;
 
-    padding: 8px;
+    padding: 7px;
 
     background: #ffffff;
 
-    border-radius: 14px;
+    border-radius: 15px;
 
-    border: 1px solid #e2e8f0;
+    border:
+
+        1px solid
+        rgba(255,255,255,0.9);
 
     box-shadow:
-        0 5px 15px rgba(15,23,42,0.07);
+
+        0 8px 25px
+        rgba(0,0,0,0.25);
 
     overflow: hidden;
+
 }
 
 
@@ -303,6 +415,7 @@ body {
     object-fit: contain;
 
     display: block;
+
 }
 
 
@@ -318,17 +431,19 @@ body {
 
     height: 100%;
 
-    font-size: 14px;
+    font-size: 13px;
 
     font-weight: 800;
 
-    color: #2563eb;
+    color: var(--primary);
+
 }
 
 
 .brand-logo.logo-error .logo-fallback {
 
     display: flex;
+
 }
 
 
@@ -338,23 +453,25 @@ body {
 
 .brand-info h1 {
 
-    font-size: 23px;
+    font-size: 22px;
 
     font-weight: 700;
 
-    letter-spacing: -0.5px;
+    letter-spacing: -0.6px;
 
-    color: #172033;
+    color: #ffffff;
+
 }
 
 
 .brand-info p {
 
-    margin-top: 5px;
+    margin-top: 4px;
 
     font-size: 13px;
 
-    color: #64748b;
+    color: #94a3b8;
+
 }
 
 
@@ -372,19 +489,25 @@ body {
 
     padding: 8px 13px;
 
-    background: #f0fdf4;
+    background:
 
-    color: #15803d;
+        rgba(34,197,94,0.08);
 
-    border: 1px solid #dcfce7;
+    border:
+
+        1px solid
+        rgba(34,197,94,0.18);
+
+    color: #86efac;
 
     border-radius: 50px;
 
-    font-size: 12px;
+    font-size: 11px;
 
-    font-weight: 600;
+    font-weight: 700;
 
     white-space: nowrap;
+
 }
 
 
@@ -399,7 +522,13 @@ body {
     background: #22c55e;
 
     box-shadow:
-        0 0 0 4px rgba(34,197,94,0.10);
+
+        0 0 0 4px
+        rgba(34,197,94,0.08),
+
+        0 0 12px
+        rgba(34,197,94,0.5);
+
 }
 
 
@@ -409,58 +538,89 @@ body {
 
 .intro {
 
-    margin: 45px 4px 28px;
+    margin: 46px 4px 31px;
+
 }
 
 
 .intro-label {
 
-    display: inline-block;
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
 
     font-size: 10px;
 
     font-weight: 800;
 
-    letter-spacing: 1.6px;
+    letter-spacing: 1.8px;
 
-    color: #2563eb;
+    color: #60a5fa;
 
-    margin-bottom: 4px;
+}
+
+
+.intro-label::before {
+
+    content: "";
+
+    width: 18px;
+
+    height: 2px;
+
+    border-radius: 5px;
+
+    background: #3b82f6;
+
+    box-shadow:
+
+        0 0 8px
+        rgba(59,130,246,0.5);
+
 }
 
 
 .intro h2 {
 
-    font-size: 29px;
+    margin-top: 9px;
 
-    letter-spacing: -1px;
+    font-size: 31px;
 
-    color: #172033;
+    line-height: 1.1;
+
+    letter-spacing: -1.2px;
+
+    color: #ffffff;
+
 }
 
 
 .intro p {
 
-    margin-top: 6px;
-
-    color: #64748b;
+    margin-top: 8px;
 
     font-size: 14px;
+
+    color: #94a3b8;
+
 }
 
 
 /* ============================================
-   CATEGORIA
+   CATEGORY
 ============================================ */
 
 .category {
 
-    margin-bottom: 36px;
+    margin-bottom: 38px;
+
 }
 
 
 /* ============================================
-   TÍTULO DA CATEGORIA
+   CATEGORY TITLE
 ============================================ */
 
 .category-title {
@@ -472,14 +632,15 @@ body {
     gap: 12px;
 
     margin-bottom: 15px;
+
 }
 
 
 .category-icon {
 
-    width: 39px;
+    width: 40px;
 
-    height: 39px;
+    height: 40px;
 
     display: flex;
 
@@ -487,16 +648,24 @@ body {
 
     justify-content: center;
 
-    background: rgba(255,255,255,0.92);
+    background:
 
-    border: 1px solid #e2e8f0;
+        rgba(255,255,255,0.06);
 
-    border-radius: 11px;
+    border:
 
-    box-shadow:
-        0 3px 10px rgba(15,23,42,0.04);
+        1px solid
+        rgba(255,255,255,0.08);
+
+    border-radius: 12px;
 
     font-size: 18px;
+
+    box-shadow:
+
+        inset 0 1px 0
+        rgba(255,255,255,0.04);
+
 }
 
 
@@ -506,7 +675,8 @@ body {
 
     font-weight: 700;
 
-    color: #172033;
+    color: #f8fafc;
+
 }
 
 
@@ -514,11 +684,12 @@ body {
 
     display: block;
 
-    margin-top: 2px;
-
-    color: #7b8798;
+    margin-top: 3px;
 
     font-size: 11px;
+
+    color: #64748b;
+
 }
 
 
@@ -533,7 +704,8 @@ body {
     grid-template-columns:
         repeat(3, minmax(0, 1fr));
 
-    gap: 16px;
+    gap: 17px;
+
 }
 
 
@@ -549,7 +721,7 @@ body {
 
     flex-direction: column;
 
-    min-height: 225px;
+    min-height: 228px;
 
     padding: 21px;
 
@@ -558,44 +730,107 @@ body {
     color: inherit;
 
     background:
-        rgba(255,255,255,0.96);
+
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.99),
+            rgba(247,249,252,0.98)
+        );
 
     border:
-        1px solid #e2e8f0;
 
-    border-radius: 16px;
+        1px solid
+        rgba(255,255,255,0.75);
+
+    border-radius: 17px;
 
     overflow: hidden;
 
     box-shadow:
-        0 4px 14px rgba(15,23,42,0.035);
+
+        0 12px 35px
+        rgba(0,0,0,0.16),
+
+        0 2px 5px
+        rgba(0,0,0,0.08);
 
     transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        border-color 0.2s ease;
-}
 
+        transform 0.25s ease,
 
-.tool-card:hover {
+        box-shadow 0.25s ease,
 
-    transform: translateY(-4px);
+        border-color 0.25s ease;
 
-    border-color: #cbd5e1;
-
-    box-shadow:
-        0 14px 32px rgba(15,23,42,0.09);
-}
-
-
-.tool-card:active {
-
-    transform: translateY(-1px);
 }
 
 
 /* ============================================
-   LINHA DE DESTAQUE
+   BRILHO
+============================================ */
+
+.tool-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+
+    height: 180px;
+
+    top: -110px;
+
+    right: -90px;
+
+    border-radius: 50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(37,99,235,0.09),
+            transparent 70%
+        );
+
+    transition:
+        transform 0.35s ease;
+
+}
+
+
+.tool-card:hover::before {
+
+    transform: scale(1.5);
+
+}
+
+
+/* ============================================
+   HOVER
+============================================ */
+
+.tool-card:hover {
+
+    transform: translateY(-6px);
+
+    border-color:
+
+        rgba(96,165,250,0.45);
+
+    box-shadow:
+
+        0 25px 55px
+        rgba(0,0,0,0.24),
+
+        0 0 0 1px
+        rgba(59,130,246,0.05);
+
+}
+
+
+/* ============================================
+   LINHA INFERIOR
 ============================================ */
 
 .tool-card::after {
@@ -604,50 +839,65 @@ body {
 
     position: absolute;
 
-    left: 0;
+    left: 20px;
 
-    right: 0;
+    right: 20px;
 
     bottom: 0;
 
     height: 3px;
 
+    border-radius: 10px 10px 0 0;
+
     background: transparent;
 
     transition:
-        background 0.2s ease;
+        background 0.25s ease;
+
 }
 
 
 .tool-card:hover::after {
 
-    background: #2563eb;
+    background:
+
+        linear-gradient(
+            90deg,
+            #2563eb,
+            #60a5fa
+        );
+
 }
 
 
 /* ============================================
-   TOPO DO CARD
+   TOPO
 ============================================ */
 
 .tool-top {
+
+    position: relative;
+
+    z-index: 1;
 
     display: flex;
 
     align-items: center;
 
     justify-content: space-between;
+
 }
 
 
 /* ============================================
-   ÍCONES DAS FERRAMENTAS
+   ÍCONES
 ============================================ */
 
 .tool-icon {
 
-    width: 47px;
+    width: 49px;
 
-    height: 47px;
+    height: 49px;
 
     display: flex;
 
@@ -655,39 +905,80 @@ body {
 
     justify-content: center;
 
-    border-radius: 13px;
+    border-radius: 14px;
 
-    font-size: 20px;
+    font-size: 21px;
+
+    box-shadow:
+
+        inset 0 0 0 1px
+        rgba(255,255,255,0.7);
+
 }
 
 
 .blue {
 
-    background: #eff6ff;
+    background:
+
+        linear-gradient(
+            145deg,
+            #eff6ff,
+            #dbeafe
+        );
+
 }
 
 
 .green {
 
-    background: #ecfdf5;
+    background:
+
+        linear-gradient(
+            145deg,
+            #ecfdf5,
+            #d1fae5
+        );
+
 }
 
 
 .orange {
 
-    background: #fff7ed;
+    background:
+
+        linear-gradient(
+            145deg,
+            #fff7ed,
+            #ffedd5
+        );
+
 }
 
 
 .purple {
 
-    background: #f5f3ff;
+    background:
+
+        linear-gradient(
+            145deg,
+            #f5f3ff,
+            #ede9fe
+        );
+
 }
 
 
 .whatsapp {
 
-    background: #ecfdf5;
+    background:
+
+        linear-gradient(
+            145deg,
+            #ecfdf5,
+            #d1fae5
+        );
+
 }
 
 
@@ -697,9 +988,9 @@ body {
 
 .arrow {
 
-    width: 31px;
+    width: 32px;
 
-    height: 31px;
+    height: 32px;
 
     display: flex;
 
@@ -713,34 +1004,46 @@ body {
 
     background: #f8fafc;
 
+    border: 1px solid #e7ebf1;
+
     font-size: 16px;
 
     transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        color 0.2s ease;
+
+        transform 0.25s ease,
+
+        background 0.25s ease,
+
+        color 0.25s ease;
+
 }
 
 
 .tool-card:hover .arrow {
 
-    transform: translateX(3px);
+    transform: translateX(4px);
 
     background: #eff6ff;
 
     color: #2563eb;
+
 }
 
 
 /* ============================================
-   CONTEÚDO DO CARD
+   CONTEÚDO
 ============================================ */
 
 .tool-content {
 
+    position: relative;
+
+    z-index: 1;
+
     flex: 1;
 
-    padding-top: 19px;
+    padding-top: 20px;
+
 }
 
 
@@ -748,9 +1051,12 @@ body {
 
     font-size: 16px;
 
-    font-weight: 700;
+    font-weight: 750;
+
+    letter-spacing: -0.2px;
 
     color: #172033;
+
 }
 
 
@@ -758,29 +1064,40 @@ body {
 
     margin-top: 7px;
 
-    color: #64748b;
+    max-width: 320px;
 
     font-size: 12.5px;
 
-    line-height: 1.6;
+    line-height: 1.65;
+
+    color: #64748b;
+
 }
 
 
 /* ============================================
-   RODAPÉ DO CARD
+   FOOTER DO CARD
 ============================================ */
 
 .tool-footer {
 
+    position: relative;
+
+    z-index: 1;
+
     padding-top: 15px;
 
-    border-top: 1px solid #eef2f6;
+    border-top:
+
+        1px solid
+        #edf1f5;
 
     color: #2563eb;
 
-    font-size: 11.5px;
+    font-size: 11px;
 
-    font-weight: 700;
+    font-weight: 750;
+
 }
 
 
@@ -792,30 +1109,32 @@ footer {
 
     display: flex;
 
-    justify-content: center;
-
     align-items: center;
+
+    justify-content: center;
 
     gap: 9px;
 
-    margin-top: 10px;
+    margin-top: 12px;
 
-    padding: 24px 0;
+    padding: 25px 0;
 
-    color: #94a3b8;
+    color: #64748b;
 
     font-size: 11px;
+
 }
 
 
 .separator {
 
-    color: #cbd5e1;
+    color: #334155;
+
 }
 
 
 /* ============================================
-   RESPONSIVO - TABLET
+   TABLET
 ============================================ */
 
 @media (max-width: 900px) {
@@ -824,13 +1143,14 @@ footer {
 
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
+
     }
 
 }
 
 
 /* ============================================
-   RESPONSIVO - CELULAR
+   CELULAR
 ============================================ */
 
 @media (max-width: 650px) {
@@ -839,7 +1159,8 @@ footer {
 
         width: 94%;
 
-        padding-top: 20px;
+        padding-top: 18px;
+
     }
 
 
@@ -849,79 +1170,83 @@ footer {
 
         align-items: flex-start;
 
-        padding: 20px;
+        padding: 19px;
+
     }
 
 
     .header-status {
 
         align-self: flex-start;
+
     }
 
 
     .brand-info h1 {
 
         font-size: 20px;
+
     }
 
 
     .brand-info p {
 
         font-size: 12px;
+
     }
 
 
     .brand-logo {
 
-        width: 55px;
+        width: 54px;
 
-        height: 55px;
+        height: 54px;
+
     }
 
 
     .intro {
 
         margin-top: 32px;
+
     }
 
 
     .intro h2 {
 
-        font-size: 25px;
+        font-size: 27px;
+
     }
 
 
     .tools-grid {
 
         grid-template-columns: 1fr;
+
     }
 
 
     .tool-card {
 
         min-height: 205px;
-    }
 
-
-    footer {
-
-        padding-bottom: 20px;
     }
 
 }
 
 
 /* ============================================
-   ACESSIBILIDADE
+   REDUÇÃO DE MOVIMENTO
 ============================================ */
 
 @media (prefers-reduced-motion: reduce) {
 
     * {
 
+        transition: none !important;
+
         scroll-behavior: auto !important;
 
-        transition: none !important;
     }
 
 }
