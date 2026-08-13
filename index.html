@@ -5,25 +5,47 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>Central de Ferramentas</title>
+    <meta
+        name="description"
+        content="Ferramentas administrativas para facilitar as tarefas do dia a dia."
+    >
 
-    <link rel="stylesheet" href="css/style.css">
+    <title>Ferramentas ADM</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
 
 </head>
 
+
 <body>
 
+
     <!-- =========================================
-         FUNDO
+         FUNDO DECORATIVO
     ========================================== -->
 
-    <div class="background"></div>
+    <div class="background">
+
+        <div class="background-shape shape-one"></div>
+
+        <div class="background-shape shape-two"></div>
+
+        <div class="background-shape shape-three"></div>
+
+    </div>
+
 
 
     <!-- =========================================
-         CONTAINER PRINCIPAL
+         CONTEÚDO PRINCIPAL
     ========================================== -->
 
     <main class="container">
@@ -35,55 +57,83 @@
 
         <header class="header">
 
+
             <div class="brand">
 
-                <div class="brand-icon">
-                    ⚙
+
+                <!-- LOGO -->
+
+                <div class="brand-logo">
+
+                    <img
+                        src="img/logo.png"
+                        alt="Logo"
+                        onerror="this.style.display='none'; this.parentElement.classList.add('logo-error');"
+                    >
+
+                    <span class="logo-fallback">
+                        ADM
+                    </span>
+
                 </div>
 
-                <div>
 
-                    <h1>Central de Ferramentas</h1>
+
+                <!-- NOME -->
+
+                <div class="brand-info">
+
+                    <h1>
+                        Ferramentas ADM
+                    </h1>
 
                     <p>
-                        Soluções desenvolvidas para facilitar
-                        as tarefas do dia a dia.
+                        Soluções internas para facilitar o dia a dia.
                     </p>
 
                 </div>
 
+
             </div>
 
+
+
+            <!-- STATUS -->
 
             <div class="header-status">
 
                 <span class="status-dot"></span>
 
-                Ferramentas disponíveis
+                Sistema disponível
 
             </div>
+
 
         </header>
 
 
 
         <!-- =====================================
-             TÍTULO
+             INTRODUÇÃO
         ====================================== -->
 
         <section class="intro">
 
+
             <span class="intro-label">
-                FERRAMENTAS INTERNAS
+                CENTRAL ADMINISTRATIVA
             </span>
+
 
             <h2>
                 Acesso rápido
             </h2>
 
+
             <p>
                 Selecione uma ferramenta para começar.
             </p>
+
 
         </section>
 
@@ -96,21 +146,27 @@
         <section class="tools-section">
 
 
-            <!-- ================================
+
+            <!-- ==================================
                  CONFERÊNCIAS
-            ================================= -->
+            =================================== -->
 
             <div class="category">
 
+
                 <div class="category-title">
 
-                    <span class="category-icon">
+
+                    <div class="category-icon">
                         📊
-                    </span>
+                    </div>
+
 
                     <div>
 
-                        <h3>Conferências</h3>
+                        <h3>
+                            Conferências
+                        </h3>
 
                         <span>
                             Análise e conferência de informações
@@ -118,10 +174,13 @@
 
                     </div>
 
+
                 </div>
 
 
+
                 <div class="tools-grid">
+
 
 
                     <!-- CONFERÊNCIA PREMMIA -->
@@ -131,31 +190,40 @@
                         class="tool-card"
                     >
 
+
                         <div class="tool-top">
+
 
                             <div class="tool-icon blue">
                                 📊
                             </div>
 
+
                             <span class="arrow">
                                 →
                             </span>
 
+
                         </div>
+
 
 
                         <div class="tool-content">
 
+
                             <h4>
                                 Conferência Premmia
                             </h4>
+
 
                             <p>
                                 Confira divergências entre os
                                 lançamentos do Premmia e o sistema interno.
                             </p>
 
+
                         </div>
+
 
 
                         <div class="tool-footer">
@@ -166,30 +234,37 @@
 
                         </div>
 
+
                     </a>
 
 
                 </div>
 
+
             </div>
 
 
 
-            <!-- ================================
+            <!-- ==================================
                  DOCUMENTOS
-            ================================= -->
+            =================================== -->
 
             <div class="category">
 
+
                 <div class="category-title">
 
-                    <span class="category-icon">
+
+                    <div class="category-icon">
                         🧾
-                    </span>
+                    </div>
+
 
                     <div>
 
-                        <h3>Documentos</h3>
+                        <h3>
+                            Documentos
+                        </h3>
 
                         <span>
                             Emissão e impressão de documentos
@@ -197,10 +272,13 @@
 
                     </div>
 
+
                 </div>
 
 
+
                 <div class="tools-grid">
+
 
 
                     <!-- RECIBO -->
@@ -210,31 +288,40 @@
                         class="tool-card"
                     >
 
+
                         <div class="tool-top">
+
 
                             <div class="tool-icon green">
                                 🧾
                             </div>
 
+
                             <span class="arrow">
                                 →
                             </span>
 
+
                         </div>
+
 
 
                         <div class="tool-content">
 
+
                             <h4>
                                 Emissão de Recibo
                             </h4>
+
 
                             <p>
                                 Gere recibos de forma rápida
                                 e pronta para impressão.
                             </p>
 
+
                         </div>
+
 
 
                         <div class="tool-footer">
@@ -244,6 +331,7 @@
                             </span>
 
                         </div>
+
 
                     </a>
 
@@ -256,31 +344,40 @@
                         class="tool-card"
                     >
 
+
                         <div class="tool-top">
+
 
                             <div class="tool-icon orange">
                                 🎫
                             </div>
 
+
                             <span class="arrow">
                                 →
                             </span>
 
+
                         </div>
+
 
 
                         <div class="tool-content">
 
+
                             <h4>
                                 Emissão de Vale
                             </h4>
+
 
                             <p>
                                 Emita vales para funcionários
                                 de maneira simples e organizada.
                             </p>
 
+
                         </div>
+
 
 
                         <div class="tool-footer">
@@ -291,30 +388,37 @@
 
                         </div>
 
+
                     </a>
 
 
                 </div>
 
+
             </div>
 
 
 
-            <!-- ================================
+            <!-- ==================================
                  OPERACIONAL
-            ================================= -->
+            =================================== -->
 
             <div class="category">
 
+
                 <div class="category-title">
 
-                    <span class="category-icon">
+
+                    <div class="category-icon">
                         ⛽
-                    </span>
+                    </div>
+
 
                     <div>
 
-                        <h3>Operacional</h3>
+                        <h3>
+                            Operacional
+                        </h3>
 
                         <span>
                             Ferramentas para apoio às operações
@@ -322,10 +426,13 @@
 
                     </div>
 
+
                 </div>
 
 
+
                 <div class="tools-grid">
+
 
 
                     <!-- OCORRÊNCIAS PDV -->
@@ -335,31 +442,40 @@
                         class="tool-card"
                     >
 
+
                         <div class="tool-top">
+
 
                             <div class="tool-icon purple">
                                 📝
                             </div>
 
+
                             <span class="arrow">
                                 →
                             </span>
 
+
                         </div>
+
 
 
                         <div class="tool-content">
 
+
                             <h4>
                                 Ocorrências PDV
                             </h4>
+
 
                             <p>
                                 Registre e organize ocorrências
                                 relacionadas ao PDV.
                             </p>
 
+
                         </div>
+
 
 
                         <div class="tool-footer">
@@ -370,30 +486,37 @@
 
                         </div>
 
+
                     </a>
 
 
                 </div>
 
+
             </div>
 
 
 
-            <!-- ================================
+            <!-- ==================================
                  ATENDIMENTO
-            ================================= -->
+            =================================== -->
 
             <div class="category">
 
+
                 <div class="category-title">
 
-                    <span class="category-icon">
+
+                    <div class="category-icon">
                         💬
-                    </span>
+                    </div>
+
 
                     <div>
 
-                        <h3>Atendimento</h3>
+                        <h3>
+                            Atendimento
+                        </h3>
 
                         <span>
                             Comunicação e relacionamento com clientes
@@ -401,10 +524,13 @@
 
                     </div>
 
+
                 </div>
 
 
+
                 <div class="tools-grid">
+
 
 
                     <!-- GERADOR DE MENSAGENS -->
@@ -414,31 +540,40 @@
                         class="tool-card"
                     >
 
+
                         <div class="tool-top">
+
 
                             <div class="tool-icon whatsapp">
                                 💬
                             </div>
 
+
                             <span class="arrow">
                                 →
                             </span>
 
+
                         </div>
+
 
 
                         <div class="tool-content">
 
+
                             <h4>
                                 Gerador de MSG para Clientes
                             </h4>
+
 
                             <p>
                                 Gere mensagens padronizadas para
                                 confirmação de transações.
                             </p>
 
+
                         </div>
+
 
 
                         <div class="tool-footer">
@@ -449,10 +584,12 @@
 
                         </div>
 
+
                     </a>
 
 
                 </div>
+
 
             </div>
 
@@ -467,17 +604,21 @@
 
         <footer>
 
+
             <span>
-                Central de Ferramentas
+                Ferramentas ADM
             </span>
+
 
             <span class="separator">
                 •
             </span>
 
+
             <span>
                 Uso interno
             </span>
+
 
         </footer>
 
@@ -485,7 +626,9 @@
     </main>
 
 
+
     <script src="js/app.js"></script>
+
 
 </body>
 
