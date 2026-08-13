@@ -3,9 +3,24 @@
 ============================================ */
 
 * {
+
     margin: 0;
+
     padding: 0;
+
     box-sizing: border-box;
+
+}
+
+
+/* ============================================
+   HTML
+============================================ */
+
+html {
+
+    scroll-behavior: smooth;
+
 }
 
 
@@ -29,11 +44,35 @@ body {
     color: #172033;
 
     background:
+
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(37, 99, 235, 0.10),
+            transparent 32%
+        ),
+
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(14, 165, 233, 0.08),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 80% 90%,
+            rgba(16, 185, 129, 0.07),
+            transparent 32%
+        ),
+
         linear-gradient(
             135deg,
-            #f5f7fb 0%,
-            #eef2f7 100%
+            #f8fafc 0%,
+            #eef2f7 50%,
+            #f8fafc 100%
         );
+
+    background-attachment: fixed;
+
+    overflow-x: hidden;
 
 }
 
@@ -48,47 +87,94 @@ body {
 
     inset: 0;
 
-    pointer-events: none;
-
     overflow: hidden;
+
+    pointer-events: none;
 
     z-index: 0;
 
 }
 
-.background::before {
 
-    content: "";
+/* ============================================
+   FORMAS
+============================================ */
+
+.background-shape {
 
     position: absolute;
 
-    width: 500px;
-    height: 500px;
-
-    top: -250px;
-    right: -180px;
-
-    background: rgba(37, 99, 235, 0.08);
-
     border-radius: 50%;
+
+    filter: blur(2px);
+
+    opacity: 0.6;
 
 }
 
-.background::after {
 
-    content: "";
+/* FORMA 1 */
 
-    position: absolute;
+.shape-one {
 
-    width: 400px;
-    height: 400px;
+    width: 420px;
 
-    bottom: -220px;
-    left: -150px;
+    height: 420px;
 
-    background: rgba(16, 185, 129, 0.07);
+    top: -240px;
 
-    border-radius: 50%;
+    right: -130px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(37, 99, 235, 0.10),
+            rgba(37, 99, 235, 0)
+        );
+
+}
+
+
+/* FORMA 2 */
+
+.shape-two {
+
+    width: 500px;
+
+    height: 500px;
+
+    bottom: -320px;
+
+    left: -220px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(16, 185, 129, 0.08),
+            rgba(16, 185, 129, 0)
+        );
+
+}
+
+
+/* FORMA 3 */
+
+.shape-three {
+
+    width: 300px;
+
+    height: 300px;
+
+    top: 45%;
+
+    right: -180px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(59, 130, 246, 0.06),
+            rgba(59, 130, 246, 0)
+        );
 
 }
 
@@ -126,18 +212,26 @@ body {
 
     gap: 30px;
 
-    padding: 28px 32px;
+    padding: 25px 30px;
 
-    background: rgba(255,255,255,0.88);
+    background:
+        rgba(255, 255, 255, 0.88);
 
-    border: 1px solid rgba(255,255,255,0.8);
+    border:
+
+        1px solid
+        rgba(255, 255, 255, 0.85);
 
     border-radius: 22px;
 
     box-shadow:
-        0 15px 45px rgba(15, 23, 42, 0.07);
 
-    backdrop-filter: blur(10px);
+        0 15px 45px
+        rgba(15, 23, 42, 0.07);
+
+    backdrop-filter: blur(14px);
+
+    -webkit-backdrop-filter: blur(14px);
 
 }
 
@@ -156,30 +250,91 @@ body {
 
 }
 
-.brand-icon {
 
-    width: 58px;
-    height: 58px;
+/* ============================================
+   LOGO
+============================================ */
+
+.brand-logo {
+
+    position: relative;
+
+    width: 62px;
+
+    height: 62px;
+
+    flex-shrink: 0;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
+
+    padding: 8px;
+
+    background: #ffffff;
 
     border-radius: 16px;
 
-    background: #172033;
-
-    color: white;
-
-    font-size: 26px;
+    border: 1px solid #e5eaf0;
 
     box-shadow:
-        0 8px 20px rgba(15,23,42,0.18);
+
+        0 8px 22px
+        rgba(15, 23, 42, 0.08);
+
+    overflow: hidden;
 
 }
 
-.brand h1 {
+
+.brand-logo img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+
+}
+
+
+.logo-fallback {
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 100%;
+
+    height: 100%;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    color: #2563eb;
+
+}
+
+
+.brand-logo.logo-error .logo-fallback {
+
+    display: flex;
+
+}
+
+
+/* ============================================
+   BRAND INFO
+============================================ */
+
+.brand-info h1 {
 
     font-size: 24px;
 
@@ -187,9 +342,12 @@ body {
 
     letter-spacing: -0.5px;
 
+    color: #172033;
+
 }
 
-.brand p {
+
+.brand-info p {
 
     margin-top: 5px;
 
@@ -226,16 +384,23 @@ body {
 
     font-weight: 600;
 
+    white-space: nowrap;
+
 }
+
 
 .status-dot {
 
     width: 8px;
+
     height: 8px;
 
     border-radius: 50%;
 
     background: #22c55e;
+
+    box-shadow:
+        0 0 0 4px rgba(34, 197, 94, 0.10);
 
 }
 
@@ -250,6 +415,7 @@ body {
 
 }
 
+
 .intro-label {
 
     font-size: 11px;
@@ -262,6 +428,7 @@ body {
 
 }
 
+
 .intro h2 {
 
     margin-top: 5px;
@@ -270,7 +437,10 @@ body {
 
     letter-spacing: -1px;
 
+    color: #172033;
+
 }
+
 
 .intro p {
 
@@ -284,7 +454,7 @@ body {
 
 
 /* ============================================
-   CATEGORY
+   CATEGORIA
 ============================================ */
 
 .category {
@@ -292,6 +462,7 @@ body {
     margin-bottom: 38px;
 
 }
+
 
 .category-title {
 
@@ -305,26 +476,32 @@ body {
 
 }
 
+
 .category-icon {
 
     width: 40px;
+
     height: 40px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
-    background: white;
+    background: #ffffff;
 
     border-radius: 12px;
 
     box-shadow:
-        0 4px 15px rgba(15,23,42,0.06);
+
+        0 4px 15px
+        rgba(15, 23, 42, 0.06);
 
     font-size: 19px;
 
 }
+
 
 .category-title h3 {
 
@@ -332,9 +509,16 @@ body {
 
     font-weight: 700;
 
+    color: #172033;
+
 }
 
+
 .category-title span {
+
+    display: block;
+
+    margin-top: 2px;
 
     color: #7b8798;
 
@@ -379,7 +563,7 @@ body {
 
     color: inherit;
 
-    background: white;
+    background: #ffffff;
 
     border: 1px solid #e8edf3;
 
@@ -387,12 +571,21 @@ body {
 
     overflow: hidden;
 
+    box-shadow:
+
+        0 4px 18px
+        rgba(15, 23, 42, 0.035);
+
     transition:
+
         transform 0.22s ease,
+
         box-shadow 0.22s ease,
+
         border-color 0.22s ease;
 
 }
+
 
 .tool-card:hover {
 
@@ -401,9 +594,21 @@ body {
     border-color: #d7dee8;
 
     box-shadow:
-        0 18px 40px rgba(15,23,42,0.10);
+
+        0 18px 40px
+        rgba(15, 23, 42, 0.10);
 
 }
+
+
+.tool-card:active {
+
+    transform: translateY(-2px);
+
+}
+
+
+/* LINHA INFERIOR */
 
 .tool-card::after {
 
@@ -412,6 +617,7 @@ body {
     position: absolute;
 
     left: 0;
+
     right: 0;
 
     bottom: 0;
@@ -420,9 +626,11 @@ body {
 
     background: transparent;
 
-    transition: background 0.2s ease;
+    transition:
+        background 0.2s ease;
 
 }
+
 
 .tool-card:hover::after {
 
@@ -432,7 +640,7 @@ body {
 
 
 /* ============================================
-   TOP
+   TOPO DO CARD
 ============================================ */
 
 .tool-top {
@@ -445,14 +653,21 @@ body {
 
 }
 
+
+/* ============================================
+   ÍCONES
+============================================ */
+
 .tool-icon {
 
     width: 48px;
+
     height: 48px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     border-radius: 14px;
@@ -461,11 +676,13 @@ body {
 
 }
 
+
 .blue {
 
     background: #eff6ff;
 
 }
+
 
 .green {
 
@@ -473,11 +690,13 @@ body {
 
 }
 
+
 .orange {
 
     background: #fff7ed;
 
 }
+
 
 .purple {
 
@@ -485,20 +704,28 @@ body {
 
 }
 
+
 .whatsapp {
 
     background: #ecfdf5;
 
 }
 
+
+/* ============================================
+   SETA
+============================================ */
+
 .arrow {
 
     width: 32px;
+
     height: 32px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     border-radius: 50%;
@@ -510,11 +737,15 @@ body {
     font-size: 17px;
 
     transition:
+
         transform 0.2s ease,
+
         background 0.2s ease,
+
         color 0.2s ease;
 
 }
+
 
 .tool-card:hover .arrow {
 
@@ -528,7 +759,7 @@ body {
 
 
 /* ============================================
-   CONTENT
+   CONTEÚDO
 ============================================ */
 
 .tool-content {
@@ -539,6 +770,7 @@ body {
 
 }
 
+
 .tool-content h4 {
 
     font-size: 17px;
@@ -548,6 +780,7 @@ body {
     color: #172033;
 
 }
+
 
 .tool-content p {
 
@@ -563,7 +796,7 @@ body {
 
 
 /* ============================================
-   FOOTER CARD
+   RODAPÉ DO CARD
 ============================================ */
 
 .tool-footer {
@@ -605,6 +838,7 @@ footer {
 
 }
 
+
 .separator {
 
     color: #cbd5e1;
@@ -613,7 +847,7 @@ footer {
 
 
 /* ============================================
-   RESPONSIVO
+   RESPONSIVO - TABLET
 ============================================ */
 
 @media (max-width: 900px) {
@@ -628,6 +862,10 @@ footer {
 }
 
 
+/* ============================================
+   RESPONSIVO - CELULAR
+============================================ */
+
 @media (max-width: 650px) {
 
     .container {
@@ -637,6 +875,7 @@ footer {
         padding-top: 20px;
 
     }
+
 
     .header {
 
@@ -648,17 +887,36 @@ footer {
 
     }
 
+
     .header-status {
 
         align-self: flex-start;
 
     }
 
-    .brand h1 {
+
+    .brand-info h1 {
 
         font-size: 20px;
 
     }
+
+
+    .brand-info p {
+
+        font-size: 13px;
+
+    }
+
+
+    .brand-logo {
+
+        width: 55px;
+
+        height: 55px;
+
+    }
+
 
     .intro {
 
@@ -666,11 +924,13 @@ footer {
 
     }
 
+
     .intro h2 {
 
         font-size: 26px;
 
     }
+
 
     .tools-grid {
 
@@ -678,9 +938,34 @@ footer {
 
     }
 
+
     .tool-card {
 
         min-height: 210px;
+
+    }
+
+
+    footer {
+
+        padding-bottom: 20px;
+
+    }
+
+}
+
+
+/* ============================================
+   REDUÇÃO DE MOVIMENTO
+============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    * {
+
+        scroll-behavior: auto !important;
+
+        transition: none !important;
 
     }
 
