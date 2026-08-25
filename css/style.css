@@ -1024,3 +1024,433 @@ footer {
     }
 
 }
+/* ============================================
+   ADMINISTRADORAS / PORTAIS
+============================================ */
+
+.portal-dropdown {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 100%;
+
+}
+
+
+/* ============================================
+   BOTÃO PRINCIPAL
+============================================ */
+
+.portal-button {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 16px 18px;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 15px;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    text-align: left;
+
+    box-shadow:
+        0 4px 13px
+        rgba(15,23,42,0.035);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.portal-button:hover {
+
+    border-color: #bfdbfe;
+
+    box-shadow:
+        0 10px 24px
+        rgba(15,23,42,0.08);
+
+    transform: translateY(-2px);
+
+}
+
+
+/* ============================================
+   PARTE ESQUERDA
+============================================ */
+
+.portal-button-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+}
+
+
+/* ============================================
+   ÍCONE PRINCIPAL
+============================================ */
+
+.portal-main-icon {
+
+    width: 46px;
+
+    height: 46px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #eff6ff,
+            #dbeafe
+        );
+
+    font-size: 20px;
+
+}
+
+
+/* ============================================
+   TEXTO DO BOTÃO
+============================================ */
+
+.portal-button-left strong {
+
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #172033;
+
+}
+
+
+.portal-button-left span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 11px;
+
+    color: #94a3b8;
+
+}
+
+
+/* ============================================
+   SETA
+============================================ */
+
+.portal-arrow {
+
+    width: 32px;
+
+    height: 32px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f8fafc;
+
+    border: 1px solid #edf1f5;
+
+    color: #64748b;
+
+    font-size: 17px;
+
+    transition:
+        transform 0.25s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+
+}
+
+
+.portal-dropdown.active .portal-arrow {
+
+    transform: rotate(180deg);
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+}
+
+
+/* ============================================
+   LISTA
+============================================ */
+
+.portal-list {
+
+    display: none;
+
+    position: absolute;
+
+    top: calc(100% + 8px);
+
+    left: 0;
+
+    right: 0;
+
+    z-index: 50;
+
+    padding: 7px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 15px;
+
+    box-shadow:
+
+        0 18px 40px
+        rgba(15,23,42,0.13),
+
+        0 3px 8px
+        rgba(15,23,42,0.05);
+
+    max-height: 430px;
+
+    overflow-y: auto;
+
+}
+
+
+/* ============================================
+   LISTA ABERTA
+============================================ */
+
+.portal-dropdown.active .portal-list {
+
+    display: block;
+
+    animation:
+        portalDrop 0.18s ease;
+
+}
+
+
+/* ============================================
+   ANIMAÇÃO
+============================================ */
+
+@keyframes portalDrop {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(-7px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* ============================================
+   ITEM
+============================================ */
+
+.portal-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    width: 100%;
+
+    padding: 10px 11px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    color: #172033;
+
+    transition:
+
+        background 0.18s ease,
+
+        transform 0.18s ease;
+
+}
+
+
+.portal-item:hover {
+
+    background: #f5f8fc;
+
+    transform: translateX(3px);
+
+}
+
+
+/* ============================================
+   ÍCONE DO ITEM
+============================================ */
+
+.portal-item-icon {
+
+    width: 34px;
+
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    border: 1px solid #dbeafe;
+
+}
+
+
+/* ============================================
+   NOME
+============================================ */
+
+.portal-item-name {
+
+    flex: 1;
+
+    font-size: 12.5px;
+
+    font-weight: 650;
+
+    color: #334155;
+
+}
+
+
+/* ============================================
+   SETA ITEM
+============================================ */
+
+.portal-item-arrow {
+
+    color: #94a3b8;
+
+    font-size: 15px;
+
+    transition:
+        color 0.18s ease,
+        transform 0.18s ease;
+
+}
+
+
+.portal-item:hover .portal-item-arrow {
+
+    color: #2563eb;
+
+    transform: translate(2px, -2px);
+
+}
+
+
+/* ============================================
+   SCROLL DA LISTA
+============================================ */
+
+.portal-list::-webkit-scrollbar {
+
+    width: 6px;
+
+}
+
+
+.portal-list::-webkit-scrollbar-track {
+
+    background: transparent;
+
+}
+
+
+.portal-list::-webkit-scrollbar-thumb {
+
+    background: #cbd5e1;
+
+    border-radius: 10px;
+
+}
+
+
+/* ============================================
+   CELULAR
+============================================ */
+
+@media (max-width: 650px) {
+
+    .portal-list {
+
+        max-height: 360px;
+
+    }
+
+}
