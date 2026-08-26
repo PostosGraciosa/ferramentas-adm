@@ -3022,3 +3022,317 @@ footer {
     }
 
 }
+/* ============================================
+   CHATGPT
+============================================ */
+
+.chatgpt-category {
+    margin-bottom: 34px;
+}
+
+
+/* ============================================
+   ÍCONE DA CATEGORIA
+============================================ */
+
+.chatgpt-category-icon {
+
+    color: #10a37f;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ecfdf5,
+            #d1fae5
+        );
+
+    border-color:
+        #bbf7d0;
+
+}
+
+
+.chatgpt-category-icon svg {
+
+    width: 19px;
+
+    height: 19px;
+
+}
+
+
+/* ============================================
+   CAIXA CHATGPT
+============================================ */
+
+.chatgpt-box {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 17px 18px;
+
+    background:
+        rgba(255,255,255,0.97);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 16px;
+
+    box-shadow:
+        var(--shadow-sm);
+
+    transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        border-color .22s ease;
+
+}
+
+
+.chatgpt-box:hover {
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        #bbf7d0;
+
+    box-shadow:
+        var(--shadow-md);
+
+}
+
+
+/* ============================================
+   CONTEÚDO
+============================================ */
+
+.chatgpt-content {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    min-width: 0;
+
+}
+
+
+.chatgpt-icon {
+
+    width: 47px;
+
+    height: 47px;
+
+    min-width: 47px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #10a37f;
+
+    background:
+        #ecfdf5;
+
+    border:
+        1px solid
+        #d1fae5;
+
+    border-radius: 13px;
+
+}
+
+
+.chatgpt-icon svg {
+
+    width: 23px;
+
+    height: 23px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+
+/* ============================================
+   TEXTO
+============================================ */
+
+.chatgpt-text {
+
+    min-width: 0;
+
+}
+
+
+.chatgpt-text strong {
+
+    display: block;
+
+    font-size: 13px;
+
+    font-weight: 750;
+
+    color: var(--text);
+
+}
+
+
+.chatgpt-text span {
+
+    display: block;
+
+    max-width: 650px;
+
+    margin-top: 4px;
+
+    font-size: 10.5px;
+
+    line-height: 1.5;
+
+    color: var(--text-secondary);
+
+}
+
+
+/* ============================================
+   BOTÃO
+============================================ */
+
+.chatgpt-button {
+
+    flex-shrink: 0;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    min-height: 39px;
+
+    padding:
+        0 15px;
+
+    color: #ffffff;
+
+    background:
+        #10a37f;
+
+    border:
+        1px solid
+        #10a37f;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-family: inherit;
+
+    font-size: 10.5px;
+
+    font-weight: 750;
+
+    box-shadow:
+        0 5px 13px
+        rgba(16,163,127,0.14);
+
+    transition:
+        transform .18s ease,
+        background .18s ease,
+        box-shadow .18s ease;
+
+}
+
+
+.chatgpt-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        #0d8f70;
+
+    border-color:
+        #0d8f70;
+
+    box-shadow:
+        0 7px 17px
+        rgba(16,163,127,0.20);
+
+}
+
+
+.chatgpt-button svg {
+
+    width: 15px;
+
+    height: 15px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+
+/* ============================================
+   CHATGPT — MOBILE
+============================================ */
+
+@media (max-width: 650px) {
+
+    .chatgpt-box {
+
+        align-items: stretch;
+
+        flex-direction: column;
+
+        gap: 14px;
+
+    }
+
+
+    .chatgpt-button {
+
+        width: 100%;
+
+    }
+
+
+    .chatgpt-text span {
+
+        max-width: none;
+
+    }
+
+}
