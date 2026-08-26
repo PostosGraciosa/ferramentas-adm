@@ -1939,3 +1939,22 @@ textarea:focus {
     }
 
 }
+/* =========================================
+   PLAYER RÁDIO NO TOPO
+========================================= */
+
+.radio-player-top {
+    width: 420px;
+    height: 62px;
+    flex-shrink: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.radio-player-top iframe {
+    display: block;
+    width: 100%;
+    height: 62px;
+    border: 0;
+}
