@@ -1,19 +1,13 @@
 /* ============================================
    FERRAMENTAS ADM
    SISTEMA CORPORATIVO
-============================================ */
-
-
-/* ============================================
-   INICIALIZAÇÃO
+   JAVASCRIPT PRINCIPAL
 ============================================ */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-
     /* ========================================
-       ELEMENTOS DO DROPDOWN
-       ADMINISTRADORAS / PORTAIS
+       ELEMENTOS
     ======================================== */
 
     const portalButton =
@@ -25,127 +19,488 @@ document.addEventListener("DOMContentLoaded", function () {
     const portalList =
         document.getElementById("portalList");
 
+    const toolSearch =
+        document.getElementById("toolSearch");
+
+    const toolsSection =
+        document.getElementById("toolsSection");
+
+    const noResults =
+        document.getElementById("noResults");
+
 
     /* ========================================
-       VERIFICAÇÃO
+       DROPDOWN — ADMINISTRADORAS
     ======================================== */
 
     if (
-        !portalButton ||
-        !portalDropdown ||
-        !portalList
+        portalButton &&
+        portalDropdown &&
+        portalList
     ) {
 
-        console.warn(
-            "Dropdown de administradoras não encontrado."
+        portalButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+                const isActive =
+                    portalDropdown.classList.toggle("active");
+
+                portalButton.setAttribute(
+                    "aria-expanded",
+                    isActive ? "true" : "false"
+                );
+
+            }
         );
 
-        return;
+
+        /* ====================================
+           FECHAR AO CLICAR FORA
+        ==================================== */
+
+        document.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    !portalDropdown.contains(event.target)
+                ) {
+
+                    portalDropdown.classList.remove("active");
+
+                    portalButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* ====================================
+           FECHAR AO ESC
+        ==================================== */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Escape") {
+
+                    portalDropdown.classList.remove("active");
+
+                    portalButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* ====================================
+           PORTAIS
+        ==================================== */
+
+        const portalItems =
+            portalList.querySelectorAll(".portal-item");
+
+
+        portalItems.forEach(
+            function (item) {
+
+                item.addEventListener(
+                    "click",
+                    function () {
+
+                        setTimeout(
+                            function () {
+
+                                portalDropdown.classList.remove(
+                                    "active"
+                                );
+
+                                portalButton.setAttribute(
+                                    "aria-expanded",
+                                    "false"
+                                );
+
+                            },
+                            100
+                        );
+
+                    }
+                );
+
+            }
+        );
 
     }
 
 
     /* ========================================
-       ABRIR / FECHAR DROPDOWN
+       BUSCA DE FERRAMENTAS
     ======================================== */
 
-    portalButton.addEventListener(
-        "click",
-        function (event) {
+    if (
+        toolSearch &&
+        toolsSection
+    ) {
 
-            event.preventDefault();
+        const categories =
+            toolsSection.querySelectorAll(".category");
 
-            event.stopPropagation();
 
-            portalDropdown.classList.toggle("active");
+        const searchableItems =
+            toolsSection.querySelectorAll(
+                ".tool-card, .portal-item"
+            );
+
+
+        /* ====================================
+           NORMALIZAR TEXTO
+           Remove acentos para facilitar busca
+        ==================================== */
+
+        function normalizeText(text) {
+
+            return text
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "");
 
         }
-    );
 
 
-    /* ========================================
-       FECHAR AO CLICAR FORA
-    ======================================== */
+        /* ====================================
+           EXECUTAR BUSCA
+        ==================================== */
 
-    document.addEventListener(
-        "click",
-        function (event) {
+        function performSearch() {
 
-            if (
-                !portalDropdown.contains(event.target)
-            ) {
-
-                portalDropdown.classList.remove(
-                    "active"
+            const searchValue =
+                normalizeText(
+                    toolSearch.value.trim()
                 );
 
-            }
 
-        }
-    );
+            let foundItems = 0;
 
 
-    /* ========================================
-       FECHAR COM ESC
-    ======================================== */
+            /* =================================
+               SEM BUSCA
+            ================================= */
 
-    document.addEventListener(
-        "keydown",
-        function (event) {
+            if (!searchValue) {
 
-            if (
-                event.key === "Escape"
-            ) {
+                searchableItems.forEach(
+                    function (item) {
 
-                portalDropdown.classList.remove(
-                    "active"
+                        item.classList.remove(
+                            "search-hidden"
+                        );
+
+                    }
                 );
 
-            }
 
-        }
-    );
+                categories.forEach(
+                    function (category) {
 
+                        category.classList.remove(
+                            "search-hidden"
+                        );
 
-    /* ========================================
-       PORTAIS
-    ======================================== */
-
-    const portalItems =
-        portalList.querySelectorAll(
-            ".portal-item"
-        );
+                    }
+                );
 
 
-    portalItems.forEach(
-        function (item) {
+                if (noResults) {
 
-            item.addEventListener(
-                "click",
-                function () {
-
-                    /*
-                        Pequeno atraso para permitir
-                        que o navegador abra o link
-                        normalmente.
-                    */
-
-                    setTimeout(
-                        function () {
-
-                            portalDropdown.classList.remove(
-                                "active"
-                            );
-
-                        },
-                        100
+                    noResults.classList.remove(
+                        "show"
                     );
+
+                }
+
+
+                return;
+
+            }
+
+
+            /* =================================
+               BUSCAR CADA ITEM
+            ================================= */
+
+            searchableItems.forEach(
+                function (item) {
+
+                    const itemText =
+                        normalizeText(
+                            (
+                                item.innerText +
+                                " " +
+                                (
+                                    item.dataset.search || ""
+                                )
+                            )
+                        );
+
+
+                    const matches =
+                        itemText.includes(searchValue);
+
+
+                    if (matches) {
+
+                        item.classList.remove(
+                            "search-hidden"
+                        );
+
+                        foundItems++;
+
+                    } else {
+
+                        item.classList.add(
+                            "search-hidden"
+                        );
+
+                    }
 
                 }
             );
 
+
+            /* =================================
+               OCULTAR CATEGORIAS SEM RESULTADO
+            ================================= */
+
+            categories.forEach(
+                function (category) {
+
+                    const visibleItems =
+                        category.querySelectorAll(
+                            ".tool-card:not(.search-hidden), .portal-item:not(.search-hidden)"
+                        );
+
+
+                    const hasVisibleItem =
+                        visibleItems.length > 0;
+
+
+                    if (hasVisibleItem) {
+
+                        category.classList.remove(
+                            "search-hidden"
+                        );
+
+                    } else {
+
+                        category.classList.add(
+                            "search-hidden"
+                        );
+
+                    }
+
+                }
+            );
+
+
+            /* =================================
+               RESULTADO VAZIO
+            ================================= */
+
+            if (noResults) {
+
+                if (foundItems === 0) {
+
+                    noResults.classList.add(
+                        "show"
+                    );
+
+                } else {
+
+                    noResults.classList.remove(
+                        "show"
+                    );
+
+                }
+
+            }
+
+
+            /* =================================
+               ABRIR PORTAIS SE ENCONTRAR
+               UM PORTAL NA BUSCA
+            ================================= */
+
+            const portalResults =
+                portalList
+                    ? portalList.querySelectorAll(
+                        ".portal-item:not(.search-hidden)"
+                    )
+                    : [];
+
+
+            if (
+                portalDropdown &&
+                portalButton &&
+                portalResults.length > 0
+            ) {
+
+                portalDropdown.classList.add(
+                    "active"
+                );
+
+                portalButton.setAttribute(
+                    "aria-expanded",
+                    "true"
+                );
+
+            }
+
         }
-    );
+
+
+        /* ====================================
+           EVENTO DE DIGITAÇÃO
+        ==================================== */
+
+        toolSearch.addEventListener(
+            "input",
+            performSearch
+        );
+
+
+        /* ====================================
+           TECLA /
+           FOCAR BUSCA
+        ==================================== */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                const activeElement =
+                    document.activeElement;
+
+
+                const isTyping =
+                    activeElement &&
+                    (
+                        activeElement.tagName === "INPUT" ||
+                        activeElement.tagName === "TEXTAREA" ||
+                        activeElement.isContentEditable
+                    );
+
+
+                if (
+                    event.key === "/" &&
+                    !isTyping
+                ) {
+
+                    event.preventDefault();
+
+                    toolSearch.focus();
+
+                }
+
+            }
+        );
+
+
+        /* ====================================
+           ESC NA BUSCA
+        ==================================== */
+
+        toolSearch.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    toolSearch.value = "";
+
+                    performSearch();
+
+                    toolSearch.blur();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ========================================
+       LOGO FALLBACK
+    ======================================== */
+
+    const logo =
+        document.querySelector(".brand-logo img");
+
+
+    if (logo) {
+
+        logo.addEventListener(
+            "error",
+            function () {
+
+                this.style.display = "none";
+
+                const parent =
+                    this.parentElement;
+
+                if (parent) {
+
+                    parent.classList.add(
+                        "logo-error"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ========================================
+       FECHAR DROPDOWN AO ABRIR OUTRA BUSCA
+    ======================================== */
+
+    if (
+        toolSearch &&
+        portalDropdown &&
+        portalButton
+    ) {
+
+        toolSearch.addEventListener(
+            "focus",
+            function () {
+
+                /*
+                    Não abrimos o dropdown
+                    automaticamente apenas
+                    ao focar a busca.
+                */
+
+            }
+        );
+
+    }
 
 
 });
