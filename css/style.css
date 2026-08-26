@@ -1,396 +1,1656 @@
-/* ============================================
-   FERRAMENTAS ADM
-   SISTEMA CORPORATIVO
-   APP.JS
-============================================ */
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-document.addEventListener("DOMContentLoaded", function () {
+<head>
 
-    /* ========================================
-       ELEMENTOS
-    ======================================== */
+    <meta charset="UTF-8">
 
-    const portalButton =
-        document.getElementById("portalButton");
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    const portalDropdown =
-        document.querySelector(".portal-dropdown");
+    <meta
+        name="description"
+        content="Central administrativa interna dos Postos Graciosa."
+    >
 
-    const portalList =
-        document.getElementById("portalList");
+    <meta
+        name="theme-color"
+        content="#0f172a"
+    >
 
-    const searchInput =
-        document.getElementById("toolSearch");
+    <title>Ferramentas ADM</title>
 
-    const noResults =
-        document.getElementById("noResults");
 
-    const categories =
-        document.querySelectorAll(".category");
+    <!-- =========================================
+         FAVICON
+    ========================================== -->
 
+    <link
+        rel="icon"
+        type="image/png"
+        href="img/favicon.png"
+    >
 
-    /* ========================================
-       DROPDOWN
-       ADMINISTRADORAS / PORTAIS
-    ======================================== */
 
-    if (
-        portalButton &&
-        portalDropdown &&
-        portalList
-    ) {
+    <!-- =========================================
+         CSS
+    ========================================== -->
 
-        portalButton.addEventListener(
-            "click",
-            function (event) {
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
 
-                event.preventDefault();
-                event.stopPropagation();
+</head>
 
-                const isOpen =
-                    portalDropdown.classList.toggle("active");
 
-                portalButton.setAttribute(
-                    "aria-expanded",
-                    isOpen ? "true" : "false"
-                );
+<body>
 
-            }
-        );
 
+    <!-- =========================================
+         FUNDO PROFISSIONAL
+    ========================================== -->
 
-        /* ====================================
-           FECHAR AO CLICAR FORA
-        ==================================== */
+    <div class="background">
 
-        document.addEventListener(
-            "click",
-            function (event) {
+        <div class="background-grid"></div>
 
-                if (
-                    !portalDropdown.contains(event.target)
-                ) {
+        <div class="background-glow background-glow-one"></div>
 
-                    portalDropdown.classList.remove(
-                        "active"
-                    );
+        <div class="background-glow background-glow-two"></div>
 
-                    portalButton.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
+        <div class="background-glow background-glow-three"></div>
 
-                }
+        <div class="background-line background-line-one"></div>
 
-            }
-        );
+        <div class="background-line background-line-two"></div>
 
+        <div class="background-circle background-circle-one"></div>
 
-        /* ====================================
-           ESC
-        ==================================== */
+        <div class="background-circle background-circle-two"></div>
 
-        document.addEventListener(
-            "keydown",
-            function (event) {
+    </div>
 
-                if (
-                    event.key === "Escape"
-                ) {
 
-                    portalDropdown.classList.remove(
-                        "active"
-                    );
 
-                    portalButton.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
+    <!-- =========================================
+         CONTEÚDO
+    ========================================== -->
 
-                    portalButton.focus();
+    <main class="container">
 
-                }
 
-            }
-        );
+        <!-- =====================================
+             HEADER
+        ====================================== -->
 
+        <header class="header">
 
-        /* ====================================
-           FECHAR AO SELECIONAR PORTAL
-        ==================================== */
 
-        const portalItems =
-            portalList.querySelectorAll(
-                ".portal-item"
-            );
+            <!-- MARCA -->
 
+            <div class="brand">
 
-        portalItems.forEach(
-            function (item) {
 
-                item.addEventListener(
-                    "click",
-                    function () {
+                <div class="brand-logo">
 
-                        setTimeout(
-                            function () {
+                    <img
+                        src="img/logo.png"
+                        alt="Logo Postos Graciosa"
+                        onerror="
+                            this.style.display='none';
+                            this.parentElement.classList.add('logo-error');
+                        "
+                    >
 
-                                portalDropdown.classList.remove(
-                                    "active"
-                                );
+                    <span class="logo-fallback">
+                        ADM
+                    </span>
 
-                                portalButton.setAttribute(
-                                    "aria-expanded",
-                                    "false"
-                                );
+                </div>
 
-                            },
-                            100
-                        );
 
-                    }
-                );
+                <div class="brand-info">
 
-            }
-        );
+                    <span class="brand-overline">
+                        POSTOS GRACIOSA
+                    </span>
 
-    }
+                    <h1>
+                        Ferramentas ADM
+                    </h1>
 
+                    <p>
+                        Central administrativa interna
+                    </p>
 
-    /* ========================================
-       BUSCA DE FERRAMENTAS
-    ======================================== */
+                </div>
 
-    if (searchInput) {
 
-        searchInput.addEventListener(
-            "input",
-            function () {
+            </div>
 
-                const search =
-                    searchInput.value
-                        .toLowerCase()
-                        .normalize("NFD")
-                        .replace(
-                            /[\u0300-\u036f]/g,
-                            ""
-                        )
-                        .trim();
 
 
-                let totalResults = 0;
+            <!-- STATUS -->
 
+            <div class="header-right">
 
-                /* =================================
-                   CADA CATEGORIA
-                ================================= */
 
-                categories.forEach(
-                    function (category) {
+                <div class="system-status">
 
-                        const categoryText =
-                            category
-                                .innerText
-                                .toLowerCase()
-                                .normalize("NFD")
-                                .replace(
-                                    /[\u0300-\u036f]/g,
-                                    ""
-                                );
+                    <span class="status-dot"></span>
 
+                    <span>
+                        Sistema disponível
+                    </span>
 
-                        const items =
-                            category.querySelectorAll(
-                                ".tool-card, .portal-item"
-                            );
+                </div>
 
 
-                        let categoryResults = 0;
+                <span class="internal-badge">
+                    USO INTERNO
+                </span>
 
 
-                        /* =============================
-                           SEM BUSCA
-                        ============================= */
+            </div>
 
-                        if (!search) {
 
-                            items.forEach(
-                                function (item) {
+        </header>
 
-                                    item.style.display = "";
 
-                                }
-                            );
 
-                            category.style.display = "";
+        <!-- =====================================
+             INTRODUÇÃO
+        ====================================== -->
 
-                            return;
+        <section class="intro">
 
-                        }
 
+            <div class="intro-content">
 
-                        /* =============================
-                           BUSCAR ITENS
-                        ============================= */
 
-                        items.forEach(
-                            function (item) {
+                <span class="section-overline">
+                    CENTRAL ADMINISTRATIVA
+                </span>
 
-                                const itemText =
-                                    (
-                                        item.dataset.search ||
-                                        item.innerText ||
-                                        ""
-                                    )
-                                    .toLowerCase()
-                                    .normalize("NFD")
-                                    .replace(
-                                        /[\u0300-\u036f]/g,
-                                        ""
-                                    );
 
+                <h2>
+                    Acesso rápido
+                </h2>
 
-                                const matches =
-                                    itemText.includes(search) ||
-                                    categoryText.includes(search);
 
+                <p>
+                    Todas as soluções internas em um só lugar.
+                </p>
 
-                                if (matches) {
 
-                                    item.style.display = "";
-                                    categoryResults++;
-                                    totalResults++;
+            </div>
 
-                                } else {
 
-                                    item.style.display = "none";
 
-                                }
+            <!-- BUSCA -->
 
-                            }
-                        );
+            <div class="search-box">
 
 
-                        /* =============================
-                           CATEGORIA
-                        ============================= */
+                <svg
+                    class="search-icon"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                >
 
-                        if (categoryResults > 0) {
+                    <path
+                        d="M21 21l-4.35-4.35m1.35-5.15a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"
+                    />
 
-                            category.style.display = "";
+                </svg>
 
-                        } else {
 
-                            category.style.display = "none";
+                <input
+                    type="text"
+                    id="toolSearch"
+                    placeholder="Buscar ferramenta..."
+                    autocomplete="off"
+                    aria-label="Buscar ferramenta"
+                >
 
-                        }
 
-                    }
-                );
+                <span class="search-shortcut">
+                    /
+                </span>
 
 
-                /* =================================
-                   RESULTADO
-                ================================= */
+            </div>
 
-                if (noResults) {
 
-                    if (
-                        search &&
-                        totalResults === 0
-                    ) {
+        </section>
 
-                        noResults.classList.add(
-                            "visible"
-                        );
 
-                    } else {
 
-                        noResults.classList.remove(
-                            "visible"
-                        );
+        <!-- =====================================
+             FERRAMENTAS
+        ====================================== -->
 
-                    }
+        <section
+            class="tools-section"
+            id="toolsSection"
+        >
 
-                }
 
-            }
-        );
+            <!-- ==================================
+                 ADMINISTRADORAS E PORTAIS
+            =================================== -->
 
+            <section
+                class="category category-portals"
+                data-category="administradoras portais cartões"
+            >
 
-        /* ====================================
-           ATALHO /
-        ==================================== */
 
-        document.addEventListener(
-            "keydown",
-            function (event) {
+                <div class="category-title">
 
-                const activeElement =
-                    document.activeElement;
 
+                    <div class="category-icon portal-category-icon">
 
-                const isTyping =
-                    activeElement &&
-                    (
-                        activeElement.tagName === "INPUT" ||
-                        activeElement.tagName === "TEXTAREA" ||
-                        activeElement.isContentEditable
-                    );
 
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
 
-                if (
-                    event.key === "/" &&
-                    !isTyping
-                ) {
+                            <rect
+                                x="3"
+                                y="5"
+                                width="18"
+                                height="14"
+                                rx="2"
+                            />
 
-                    event.preventDefault();
+                            <path
+                                d="M3 10h18"
+                            />
 
-                    searchInput.focus();
+                            <path
+                                d="M7 15h3"
+                            />
 
-                }
+                        </svg>
 
-            }
-        );
 
-    }
+                    </div>
 
 
-    /* ========================================
-       FALLBACK DOS ÍCONES DOS PORTAIS
-    ======================================== */
+                    <div>
 
-    const portalIcons =
-        document.querySelectorAll(
-            ".portal-item-icon img"
-        );
+                        <h3>
+                            Administradoras e Portais
+                        </h3>
 
+                        <span>
+                            Acesso aos sistemas externos utilizados pela administração
+                        </span>
 
-    portalIcons.forEach(
-        function (img) {
+                    </div>
 
-            img.addEventListener(
-                "error",
-                function () {
 
-                    this.style.display = "none";
+                </div>
 
-                    const fallback =
-                        this.parentElement.querySelector(
-                            ".portal-fallback"
-                        );
 
-                    if (fallback) {
 
-                        fallback.style.display = "flex";
+                <!-- DROPDOWN -->
 
-                    }
+                <div class="portal-dropdown">
 
-                }
-            );
 
-        }
-    );
+                    <button
+                        type="button"
+                        class="portal-button"
+                        id="portalButton"
+                        aria-expanded="false"
+                        aria-controls="portalList"
+                    >
 
 
-});
+                        <div class="portal-button-left">
+
+
+                            <div class="portal-main-icon">
+
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+
+                                    <rect
+                                        x="3"
+                                        y="5"
+                                        width="18"
+                                        height="14"
+                                        rx="2"
+                                    />
+
+                                    <path
+                                        d="M3 10h18"
+                                    />
+
+                                    <path
+                                        d="M7 15h4"
+                                    />
+
+                                </svg>
+
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Acessar Administradoras
+                                </strong>
+
+                                <span>
+                                    Selecione um portal para acessar
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <span class="portal-arrow">
+
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+
+                                <path
+                                    d="m6 9 6 6 6-6"
+                                />
+
+                            </svg>
+
+
+                        </span>
+
+
+                    </button>
+
+
+
+                    <!-- =================================
+                         LISTA DE PORTAIS
+                    ================================== -->
+
+                    <div
+                        class="portal-list"
+                        id="portalList"
+                    >
+
+
+                        <!-- =================================
+                             CIELO
+                        ================================== -->
+
+                        <a
+                            href="https://minhaconta2.cielo.com.br/site/acessos/login"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="portal-item"
+                            data-search="cielo cartão administradora"
+                        >
+
+                            <span class="portal-item-icon">
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=cielo.com.br&sz=64"
+                                    alt="Cielo"
+                                    loading="lazy"
+                                >
+
+                            </span>
+
+                            <span class="portal-item-name">
+                                Cielo
+                            </span>
+
+                            <span class="portal-item-arrow">
+                                ↗
+                            </span>
+
+                        </a>
+
+
+
+                        <!-- =================================
+                             CS ONLINE
+                        ================================== -->
+
+                        <a
+                            href="https://csonlinetenant.b2clogin.com/csonlinetenant.onmicrosoft.com/oauth2/v2.0/authorize?response_mode=query&client_id=9ee58843-cddd-427d-a2af-2911434ad880&nonce=defaultNonce&scope=openid&response_type=code&prompt=login&p=B2C_1A_SeamlessMigration_signuporsignin_UserName&ui_locales=pt-BR&redirect_uri=https%3A%2F%2Fportal.csonline.com.br%2F%2523%2Flogin%2Fhandler&code_challenge=d8Vf5H-O8MZ0zTJP5Jo6_XHNsPWttAl5Q9qbNacbXJ8&code_challenge_method=S256&state=%2F"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="portal-item"
+                            data-search="cs online cartão administradora"
+                        >
+
+                            <span class="portal-item-icon">
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=portal.csonline.com.br&sz=64"
+                                    alt="CS Online"
+                                    loading="lazy"
+                                >
+
+                            </span>
+
+                            <span class="portal-item-name">
+                                CS Online
+                            </span>
+
+                            <span class="portal-item-arrow">
+                                ↗
+                            </span>
+
+                        </a>
+
+
+
+                        <!-- =================================
+                             GETNET
+                        ================================== -->
+
+                        <a
+                            href="https://minhaconta.getnet.com.br/login"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="portal-item"
+                            data-search="getnet cartão administradora"
+                        >
+
+                            <span class="portal-item-icon">
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=getnet.com.br&sz=64"
+                                    alt="Getnet"
+                                    loading="lazy"
+                                >
+
+                            </span>
+
+                            <span class="portal-item-name">
+                                Getnet
+                            </span>
+
+                            <span class="portal-item-arrow">
+                                ↗
+                            </span>
+
+                        </a>
+
+
+
+                        <!-- =================================
+                             LINK
+                        ================================== -->
+
+                        <a
+                            href="https://linkbeneficios.com.br/Intranet/Credenciado/Login"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="portal-item"
+                            data-search="link benefícios cartão"
+                        >
+
+                            <span class="portal-item-icon">
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=linkbeneficios.com.br&sz=64"
+                                    alt="Link"
+                                    loading="lazy"
+                                >
+
+                            </span>
+
+                            <span class="portal-item-name">
+                                Link
+                            </span>
+
+                            <span class="portal-item-arrow">
+                                ↗
+                            </span>
+
+                        </a>
+
+
+
+                        <!-- =================================
+                             MAIS CASH
+                        ================================== -->
+
+                        <a
+                            href="https://maiscash.cartaodetodos.com.br/auth/login"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="portal-item"
+                            data-search="maiscash mais cash cartão"
+                        >
+
+                            <span class="portal-item-icon">
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=cartaodetodos.com.br&sz=64"
+                                    alt="MaisCash"
+                                    loading="lazy"
+                                >
+
+                            </span>
+
+                            <span class="portal-item-name">
+                                MaisCash
+                            </span>
+
+                            <span class="portal-item-arrow">
+                                ↗
+                            </span>
+
+                        </a>
+
+
+
+                        <!-- =================================
+                             NEO
+                        ================================== -->
+
+                        <a
+                            href="https://neofacilidades.com.br/Intranet/Login?ReturnUrl=%2FIntranet%2FCredenciado"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="portal-item"
+                            data-search="neo cartão administradora"
+                        >
+
+                            <span class="portal-item-icon">
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=neofacilidades.com.br&sz=64"
+                                    alt="Neo"
+                                    loading="lazy"
+                                >
+
+                            </span>
+
+                            <span class="portal-item-name">
+                                Neo
+                            </span>
+
+                            <span class="portal-item-arrow">
+                                ↗
+                            </span>
+
+                        </a>
+
+
+
+                        <!-- =================================
+                             PAYLY
+                        ================================== -->
+
+                        <a
+                            href="https://www.payly.com.br/portal"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="portal-item"
+                            data-search="payly cartão administradora"
+                        >
+
+                            <span class="portal-item-icon">
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=payly.com.br&sz=64"
+                                    alt="Payly"
+                                    loading="lazy"
+                                >
+
+                            </span>
+
+                            <span class="portal-item-name">
+                                Payly
+                            </span>
+
+                            <span class="portal-item-arrow">
+                                ↗
+                            </span>
+
+                        </a>
+
+
+
+                        <!-- =================================
+                             PORTAL DO FRENTISTA
+                        ================================== -->
+
+                        <a
+                            href="https://cn.vibraenergia.com.br/premmia/revendedor/login"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="portal-item"
+                            data-search="portal frentista premia prem mia vibra"
+                        >
+
+                            <span class="portal-item-icon">
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=vibraenergia.com.br&sz=64"
+                                    alt="Portal do Frentista"
+                                    loading="lazy"
+                                >
+
+                            </span>
+
+                            <span class="portal-item-name">
+                                Portal do Frentista
+                            </span>
+
+                            <span class="portal-item-arrow">
+                                ↗
+                            </span>
+
+                        </a>
+
+
+
+                        <!-- =================================
+                             PRIME
+                        ================================== -->
+
+                        <a
+                            href="https://www.primebeneficios.com.br/Intranet/Prime/Login"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="portal-item"
+                            data-search="prime benefícios cartão"
+                        >
+
+                            <span class="portal-item-icon">
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=primebeneficios.com.br&sz=64"
+                                    alt="Prime"
+                                    loading="lazy"
+                                >
+
+                            </span>
+
+                            <span class="portal-item-name">
+                                Prime
+                            </span>
+
+                            <span class="portal-item-arrow">
+                                ↗
+                            </span>
+
+                        </a>
+
+
+
+                        <!-- =================================
+                             REDE
+                        ================================== -->
+
+                        <a
+                            href="https://meu.userede.com.br/?redirect=%2Fhome"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="portal-item"
+                            data-search="rede userede cartão"
+                        >
+
+                            <span class="portal-item-icon">
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=userede.com.br&sz=64"
+                                    alt="Rede"
+                                    loading="lazy"
+                                >
+
+                            </span>
+
+                            <span class="portal-item-name">
+                                Rede
+                            </span>
+
+                            <span class="portal-item-arrow">
+                                ↗
+                            </span>
+
+                        </a>
+
+
+
+                        <!-- =================================
+                             SEM PARAR
+                        ================================== -->
+
+                        <a
+                            href="https://credenciados.semparar.com.br/login"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="portal-item"
+                            data-search="sem parar cartão"
+                        >
+
+                            <span class="portal-item-icon">
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=semparar.com.br&sz=64"
+                                    alt="Sem Parar"
+                                    loading="lazy"
+                                >
+
+                            </span>
+
+                            <span class="portal-item-name">
+                                Sem Parar
+                            </span>
+
+                            <span class="portal-item-arrow">
+                                ↗
+                            </span>
+
+                        </a>
+
+
+
+                        <!-- =================================
+                             SITEF
+                        ================================== -->
+
+                        <a
+                            href="https://oauth.softwareexpress.com.br/auth/realms/sitefexpress/protocol/openid-connect/auth?response_type=code&client_id=sitefweb&redirect_uri=https%3A%2F%2Fsitefexpress1.softwareexpress.com.br%2Fsitefweb%2Fsso%2Flogin&state=36c646b0-f71b-4f4b-bfba-011e3464646e&login=true&scope=openid"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="portal-item"
+                            data-search="sitef software express cartão"
+                        >
+
+                            <span class="portal-item-icon">
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=softwareexpress.com.br&sz=64"
+                                    alt="SiTef"
+                                    loading="lazy"
+                                >
+
+                            </span>
+
+                            <span class="portal-item-name">
+                                SiTef
+                            </span>
+
+                            <span class="portal-item-arrow">
+                                ↗
+                            </span>
+
+                        </a>
+
+
+
+                        <!-- =================================
+                             TICKET
+                        ================================== -->
+
+                        <a
+                            href="https://sso.sa.edenred.io/web/session/step/password?returnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fresponse_type%3Dcode%26client_id%3De80f46481b09455a80471c8d880ae2ee%26state%3DS0piUlRZbzUzRFhSWi54Z2JzQkJRT2tQaUd6eklYZlhcUW14VnpnNjNkM0hw%26redirect_uri%3Dhttps%253A%252F%252Fparceiro.edenredmobilidade.com.br%252FEstabelecimentoSSL%252Fsso%2Flogin.cfm%26scope%3Dopenid%2520profile%2520email%2520offline_access%2520portal-fleet-and-mobility-ms_application%2520portal-fleet-and-mobility-ms_application-mfa%26code_challenge%3DvSVYofcn_HGpKqlr3OXBvYSPUjnepfx2blvsNjUIru0%26code_challenge_method%3DS256%26nonce%3DS0piUlRZbzUzRFhSWi54Z2JzQkJRT2tQaUd6eklYZlhjUW14VnpnNjNkM0hw%26acr_values%3Dtenant%253Afleet-br-merchant%26ui_locales%3Dpt-br"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="portal-item"
+                            data-search="ticket edenred cartão"
+                        >
+
+                            <span class="portal-item-icon">
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=edenredmobilidade.com.br&sz=64"
+                                    alt="Ticket"
+                                    loading="lazy"
+                                >
+
+                            </span>
+
+                            <span class="portal-item-name">
+                                Ticket
+                            </span>
+
+                            <span class="portal-item-arrow">
+                                ↗
+                            </span>
+
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ==================================
+                 CONFERÊNCIAS
+            =================================== -->
+
+            <section
+                class="category"
+                data-category="conferencias"
+            >
+
+
+                <div class="category-title">
+
+
+                    <div class="category-icon blue-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+
+                            <path
+                                d="M4 19V5"
+                            />
+
+                            <path
+                                d="M4 19h16"
+                            />
+
+                            <rect
+                                x="7"
+                                y="11"
+                                width="2.8"
+                                height="5"
+                                rx="0.5"
+                            />
+
+                            <rect
+                                x="11"
+                                y="8"
+                                width="2.8"
+                                height="8"
+                                rx="0.5"
+                            />
+
+                            <rect
+                                x="15"
+                                y="5"
+                                width="2.8"
+                                height="11"
+                                rx="0.5"
+                            />
+
+                        </svg>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Conferências
+                        </h3>
+
+                        <span>
+                            Conferência e análise de informações
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="tools-grid">
+
+
+                    <!-- PREMMIA -->
+
+                    <a
+                        href="https://postosgraciosa.github.io/conferencia-premmia/"
+                        class="tool-card"
+                        data-search="conferencia premia prem mia premmiia"
+                    >
+
+
+                        <div class="tool-top">
+
+
+                            <div class="tool-icon blue">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+
+                                    <path
+                                        d="M4 19V5"
+                                    />
+
+                                    <path
+                                        d="M4 19h16"
+                                    />
+
+                                    <path
+                                        d="m7 15 4-4 3 2 5-6"
+                                    />
+
+                                    <path
+                                        d="M15 7h4v4"
+                                    />
+
+                                </svg>
+
+                            </div>
+
+
+                            <span class="arrow">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+
+                                    <path
+                                        d="M5 12h14"
+                                    />
+
+                                    <path
+                                        d="m13 6 6 6-6 6"
+                                    />
+
+                                </svg>
+
+                            </span>
+
+
+                        </div>
+
+
+                        <div class="tool-content">
+
+                            <h4>
+                                Conferência Premmia
+                            </h4>
+
+                            <p>
+                                Confira divergências entre os lançamentos
+                                do Premmia e o sistema interno.
+                            </p>
+
+                        </div>
+
+
+                    </a>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ==================================
+                 DOCUMENTOS
+            =================================== -->
+
+            <section
+                class="category"
+                data-category="documentos"
+            >
+
+
+                <div class="category-title">
+
+
+                    <div class="category-icon green-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+
+                            <path
+                                d="M6 3h9l4 4v14H6z"
+                            />
+
+                            <path
+                                d="M15 3v5h5"
+                            />
+
+                            <path
+                                d="M9 13h6"
+                            />
+
+                            <path
+                                d="M9 17h6"
+                            />
+
+                        </svg>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Documentos
+                        </h3>
+
+                        <span>
+                            Emissão e impressão de documentos
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="tools-grid">
+
+
+                    <!-- RECIBO -->
+
+                    <a
+                        href="https://postosgraciosa.github.io/recibo-online/"
+                        class="tool-card"
+                        data-search="recibo emissão recibo documento"
+                    >
+
+
+                        <div class="tool-top">
+
+
+                            <div class="tool-icon green">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+
+                                    <path
+                                        d="M6 3h9l4 4v14H6z"
+                                    />
+
+                                    <path
+                                        d="M15 3v5h5"
+                                    />
+
+                                    <path
+                                        d="M9 13h6"
+                                    />
+
+                                    <path
+                                        d="M9 17h4"
+                                    />
+
+                                </svg>
+
+                            </div>
+
+
+                            <span class="arrow">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+
+                                    <path
+                                        d="M5 12h14"
+                                    />
+
+                                    <path
+                                        d="m13 6 6 6-6 6"
+                                    />
+
+                                </svg>
+
+                            </span>
+
+
+                        </div>
+
+
+                        <div class="tool-content">
+
+                            <h4>
+                                Emissão de Recibo
+                            </h4>
+
+                            <p>
+                                Gere recibos de forma rápida
+                                e pronta para impressão.
+                            </p>
+
+                        </div>
+
+
+                    </a>
+
+
+
+                    <!-- VALE -->
+
+                    <a
+                        href="https://postosgraciosa.github.io/vale-funcionario/"
+                        class="tool-card"
+                        data-search="vale funcionário funcionario emissão vale"
+                    >
+
+
+                        <div class="tool-top">
+
+
+                            <div class="tool-icon orange">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+
+                                    <path
+                                        d="M4 7h16v10H4z"
+                                    />
+
+                                    <path
+                                        d="M8 7v10"
+                                    />
+
+                                    <path
+                                        d="M16 7v10"
+                                    />
+
+                                    <path
+                                        d="M11 10h2"
+                                    />
+
+                                    <path
+                                        d="M11 14h2"
+                                    />
+
+                                </svg>
+
+                            </div>
+
+
+                            <span class="arrow">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+
+                                    <path
+                                        d="M5 12h14"
+                                    />
+
+                                    <path
+                                        d="m13 6 6 6-6 6"
+                                    />
+
+                                </svg>
+
+                            </span>
+
+
+                        </div>
+
+
+                        <div class="tool-content">
+
+                            <h4>
+                                Emissão de Vale
+                            </h4>
+
+                            <p>
+                                Emita vales para funcionários
+                                de maneira simples e organizada.
+                            </p>
+
+                        </div>
+
+
+                    </a>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ==================================
+                 OPERACIONAL
+            =================================== -->
+
+            <section
+                class="category"
+                data-category="operacional"
+            >
+
+
+                <div class="category-title">
+
+
+                    <div class="category-icon purple-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+
+                            <rect
+                                x="5"
+                                y="4"
+                                width="14"
+                                height="17"
+                                rx="2"
+                            />
+
+                            <path
+                                d="M9 8h6"
+                            />
+
+                            <path
+                                d="M9 12h6"
+                            />
+
+                            <path
+                                d="M9 16h4"
+                            />
+
+                        </svg>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Operacional
+                        </h3>
+
+                        <span>
+                            Ferramentas de apoio à operação
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="tools-grid">
+
+
+                    <!-- OCORRÊNCIAS -->
+
+                    <a
+                        href="https://postosgraciosa.github.io/ocorrencias-pdv/"
+                        class="tool-card"
+                        data-search="ocorrencias ocorrências pdv ponto venda"
+                    >
+
+
+                        <div class="tool-top">
+
+
+                            <div class="tool-icon purple">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+
+                                    <rect
+                                        x="5"
+                                        y="4"
+                                        width="14"
+                                        height="17"
+                                        rx="2"
+                                    />
+
+                                    <path
+                                        d="M9 8h6"
+                                    />
+
+                                    <path
+                                        d="M9 12h6"
+                                    />
+
+                                    <path
+                                        d="M9 16h4"
+                                    />
+
+                                </svg>
+
+                            </div>
+
+
+                            <span class="arrow">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+
+                                    <path
+                                        d="M5 12h14"
+                                    />
+
+                                    <path
+                                        d="m13 6 6 6-6 6"
+                                    />
+
+                                </svg>
+
+                            </span>
+
+
+                        </div>
+
+
+                        <div class="tool-content">
+
+                            <h4>
+                                Ocorrências PDV
+                            </h4>
+
+                            <p>
+                                Registre e organize ocorrências
+                                relacionadas ao PDV.
+                            </p>
+
+                        </div>
+
+
+                    </a>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ==================================
+                 ATENDIMENTO
+            =================================== -->
+
+            <section
+                class="category"
+                data-category="atendimento"
+            >
+
+
+                <div class="category-title">
+
+
+                    <div class="category-icon cyan-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+
+                            <!-- BALÃO DE CONVERSA -->
+
+                            <path
+                                d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5 8 8 0 0 1-3.1-.62L4 20l1.63-4.02A7.5 7.5 0 1 1 20 11.5Z"
+                            />
+
+                            <path
+                                d="M8.5 11.5h.01"
+                            />
+
+                            <path
+                                d="M12 11.5h.01"
+                            />
+
+                            <path
+                                d="M15.5 11.5h.01"
+                            />
+
+                        </svg>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Atendimento
+                        </h3>
+
+                        <span>
+                            Comunicação e relacionamento com clientes
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="tools-grid">
+
+
+                    <!-- MENSAGENS -->
+
+                    <a
+                        href="https://postosgraciosa.github.io/mensagem-whatsapp/"
+                        class="tool-card"
+                        data-search="mensagem whatsapp cliente clientes gerador msg mensagem"
+                    >
+
+
+                        <div class="tool-top">
+
+
+                            <div class="tool-icon whatsapp">
+
+                                <!-- =================================
+                                     BALÃO DE CONVERSA
+                                ================================== -->
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+
+                                    <path
+                                        d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5 8 8 0 0 1-3.1-.62L4 20l1.63-4.02A7.5 7.5 0 1 1 20 11.5Z"
+                                    />
+
+                                    <path
+                                        d="M8.5 11.5h.01"
+                                    />
+
+                                    <path
+                                        d="M12 11.5h.01"
+                                    />
+
+                                    <path
+                                        d="M15.5 11.5h.01"
+                                    />
+
+                                </svg>
+
+                            </div>
+
+
+                            <span class="arrow">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+
+                                    <path
+                                        d="M5 12h14"
+                                    />
+
+                                    <path
+                                        d="m13 6 6 6-6 6"
+                                    />
+
+                                </svg>
+
+                            </span>
+
+
+                        </div>
+
+
+                        <div class="tool-content">
+
+                            <h4>
+                                Gerador de MSG para Clientes
+                            </h4>
+
+                            <p>
+                                Gere mensagens padronizadas para
+                                confirmação de transações.
+                            </p>
+
+                        </div>
+
+
+                    </a>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ==================================
+                 SEM RESULTADOS
+            =================================== -->
+
+            <div
+                class="no-results"
+                id="noResults"
+            >
+
+
+                <div class="no-results-icon">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+
+                        <circle
+                            cx="11"
+                            cy="11"
+                            r="6"
+                        />
+
+                        <path
+                            d="m16 16 4 4"
+                        />
+
+                    </svg>
+
+                </div>
+
+
+                <h3>
+                    Nenhuma ferramenta encontrada
+                </h3>
+
+
+                <p>
+                    Tente pesquisar por outro nome.
+                </p>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             FOOTER
+        ====================================== -->
+
+        <footer>
+
+
+            <div class="footer-left">
+
+                <strong>
+                    Ferramentas ADM
+                </strong>
+
+                <span>
+                    Central administrativa interna
+                </span>
+
+            </div>
+
+
+            <div class="footer-right">
+
+                <span>
+                    Uso interno
+                </span>
+
+                <span class="separator">
+                    •
+                </span>
+
+                <span>
+                    Postos Graciosa
+                </span>
+
+            </div>
+
+
+        </footer>
+
+
+    </main>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script src="js/app.js"></script>
+
+
+</body>
+
+</html>
