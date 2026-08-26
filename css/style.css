@@ -1950,7 +1950,7 @@ textarea:focus {
     overflow: hidden;
     display: flex;
     align-items: center;
-   margin-left: -80px;
+   margin-left: -90px;
 }
 
 .radio-player-top iframe {
