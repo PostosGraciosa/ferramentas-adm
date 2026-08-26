@@ -393,68 +393,125 @@
 
 
 
-            <!-- =====================================
-                 CHATGPT
-            ====================================== -->
+            <!-- ==========================================
+     ASSISTENTE CHATGPT
+========================================== -->
 
-            <article
-                class="card"
-                data-search="chatgpt assistente inteligência artificial chat"
+<article
+    class="card chatgpt-card"
+    data-search="chatgpt assistente chat inteligência artificial ia perguntas respostas"
+>
+
+    <div class="card-icon chatgpt-icon">
+        💬
+    </div>
+
+    <h3>
+        Assistente ChatGPT
+    </h3>
+
+    <p>
+        Digite sua solicitação ou escolha um prompt
+        para abrir diretamente no ChatGPT.
+    </p>
+
+    <div class="chatgpt-box">
+
+        <label for="chatgptPrompt">
+            O que você precisa?
+        </label>
+
+        <textarea
+            id="chatgptPrompt"
+            placeholder="Digite sua pergunta ou solicitação..."
+            rows="4"
+        ></textarea>
+
+
+        <!-- SUGESTÕES -->
+
+        <div class="prompt-title">
+            Sugestões rápidas
+        </div>
+
+        <div class="prompt-suggestions">
+
+            <button
+                type="button"
+                class="prompt-suggestion"
+                data-prompt="Crie uma resposta profissional e educada para um cliente que entrou em contato com a empresa."
             >
+                💬 Resposta para cliente
+            </button>
 
-                <div class="card-icon chatgpt-icon">
+            <button
+                type="button"
+                class="prompt-suggestion"
+                data-prompt="Reescreva este texto de forma mais profissional, clara e objetiva, mantendo o sentido original:"
+            >
+                ✍️ Melhorar texto
+            </button>
 
-                    <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                    >
+            <button
+                type="button"
+                class="prompt-suggestion"
+                data-prompt="Crie uma mensagem curta e profissional para solicitar uma informação que está pendente."
+            >
+                📋 Solicitar informação
+            </button>
 
-                        <path
-                            d="M12 3.5a4.2 4.2 0 0 1 4 2.9 4.2 4.2 0 0 1 3.1 5.8 4.2 4.2 0 0 1-3.1 6.1 4.2 4.2 0 0 1-7 1.1 4.2 4.2 0 0 1-3.1-5.8 4.2 4.2 0 0 1 3.1-6.1A4.2 4.2 0 0 1 12 3.5Z"
-                        />
+            <button
+                type="button"
+                class="prompt-suggestion"
+                data-prompt="Crie uma resposta profissional para uma reclamação de cliente, demonstrando atenção, respeito e disposição para resolver o problema."
+            >
+                🤝 Responder reclamação
+            </button>
 
-                        <path
-                            d="m8.5 8.2 3.5 2v4"
-                        />
+            <button
+                type="button"
+                class="prompt-suggestion"
+                data-prompt="Resuma o texto abaixo de forma objetiva, destacando apenas as informações mais importantes:"
+            >
+                📝 Resumir texto
+            </button>
 
-                        <path
-                            d="m15.5 8.2-3.5 2"
-                        />
+            <button
+                type="button"
+                class="prompt-suggestion"
+                data-prompt="Analise esta situação e sugira a melhor forma de responder profissionalmente:"
+            >
+                🧠 Analisar situação
+            </button>
 
-                        <path
-                            d="m8.5 15.8 3.5-2"
-                        />
-
-                    </svg>
-
-                </div>
-
-
-                <h3>
-                    Assistente ChatGPT
-                </h3>
-
-
-                <p>
-                    Abra o ChatGPT para apoio administrativo
-                    em tarefas diversas.
-                </p>
-
-
-                <a
-                    class="card-action"
-                    href="https://chatgpt.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Abrir ChatGPT
-                    →
-                </a>
-
-            </article>
+        </div>
 
 
+        <!-- AÇÕES -->
 
+        <div class="chatgpt-actions">
+
+            <button
+                type="button"
+                class="btn btn-ghost"
+                id="btnCopiarPrompt"
+            >
+                📋 Copiar prompt
+            </button>
+
+            <button
+                type="button"
+                class="btn btn-chatgpt"
+                id="btnAbrirChatGPT"
+            >
+                💬 Abrir no ChatGPT →
+            </button>
+
+        </div>
+
+    </div>
+
+</article>
             <!-- =====================================
                  ADMINISTRADORAS
             ====================================== -->
