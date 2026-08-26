@@ -20,7 +20,7 @@
         content="#0f172a"
     >
 
-    <title>Ferramentas ADM | Postos Graciosa</title>
+    <title>Ferramentas ADM</title>
 
 
     <!-- =========================================
@@ -43,21 +43,17 @@
         href="css/style.css"
     >
 
-
 </head>
 
 
 <body>
 
 
-    <!-- =====================================================
-         FUNDO DECORATIVO
-    ====================================================== -->
+    <!-- =========================================
+         FUNDO
+    ========================================== -->
 
-    <div
-        class="background"
-        aria-hidden="true"
-    >
+    <div class="background">
 
         <div class="background-grid"></div>
 
@@ -73,16 +69,16 @@
 
 
 
-    <!-- =====================================================
-         CONTEÚDO PRINCIPAL
-    ====================================================== -->
+    <!-- =========================================
+         CONTEÚDO
+    ========================================== -->
 
     <main class="container">
 
 
-        <!-- =================================================
+        <!-- =====================================
              HEADER
-        ================================================== -->
+        ====================================== -->
 
         <header class="header">
 
@@ -159,9 +155,9 @@
 
 
 
-        <!-- =================================================
+        <!-- =====================================
              INTRODUÇÃO
-        ================================================== -->
+        ====================================== -->
 
         <section class="intro">
 
@@ -188,9 +184,7 @@
 
 
 
-            <!-- =============================================
-                 BUSCA
-            ============================================== -->
+            <!-- BUSCA -->
 
             <div class="search-box">
 
@@ -198,7 +192,6 @@
                 <svg
                     class="search-icon"
                     viewBox="0 0 24 24"
-                    fill="none"
                     aria-hidden="true"
                 >
 
@@ -224,10 +217,7 @@
                 >
 
 
-                <span
-                    class="search-shortcut"
-                    aria-hidden="true"
-                >
+                <span class="search-shortcut">
                     /
                 </span>
 
@@ -239,9 +229,9 @@
 
 
 
-        <!-- =================================================
+        <!-- =====================================
              FERRAMENTAS
-        ================================================== -->
+        ====================================== -->
 
         <section
             class="tools-section"
@@ -250,13 +240,13 @@
 
 
 
-            <!-- =================================================
+            <!-- ==================================
                  ADMINISTRADORAS E PORTAIS
-            ================================================== -->
+            =================================== -->
 
             <section
                 class="category category-portals"
-                data-category="administradoras portais cartões"
+                data-category="administradoras portais cartões cartoes"
             >
 
 
@@ -265,9 +255,9 @@
 
                     <div class="category-icon portal-category-icon">
 
+
                         <svg
                             viewBox="0 0 24 24"
-                            fill="none"
                             aria-hidden="true"
                         >
 
@@ -289,6 +279,7 @@
 
                         </svg>
 
+
                     </div>
 
 
@@ -309,9 +300,9 @@
 
 
 
-                <!-- =================================================
+                <!-- =================================
                      DROPDOWN
-                ================================================== -->
+                ================================== -->
 
                 <div class="portal-dropdown">
 
@@ -330,9 +321,9 @@
 
                             <div class="portal-main-icon">
 
+
                                 <svg
                                     viewBox="0 0 24 24"
-                                    fill="none"
                                     aria-hidden="true"
                                 >
 
@@ -353,6 +344,7 @@
                                     />
 
                                 </svg>
+
 
                             </div>
 
@@ -376,9 +368,9 @@
 
                         <span class="portal-arrow">
 
+
                             <svg
                                 viewBox="0 0 24 24"
-                                fill="none"
                                 aria-hidden="true"
                             >
 
@@ -388,6 +380,7 @@
 
                             </svg>
 
+
                         </span>
 
 
@@ -395,9 +388,9 @@
 
 
 
-                    <!-- =================================================
+                    <!-- =================================
                          LISTA DE PORTAIS
-                    ================================================== -->
+                    ================================== -->
 
                     <div
                         class="portal-list"
@@ -405,9 +398,9 @@
                     >
 
 
-                        <!-- =============================================
+                        <!-- =================================
                              CIELO
-                        ============================================== -->
+                        ================================== -->
 
                         <a
                             href="https://minhaconta2.cielo.com.br/site/acessos/login"
@@ -420,10 +413,17 @@
                             <span class="portal-item-icon">
 
                                 <img
-                                    src="https://www.google.com/s2/favicons?domain=cielo.com.br&sz=64"
+                                    src="img/portais/cielo.png"
                                     alt="Cielo"
-                                    loading="lazy"
+                                    onerror="
+                                        this.style.display='none';
+                                        this.parentElement.classList.add('icon-fallback');
+                                    "
                                 >
+
+                                <span class="portal-fallback">
+                                    C
+                                </span>
 
                             </span>
 
@@ -439,9 +439,9 @@
 
 
 
-                        <!-- =============================================
+                        <!-- =================================
                              CS ONLINE
-                        ============================================== -->
+                        ================================== -->
 
                         <a
                             href="https://csonlinetenant.b2clogin.com/csonlinetenant.onmicrosoft.com/oauth2/v2.0/authorize?response_mode=query&client_id=9ee58843-cddd-427d-a2af-2911434ad880&nonce=defaultNonce&scope=openid&response_type=code&prompt=login&p=B2C_1A_SeamlessMigration_signuporsignin_UserName&ui_locales=pt-BR&redirect_uri=https%3A%2F%2Fportal.csonline.com.br%2F%2523%2Flogin%2Fhandler&code_challenge=d8Vf5H-O8MZ0zTJP5Jo6_XHNsPWttAl5Q9qbNacbXJ8&code_challenge_method=S256&state=%2F"
@@ -454,10 +454,17 @@
                             <span class="portal-item-icon">
 
                                 <img
-                                    src="https://www.google.com/s2/favicons?domain=portal.csonline.com.br&sz=64"
+                                    src="img/portais/cs-online.png"
                                     alt="CS Online"
-                                    loading="lazy"
+                                    onerror="
+                                        this.style.display='none';
+                                        this.parentElement.classList.add('icon-fallback');
+                                    "
                                 >
+
+                                <span class="portal-fallback">
+                                    CS
+                                </span>
 
                             </span>
 
@@ -473,9 +480,9 @@
 
 
 
-                        <!-- =============================================
+                        <!-- =================================
                              GETNET
-                        ============================================== -->
+                        ================================== -->
 
                         <a
                             href="https://minhaconta.getnet.com.br/login"
@@ -488,10 +495,17 @@
                             <span class="portal-item-icon">
 
                                 <img
-                                    src="https://www.google.com/s2/favicons?domain=getnet.com.br&sz=64"
+                                    src="img/portais/getnet.png"
                                     alt="Getnet"
-                                    loading="lazy"
+                                    onerror="
+                                        this.style.display='none';
+                                        this.parentElement.classList.add('icon-fallback';
+                                    "
                                 >
+
+                                <span class="portal-fallback">
+                                    G
+                                </span>
 
                             </span>
 
@@ -507,25 +521,32 @@
 
 
 
-                        <!-- =============================================
+                        <!-- =================================
                              LINK
-                        ============================================== -->
+                        ================================== -->
 
                         <a
                             href="https://linkbeneficios.com.br/Intranet/Credenciado/Login"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="portal-item"
-                            data-search="link benefícios cartão administradora"
+                            data-search="link benefícios beneficios cartão"
                         >
 
                             <span class="portal-item-icon">
 
                                 <img
-                                    src="https://www.google.com/s2/favicons?domain=linkbeneficios.com.br&sz=64"
+                                    src="img/portais/link.png"
                                     alt="Link"
-                                    loading="lazy"
+                                    onerror="
+                                        this.style.display='none';
+                                        this.parentElement.classList.add('icon-fallback';
+                                    "
                                 >
+
+                                <span class="portal-fallback">
+                                    L
+                                </span>
 
                             </span>
 
@@ -541,9 +562,9 @@
 
 
 
-                        <!-- =============================================
+                        <!-- =================================
                              MAIS CASH
-                        ============================================== -->
+                        ================================== -->
 
                         <a
                             href="https://maiscash.cartaodetodos.com.br/auth/login"
@@ -556,10 +577,17 @@
                             <span class="portal-item-icon">
 
                                 <img
-                                    src="https://www.google.com/s2/favicons?domain=cartaodetodos.com.br&sz=64"
+                                    src="img/portais/maiscash.png"
                                     alt="MaisCash"
-                                    loading="lazy"
+                                    onerror="
+                                        this.style.display='none';
+                                        this.parentElement.classList.add('icon-fallback';
+                                    "
                                 >
+
+                                <span class="portal-fallback">
+                                    M
+                                </span>
 
                             </span>
 
@@ -575,25 +603,32 @@
 
 
 
-                        <!-- =============================================
+                        <!-- =================================
                              NEO
-                        ============================================== -->
+                        ================================== -->
 
                         <a
                             href="https://neofacilidades.com.br/Intranet/Login?ReturnUrl=%2FIntranet%2FCredenciado"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="portal-item"
-                            data-search="neo facilidades cartão"
+                            data-search="neo cartão administradora"
                         >
 
                             <span class="portal-item-icon">
 
                                 <img
-                                    src="https://www.google.com/s2/favicons?domain=neofacilidades.com.br&sz=64"
+                                    src="img/portais/neo.png"
                                     alt="Neo"
-                                    loading="lazy"
+                                    onerror="
+                                        this.style.display='none';
+                                        this.parentElement.classList.add('icon-fallback';
+                                    "
                                 >
+
+                                <span class="portal-fallback">
+                                    N
+                                </span>
 
                             </span>
 
@@ -609,9 +644,9 @@
 
 
 
-                        <!-- =============================================
+                        <!-- =================================
                              PAYLY
-                        ============================================== -->
+                        ================================== -->
 
                         <a
                             href="https://www.payly.com.br/portal"
@@ -624,10 +659,17 @@
                             <span class="portal-item-icon">
 
                                 <img
-                                    src="https://www.google.com/s2/favicons?domain=payly.com.br&sz=64"
+                                    src="img/portais/payly.png"
                                     alt="Payly"
-                                    loading="lazy"
+                                    onerror="
+                                        this.style.display='none';
+                                        this.parentElement.classList.add('icon-fallback';
+                                    "
                                 >
+
+                                <span class="portal-fallback">
+                                    P
+                                </span>
 
                             </span>
 
@@ -643,25 +685,32 @@
 
 
 
-                        <!-- =============================================
+                        <!-- =================================
                              PORTAL DO FRENTISTA
-                        ============================================== -->
+                        ================================== -->
 
                         <a
                             href="https://cn.vibraenergia.com.br/premmia/revendedor/login"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="portal-item"
-                            data-search="portal frentista prem mia premmia vibra"
+                            data-search="portal frentista premia premmia vibra"
                         >
 
                             <span class="portal-item-icon">
 
                                 <img
-                                    src="https://www.google.com/s2/favicons?domain=vibraenergia.com.br&sz=64"
+                                    src="img/portais/premmia.png"
                                     alt="Portal do Frentista"
-                                    loading="lazy"
+                                    onerror="
+                                        this.style.display='none';
+                                        this.parentElement.classList.add('icon-fallback';
+                                    "
                                 >
+
+                                <span class="portal-fallback">
+                                    PF
+                                </span>
 
                             </span>
 
@@ -677,25 +726,32 @@
 
 
 
-                        <!-- =============================================
+                        <!-- =================================
                              PRIME
-                        ============================================== -->
+                        ================================== -->
 
                         <a
                             href="https://www.primebeneficios.com.br/Intranet/Prime/Login"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="portal-item"
-                            data-search="prime benefícios cartão administradora"
+                            data-search="prime benefícios beneficios cartão"
                         >
 
                             <span class="portal-item-icon">
 
                                 <img
-                                    src="https://www.google.com/s2/favicons?domain=primebeneficios.com.br&sz=64"
+                                    src="img/portais/prime.png"
                                     alt="Prime"
-                                    loading="lazy"
+                                    onerror="
+                                        this.style.display='none';
+                                        this.parentElement.classList.add('icon-fallback';
+                                    "
                                 >
+
+                                <span class="portal-fallback">
+                                    P
+                                </span>
 
                             </span>
 
@@ -711,9 +767,9 @@
 
 
 
-                        <!-- =============================================
+                        <!-- =================================
                              REDE
-                        ============================================== -->
+                        ================================== -->
 
                         <a
                             href="https://meu.userede.com.br/?redirect=%2Fhome"
@@ -726,10 +782,17 @@
                             <span class="portal-item-icon">
 
                                 <img
-                                    src="https://www.google.com/s2/favicons?domain=userede.com.br&sz=64"
+                                    src="img/portais/rede.png"
                                     alt="Rede"
-                                    loading="lazy"
+                                    onerror="
+                                        this.style.display='none';
+                                        this.parentElement.classList.add('icon-fallback';
+                                    "
                                 >
+
+                                <span class="portal-fallback">
+                                    R
+                                </span>
 
                             </span>
 
@@ -745,9 +808,9 @@
 
 
 
-                        <!-- =============================================
+                        <!-- =================================
                              SEM PARAR
-                        ============================================== -->
+                        ================================== -->
 
                         <a
                             href="https://credenciados.semparar.com.br/login"
@@ -760,10 +823,17 @@
                             <span class="portal-item-icon">
 
                                 <img
-                                    src="https://www.google.com/s2/favicons?domain=semparar.com.br&sz=64"
+                                    src="img/portais/sem-parar.png"
                                     alt="Sem Parar"
-                                    loading="lazy"
+                                    onerror="
+                                        this.style.display='none';
+                                        this.parentElement.classList.add('icon-fallback';
+                                    "
                                 >
+
+                                <span class="portal-fallback">
+                                    SP
+                                </span>
 
                             </span>
 
@@ -779,25 +849,32 @@
 
 
 
-                        <!-- =============================================
+                        <!-- =================================
                              SITEF
-                        ============================================== -->
+                        ================================== -->
 
                         <a
                             href="https://oauth.softwareexpress.com.br/auth/realms/sitefexpress/protocol/openid-connect/auth?response_type=code&client_id=sitefweb&redirect_uri=https%3A%2F%2Fsitefexpress1.softwareexpress.com.br%2Fsitefweb%2Fsso%2Flogin&state=36c646b0-f71b-4f4b-bfba-011e3464646e&login=true&scope=openid"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="portal-item"
-                            data-search="sitef software express cartão administradora"
+                            data-search="sitef software express cartão"
                         >
 
                             <span class="portal-item-icon">
 
                                 <img
-                                    src="https://www.google.com/s2/favicons?domain=softwareexpress.com.br&sz=64"
+                                    src="img/portais/sitef.png"
                                     alt="Sitef"
-                                    loading="lazy"
+                                    onerror="
+                                        this.style.display='none';
+                                        this.parentElement.classList.add('icon-fallback';
+                                    "
                                 >
+
+                                <span class="portal-fallback">
+                                    S
+                                </span>
 
                             </span>
 
@@ -813,12 +890,12 @@
 
 
 
-                        <!-- =============================================
+                        <!-- =================================
                              TICKET
-                        ============================================== -->
+                        ================================== -->
 
                         <a
-                            href="https://sso.sa.edenred.io/web/session/step/password?returnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fresponse_type%3Dcode%26client_id%3De80f46481b09455a80471c8d880ae2ee%26state%3DS0piUlRZbzUzRFhSWi54Z2JzQkJRT2tQaUd6eklYZlhjUW14VnpnNjNkM0hw%26redirect_uri%3Dhttps%253A%252F%252Fparceiro.edenredmobilidade.com.br%252FEstabelecimentoSSL%252Fsso%2Flogin.cfm%26scope%3Dopenid%2520profile%2520email%2520offline_access%2520portal-fleet-and-mobility-ms_application%2520portal-fleet-and-mobility-ms_application-mfa%26code_challenge%3DvSVYofcn_HGpKqlr3OXBvYSPUjnepfx2blvsNjUIru0%26code_challenge_method%3DS256%26nonce%3DS0piUlRZbzUzRFhSWi54Z2JzQkJRT2tQaUd6eklYZlhjUW14VnpnNjNkM0hw%26acr_values%3Dtenant%253Afleet-br-merchant%26ui_locales%3Dpt-br"
+                            href="https://sso.sa.edenred.io/web/session/step/password?returnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fresponse_type%3Dcode%26client_id%3De80f46481b09455a80471c8d880ae2ee%26state%3DS0piUlRZbzUzRFhSWi54Z2JzQkJRT2tQaUd6eklYZlhjUW14VnpnNjNkM0hw%26redirect_uri%3Dhttps%253A%252F%252Fparceiro.edenredmobilidade.com.br%252FEstabelecimentoSSL%252Fsso%2Flogin.cfm%26scope%3Dopenid%2520profile%2520email%2520offline_access%2520portal-fleet-and-mobility-ms_application%2520portal-fleet-and-mobility-ms_application-mfa%26code_challenge%3DvSVYofcn_HGpKqlr3OXBvYSPUjnepfx2blvsNjUIru0%26code_challenge_method%3DS256%26nonce%3DS0piUlRZbzUzRFhSWi54Z2JzQkJRT2tQaUd6eklYZlhcUW14VnpnNjNkM0hw%26acr_values%3Dtenant%253Afleet-br-merchant%26ui_locales%3Dpt-br"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="portal-item"
@@ -828,10 +905,17 @@
                             <span class="portal-item-icon">
 
                                 <img
-                                    src="https://www.google.com/s2/favicons?domain=edenredmobilidade.com.br&sz=64"
+                                    src="img/portais/ticket.png"
                                     alt="Ticket"
-                                    loading="lazy"
+                                    onerror="
+                                        this.style.display='none';
+                                        this.parentElement.classList.add('icon-fallback';
+                                    "
                                 >
+
+                                <span class="portal-fallback">
+                                    T
+                                </span>
 
                             </span>
 
@@ -854,13 +938,13 @@
 
 
 
-            <!-- =================================================
+            <!-- ==================================
                  CONFERÊNCIAS
-            ================================================== -->
+            =================================== -->
 
             <section
                 class="category"
-                data-category="conferencias conferência análise"
+                data-category="conferencias conferência conferencia"
             >
 
 
@@ -871,7 +955,6 @@
 
                         <svg
                             viewBox="0 0 24 24"
-                            fill="none"
                             aria-hidden="true"
                         >
 
@@ -937,7 +1020,7 @@
                     <a
                         href="https://postosgraciosa.github.io/conferencia-premmia/"
                         class="tool-card"
-                        data-search="conferencia premia premmia prem mia cartões"
+                        data-search="conferencia premia prem mia premmia"
                     >
 
 
@@ -948,7 +1031,6 @@
 
                                 <svg
                                     viewBox="0 0 24 24"
-                                    fill="none"
                                     aria-hidden="true"
                                 >
 
@@ -977,7 +1059,6 @@
 
                                 <svg
                                     viewBox="0 0 24 24"
-                                    fill="none"
                                     aria-hidden="true"
                                 >
 
@@ -1012,7 +1093,7 @@
 
 
                         <div class="tool-footer">
-                            Acessar conferência
+                            Abrir ferramenta
                         </div>
 
 
@@ -1026,13 +1107,13 @@
 
 
 
-            <!-- =================================================
+            <!-- ==================================
                  DOCUMENTOS
-            ================================================== -->
+            =================================== -->
 
             <section
                 class="category"
-                data-category="documentos recibo vale funcionário"
+                data-category="documentos recibo vale funcionário funcionario"
             >
 
 
@@ -1043,7 +1124,6 @@
 
                         <svg
                             viewBox="0 0 24 24"
-                            fill="none"
                             aria-hidden="true"
                         >
 
@@ -1093,7 +1173,7 @@
                     <a
                         href="https://postosgraciosa.github.io/recibo-online/"
                         class="tool-card"
-                        data-search="recibo emissão recibo documento"
+                        data-search="recibo emissão emitir documento"
                     >
 
 
@@ -1104,7 +1184,6 @@
 
                                 <svg
                                     viewBox="0 0 24 24"
-                                    fill="none"
                                     aria-hidden="true"
                                 >
 
@@ -1133,7 +1212,6 @@
 
                                 <svg
                                     viewBox="0 0 24 24"
-                                    fill="none"
                                     aria-hidden="true"
                                 >
 
@@ -1168,7 +1246,7 @@
 
 
                         <div class="tool-footer">
-                            Emitir recibo
+                            Abrir ferramenta
                         </div>
 
 
@@ -1181,7 +1259,7 @@
                     <a
                         href="https://postosgraciosa.github.io/vale-funcionario/"
                         class="tool-card"
-                        data-search="vale funcionário funcionario emissão vale"
+                        data-search="vale funcionário funcionario emissão emitir vale"
                     >
 
 
@@ -1192,24 +1270,19 @@
 
                                 <svg
                                     viewBox="0 0 24 24"
-                                    fill="none"
                                     aria-hidden="true"
                                 >
 
-                                    <rect
-                                        x="4"
-                                        y="6"
-                                        width="16"
-                                        height="12"
-                                        rx="2"
+                                    <path
+                                        d="M4 7h16v10H4z"
                                     />
 
                                     <path
-                                        d="M8 6v12"
+                                        d="M8 7v10"
                                     />
 
                                     <path
-                                        d="M16 6v12"
+                                        d="M16 7v10"
                                     />
 
                                     <path
@@ -1229,7 +1302,6 @@
 
                                 <svg
                                     viewBox="0 0 24 24"
-                                    fill="none"
                                     aria-hidden="true"
                                 >
 
@@ -1264,7 +1336,7 @@
 
 
                         <div class="tool-footer">
-                            Emitir vale
+                            Abrir ferramenta
                         </div>
 
 
@@ -1278,13 +1350,13 @@
 
 
 
-            <!-- =================================================
+            <!-- ==================================
                  OPERACIONAL
-            ================================================== -->
+            =================================== -->
 
             <section
                 class="category"
-                data-category="operacional ocorrências pdv ponto venda"
+                data-category="operacional ocorrências ocorrencias pdv ponto venda"
             >
 
 
@@ -1295,7 +1367,6 @@
 
                         <svg
                             viewBox="0 0 24 24"
-                            fill="none"
                             aria-hidden="true"
                         >
 
@@ -1349,7 +1420,7 @@
                     <a
                         href="https://postosgraciosa.github.io/ocorrencias-pdv/"
                         class="tool-card"
-                        data-search="ocorrencias ocorrência pdv ponto venda"
+                        data-search="ocorrencias ocorrências pdv ponto venda"
                     >
 
 
@@ -1360,7 +1431,6 @@
 
                                 <svg
                                     viewBox="0 0 24 24"
-                                    fill="none"
                                     aria-hidden="true"
                                 >
 
@@ -1393,7 +1463,6 @@
 
                                 <svg
                                     viewBox="0 0 24 24"
-                                    fill="none"
                                     aria-hidden="true"
                                 >
 
@@ -1428,7 +1497,7 @@
 
 
                         <div class="tool-footer">
-                            Registrar ocorrência
+                            Abrir ferramenta
                         </div>
 
 
@@ -1442,13 +1511,13 @@
 
 
 
-            <!-- =================================================
+            <!-- ==================================
                  ATENDIMENTO
-            ================================================== -->
+            =================================== -->
 
             <section
                 class="category"
-                data-category="atendimento mensagem mensagens whatsapp cliente"
+                data-category="atendimento mensagem mensagens whatsapp cliente clientes"
             >
 
 
@@ -1459,24 +1528,25 @@
 
                         <svg
                             viewBox="0 0 24 24"
-                            fill="none"
                             aria-hidden="true"
                         >
 
+                            <!-- BALÃO DE CONVERSA -->
+
                             <path
-                                d="M20 11.5a7.5 7.5 0 0 1-8 7.5 8 8 0 0 1-3-.6L4 20l1.6-4A7.5 7.5 0 1 1 20 11.5Z"
+                                d="M20 11.5a7.5 7.5 0 0 1-7.8 7.5 8.4 8.4 0 0 1-3.2-.6L4 20l1.7-4A7.4 7.4 0 1 1 20 11.5Z"
                             />
 
                             <path
-                                d="M8 11h.01"
+                                d="M8 11.5h.01"
                             />
 
                             <path
-                                d="M12 11h.01"
+                                d="M12 11.5h.01"
                             />
 
                             <path
-                                d="M16 11h.01"
+                                d="M16 11.5h.01"
                             />
 
                         </svg>
@@ -1504,14 +1574,14 @@
                 <div class="tools-grid">
 
 
-                    <!-- =================================================
-                         GERADOR DE MENSAGENS
-                    ================================================== -->
+                    <!-- =================================
+                         GERADOR DE MENSAGEM
+                    ================================== -->
 
                     <a
                         href="https://postosgraciosa.github.io/mensagem-whatsapp/"
                         class="tool-card"
-                        data-search="mensagem whatsapp cliente clientes gerador msg comunicação atendimento"
+                        data-search="mensagem whatsapp cliente clientes gerador mensagem msg comunicação"
                     >
 
 
@@ -1520,29 +1590,30 @@
 
                             <div class="tool-icon whatsapp">
 
-
-                                <!-- ÍCONE DE MENSAGEM CORRIGIDO -->
+                                <!-- BALÃO DE CONVERSA -->
 
                                 <svg
                                     viewBox="0 0 24 24"
-                                    fill="none"
                                     aria-hidden="true"
                                 >
 
                                     <path
-                                        d="M20 11.5a7.5 7.5 0 0 1-7.7 7.5 8 8 0 0 1-3.1-.6L4 20l1.6-4A7.5 7.5 0 1 1 20 11.5Z"
+                                        d="M20 11.5a7.5 7.5 0 0 1-7.8 7.5 8.4 8.4 0 0 1-3.2-.6L4 20l1.7-4A7.4 7.4 0 1 1 20 11.5Z"
                                     />
 
                                     <path
-                                        d="M8 10h8"
+                                        d="M8 11.5h.01"
                                     />
 
                                     <path
-                                        d="M8 14h5"
+                                        d="M12 11.5h.01"
+                                    />
+
+                                    <path
+                                        d="M16 11.5h.01"
                                     />
 
                                 </svg>
-
 
                             </div>
 
@@ -1551,7 +1622,6 @@
 
                                 <svg
                                     viewBox="0 0 24 24"
-                                    fill="none"
                                     aria-hidden="true"
                                 >
 
@@ -1574,19 +1644,19 @@
                         <div class="tool-content">
 
                             <h4>
-                                Gerador de Mensagens
+                                Gerador de MSG para Clientes
                             </h4>
 
                             <p>
                                 Gere mensagens padronizadas para
-                                comunicação e confirmação de transações.
+                                confirmação de transações.
                             </p>
 
                         </div>
 
 
                         <div class="tool-footer">
-                            Criar mensagem
+                            Abrir ferramenta
                         </div>
 
 
@@ -1600,9 +1670,9 @@
 
 
 
-            <!-- =================================================
+            <!-- ==================================
                  SEM RESULTADOS
-            ================================================== -->
+            =================================== -->
 
             <div
                 class="no-results"
@@ -1614,7 +1684,6 @@
 
                     <svg
                         viewBox="0 0 24 24"
-                        fill="none"
                         aria-hidden="true"
                     >
 
@@ -1650,9 +1719,9 @@
 
 
 
-        <!-- =================================================
+        <!-- =====================================
              FOOTER
-        ================================================== -->
+        ====================================== -->
 
         <footer>
 
@@ -1694,11 +1763,13 @@
 
 
 
-    <!-- =====================================================
+    <!-- =========================================
          JAVASCRIPT
-    ====================================================== -->
+    ========================================== -->
 
-    <script src="js/app.js"></script>
+    <script
+        src="js/app.js"
+    ></script>
 
 
 </body>
