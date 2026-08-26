@@ -1959,3 +1959,14 @@ textarea:focus {
     height: 62px;
     border: 0;
 }
+
+/* =========================================
+   POST-ITS ADMINISTRATIVOS
+========================================= */
+
+.postit-icon {
+
+    background:
+        #fefce8;
+
+}
