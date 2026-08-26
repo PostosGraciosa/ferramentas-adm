@@ -1,19 +1,17 @@
 /* ============================================
-   FERRAMENTAS ADM
-   POSTOS GRACIOSA
-
+   FERRAMENTAS ADM | POSTOS GRACIOSA
    js/app.js
-   ============================================ */
+   Sistema administrativo interno
+============================================ */
 
 (function () {
 
     'use strict';
 
 
-
-    /* =========================================
-       TEMPLATES DO ASSISTENTE LOCAL
-    ========================================= */
+    /* ============================================
+       TEMPLATES — ASSISTENTE DE RESPOSTAS LOCAL
+    ============================================ */
 
     var templates = {
 
@@ -34,7 +32,7 @@
                 'Olá! Para darmos continuidade à sua solicitação, ' +
                 'pedimos o envio do seguinte documento: ' +
                 (info || 'documento pendente') +
-                '. Assim que recebermos, daremos continuidade ao atendimento.'
+                '. Assim que recebermos, daremos sequência ao atendimento.'
             );
 
         },
@@ -55,9 +53,10 @@
         'Aguardando retorno': function (info) {
 
             return (
-                'Olá! Estamos aguardando o retorno referente a ' +
+                'Olá! Estamos aguardando o seu retorno referente a ' +
                 (info || 'sua solicitação') +
-                '. Assim que tivermos novidades, entraremos em contato.'
+                '. Assim que recebermos as informações, ' +
+                'daremos continuidade ao atendimento.'
             );
 
         },
@@ -67,7 +66,7 @@
 
             return (
                 'Olá! Sua solicitação foi encaminhada ao setor responsável' +
-                (info ? ' para análise de ' + info : '') +
+                (info ? ' (' + info + ')' : '') +
                 '. Em breve retornaremos com um posicionamento.'
             );
 
@@ -91,7 +90,7 @@
                 'Olá! ' +
                 (
                     info ||
-                    'Informe os detalhes que deseja incluir na resposta.'
+                    'Informe os detalhes da resposta que deseja elaborar.'
                 )
             );
 
@@ -100,10 +99,9 @@
     };
 
 
-
-    /* =========================================
-       ELEMENTOS
-    ========================================== */
+    /* ============================================
+       ELEMENTOS DO SISTEMA
+    ============================================ */
 
     var tipoResposta =
         document.getElementById('tipoResposta');
@@ -129,204 +127,262 @@
     var emptyState =
         document.getElementById('emptyState');
 
+    var dropdownCard =
+        document.querySelector('.dropdown');
+
     var portaisToggle =
         document.getElementById('portaisToggle');
 
-    var dropdown =
-        document.querySelector('.dropdown');
+    var portaisMenu =
+        document.getElementById('portaisMenu');
 
-    var aiPanel =
-        document.getElementById('aiPanel');
 
+    /* ============================================
+       CHATGPT
+    ============================================ */
+
+    var chatgptPrompt =
+        document.getElementById('chatgptPrompt');
+
+    var btnCopiarPrompt =
+        document.getElementById('btnCopiarPrompt');
+
+    var btnAbrirChatGPT =
+        document.getElementById('btnAbrirChatGPT');
+
+    var promptSuggestions =
+        document.querySelectorAll('.prompt-suggestion');
 
 
     var PLACEHOLDER =
         'A resposta gerada aparecerá aqui.';
 
 
+    /* ============================================
+       FUNÇÃO — MOSTRAR AVISO
+    ============================================ */
 
-    /* =========================================
-       PREFERÊNCIAS
-    ========================================== */
+    function mostrarAviso(elemento, mensagem) {
 
-    function salvarPreferencias() {
+        if (!elemento) return;
 
-        try {
+        var original =
+            elemento.innerHTML;
 
-            localStorage.setItem(
-                'ferramentasAdm.tipo',
-                tipoResposta.value
-            );
+        elemento.innerHTML =
+            mensagem;
 
-        } catch (e) {}
+        setTimeout(function () {
+
+            elemento.innerHTML =
+                original;
+
+        }, 1800);
 
     }
 
 
+    /* ============================================
+       ASSISTENTE DE RESPOSTAS
+    ============================================ */
 
-    function carregarPreferencias() {
+    if (btnGerar) {
 
-        try {
+        btnGerar.addEventListener(
+            'click',
+            function () {
 
-            var tipoSalvo =
-                localStorage.getItem(
-                    'ferramentasAdm.tipo'
-                );
+                if (!tipoResposta || !resultado) {
+                    return;
+                }
 
+                var tipo =
+                    tipoResposta.value;
 
-            if (
-                tipoSalvo &&
-                templates[tipoSalvo]
-            ) {
+                var info =
+                    infoExtra ?
+                    infoExtra.value.trim() :
+                    '';
 
-                tipoResposta.value =
-                    tipoSalvo;
+                if (templates[tipo]) {
+
+                    resultado.textContent =
+                        templates[tipo](info);
+
+                    resultado.classList.add(
+                        'result-filled'
+                    );
+
+                }
 
             }
-
-        } catch (e) {}
-
-    }
-
-
-
-    /* =========================================
-       GERAR RESPOSTA
-    ========================================== */
-
-    function gerarResposta() {
-
-        var tipo =
-            tipoResposta.value;
-
-        var info =
-            infoExtra.value.trim();
-
-        if (
-            typeof templates[tipo] !==
-            'function'
-        ) {
-
-            resultado.textContent =
-                PLACEHOLDER;
-
-            return;
-
-        }
-
-
-        var resposta =
-            templates[tipo](info);
-
-
-        resultado.textContent =
-            resposta;
-
-
-        resultado.classList.add(
-            'result-active'
         );
 
     }
 
 
+    /* ============================================
+       LIMPAR ASSISTENTE
+    ============================================ */
 
-    /* =========================================
-       LIMPAR
-    ========================================== */
+    if (btnLimpar) {
 
-    function limparAssistente() {
+        btnLimpar.addEventListener(
+            'click',
+            function () {
 
-        infoExtra.value = '';
+                if (infoExtra) {
+                    infoExtra.value = '';
+                }
 
-        resultado.textContent =
-            PLACEHOLDER;
+                if (resultado) {
 
-        resultado.classList.remove(
-            'result-active'
+                    resultado.textContent =
+                        PLACEHOLDER;
+
+                    resultado.classList.remove(
+                        'result-filled'
+                    );
+
+                }
+
+                if (tipoResposta) {
+
+                    tipoResposta.selectedIndex =
+                        0;
+
+                }
+
+            }
         );
 
     }
 
 
+    /* ============================================
+       COPIAR RESPOSTA
+    ============================================ */
 
-    /* =========================================
-       COPIAR
-    ========================================== */
+    if (btnCopiar) {
 
-    function copiarResposta() {
+        btnCopiar.addEventListener(
+            'click',
+            function () {
 
-        var texto =
-            resultado.textContent.trim();
+                if (!resultado) return;
+
+                var texto =
+                    resultado.textContent.trim();
+
+                if (
+                    !texto ||
+                    texto === PLACEHOLDER
+                ) {
+
+                    return;
+
+                }
 
 
-        if (
-            !texto ||
-            texto === PLACEHOLDER
-        ) {
+                copiarTexto(
+                    texto,
+                    function () {
 
-            return;
+                        var textoOriginal =
+                            btnCopiar.innerHTML;
 
-        }
+                        btnCopiar.innerHTML =
+                            '✓ Copiado';
 
+                        setTimeout(
+                            function () {
+
+                                btnCopiar.innerHTML =
+                                    textoOriginal;
+
+                            },
+                            1800
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+    }
+
+
+    /* ============================================
+       FUNÇÃO UNIVERSAL DE CÓPIA
+    ============================================ */
+
+    function copiarTexto(texto, sucesso) {
 
         if (
             navigator.clipboard &&
-            navigator.clipboard.writeText
+            window.isSecureContext
         ) {
 
-            navigator.clipboard.writeText(
-                texto
-            ).then(function () {
+            navigator.clipboard
+                .writeText(texto)
+                .then(function () {
 
-                mostrarCopiado();
+                    if (sucesso) {
+                        sucesso();
+                    }
 
-            }).catch(function () {
+                })
+                .catch(function () {
 
-                copiarFallback(texto);
+                    copiarTextoFallback(
+                        texto,
+                        sucesso
+                    );
 
-            });
+                });
 
         } else {
 
-            copiarFallback(texto);
+            copiarTextoFallback(
+                texto,
+                sucesso
+            );
 
         }
 
     }
 
 
+    function copiarTextoFallback(
+        texto,
+        sucesso
+    ) {
 
-    /* =========================================
-       FALLBACK DE CÓPIA
-    ========================================== */
-
-    function copiarFallback(texto) {
-
-        var area =
+        var textarea =
             document.createElement(
                 'textarea'
             );
 
-
-        area.value =
+        textarea.value =
             texto;
 
-
-        area.style.position =
+        textarea.style.position =
             'fixed';
 
-        area.style.left =
+        textarea.style.left =
             '-9999px';
 
+        textarea.style.top =
+            '0';
 
         document.body.appendChild(
-            area
+            textarea
         );
 
+        textarea.focus();
 
-        area.select();
-
+        textarea.select();
 
         try {
 
@@ -334,238 +390,88 @@
                 'copy'
             );
 
-            mostrarCopiado();
-
-        } catch (e) {}
-
-
-
-        document.body.removeChild(
-            area
-        );
-
-    }
-
-
-
-    /* =========================================
-       FEEDBACK COPIADO
-    ========================================== */
-
-    function mostrarCopiado() {
-
-        var textoOriginal =
-            btnCopiar.innerHTML;
-
-
-        btnCopiar.innerHTML =
-            '✓ Copiado!';
-
-
-        btnCopiar.classList.add(
-            'copied'
-        );
-
-
-        setTimeout(
-            function () {
-
-                btnCopiar.innerHTML =
-                    textoOriginal;
-
-                btnCopiar.classList.remove(
-                    'copied'
-                );
-
-            },
-            1800
-        );
-
-    }
-
-
-
-    /* =========================================
-       BUSCA
-    ========================================== */
-
-    function executarBusca() {
-
-        var termo =
-            searchInput.value
-                .trim()
-                .toLowerCase();
-
-
-        var cards =
-            document.querySelectorAll(
-                '.card'
-            );
-
-
-        var encontrados = 0;
-
-
-        cards.forEach(function (card) {
-
-            var texto =
-                (
-                    card.getAttribute(
-                        'data-search'
-                    ) || ''
-                ).toLowerCase();
-
-
-            var titulo =
-                (
-                    card.querySelector(
-                        'h3'
-                    )?.textContent || ''
-                ).toLowerCase();
-
-
-            var combinado =
-                texto + ' ' + titulo;
-
-
-            var mostrar =
-                !termo ||
-                combinado.includes(
-                    termo
-                );
-
-
-            card.classList.toggle(
-                'search-hidden',
-                !mostrar
-            );
-
-
-            if (mostrar) {
-
-                encontrados++;
-
+            if (sucesso) {
+                sucesso();
             }
 
-        });
+        } catch (e) {
 
-
-        emptyState.classList.toggle(
-            'hidden',
-            encontrados !== 0
-        );
-
-    }
-
-
-
-    /* =========================================
-       ABRIR ASSISTENTE
-    ========================================== */
-
-    function abrirAssistente() {
-
-        if (!aiPanel) {
-            return;
-        }
-
-
-        aiPanel.classList.add(
-            'ai-highlight'
-        );
-
-
-        aiPanel.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-
-
-        setTimeout(
-            function () {
-
-                aiPanel.classList.remove(
-                    'ai-highlight'
-                );
-
-            },
-            1300
-        );
-
-    }
-
-
-
-    /* =========================================
-       DROPDOWN
-    ========================================== */
-
-    function alternarPortais() {
-
-        if (!dropdown) {
-            return;
-        }
-
-
-        var aberto =
-            dropdown.classList.toggle(
-                'open'
+            console.error(
+                'Não foi possível copiar:',
+                e
             );
 
+        }
 
-        portaisToggle.setAttribute(
-            'aria-expanded',
-            aberto
-                ? 'true'
-                : 'false'
+        document.body.removeChild(
+            textarea
         );
-
-
-        portaisToggle.querySelector(
-            'span'
-        ).textContent =
-            aberto
-                ? '▴'
-                : '▾';
 
     }
 
 
+    /* ============================================
+       DROPDOWN — ADMINISTRADORAS
+    ============================================ */
 
-    /* =========================================
+    if (
+        dropdownCard &&
+        portaisToggle
+    ) {
+
+        portaisToggle.addEventListener(
+            'click',
+            function (event) {
+
+                event.stopPropagation();
+
+                var aberto =
+                    dropdownCard.classList.contains(
+                        'open'
+                    );
+
+                dropdownCard.classList.toggle(
+                    'open'
+                );
+
+                portaisToggle.setAttribute(
+                    'aria-expanded',
+                    String(!aberto)
+                );
+
+            }
+        );
+
+    }
+
+
+    /* ============================================
        FECHAR DROPDOWN AO CLICAR FORA
-    ========================================== */
+    ============================================ */
 
     document.addEventListener(
         'click',
         function (event) {
 
-            if (!dropdown) {
-                return;
-            }
-
-
             if (
-                !dropdown.contains(
+                dropdownCard &&
+                !dropdownCard.contains(
                     event.target
                 )
             ) {
 
-                dropdown.classList.remove(
+                dropdownCard.classList.remove(
                     'open'
                 );
 
+                if (portaisToggle) {
 
-                portaisToggle.setAttribute(
-                    'aria-expanded',
-                    'false'
-                );
+                    portaisToggle.setAttribute(
+                        'aria-expanded',
+                        'false'
+                    );
 
-
-                portaisToggle.querySelector(
-                    'span'
-                ).textContent =
-                    '▾';
+                }
 
             }
 
@@ -573,21 +479,206 @@
     );
 
 
+    /* ============================================
+       NÃO FECHAR AO CLICAR DENTRO DO MENU
+    ============================================ */
 
-    /* =========================================
-       ATALHO /
-    ========================================== */
+    if (portaisMenu) {
+
+        portaisMenu.addEventListener(
+            'click',
+            function (event) {
+
+                event.stopPropagation();
+
+            }
+        );
+
+    }
+
+
+    /* ============================================
+       BUSCA DAS FERRAMENTAS
+    ============================================ */
+
+    function executarBusca() {
+
+        if (!searchInput) {
+            return;
+        }
+
+        var termo =
+            searchInput.value
+                .toLowerCase()
+                .trim();
+
+        var cards =
+            document.querySelectorAll(
+                '.grid .card'
+            );
+
+        var encontrados =
+            0;
+
+
+        cards.forEach(
+            function (card) {
+
+                var texto =
+                    (
+                        card.getAttribute(
+                            'data-search'
+                        ) || ''
+                    )
+                    .toLowerCase();
+
+                var titulo =
+                    card.querySelector('h3');
+
+                if (titulo) {
+
+                    texto +=
+                        ' ' +
+                        titulo.textContent
+                            .toLowerCase();
+
+                }
+
+
+                if (
+                    !termo ||
+                    texto.indexOf(
+                        termo
+                    ) !== -1
+                ) {
+
+                    card.classList.remove(
+                        'search-hidden'
+                    );
+
+                    card.style.display =
+                        '';
+
+                    encontrados++;
+
+                } else {
+
+                    card.classList.add(
+                        'search-hidden'
+                    );
+
+                    card.style.display =
+                        'none';
+
+                }
+
+            }
+        );
+
+
+        /* ========================================
+           ESTADO SEM RESULTADOS
+        ======================================== */
+
+        if (emptyState) {
+
+            if (
+                termo &&
+                encontrados === 0
+            ) {
+
+                emptyState.classList.remove(
+                    'hidden'
+                );
+
+            } else {
+
+                emptyState.classList.add(
+                    'hidden'
+                );
+
+            }
+
+        }
+
+
+        /* ========================================
+           FILTRAR SEÇÕES VAZIAS
+        ======================================== */
+
+        var secoes =
+            document.querySelectorAll(
+                '.category'
+            );
+
+        secoes.forEach(
+            function (secao) {
+
+                var cardsVisiveis =
+                    secao.querySelectorAll(
+                        '.card:not([style*="display: none"])'
+                    );
+
+                if (
+                    cardsVisiveis.length === 0 &&
+                    termo
+                ) {
+
+                    secao.classList.add(
+                        'search-empty'
+                    );
+
+                } else {
+
+                    secao.classList.remove(
+                        'search-empty'
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    if (searchInput) {
+
+        searchInput.addEventListener(
+            'input',
+            executarBusca
+        );
+
+    }
+
+
+    /* ============================================
+       ATALHO "/" PARA PESQUISA
+    ============================================ */
 
     document.addEventListener(
         'keydown',
         function (event) {
 
+            var elemento =
+                document.activeElement;
+
+            var digitando =
+                elemento &&
+                (
+                    elemento.tagName ===
+                        'INPUT' ||
+                    elemento.tagName ===
+                        'TEXTAREA' ||
+                    elemento.tagName ===
+                        'SELECT'
+                );
+
+
             if (
                 event.key === '/' &&
-                document.activeElement !==
-                searchInput &&
-                document.activeElement !==
-                infoExtra
+                !digitando &&
+                searchInput
             ) {
 
                 event.preventDefault();
@@ -597,12 +688,16 @@
             }
 
 
+            /* ESC LIMPA A BUSCA */
+
             if (
-                event.key === 'Escape'
+                event.key === 'Escape' &&
+                searchInput &&
+                document.activeElement ===
+                    searchInput
             ) {
 
-                searchInput.value =
-                    '';
+                searchInput.value = '';
 
                 executarBusca();
 
@@ -614,37 +709,297 @@
     );
 
 
+    /* ============================================
+       PROMPTS DO CHATGPT
+    ============================================ */
 
-    /* =========================================
-       EVENTOS
-    ========================================== */
+    if (promptSuggestions.length) {
 
-    if (btnGerar) {
+        promptSuggestions.forEach(
+            function (button) {
 
-        btnGerar.addEventListener(
-            'click',
-            gerarResposta
+                button.addEventListener(
+                    'click',
+                    function () {
+
+                        if (!chatgptPrompt) {
+                            return;
+                        }
+
+                        var prompt =
+                            button.getAttribute(
+                                'data-prompt'
+                            );
+
+
+                        if (!prompt) {
+                            return;
+                        }
+
+
+                        chatgptPrompt.value =
+                            prompt;
+
+
+                        chatgptPrompt.focus();
+
+
+                        /* Cursor no final */
+
+                        try {
+
+                            chatgptPrompt.setSelectionRange(
+                                chatgptPrompt.value.length,
+                                chatgptPrompt.value.length
+                            );
+
+                        } catch (e) {}
+
+                    }
+                );
+
+            }
         );
 
     }
 
 
-    if (btnLimpar) {
+    /* ============================================
+       COPIAR PROMPT DO CHATGPT
+    ============================================ */
 
-        btnLimpar.addEventListener(
+    if (btnCopiarPrompt) {
+
+        btnCopiarPrompt.addEventListener(
             'click',
-            limparAssistente
+            function () {
+
+                if (!chatgptPrompt) {
+                    return;
+                }
+
+                var texto =
+                    chatgptPrompt.value.trim();
+
+
+                if (!texto) {
+
+                    chatgptPrompt.focus();
+
+                    return;
+
+                }
+
+
+                copiarTexto(
+                    texto,
+                    function () {
+
+                        var original =
+                            btnCopiarPrompt.innerHTML;
+
+                        btnCopiarPrompt.innerHTML =
+                            '✓ Prompt copiado';
+
+                        setTimeout(
+                            function () {
+
+                                btnCopiarPrompt.innerHTML =
+                                    original;
+
+                            },
+                            1800
+                        );
+
+                    }
+                );
+
+            }
         );
 
     }
 
 
-    if (btnCopiar) {
+    /* ============================================
+       ABRIR CHATGPT
+    ============================================ */
 
-        btnCopiar.addEventListener(
+    if (btnAbrirChatGPT) {
+
+        btnAbrirChatGPT.addEventListener(
             'click',
-            copiarResposta
+            function () {
+
+                var texto = '';
+
+                if (chatgptPrompt) {
+
+                    texto =
+                        chatgptPrompt.value.trim();
+
+                }
+
+
+                /*
+                 * SEM API
+                 *
+                 * Se houver um prompt:
+                 * 1. copia para área de transferência
+                 * 2. abre o ChatGPT
+                 *
+                 * O usuário pode usar CTRL + V.
+                 */
+
+
+                if (texto) {
+
+                    copiarTexto(
+                        texto,
+                        function () {
+
+                            abrirChatGPT();
+
+                        }
+                    );
+
+                } else {
+
+                    abrirChatGPT();
+
+                }
+
+            }
         );
+
+    }
+
+
+    function abrirChatGPT() {
+
+        window.open(
+            'https://chatgpt.com/',
+            '_blank',
+            'noopener,noreferrer'
+        );
+
+    }
+
+
+    /* ============================================
+       ENTER NO CHATGPT
+       CTRL + ENTER = COPIAR PROMPT
+    ============================================ */
+
+    if (chatgptPrompt) {
+
+        chatgptPrompt.addEventListener(
+            'keydown',
+            function (event) {
+
+                /*
+                 * CTRL + ENTER
+                 * copia o prompt
+                 */
+
+                if (
+                    event.ctrlKey &&
+                    event.key === 'Enter'
+                ) {
+
+                    event.preventDefault();
+
+                    if (btnCopiarPrompt) {
+
+                        btnCopiarPrompt.click();
+
+                    }
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ============================================
+       LOCAL STORAGE
+    ============================================ */
+
+    function salvarPreferencias() {
+
+        try {
+
+            if (tipoResposta) {
+
+                localStorage.setItem(
+                    'ferramentasAdm.tipo',
+                    tipoResposta.value
+                );
+
+            }
+
+
+            if (searchInput) {
+
+                localStorage.setItem(
+                    'ferramentasAdm.busca',
+                    searchInput.value
+                );
+
+            }
+
+        } catch (e) {
+
+            console.warn(
+                'Não foi possível salvar preferências.'
+            );
+
+        }
+
+    }
+
+
+    function carregarPreferencias() {
+
+        try {
+
+            var tipoSalvo =
+                localStorage.getItem(
+                    'ferramentasAdm.tipo'
+                );
+
+            var buscaSalva =
+                localStorage.getItem(
+                    'ferramentasAdm.busca'
+                );
+
+
+            if (
+                tipoSalvo &&
+                templates[tipoSalvo] &&
+                tipoResposta
+            ) {
+
+                tipoResposta.value =
+                    tipoSalvo;
+
+            }
+
+
+            /*
+             * Não recuperamos automaticamente
+             * a busca para não esconder ferramentas
+             * quando o usuário abre a página.
+             */
+
+        } catch (e) {
+
+            console.warn(
+                'Não foi possível carregar preferências.'
+            );
+
+        }
 
     }
 
@@ -663,240 +1018,34 @@
 
         searchInput.addEventListener(
             'input',
-            executarBusca
+            salvarPreferencias
         );
 
     }
 
 
-    if (portaisToggle) {
-
-        portaisToggle.addEventListener(
-            'click',
-            function (event) {
-
-                event.stopPropagation();
-
-                alternarPortais();
-
-            }
-        );
-
-    }
-
-
-
-    /* =========================================
-       CLIQUE NOS CARDS
-    ========================================== */
-
-    document.querySelectorAll(
-        '.card'
-    ).forEach(function (card) {
-
-        card.addEventListener(
-            'click',
-            function (event) {
-
-                if (
-                    event.target.closest(
-                        'a'
-                    ) ||
-                    event.target.closest(
-                        'button'
-                    ) ||
-                    event.target.closest(
-                        '.dropdown-menu'
-                    )
-                ) {
-
-                    return;
-
-                }
-
-
-                var target =
-                    card.getAttribute(
-                        'data-target'
-                    );
-
-
-                if (
-                    target ===
-                    'aiPanel'
-                ) {
-
-                    abrirAssistente();
-
-                }
-
-            }
-        );
-
-    });
-
-
-
-    /* =========================================
-       ENTER NO TEXTAREA
-    ========================================== */
-
-    if (infoExtra) {
-
-        infoExtra.addEventListener(
-            'keydown',
-            function (event) {
-
-                if (
-                    event.ctrlKey &&
-                    event.key === 'Enter'
-                ) {
-
-                    event.preventDefault();
-
-                    gerarResposta();
-
-                }
-
-            }
-        );
-
-    }
-
-
-
-    /* =========================================
+    /* ============================================
        INICIALIZAÇÃO
-    ========================================== */
+    ============================================ */
 
     carregarPreferencias();
 
-    executarBusca();
+
+    /* ============================================
+       GARANTIR ESTADO INICIAL
+    ============================================ */
+
+    if (resultado) {
+
+        resultado.textContent =
+            PLACEHOLDER;
+
+    }
+
+
+    console.log(
+        'Ferramentas ADM carregado com sucesso.'
+    );
 
 
 })();
-/* ============================================
-   ASSISTENTE CHATGPT
-============================================ */
-
-var chatgptPrompt = document.getElementById('chatgptPrompt');
-var btnCopiarPrompt = document.getElementById('btnCopiarPrompt');
-var btnAbrirChatGPT = document.getElementById('btnAbrirChatGPT');
-var promptSuggestions = document.querySelectorAll('.prompt-suggestion');
-
-
-/* ===== CLICAR EM UMA SUGESTÃO ===== */
-
-promptSuggestions.forEach(function (button) {
-
-    button.addEventListener('click', function () {
-
-        var prompt = button.getAttribute('data-prompt');
-
-        if (!prompt) return;
-
-        chatgptPrompt.value = prompt;
-
-        chatgptPrompt.focus();
-
-        /* Coloca o cursor no final */
-        chatgptPrompt.setSelectionRange(
-            chatgptPrompt.value.length,
-            chatgptPrompt.value.length
-        );
-
-    });
-
-});
-
-
-/* ===== COPIAR PROMPT ===== */
-
-if (btnCopiarPrompt) {
-
-    btnCopiarPrompt.addEventListener('click', function () {
-
-        var texto = chatgptPrompt.value.trim();
-
-        if (!texto) {
-
-            chatgptPrompt.focus();
-
-            return;
-
-        }
-
-        if (navigator.clipboard) {
-
-            navigator.clipboard.writeText(texto)
-                .then(function () {
-
-                    var textoOriginal =
-                        btnCopiarPrompt.innerHTML;
-
-                    btnCopiarPrompt.innerHTML =
-                        '✓ Prompt copiado';
-
-                    setTimeout(function () {
-
-                        btnCopiarPrompt.innerHTML =
-                            textoOriginal;
-
-                    }, 1800);
-
-                });
-
-        } else {
-
-            chatgptPrompt.select();
-
-            document.execCommand('copy');
-
-        }
-
-    });
-
-}
-
-
-/* ===== ABRIR CHATGPT ===== */
-
-if (btnAbrirChatGPT) {
-
-    btnAbrirChatGPT.addEventListener('click', function () {
-
-        var texto = chatgptPrompt.value.trim();
-
-        /*
-         * Sem API:
-         * abre o ChatGPT normalmente.
-         *
-         * O prompt também é copiado automaticamente
-         * para facilitar o uso.
-         */
-
-        if (texto) {
-
-            if (navigator.clipboard) {
-
-                navigator.clipboard.writeText(texto);
-
-            } else {
-
-                chatgptPrompt.select();
-
-                document.execCommand('copy');
-
-            }
-
-        }
-
-        window.open(
-            'https://chatgpt.com/',
-            '_blank',
-            'noopener,noreferrer'
-        );
-
-    });
-
-}
