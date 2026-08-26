@@ -775,3 +775,128 @@
 
 
 })();
+/* ============================================
+   ASSISTENTE CHATGPT
+============================================ */
+
+var chatgptPrompt = document.getElementById('chatgptPrompt');
+var btnCopiarPrompt = document.getElementById('btnCopiarPrompt');
+var btnAbrirChatGPT = document.getElementById('btnAbrirChatGPT');
+var promptSuggestions = document.querySelectorAll('.prompt-suggestion');
+
+
+/* ===== CLICAR EM UMA SUGESTÃO ===== */
+
+promptSuggestions.forEach(function (button) {
+
+    button.addEventListener('click', function () {
+
+        var prompt = button.getAttribute('data-prompt');
+
+        if (!prompt) return;
+
+        chatgptPrompt.value = prompt;
+
+        chatgptPrompt.focus();
+
+        /* Coloca o cursor no final */
+        chatgptPrompt.setSelectionRange(
+            chatgptPrompt.value.length,
+            chatgptPrompt.value.length
+        );
+
+    });
+
+});
+
+
+/* ===== COPIAR PROMPT ===== */
+
+if (btnCopiarPrompt) {
+
+    btnCopiarPrompt.addEventListener('click', function () {
+
+        var texto = chatgptPrompt.value.trim();
+
+        if (!texto) {
+
+            chatgptPrompt.focus();
+
+            return;
+
+        }
+
+        if (navigator.clipboard) {
+
+            navigator.clipboard.writeText(texto)
+                .then(function () {
+
+                    var textoOriginal =
+                        btnCopiarPrompt.innerHTML;
+
+                    btnCopiarPrompt.innerHTML =
+                        '✓ Prompt copiado';
+
+                    setTimeout(function () {
+
+                        btnCopiarPrompt.innerHTML =
+                            textoOriginal;
+
+                    }, 1800);
+
+                });
+
+        } else {
+
+            chatgptPrompt.select();
+
+            document.execCommand('copy');
+
+        }
+
+    });
+
+}
+
+
+/* ===== ABRIR CHATGPT ===== */
+
+if (btnAbrirChatGPT) {
+
+    btnAbrirChatGPT.addEventListener('click', function () {
+
+        var texto = chatgptPrompt.value.trim();
+
+        /*
+         * Sem API:
+         * abre o ChatGPT normalmente.
+         *
+         * O prompt também é copiado automaticamente
+         * para facilitar o uso.
+         */
+
+        if (texto) {
+
+            if (navigator.clipboard) {
+
+                navigator.clipboard.writeText(texto);
+
+            } else {
+
+                chatgptPrompt.select();
+
+                document.execCommand('copy');
+
+            }
+
+        }
+
+        window.open(
+            'https://chatgpt.com/',
+            '_blank',
+            'noopener,noreferrer'
+        );
+
+    });
+
+}
