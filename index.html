@@ -1,146 +1,1463 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ferramentas ADM | Postos Graciosa</title>
-  <meta name="description" content="Central administrativa interna dos Postos Graciosa">
-  <link rel="icon" href="img/favicon.png">
-  <link rel="stylesheet" href="css/style.css">
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Central administrativa interna dos Postos Graciosa."
+    >
+
+    <meta
+        name="theme-color"
+        content="#0f172a"
+    >
+
+    <title>Ferramentas ADM | Postos Graciosa</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="img/favicon.png"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
 </head>
+
+
 <body>
-  <header class="header">
-    <div class="header-inner">
-      <div class="brand">
-        <div class="brand-overline">Postos Graciosa</div>
-        <h1>Ferramentas ADM</h1>
-        <p>Central administrativa interna</p>
-      </div>
-      <div class="header-actions">
-        <a class="quick-link" href="https://webmail.postosgraciosa.com.br/" target="_blank" rel="noopener">Webmail</a>
-        <a class="quick-link" href="https://web.whatsapp.com/" target="_blank" rel="noopener">WhatsApp Web</a>
-        <span class="status"><span class="status-dot"></span> Sistema disponível</span>
-        <span class="badge-internal">Uso interno</span>
-      </div>
-    </div>
-  </header>
 
-  <main class="container">
-    <div class="search-wrap">
-      <span class="search-icon">🔍</span>
-      <input type="search" id="searchInput" placeholder="Buscar ferramenta..." aria-label="Buscar ferramenta">
-      <span class="search-shortcut">/</span>
+
+    <!-- =========================================
+         FUNDO
+    ========================================== -->
+
+    <div class="background">
+
+        <div class="background-grid"></div>
+
+        <div class="background-glow background-glow-one"></div>
+
+        <div class="background-glow background-glow-two"></div>
+
+        <div class="background-line background-line-one"></div>
+
+        <div class="background-line background-line-two"></div>
+
     </div>
 
-    <div class="grid" id="toolsGrid">
-      <article class="card" data-search="resposta rapida assistente respostas ia local">
-        <div class="card-icon">🤖</div>
-        <h3>Assistente de Respostas <span class="selo-local">Local</span></h3>
-        <p>Gera respostas administrativas com IA local, sem necessidade de API.</p>
-        <span class="card-action">Abrir ↓</span>
-      </article>
 
-      <article class="card" data-search="chatgpt assistente chat">
-        <div class="card-icon">💬</div>
-        <h3>Assistente ChatGPT</h3>
-        <p>Abre o ChatGPT para apoio administrativo em tarefas diversas.</p>
-        <a class="card-action" href="https://chatgpt.com/" target="_blank" rel="noopener">Abrir ChatGPT →</a>
-      </article>
 
-      <article class="card dropdown" data-search="administradoras portais cielo cs online getnet link mais cash neo payly portal frentista prime rede sem parar sitef ticket">
-        <div class="card-icon">🏦</div>
-        <h3>Administradoras e Portais</h3>
-        <p>Acesso rápido aos portais de administradoras e adquirentes.</p>
-        <span class="card-action" id="portaisToggle" aria-expanded="false">Ver portais ▾</span>
-        <nav class="dropdown-menu" id="portaisMenu" aria-label="Portais">
-          <!-- ⚠️ URLs dos portais não vieram no arquivo — substitua "#" pelas reais -->
-          <a href="#" target="_blank" rel="noopener">Cielo</a>
-          <a href="#" target="_blank" rel="noopener">CS Online</a>
-          <a href="#" target="_blank" rel="noopener">Getnet</a>
-          <a href="#" target="_blank" rel="noopener">Link</a>
-          <a href="#" target="_blank" rel="noopener">MaisCash</a>
-          <a href="#" target="_blank" rel="noopener">Neo</a>
-          <a href="#" target="_blank" rel="noopener">Payly</a>
-          <a href="#" target="_blank" rel="noopener">Portal do Frentista</a>
-          <a href="#" target="_blank" rel="noopener">Prime</a>
-          <a href="#" target="_blank" rel="noopener">Rede</a>
-          <a href="#" target="_blank" rel="noopener">Sem Parar</a>
-          <a href="#" target="_blank" rel="noopener">SiTef</a>
-          <a href="#" target="_blank" rel="noopener">Ticket</a>
-        </nav>
-      </article>
+    <!-- =========================================
+         HEADER
+    ========================================== -->
 
-      <article class="card" data-search="conferencias premmia divergencias">
-        <div class="card-icon">🔍</div>
-        <h3>Conferência Premmia</h3>
-        <p>Confere divergências entre o Premmia e o sistema interno.</p>
-        <span class="card-action">Abrir →</span>
-      </article>
+    <header class="header">
 
-      <article class="card" data-search="documentos recibo vale impressao">
-        <div class="card-icon">📄</div>
-        <h3>Documentos</h3>
-        <p>Emissão de recibos rápidos para impressão e vales para funcionários.</p>
-        <span class="card-action">Recibos · Vales →</span>
-      </article>
+        <div class="header-inner">
 
-      <article class="card" data-search="operacional ocorrencias pdv">
-        <div class="card-icon">⚙️</div>
-        <h3>Ocorrências PDV</h3>
-        <p>Registro de ocorrências do ponto de venda.</p>
-        <span class="card-action">Abrir →</span>
-      </article>
 
-      <article class="card" data-search="atendimento gerador mensagem msg clientes padronizadas confirmacao transacoes">
-        <div class="card-icon">📞</div>
-        <h3>Gerador de MSG para Clientes</h3>
-        <p>Mensagens padronizadas de confirmação de transações.</p>
-        <span class="card-action">Abrir →</span>
-      </article>
-    </div>
+            <div class="brand">
 
-    <p class="empty-state hidden" id="emptyState">
-      <strong>Nenhuma ferramenta encontrada</strong>
-      Tente pesquisar por outro nome.
-    </p>
 
-    <section class="ai-panel" aria-labelledby="ai-title">
-      <h2 id="ai-title">Assistente de Respostas</h2>
-      <p class="sub">IA local — gera respostas padronizadas sem depender de API externa.</p>
+                <div class="brand-logo">
 
-      <div class="form-row">
-        <label for="tipoResposta">Tipo de resposta</label>
-        <select id="tipoResposta">
-          <option>Confirmação de pagamento</option>
-          <option>Solicitação de documento</option>
-          <option>Divergência de informação</option>
-          <option>Aguardando retorno</option>
-          <option>Encaminhamento ao setor responsável</option>
-          <option>Agradecimento</option>
-          <option>Resposta personalizada</option>
-        </select>
-      </div>
+                    <img
+                        src="img/logo.png"
+                        alt="Logo Postos Graciosa"
+                        onerror="
+                            this.style.display='none';
+                            this.parentElement.classList.add('logo-error');
+                        "
+                    >
 
-      <div class="form-row">
-        <label for="infoExtra">Informações adicionais</label>
-        <textarea id="infoExtra" placeholder="Detalhes a incluir na resposta..."></textarea>
-      </div>
+                    <span class="logo-fallback">
+                        ADM
+                    </span>
 
-      <div class="form-row">
-        <button class="btn btn-primary" id="btnGerar">✨ Gerar resposta</button>
-        <button class="btn btn-ghost" id="btnLimpar">Limpar</button>
-        <button class="btn btn-ghost" id="btnCopiar">📋 Copiar resposta</button>
-      </div>
+                </div>
 
-      <div class="result-box" id="resultado" aria-live="polite">A resposta gerada aparecerá aqui.</div>
-    </section>
-  </main>
 
-  <footer class="footer">
-    <span><strong>Ferramentas ADM</strong> · Central administrativa interna</span>
-    <span>Uso interno · Postos Graciosa</span>
-  </footer>
+                <div class="brand-info">
 
-  <script src="js/app.js"></script>
+                    <span class="brand-overline">
+                        POSTOS GRACIOSA
+                    </span>
+
+                    <h1>
+                        Ferramentas ADM
+                    </h1>
+
+                    <p>
+                        Central administrativa interna
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- AÇÕES RÁPIDAS -->
+
+            <div class="header-actions">
+
+
+                <a
+                    class="quick-link quick-email"
+                    href="https://webmail.postosgraciosa.com.br/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Abrir Webmail"
+                >
+
+                    <span class="quick-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+
+                            <rect
+                                x="3"
+                                y="5"
+                                width="18"
+                                height="14"
+                                rx="2"
+                            />
+
+                            <path
+                                d="m3 7 9 6 9-6"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    <span>
+                        E-mail
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    class="quick-link quick-whatsapp"
+                    href="https://web.whatsapp.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Abrir WhatsApp Web"
+                >
+
+                    <span class="quick-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+
+                            <path
+                                d="M20 11.5a7.5 7.5 0 0 1-8 7.5 8 8 0 0 1-3-.6L4 20l1.6-4A7.5 7.5 0 1 1 20 11.5Z"
+                            />
+
+                            <path
+                                d="M8.5 9.5c.4 2 2 3.6 4 4"
+                            />
+
+                            <path
+                                d="M8.5 9.5c.2-.8.5-1.1.9-1.1"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    <span>
+                        WhatsApp
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    class="quick-link quick-chatgpt"
+                    href="https://chatgpt.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Abrir ChatGPT"
+                >
+
+                    <span class="quick-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+
+                            <path
+                                d="M12 3.5a4.2 4.2 0 0 1 4 2.9 4.2 4.2 0 0 1 3.1 5.8 4.2 4.2 0 0 1-3.1 6.1 4.2 4.2 0 0 1-7 1.1 4.2 4.2 0 0 1-3.1-5.8 4.2 4.2 0 0 1 3.1-6.1A4.2 4.2 0 0 1 12 3.5Z"
+                            />
+
+                            <path
+                                d="m8.5 8.2 3.5 2v4"
+                            />
+
+                            <path
+                                d="m15.5 8.2-3.5 2"
+                            />
+
+                            <path
+                                d="m8.5 15.8 3.5-2"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    <span>
+                        ChatGPT
+                    </span>
+
+                </a>
+
+
+
+                <span class="status">
+
+                    <span class="status-dot"></span>
+
+                    Sistema disponível
+
+                </span>
+
+
+
+                <span class="badge-internal">
+                    USO INTERNO
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================
+         CONTEÚDO
+    ========================================== -->
+
+    <main class="container">
+
+
+        <!-- BUSCA -->
+
+        <div class="search-wrap">
+
+            <svg
+                class="search-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
+
+                <circle
+                    cx="11"
+                    cy="11"
+                    r="6"
+                />
+
+                <path
+                    d="m16 16 4 4"
+                />
+
+            </svg>
+
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Buscar ferramenta..."
+                autocomplete="off"
+                aria-label="Buscar ferramenta"
+            >
+
+
+            <span class="search-shortcut">
+                /
+            </span>
+
+        </div>
+
+
+
+        <!-- =========================================
+             GRADE
+        ========================================== -->
+
+        <div
+            class="grid"
+            id="toolsGrid"
+        >
+
+
+            <!-- =====================================
+                 ASSISTENTE LOCAL
+            ====================================== -->
+
+            <article
+                class="card ai-card"
+                data-search="resposta rápida assistente respostas ia local inteligência artificial"
+                data-target="aiPanel"
+            >
+
+                <div class="card-icon ai-icon">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+
+                        <rect
+                            x="4"
+                            y="5"
+                            width="16"
+                            height="14"
+                            rx="3"
+                        />
+
+                        <path
+                            d="M8 9h8"
+                        />
+
+                        <path
+                            d="M8 13h5"
+                        />
+
+                        <path
+                            d="M8 17h3"
+                        />
+
+                        <path
+                            d="M9 2v3"
+                        />
+
+                        <path
+                            d="M15 2v3"
+                        />
+
+                    </svg>
+
+                </div>
+
+
+                <h3>
+
+                    Assistente de Respostas
+
+                    <span class="selo-local">
+                        LOCAL
+                    </span>
+
+                </h3>
+
+
+                <p>
+                    Gere respostas administrativas padronizadas
+                    sem necessidade de API.
+                </p>
+
+
+                <span class="card-action">
+                    Abrir assistente
+                    →
+                </span>
+
+            </article>
+
+
+
+            <!-- =====================================
+                 CHATGPT
+            ====================================== -->
+
+            <article
+                class="card"
+                data-search="chatgpt assistente inteligência artificial chat"
+            >
+
+                <div class="card-icon chatgpt-icon">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+
+                        <path
+                            d="M12 3.5a4.2 4.2 0 0 1 4 2.9 4.2 4.2 0 0 1 3.1 5.8 4.2 4.2 0 0 1-3.1 6.1 4.2 4.2 0 0 1-7 1.1 4.2 4.2 0 0 1-3.1-5.8 4.2 4.2 0 0 1 3.1-6.1A4.2 4.2 0 0 1 12 3.5Z"
+                        />
+
+                        <path
+                            d="m8.5 8.2 3.5 2v4"
+                        />
+
+                        <path
+                            d="m15.5 8.2-3.5 2"
+                        />
+
+                        <path
+                            d="m8.5 15.8 3.5-2"
+                        />
+
+                    </svg>
+
+                </div>
+
+
+                <h3>
+                    Assistente ChatGPT
+                </h3>
+
+
+                <p>
+                    Abra o ChatGPT para apoio administrativo
+                    em tarefas diversas.
+                </p>
+
+
+                <a
+                    class="card-action"
+                    href="https://chatgpt.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Abrir ChatGPT
+                    →
+                </a>
+
+            </article>
+
+
+
+            <!-- =====================================
+                 ADMINISTRADORAS
+            ====================================== -->
+
+            <article
+                class="card dropdown"
+                data-search="administradoras portais cielo cs online getnet link maiscash mais cash neo payly portal frentista prime rede sem parar sitef sitef ticket cartões adquirentes"
+            >
+
+                <div class="card-icon bank-icon">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+
+                        <path
+                            d="M3 10h18"
+                        />
+
+                        <path
+                            d="m4 10 8-6 8 6"
+                        />
+
+                        <path
+                            d="M5 10v8"
+                        />
+
+                        <path
+                            d="M9 10v8"
+                        />
+
+                        <path
+                            d="M15 10v8"
+                        />
+
+                        <path
+                            d="M19 10v8"
+                        />
+
+                        <path
+                            d="M3 20h18"
+                        />
+
+                    </svg>
+
+                </div>
+
+
+                <h3>
+                    Administradoras e Portais
+                </h3>
+
+
+                <p>
+                    Acesso rápido aos portais de administradoras
+                    e adquirentes.
+                </p>
+
+
+                <button
+                    type="button"
+                    class="card-action portal-toggle"
+                    id="portaisToggle"
+                    aria-expanded="false"
+                    aria-controls="portaisMenu"
+                >
+                    Ver portais
+                    <span>▾</span>
+                </button>
+
+
+
+                <!-- =================================
+                     PORTAIS
+                ================================== -->
+
+                <nav
+                    class="dropdown-menu"
+                    id="portaisMenu"
+                    aria-label="Administradoras e Portais"
+                >
+
+
+                    <!-- CIELO -->
+
+                    <a
+                        href="https://minhaconta2.cielo.com.br/site/acessos/login"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-search="cielo"
+                    >
+
+                        <span class="portal-logo portal-cielo">
+                            C
+                        </span>
+
+                        <span>
+                            Cielo
+                        </span>
+
+                        <span class="portal-external">
+                            ↗
+                        </span>
+
+                    </a>
+
+
+
+                    <!-- CS ONLINE -->
+
+                    <a
+                        href="https://csonlinetenant.b2clogin.com/csonlinetenant.onmicrosoft.com/oauth2/v2.0/authorize?response_mode=query&client_id=9ee58843-cddd-427d-a2af-2911434ad880&nonce=defaultNonce&scope=openid&response_type=code&prompt=login&p=B2C_1A_SeamlessMigration_signuporsignin_UserName&ui_locales=pt-BR&redirect_uri=https%3A%2F%2Fportal.csonline.com.br%2F%2523%2Flogin%2Fhandler&code_challenge=d8Vf5H-O8MZ0zTJP5Jo6_XHNsPWttAl5Q9qbNacbXJ8&code_challenge_method=S256&state=%2F"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-search="cs online"
+                    >
+
+                        <span class="portal-logo portal-cs">
+                            CS
+                        </span>
+
+                        <span>
+                            CS Online
+                        </span>
+
+                        <span class="portal-external">
+                            ↗
+                        </span>
+
+                    </a>
+
+
+
+                    <!-- GETNET -->
+
+                    <a
+                        href="https://minhaconta.getnet.com.br/login"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-search="getnet"
+                    >
+
+                        <span class="portal-logo portal-getnet">
+                            G
+                        </span>
+
+                        <span>
+                            Getnet
+                        </span>
+
+                        <span class="portal-external">
+                            ↗
+                        </span>
+
+                    </a>
+
+
+
+                    <!-- LINK -->
+
+                    <a
+                        href="https://linkbeneficios.com.br/Intranet/Credenciado/Login"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-search="link benefícios"
+                    >
+
+                        <span class="portal-logo portal-link">
+                            L
+                        </span>
+
+                        <span>
+                            Link
+                        </span>
+
+                        <span class="portal-external">
+                            ↗
+                        </span>
+
+                    </a>
+
+
+
+                    <!-- MAIS CASH -->
+
+                    <a
+                        href="https://maiscash.cartaodetodos.com.br/auth/login"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-search="maiscash mais cash"
+                    >
+
+                        <span class="portal-logo portal-maiscash">
+                            M
+                        </span>
+
+                        <span>
+                            MaisCash
+                        </span>
+
+                        <span class="portal-external">
+                            ↗
+                        </span>
+
+                    </a>
+
+
+
+                    <!-- NEO -->
+
+                    <a
+                        href="https://neofacilidades.com.br/Intranet/Login?ReturnUrl=%2FIntranet%2FCredenciado"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-search="neo"
+                    >
+
+                        <span class="portal-logo portal-neo">
+                            N
+                        </span>
+
+                        <span>
+                            Neo
+                        </span>
+
+                        <span class="portal-external">
+                            ↗
+                        </span>
+
+                    </a>
+
+
+
+                    <!-- PAYLY -->
+
+                    <a
+                        href="https://www.payly.com.br/portal"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-search="payly"
+                    >
+
+                        <span class="portal-logo portal-payly">
+                            P
+                        </span>
+
+                        <span>
+                            Payly
+                        </span>
+
+                        <span class="portal-external">
+                            ↗
+                        </span>
+
+                    </a>
+
+
+
+                    <!-- PORTAL DO FRENTISTA -->
+
+                    <a
+                        href="https://cn.vibraenergia.com.br/premmia/revendedor/login"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-search="portal frentista prem mia premia vibra"
+                    >
+
+                        <span class="portal-logo portal-frentista">
+                            PF
+                        </span>
+
+                        <span>
+                            Portal do Frentista
+                        </span>
+
+                        <span class="portal-external">
+                            ↗
+                        </span>
+
+                    </a>
+
+
+
+                    <!-- PRIME -->
+
+                    <a
+                        href="https://www.primebeneficios.com.br/Intranet/Prime/Login"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-search="prime"
+                    >
+
+                        <span class="portal-logo portal-prime">
+                            P
+                        </span>
+
+                        <span>
+                            Prime
+                        </span>
+
+                        <span class="portal-external">
+                            ↗
+                        </span>
+
+                    </a>
+
+
+
+                    <!-- REDE -->
+
+                    <a
+                        href="https://meu.userede.com.br/?redirect=%2Fhome"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-search="rede userede"
+                    >
+
+                        <span class="portal-logo portal-rede">
+                            R
+                        </span>
+
+                        <span>
+                            Rede
+                        </span>
+
+                        <span class="portal-external">
+                            ↗
+                        </span>
+
+                    </a>
+
+
+
+                    <!-- SEM PARAR -->
+
+                    <a
+                        href="https://credenciados.semparar.com.br/login"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-search="sem parar"
+                    >
+
+                        <span class="portal-logo portal-semparar">
+                            SP
+                        </span>
+
+                        <span>
+                            Sem Parar
+                        </span>
+
+                        <span class="portal-external">
+                            ↗
+                        </span>
+
+                    </a>
+
+
+
+                    <!-- SITEF -->
+
+                    <a
+                        href="https://oauth.softwareexpress.com.br/auth/realms/sitefexpress/protocol/openid-connect/auth?response_type=code&client_id=sitefweb&redirect_uri=https%3A%2F%2Fsitefexpress1.softwareexpress.com.br%2Fsitefweb%2Fsso%2Flogin&state=36c646b0-f71b-4f4b-bfba-011e3464646e&login=true&scope=openid"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-search="sitef software express"
+                    >
+
+                        <span class="portal-logo portal-sitef">
+                            S
+                        </span>
+
+                        <span>
+                            SiTef
+                        </span>
+
+                        <span class="portal-external">
+                            ↗
+                        </span>
+
+                    </a>
+
+
+
+                    <!-- TICKET -->
+
+                    <a
+                        href="https://sso.sa.edenred.io/web/session/step/password?returnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fresponse_type%3Dcode%26client_id%3De80f46481b09455a80471c8d880ae2ee%26state%3DS0piUlRZbzUzRFhSWi54Z2JzQkJRT2tQaUd6eklYZlhjUW14VnpnNjNkM0hw%26redirect_uri%3Dhttps%253A%252F%252Fparceiro.edenredmobilidade.com.br%252FEstabelecimentoSSL%252Fsso%2Flogin.cfm%26scope%3Dopenid%2520profile%2520email%2520offline_access%2520portal-fleet-and-mobility-ms_application%2520portal-fleet-and-mobility-ms_application-mfa%26code_challenge%3DvSVYofcn_HGpKqlr3OXBvYSPUjnepfx2blvsNjUIru0%26code_challenge_method%3DS256%26nonce%3DS0piUlRZbzUzRFhSWi54Z2JzQkJRT2tQaUd6eklYZlhjUW14VnpnNjNkM0hw%26acr_values%3Dtenant%253Afleet-br-merchant%26ui_locales%3Dpt-br"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-search="ticket edenred"
+                    >
+
+                        <span class="portal-logo portal-ticket">
+                            T
+                        </span>
+
+                        <span>
+                            Ticket
+                        </span>
+
+                        <span class="portal-external">
+                            ↗
+                        </span>
+
+                    </a>
+
+
+                </nav>
+
+            </article>
+
+
+
+            <!-- =====================================
+                 PREMMIA
+            ====================================== -->
+
+            <article
+                class="card"
+                data-search="conferência conferencia premmia premia divergências"
+            >
+
+                <div class="card-icon blue-card-icon">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+
+                        <path
+                            d="M4 19V5"
+                        />
+
+                        <path
+                            d="M4 19h16"
+                        />
+
+                        <path
+                            d="m7 15 4-4 3 2 5-6"
+                        />
+
+                        <path
+                            d="M15 7h4v4"
+                        />
+
+                    </svg>
+
+                </div>
+
+
+                <h3>
+                    Conferência Premmia
+                </h3>
+
+
+                <p>
+                    Confira divergências entre os lançamentos
+                    do Premmia e o sistema interno.
+                </p>
+
+
+                <a
+                    class="card-action"
+                    href="https://postosgraciosa.github.io/conferencia-premmia/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Abrir conferência
+                    →
+                </a>
+
+            </article>
+
+
+
+            <!-- =====================================
+                 RECIBOS
+            ====================================== -->
+
+            <article
+                class="card"
+                data-search="documentos recibo emissão recibos impressão"
+            >
+
+                <div class="card-icon document-icon">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+
+                        <path
+                            d="M6 3h9l4 4v14H6z"
+                        />
+
+                        <path
+                            d="M15 3v5h5"
+                        />
+
+                        <path
+                            d="M9 13h6"
+                        />
+
+                        <path
+                            d="M9 17h5"
+                        />
+
+                    </svg>
+
+                </div>
+
+
+                <h3>
+                    Emissão de Recibo
+                </h3>
+
+
+                <p>
+                    Gere recibos de forma rápida
+                    e pronta para impressão.
+                </p>
+
+
+                <a
+                    class="card-action"
+                    href="https://postosgraciosa.github.io/recibo-online/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Abrir recibos
+                    →
+                </a>
+
+            </article>
+
+
+
+            <!-- =====================================
+                 VALES
+            ====================================== -->
+
+            <article
+                class="card"
+                data-search="vale funcionário funcionario emissão vale documentos"
+            >
+
+                <div class="card-icon vale-icon">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+
+                        <path
+                            d="M4 7h16v10H4z"
+                        />
+
+                        <path
+                            d="M8 7v10"
+                        />
+
+                        <path
+                            d="M16 7v10"
+                        />
+
+                        <path
+                            d="M11 10h2"
+                        />
+
+                        <path
+                            d="M11 14h2"
+                        />
+
+                    </svg>
+
+                </div>
+
+
+                <h3>
+                    Emissão de Vale
+                </h3>
+
+
+                <p>
+                    Emita vales para funcionários
+                    de maneira simples e organizada.
+                </p>
+
+
+                <a
+                    class="card-action"
+                    href="https://postosgraciosa.github.io/vale-funcionario/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Abrir vales
+                    →
+                </a>
+
+            </article>
+
+
+
+            <!-- =====================================
+                 OCORRÊNCIAS
+            ====================================== -->
+
+            <article
+                class="card"
+                data-search="operacional ocorrências ocorrencias pdv ponto de venda"
+            >
+
+                <div class="card-icon operational-icon">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+
+                        <rect
+                            x="5"
+                            y="4"
+                            width="14"
+                            height="17"
+                            rx="2"
+                        />
+
+                        <path
+                            d="M9 8h6"
+                        />
+
+                        <path
+                            d="M9 12h6"
+                        />
+
+                        <path
+                            d="M9 16h4"
+                        />
+
+                    </svg>
+
+                </div>
+
+
+                <h3>
+                    Ocorrências PDV
+                </h3>
+
+
+                <p>
+                    Registre e organize ocorrências
+                    relacionadas ao PDV.
+                </p>
+
+
+                <a
+                    class="card-action"
+                    href="https://postosgraciosa.github.io/ocorrencias-pdv/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Abrir ocorrências
+                    →
+                </a>
+
+            </article>
+
+
+
+            <!-- =====================================
+                 GERADOR DE MENSAGENS
+            ====================================== -->
+
+            <article
+                class="card"
+                data-search="atendimento gerador mensagem mensagens msg clientes whatsapp confirmação transações"
+            >
+
+                <div class="card-icon message-icon">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+
+                        <!-- BALÃO DE CONVERSA -->
+
+                        <path
+                            d="M20 11.5a7.5 7.5 0 0 1-8 7.5 8 8 0 0 1-3-.6L4 20l1.6-4A7.5 7.5 0 1 1 20 11.5Z"
+                        />
+
+                        <path
+                            d="M8 11h.01"
+                        />
+
+                        <path
+                            d="M12 11h.01"
+                        />
+
+                        <path
+                            d="M16 11h.01"
+                        />
+
+                    </svg>
+
+                </div>
+
+
+                <h3>
+                    Gerador de MSG para Clientes
+                </h3>
+
+
+                <p>
+                    Gere mensagens padronizadas para
+                    confirmação de transações.
+                </p>
+
+
+                <a
+                    class="card-action"
+                    href="https://postosgraciosa.github.io/mensagem-whatsapp/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Abrir gerador
+                    →
+                </a>
+
+            </article>
+
+
+        </div>
+
+
+
+        <!-- =========================================
+             SEM RESULTADOS
+        ========================================== -->
+
+        <div
+            class="empty-state hidden"
+            id="emptyState"
+        >
+
+            <div class="empty-icon">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                >
+
+                    <circle
+                        cx="11"
+                        cy="11"
+                        r="6"
+                    />
+
+                    <path
+                        d="m16 16 4 4"
+                    />
+
+                </svg>
+
+            </div>
+
+
+            <strong>
+                Nenhuma ferramenta encontrada
+            </strong>
+
+
+            <span>
+                Tente pesquisar por outro nome.
+            </span>
+
+        </div>
+
+
+
+        <!-- =========================================
+             ASSISTENTE LOCAL
+        ========================================== -->
+
+        <section
+            class="ai-panel"
+            id="aiPanel"
+            aria-labelledby="ai-title"
+        >
+
+
+            <div class="ai-header">
+
+
+                <div class="ai-title-wrap">
+
+                    <div class="ai-panel-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+
+                            <rect
+                                x="4"
+                                y="5"
+                                width="16"
+                                height="14"
+                                rx="3"
+                            />
+
+                            <path
+                                d="M8 9h8"
+                            />
+
+                            <path
+                                d="M8 13h5"
+                            />
+
+                            <path
+                                d="M8 17h3"
+                            />
+
+                        </svg>
+
+                    </div>
+
+
+                    <div>
+
+                        <h2 id="ai-title">
+                            Assistente de Respostas
+                        </h2>
+
+                        <p class="sub">
+                            IA local — gera respostas padronizadas
+                            sem depender de API externa.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <span class="ai-local-badge">
+                    SEM API
+                </span>
+
+
+            </div>
+
+
+
+            <div class="form-row">
+
+                <label for="tipoResposta">
+                    Tipo de resposta
+                </label>
+
+
+                <select id="tipoResposta">
+
+                    <option>
+                        Confirmação de pagamento
+                    </option>
+
+                    <option>
+                        Solicitação de documento
+                    </option>
+
+                    <option>
+                        Divergência de informação
+                    </option>
+
+                    <option>
+                        Aguardando retorno
+                    </option>
+
+                    <option>
+                        Encaminhamento ao setor responsável
+                    </option>
+
+                    <option>
+                        Agradecimento
+                    </option>
+
+                    <option>
+                        Resposta personalizada
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <div class="form-row">
+
+                <label for="infoExtra">
+                    Informações adicionais
+                </label>
+
+
+                <textarea
+                    id="infoExtra"
+                    rows="4"
+                    placeholder="Digite os detalhes que devem aparecer na resposta..."
+                ></textarea>
+
+            </div>
+
+
+
+            <div class="ai-buttons">
+
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="btnGerar"
+                >
+                    ✨ Gerar resposta
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn btn-ghost"
+                    id="btnLimpar"
+                >
+                    Limpar
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn btn-ghost"
+                    id="btnCopiar"
+                >
+                    📋 Copiar resposta
+                </button>
+
+            </div>
+
+
+
+            <div
+                class="result-box"
+                id="resultado"
+                aria-live="polite"
+            >
+                A resposta gerada aparecerá aqui.
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer class="footer">
+
+        <div>
+
+            <strong>
+                Ferramentas ADM
+            </strong>
+
+            <span>
+                · Central administrativa interna
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Uso interno
+            </span>
+
+            <span class="separator">
+                •
+            </span>
+
+            <span>
+                Postos Graciosa
+            </span>
+
+        </div>
+
+    </footer>
+
+
+
+    <script src="js/app.js"></script>
+
 </body>
+
 </html>
