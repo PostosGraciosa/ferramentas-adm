@@ -59,6 +59,23 @@
         document.querySelectorAll('.prompt-suggestion');
 
 
+    /* =========================================
+       CARDS DOS ASSISTENTES
+    ========================================== */
+
+    var cardAssistente =
+        document.getElementById('cardAssistente');
+
+    var cardChatGPT =
+        document.getElementById('cardChatGPT');
+
+    var localAssistant =
+        document.getElementById('localAssistant');
+
+    var chatgptAssistant =
+        document.getElementById('chatgptAssistant');
+
+
     var PLACEHOLDER =
         'A resposta gerada aparecerá aqui.';
 
@@ -71,10 +88,6 @@
     var templates = {
 
 
-        /* =====================================
-           💳 CONFIRMAÇÃO DE PAGAMENTO
-        ====================================== */
-
         'Confirmação de pagamento': function (info) {
 
             return (
@@ -85,10 +98,6 @@
 
         },
 
-
-        /* =====================================
-           💰 PAGAMENTO NÃO LOCALIZADO
-        ====================================== */
 
         'Pagamento não localizado': function (info) {
 
@@ -101,10 +110,6 @@
         },
 
 
-        /* =====================================
-           🔄 ESTORNO
-        ====================================== */
-
         'Estorno': function (info) {
 
             return (
@@ -115,10 +120,6 @@
 
         },
 
-
-        /* =====================================
-           ⚠️ DIVERGÊNCIA DE VALOR
-        ====================================== */
 
         'Divergência de valor': function (info) {
 
@@ -131,10 +132,6 @@
         },
 
 
-        /* =====================================
-           📄 SOLICITAÇÃO DE DOCUMENTO
-        ====================================== */
-
         'Solicitação de documento': function (info) {
 
             return (
@@ -145,10 +142,6 @@
 
         },
 
-
-        /* =====================================
-           🧾 SOLICITAÇÃO DE COMPROVANTE
-        ====================================== */
 
         'Solicitação de comprovante': function (info) {
 
@@ -161,10 +154,6 @@
         },
 
 
-        /* =====================================
-           ⏳ AGUARDANDO RETORNO
-        ====================================== */
-
         'Aguardando retorno': function (info) {
 
             return (
@@ -175,10 +164,6 @@
 
         },
 
-
-        /* =====================================
-           📞 RETORNO AO CLIENTE
-        ====================================== */
 
         'Retorno ao cliente': function (info) {
 
@@ -191,10 +176,6 @@
         },
 
 
-        /* =====================================
-           🏦 PROBLEMA COM CARTÃO
-        ====================================== */
-
         'Problema com cartão': function (info) {
 
             return (
@@ -205,10 +186,6 @@
 
         },
 
-
-        /* =====================================
-           💳 CARTÃO RECUSADO
-        ====================================== */
 
         'Cartão recusado': function (info) {
 
@@ -221,10 +198,6 @@
         },
 
 
-        /* =====================================
-           🎫 TICKET / BENEFÍCIO
-        ====================================== */
-
         'Ticket / benefício': function (info) {
 
             return (
@@ -235,10 +208,6 @@
 
         },
 
-
-        /* =====================================
-           🚗 ABASTECIMENTO
-        ====================================== */
 
         'Abastecimento': function (info) {
 
@@ -251,10 +220,6 @@
         },
 
 
-        /* =====================================
-           🛒 LOJA / CONVENIÊNCIA
-        ====================================== */
-
         'Loja / conveniência': function (info) {
 
             return (
@@ -265,10 +230,6 @@
 
         },
 
-
-        /* =====================================
-           📦 PRODUTO INDISPONÍVEL
-        ====================================== */
 
         'Produto indisponível': function (info) {
 
@@ -281,10 +242,6 @@
         },
 
 
-        /* =====================================
-           🧑‍💼 ENCAMINHAMENTO
-        ====================================== */
-
         'Encaminhamento ao setor responsável': function (info) {
 
             return (
@@ -295,10 +252,6 @@
 
         },
 
-
-        /* =====================================
-           🙏 AGRADECIMENTO
-        ====================================== */
 
         'Agradecimento': function (info) {
 
@@ -311,10 +264,6 @@
         },
 
 
-        /* =====================================
-           ❌ RECLAMAÇÃO
-        ====================================== */
-
         'Reclamação': function (info) {
 
             return (
@@ -325,10 +274,6 @@
 
         },
 
-
-        /* =====================================
-           📝 RESPOSTA PERSONALIZADA
-        ====================================== */
 
         'Resposta personalizada': function (info) {
 
@@ -477,6 +422,143 @@
 
         }
     );
+
+
+
+    /* =========================================
+       NAVEGAÇÃO DOS CARDS DE ASSISTENTES
+    ========================================== */
+
+    function irParaAssistente(elemento) {
+
+        if (!elemento) {
+
+            return;
+
+        }
+
+
+        elemento.scrollIntoView({
+
+            behavior: 'smooth',
+
+            block: 'start'
+
+        });
+
+
+        /*
+         * Pequeno destaque visual para mostrar
+         * ao usuário qual assistente foi aberto.
+         */
+
+        elemento.classList.add(
+            'assistant-focus'
+        );
+
+
+        setTimeout(
+            function () {
+
+                elemento.classList.remove(
+                    'assistant-focus'
+                );
+
+            },
+            1200
+        );
+
+    }
+
+
+
+    /* =========================================
+       ASSISTENTE LOCAL
+    ========================================== */
+
+    if (
+        cardAssistente &&
+        localAssistant
+    ) {
+
+        cardAssistente.addEventListener(
+            'click',
+            function () {
+
+                irParaAssistente(
+                    localAssistant
+                );
+
+            }
+        );
+
+
+        cardAssistente.addEventListener(
+            'keydown',
+            function (event) {
+
+                if (
+                    event.key === 'Enter' ||
+                    event.key === ' '
+                ) {
+
+                    event.preventDefault();
+
+                    irParaAssistente(
+                        localAssistant
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* =========================================
+       ASSISTENTE CHATGPT
+    ========================================== */
+
+    if (
+        cardChatGPT &&
+        chatgptAssistant
+    ) {
+
+        cardChatGPT.addEventListener(
+            'click',
+            function () {
+
+                irParaAssistente(
+                    chatgptAssistant
+                );
+
+            }
+        );
+
+
+        cardChatGPT.addEventListener(
+            'keydown',
+            function (event) {
+
+                if (
+                    event.key === 'Enter' ||
+                    event.key === ' '
+                ) {
+
+                    event.preventDefault();
+
+                    irParaAssistente(
+                        chatgptAssistant
+                    );
+
+                }
+
+            }
+        );
+
+    }
 
 
 
@@ -764,6 +846,7 @@
 
                     }
 
+
                     mostrarFeedback(
                         btnCopiarPrompt,
                         'Digite um prompt primeiro'
@@ -789,9 +872,6 @@
 
     /* =========================================
        ABRIR CHATGPT
-       
-       O TEXTO DIGITADO É ENVIADO PELA URL
-       PARA O CAMPO DO CHATGPT.
     ========================================== */
 
     if (btnAbrirChatGPT) {
@@ -805,10 +885,6 @@
                         ? chatgptPrompt.value.trim()
                         : '';
 
-
-                /* =================================
-                   CAMPO VAZIO
-                ================================== */
 
                 if (!texto) {
 
@@ -830,18 +906,10 @@
                 }
 
 
-                /* =================================
-                   MONTAR URL
-                ================================== */
-
                 var urlChatGPT =
                     'https://chatgpt.com/?q=' +
                     encodeURIComponent(texto);
 
-
-                /* =================================
-                   ABRIR NOVA ABA
-                ================================== */
 
                 window.open(
                     urlChatGPT,
