@@ -1,7 +1,7 @@
 /* ============================================
    FERRAMENTAS ADM
    SISTEMA CORPORATIVO
-   LIGHT CORPORATE UI
+   LIGHT UI — PROFISSIONAL
 ============================================ */
 
 
@@ -10,41 +10,48 @@
 ============================================ */
 
 * {
+
     margin: 0;
+
     padding: 0;
+
     box-sizing: border-box;
+
 }
 
-
-/* ============================================
-   VARIÁVEIS
-============================================ */
 
 :root {
 
     --primary: #2563eb;
+
     --primary-dark: #1d4ed8;
+
     --primary-soft: #eff6ff;
 
     --background: #f4f7fb;
 
     --surface: #ffffff;
+
     --surface-soft: #f8fafc;
 
     --text: #172033;
+
     --text-secondary: #64748b;
+
     --text-muted: #94a3b8;
 
     --border: #e2e8f0;
 
-    --shadow-sm:
-        0 3px 12px rgba(15, 23, 42, 0.035);
+    --border-soft: #edf1f5;
 
-    --shadow-md:
-        0 10px 28px rgba(15, 23, 42, 0.065);
+    --shadow:
+        0 5px 18px
+        rgba(15,23,42,0.045);
 
-    --shadow-lg:
-        0 18px 45px rgba(15, 23, 42, 0.09);
+    --shadow-hover:
+        0 18px 38px
+        rgba(15,23,42,0.10);
+
 }
 
 
@@ -70,25 +77,21 @@ body {
     background:
 
         radial-gradient(
-            circle at 10% 15%,
-            rgba(37, 99, 235, 0.055),
+            circle at 15% 5%,
+            rgba(37,99,235,0.055),
             transparent 28%
         ),
 
         radial-gradient(
-            circle at 90% 70%,
-            rgba(59, 130, 246, 0.045),
-            transparent 30%
+            circle at 85% 18%,
+            rgba(59,130,246,0.04),
+            transparent 25%
         ),
 
-        linear-gradient(
-            135deg,
-            #f8fafc 0%,
-            #f1f5f9 48%,
-            #eef3f8 100%
-        );
+        #f4f7fb;
 
     overflow-x: hidden;
+
 }
 
 
@@ -107,12 +110,9 @@ body {
     pointer-events: none;
 
     overflow: hidden;
+
 }
 
-
-/* ============================================
-   GRADE
-============================================ */
 
 .background-grid {
 
@@ -125,24 +125,147 @@ body {
     background-image:
 
         linear-gradient(
-            rgba(100, 116, 139, 0.055) 1px,
+            rgba(148,163,184,0.045) 1px,
             transparent 1px
         ),
 
         linear-gradient(
             90deg,
-            rgba(100, 116, 139, 0.055) 1px,
+            rgba(148,163,184,0.045) 1px,
             transparent 1px
         );
 
-    background-size: 42px 42px;
+    background-size: 44px 44px;
 
-    mask-image:
-        linear-gradient(
-            to bottom,
-            black,
-            transparent 88%
+}
+
+
+.background-glow {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    filter: blur(2px);
+
+}
+
+
+.background-glow-one {
+
+    width: 420px;
+
+    height: 420px;
+
+    top: -260px;
+
+    right: -160px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(37,99,235,0.07),
+            transparent 70%
         );
+
+}
+
+
+.background-glow-two {
+
+    width: 380px;
+
+    height: 380px;
+
+    bottom: -260px;
+
+    left: -180px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(59,130,246,0.045),
+            transparent 70%
+        );
+
+}
+
+
+.background-line {
+
+    position: absolute;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(148,163,184,0.16),
+            transparent
+        );
+
+}
+
+
+.background-line-one {
+
+    width: 420px;
+
+    top: 28%;
+
+    right: -100px;
+
+    transform: rotate(-25deg);
+
+}
+
+
+.background-line-two {
+
+    width: 350px;
+
+    bottom: 20%;
+
+    left: -80px;
+
+    transform: rotate(22deg);
+
+}
+
+
+.background-dot {
+
+    position: absolute;
+
+    width: 5px;
+
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #cbd5e1;
+
+    opacity: 0.45;
+
+}
+
+
+.background-dot-one {
+
+    top: 23%;
+
+    left: 7%;
+
+}
+
+
+.background-dot-two {
+
+    bottom: 18%;
+
+    right: 8%;
+
 }
 
 
@@ -167,11 +290,12 @@ body {
     background:
         linear-gradient(
             90deg,
-            #1d4ed8 0%,
-            #2563eb 30%,
-            #60a5fa 60%,
-            #2563eb 100%
+            #1d4ed8,
+            #3b82f6,
+            #60a5fa,
+            #2563eb
         );
+
 }
 
 
@@ -185,7 +309,7 @@ body {
 
     position: absolute;
 
-    top: 78px;
+    top: 76px;
 
     left: 0;
 
@@ -194,150 +318,8 @@ body {
     height: 1px;
 
     background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(148,163,184,0.28),
-            transparent
-        );
-}
+        rgba(148,163,184,0.18);
 
-
-/* ============================================
-   GLOW 1
-============================================ */
-
-.background-glow {
-
-    position: absolute;
-
-    border-radius: 50%;
-
-    filter: blur(1px);
-
-    opacity: 0.65;
-}
-
-
-.background-glow-one {
-
-    width: 420px;
-
-    height: 420px;
-
-    top: -210px;
-
-    right: -130px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(37,99,235,0.08),
-            transparent 68%
-        );
-}
-
-
-.background-glow-two {
-
-    width: 360px;
-
-    height: 360px;
-
-    bottom: -180px;
-
-    left: -120px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(59,130,246,0.055),
-            transparent 68%
-        );
-}
-
-
-/* ============================================
-   LINHAS DECORATIVAS
-============================================ */
-
-.background-line {
-
-    position: absolute;
-
-    height: 1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(148,163,184,0.20),
-            transparent
-        );
-
-    transform: rotate(-25deg);
-}
-
-
-.background-line-one {
-
-    width: 460px;
-
-    top: 29%;
-
-    right: -140px;
-}
-
-
-.background-line-two {
-
-    width: 360px;
-
-    bottom: 20%;
-
-    left: -120px;
-
-    transform: rotate(25deg);
-}
-
-
-/* ============================================
-   CÍRCULOS
-============================================ */
-
-.background-circle {
-
-    position: absolute;
-
-    border:
-        1px solid
-        rgba(37,99,235,0.045);
-
-    border-radius: 50%;
-}
-
-
-.background-circle-one {
-
-    width: 180px;
-
-    height: 180px;
-
-    top: 160px;
-
-    right: 5%;
-}
-
-
-.background-circle-two {
-
-    width: 100px;
-
-    height: 100px;
-
-    bottom: 12%;
-
-    right: 13%;
 }
 
 
@@ -356,6 +338,7 @@ body {
     margin: 0 auto;
 
     padding: 38px 0 30px;
+
 }
 
 
@@ -380,16 +363,17 @@ body {
 
     border:
         1px solid
-        rgba(226,232,240,0.9);
+        var(--border);
 
     border-radius: 18px;
 
     box-shadow:
-        0 10px 30px
+        0 8px 28px
         rgba(15,23,42,0.055);
 
     backdrop-filter:
-        blur(12px);
+        blur(10px);
+
 }
 
 
@@ -404,12 +388,9 @@ body {
     align-items: center;
 
     gap: 16px;
+
 }
 
-
-/* ============================================
-   LOGO
-============================================ */
 
 .brand-logo {
 
@@ -431,15 +412,16 @@ body {
 
     border:
         1px solid
-        #e2e8f0;
+        var(--border);
 
     border-radius: 14px;
 
     box-shadow:
         0 4px 12px
-        rgba(15,23,42,0.055);
+        rgba(15,23,42,0.06);
 
     overflow: hidden;
+
 }
 
 
@@ -452,6 +434,7 @@ body {
     object-fit: contain;
 
     display: block;
+
 }
 
 
@@ -472,17 +455,19 @@ body {
     font-weight: 800;
 
     color: var(--primary);
+
 }
 
 
 .brand-logo.logo-error .logo-fallback {
 
     display: flex;
+
 }
 
 
 /* ============================================
-   BRAND TEXTO
+   BRAND TEXT
 ============================================ */
 
 .brand-overline {
@@ -495,9 +480,10 @@ body {
 
     font-weight: 800;
 
-    letter-spacing: 1.7px;
+    letter-spacing: 1.5px;
 
     color: var(--primary);
+
 }
 
 
@@ -505,9 +491,10 @@ body {
 
     font-size: 22px;
 
-    font-weight: 750;
+    font-weight: 700;
 
     letter-spacing: -0.6px;
+
 }
 
 
@@ -518,6 +505,7 @@ body {
     font-size: 13px;
 
     color: var(--text-secondary);
+
 }
 
 
@@ -532,12 +520,9 @@ body {
     align-items: center;
 
     gap: 9px;
+
 }
 
-
-/* ============================================
-   STATUS
-============================================ */
 
 .system-status {
 
@@ -551,9 +536,7 @@ body {
 
     background: #f0fdf4;
 
-    border:
-        1px solid
-        #dcfce7;
+    border: 1px solid #dcfce7;
 
     color: #15803d;
 
@@ -564,6 +547,7 @@ body {
     font-weight: 700;
 
     white-space: nowrap;
+
 }
 
 
@@ -580,32 +564,28 @@ body {
     box-shadow:
         0 0 0 3px
         rgba(34,197,94,0.10);
+
 }
 
 
-/* ============================================
-   INTERNAL BADGE
-============================================ */
-
 .internal-badge {
 
-    padding: 8px 11px;
+    padding: 8px 12px;
 
     border-radius: 50px;
 
     background: #f8fafc;
 
-    border:
-        1px solid
-        #e2e8f0;
+    border: 1px solid var(--border);
 
     color: #64748b;
 
-    font-size: 9px;
+    font-size: 10px;
 
     font-weight: 800;
 
-    letter-spacing: 0.7px;
+    letter-spacing: 0.5px;
+
 }
 
 
@@ -623,13 +603,10 @@ body {
 
     gap: 30px;
 
-    margin: 42px 4px 30px;
+    margin: 43px 4px 31px;
+
 }
 
-
-/* ============================================
-   INTRO CONTENT
-============================================ */
 
 .section-overline {
 
@@ -646,6 +623,7 @@ body {
     letter-spacing: 1.7px;
 
     color: var(--primary);
+
 }
 
 
@@ -660,6 +638,7 @@ body {
     background: var(--primary);
 
     border-radius: 5px;
+
 }
 
 
@@ -670,6 +649,7 @@ body {
     font-size: 30px;
 
     letter-spacing: -1.1px;
+
 }
 
 
@@ -680,6 +660,7 @@ body {
     font-size: 14px;
 
     color: var(--text-secondary);
+
 }
 
 
@@ -691,11 +672,10 @@ body {
 
     position: relative;
 
-    width: min(330px, 100%);
+    width: 310px;
 
-    display: flex;
+    flex-shrink: 0;
 
-    align-items: center;
 }
 
 
@@ -703,10 +683,11 @@ body {
 
     width: 100%;
 
-    height: 46px;
+    height: 47px;
 
     padding:
-        0 42px 0 42px;
+        0 48px
+        0 43px;
 
     border:
         1px solid
@@ -714,16 +695,15 @@ body {
 
     border-radius: 13px;
 
-    background:
-        rgba(255,255,255,0.94);
+    background: #ffffff;
 
     color: var(--text);
 
+    outline: none;
+
     font-family: inherit;
 
-    font-size: 12px;
-
-    outline: none;
+    font-size: 12.5px;
 
     box-shadow:
         0 4px 14px
@@ -732,12 +712,14 @@ body {
     transition:
         border-color 0.2s ease,
         box-shadow 0.2s ease;
+
 }
 
 
 .search-box input::placeholder {
 
-    color: #94a3b8;
+    color: #a1acbb;
+
 }
 
 
@@ -748,6 +730,7 @@ body {
     box-shadow:
         0 0 0 4px
         rgba(37,99,235,0.08);
+
 }
 
 
@@ -755,11 +738,15 @@ body {
 
     position: absolute;
 
+    top: 50%;
+
     left: 15px;
 
     width: 17px;
 
     height: 17px;
+
+    transform: translateY(-50%);
 
     fill: none;
 
@@ -768,6 +755,7 @@ body {
     stroke-width: 1.8;
 
     pointer-events: none;
+
 }
 
 
@@ -775,7 +763,15 @@ body {
 
     position: absolute;
 
+    top: 50%;
+
     right: 12px;
+
+    transform: translateY(-50%);
+
+    width: 23px;
+
+    height: 23px;
 
     display: flex;
 
@@ -783,13 +779,9 @@ body {
 
     justify-content: center;
 
-    width: 22px;
-
-    height: 22px;
-
     border:
         1px solid
-        #e2e8f0;
+        #e5eaf0;
 
     border-radius: 6px;
 
@@ -797,9 +789,10 @@ body {
 
     color: #94a3b8;
 
-    font-size: 11px;
+    font-size: 12px;
 
     font-weight: 700;
+
 }
 
 
@@ -809,13 +802,10 @@ body {
 
 .category {
 
-    margin-bottom: 38px;
+    margin-bottom: 39px;
+
 }
 
-
-/* ============================================
-   CATEGORY TITLE
-============================================ */
 
 .category-title {
 
@@ -826,6 +816,7 @@ body {
     gap: 12px;
 
     margin-bottom: 15px;
+
 }
 
 
@@ -852,7 +843,9 @@ body {
     border-radius: 11px;
 
     box-shadow:
-        var(--shadow-sm);
+        0 3px 9px
+        rgba(15,23,42,0.035);
+
 }
 
 
@@ -871,71 +864,7 @@ body {
     stroke-linecap: round;
 
     stroke-linejoin: round;
-}
 
-
-.portal-category-icon {
-
-    color: #2563eb;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #eff6ff
-        );
-}
-
-
-.blue-icon {
-
-    color: #2563eb;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #eff6ff
-        );
-}
-
-
-.green-icon {
-
-    color: #16a34a;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #f0fdf4
-        );
-}
-
-
-.purple-icon {
-
-    color: #7c3aed;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #f5f3ff
-        );
-}
-
-
-.cyan-icon {
-
-    color: #0891b2;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #ecfeff
-        );
 }
 
 
@@ -943,7 +872,8 @@ body {
 
     font-size: 15px;
 
-    font-weight: 750;
+    font-weight: 700;
+
 }
 
 
@@ -956,6 +886,87 @@ body {
     font-size: 11px;
 
     color: var(--text-muted);
+
+}
+
+
+.blue-icon {
+
+    color: #2563eb;
+
+    background: #eff6ff;
+
+    border-color: #dbeafe;
+
+}
+
+
+.green-icon {
+
+    color: #059669;
+
+    background: #ecfdf5;
+
+    border-color: #d1fae5;
+
+}
+
+
+.purple-icon {
+
+    color: #7c3aed;
+
+    background: #f5f3ff;
+
+    border-color: #ede9fe;
+
+}
+
+
+.cyan-icon {
+
+    color: #0891b2;
+
+    background: #ecfeff;
+
+    border-color: #cffafe;
+
+}
+
+
+.mail-icon {
+
+    color: #475569;
+
+    background: #f8fafc;
+
+}
+
+
+.portal-category-icon {
+
+    color: #2563eb;
+
+    background: #eff6ff;
+
+    border-color: #dbeafe;
+
+}
+
+
+.ai-icon {
+
+    color: #2563eb;
+
+    background:
+        linear-gradient(
+            145deg,
+            #eff6ff,
+            #dbeafe
+        );
+
+    border-color: #dbeafe;
+
 }
 
 
@@ -971,6 +982,7 @@ body {
         repeat(3, minmax(0, 1fr));
 
     gap: 17px;
+
 }
 
 
@@ -995,7 +1007,7 @@ body {
     color: inherit;
 
     background:
-        rgba(255,255,255,0.96);
+        rgba(255,255,255,0.97);
 
     border:
         1px solid
@@ -1006,25 +1018,25 @@ body {
     overflow: hidden;
 
     box-shadow:
-        var(--shadow-sm);
+        var(--shadow);
 
     transition:
         transform 0.22s ease,
         box-shadow 0.22s ease,
         border-color 0.22s ease;
+
 }
 
 
 .tool-card:hover {
 
-    transform:
-        translateY(-5px);
+    transform: translateY(-5px);
 
-    border-color:
-        #bfdbfe;
+    border-color: #bfdbfe;
 
     box-shadow:
-        var(--shadow-lg);
+        var(--shadow-hover);
+
 }
 
 
@@ -1046,22 +1058,19 @@ body {
 
     transition:
         background 0.2s ease;
+
 }
 
 
 .tool-card:hover::after {
 
-    background:
-        linear-gradient(
-            90deg,
-            #2563eb,
-            #60a5fa
-        );
+    background: var(--primary);
+
 }
 
 
 /* ============================================
-   TOPO
+   TOOL TOPO
 ============================================ */
 
 .tool-top {
@@ -1071,12 +1080,9 @@ body {
     align-items: center;
 
     justify-content: space-between;
+
 }
 
-
-/* ============================================
-   ÍCONE DAS FERRAMENTAS
-============================================ */
 
 .tool-icon {
 
@@ -1091,6 +1097,7 @@ body {
     justify-content: center;
 
     border-radius: 13px;
+
 }
 
 
@@ -1109,64 +1116,61 @@ body {
     stroke-linecap: round;
 
     stroke-linejoin: round;
+
 }
 
 
-.blue {
+.tool-icon.blue {
 
     color: #2563eb;
 
-    background:
-        #eff6ff;
+    background: #eff6ff;
+
 }
 
 
-.green {
+.tool-icon.green {
 
-    color: #16a34a;
+    color: #059669;
 
-    background:
-        #ecfdf5;
+    background: #ecfdf5;
+
 }
 
 
-.orange {
+.tool-icon.orange {
 
     color: #ea580c;
 
-    background:
-        #fff7ed;
+    background: #fff7ed;
+
 }
 
 
-.purple {
+.tool-icon.purple {
 
     color: #7c3aed;
 
-    background:
-        #f5f3ff;
+    background: #f5f3ff;
+
 }
 
 
-.cyan {
+.tool-icon.whatsapp {
 
-    color: #0891b2;
+    color: #059669;
 
-    background:
-        #ecfeff;
+    background: #ecfdf5;
+
 }
 
 
-.message-icon {
+.tool-icon.mail {
 
-    color: #0891b2;
+    color: #475569;
 
-    background:
-        linear-gradient(
-            145deg,
-            #ecfeff,
-            #cffafe
-        );
+    background: #f1f5f9;
+
 }
 
 
@@ -1200,6 +1204,7 @@ body {
         transform 0.2s ease,
         color 0.2s ease,
         background 0.2s ease;
+
 }
 
 
@@ -1218,24 +1223,23 @@ body {
     stroke-linecap: round;
 
     stroke-linejoin: round;
+
 }
 
 
 .tool-card:hover .arrow {
 
-    transform:
-        translateX(4px);
+    transform: translateX(4px);
 
-    color:
-        var(--primary);
+    color: var(--primary);
 
-    background:
-        #eff6ff;
+    background: #eff6ff;
+
 }
 
 
 /* ============================================
-   CONTENT
+   TOOL CONTENT
 ============================================ */
 
 .tool-content {
@@ -1243,6 +1247,7 @@ body {
     flex: 1;
 
     padding-top: 20px;
+
 }
 
 
@@ -1250,9 +1255,10 @@ body {
 
     font-size: 16px;
 
-    font-weight: 750;
+    font-weight: 700;
 
     letter-spacing: -0.2px;
+
 }
 
 
@@ -1266,8 +1272,8 @@ body {
 
     line-height: 1.65;
 
-    color:
-        var(--text-secondary);
+    color: var(--text-secondary);
+
 }
 
 
@@ -1281,21 +1287,19 @@ body {
 
     border-top:
         1px solid
-        #edf1f5;
+        var(--border-soft);
 
-    color:
-        var(--primary);
+    color: var(--primary);
 
-    font-size: 10px;
+    font-size: 11px;
 
-    font-weight: 800;
+    font-weight: 700;
 
-    letter-spacing: 0.5px;
 }
 
 
 /* ============================================
-   ADMINISTRADORAS / PORTAIS
+   PORTAIS
 ============================================ */
 
 .portal-dropdown {
@@ -1303,12 +1307,9 @@ body {
     position: relative;
 
     width: 100%;
+
 }
 
-
-/* ============================================
-   BOTÃO
-============================================ */
 
 .portal-button {
 
@@ -1328,11 +1329,9 @@ body {
 
     border-radius: 15px;
 
-    background:
-        rgba(255,255,255,0.96);
+    background: #ffffff;
 
-    color:
-        var(--text);
+    color: var(--text);
 
     cursor: pointer;
 
@@ -1341,25 +1340,26 @@ body {
     text-align: left;
 
     box-shadow:
-        var(--shadow-sm);
+        var(--shadow);
 
     transition:
         border-color 0.2s ease,
         box-shadow 0.2s ease,
         transform 0.2s ease;
+
 }
 
 
 .portal-button:hover {
 
-    border-color:
-        #bfdbfe;
+    border-color: #bfdbfe;
 
     box-shadow:
-        var(--shadow-md);
+        0 10px 24px
+        rgba(15,23,42,0.08);
 
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
+
 }
 
 
@@ -1370,12 +1370,9 @@ body {
     align-items: center;
 
     gap: 14px;
+
 }
 
-
-/* ============================================
-   ÍCONE PRINCIPAL
-============================================ */
 
 .portal-main-icon {
 
@@ -1401,6 +1398,7 @@ body {
         );
 
     color: #2563eb;
+
 }
 
 
@@ -1419,12 +1417,9 @@ body {
     stroke-linecap: round;
 
     stroke-linejoin: round;
+
 }
 
-
-/* ============================================
-   TEXTO
-============================================ */
 
 .portal-button-left strong {
 
@@ -1432,7 +1427,8 @@ body {
 
     font-size: 14px;
 
-    font-weight: 750;
+    font-weight: 700;
+
 }
 
 
@@ -1444,12 +1440,13 @@ body {
 
     font-size: 11px;
 
-    color: #94a3b8;
+    color: var(--text-muted);
+
 }
 
 
 /* ============================================
-   SETA DROPDOWN
+   PORTAL ARROW
 ============================================ */
 
 .portal-arrow {
@@ -1480,6 +1477,7 @@ body {
         transform 0.25s ease,
         background 0.2s ease,
         color 0.2s ease;
+
 }
 
 
@@ -1498,24 +1496,23 @@ body {
     stroke-linecap: round;
 
     stroke-linejoin: round;
+
 }
 
 
 .portal-dropdown.active .portal-arrow {
 
-    transform:
-        rotate(180deg);
+    transform: rotate(180deg);
 
-    background:
-        #eff6ff;
+    background: #eff6ff;
 
-    color:
-        #2563eb;
+    color: #2563eb;
+
 }
 
 
 /* ============================================
-   LISTA
+   PORTAL LIST
 ============================================ */
 
 .portal-list {
@@ -1528,8 +1525,7 @@ body {
 
     padding: 7px;
 
-    background:
-        rgba(255,255,255,0.98);
+    background: #ffffff;
 
     border:
         1px solid
@@ -1539,11 +1535,15 @@ body {
 
     box-shadow:
         0 12px 30px
-        rgba(15,23,42,0.08);
+        rgba(15,23,42,0.08),
+
+        0 3px 8px
+        rgba(15,23,42,0.04);
 
     max-height: 430px;
 
     overflow-y: auto;
+
 }
 
 
@@ -1553,6 +1553,7 @@ body {
 
     animation:
         portalDrop 0.18s ease;
+
 }
 
 
@@ -1562,22 +1563,23 @@ body {
 
         opacity: 0;
 
-        transform:
-            translateY(-7px);
+        transform: translateY(-7px);
+
     }
 
     to {
 
         opacity: 1;
 
-        transform:
-            translateY(0);
+        transform: translateY(0);
+
     }
+
 }
 
 
 /* ============================================
-   ITEM PORTAL
+   PORTAL ITEM
 ============================================ */
 
 .portal-item {
@@ -1590,47 +1592,41 @@ body {
 
     width: 100%;
 
-    min-height: 54px;
-
-    padding: 8px 10px;
+    padding: 9px 10px;
 
     border-radius: 10px;
 
     text-decoration: none;
 
-    color:
-        var(--text);
+    color: var(--text);
 
     transition:
         background 0.18s ease,
         transform 0.18s ease;
+
 }
 
 
 .portal-item:hover {
 
-    background:
-        #f5f8fc;
+    background: #f5f8fc;
 
-    transform:
-        translateX(3px);
+    transform: translateX(3px);
+
 }
 
 
 /* ============================================
-   ÍCONE PORTAL
-   TODOS MESMO TAMANHO
+   PORTAL ICON
 ============================================ */
 
 .portal-item-icon {
 
-    width: 40px;
+    width: 38px;
 
-    height: 40px;
+    height: 38px;
 
-    min-width: 40px;
-
-    max-width: 40px;
+    flex-shrink: 0;
 
     display: flex;
 
@@ -1640,18 +1636,18 @@ body {
 
     border-radius: 10px;
 
-    background:
-        #ffffff;
+    background: #ffffff;
 
     border:
         1px solid
-        #e2e8f0;
-
-    box-shadow:
-        0 2px 6px
-        rgba(15,23,42,0.045);
+        #e5eaf0;
 
     overflow: hidden;
+
+    box-shadow:
+        0 2px 5px
+        rgba(15,23,42,0.04);
+
 }
 
 
@@ -1661,58 +1657,28 @@ body {
 
     height: 24px;
 
-    min-width: 24px;
-
-    min-height: 24px;
-
-    max-width: 24px;
-
-    max-height: 24px;
-
     object-fit: contain;
 
     display: block;
+
+}
+
+
+.portal-item-icon.favicon-error::after {
+
+    content: "•";
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    color: #94a3b8;
+
 }
 
 
 /* ============================================
-   FALLBACK
-============================================ */
-
-.portal-fallback {
-
-    display: none;
-
-    align-items: center;
-
-    justify-content: center;
-
-    width: 100%;
-
-    height: 100%;
-
-    font-size: 11px;
-
-    font-weight: 800;
-
-    color: #64748b;
-}
-
-
-.portal-item-icon.icon-error img {
-
-    display: none;
-}
-
-
-.portal-item-icon.icon-error .portal-fallback {
-
-    display: flex;
-}
-
-
-/* ============================================
-   NOME
+   PORTAL NAME
 ============================================ */
 
 .portal-item-name {
@@ -1723,38 +1689,35 @@ body {
 
     font-weight: 650;
 
-    color:
-        #334155;
+    color: #334155;
+
 }
 
 
 /* ============================================
-   SETA ITEM
+   PORTAL ARROW
 ============================================ */
 
 .portal-item-arrow {
 
-    color:
-        #94a3b8;
+    color: #94a3b8;
 
     font-size: 15px;
 
     transition:
         color 0.18s ease,
         transform 0.18s ease;
+
 }
 
 
 .portal-item:hover .portal-item-arrow {
 
-    color:
-        #2563eb;
+    color: #2563eb;
 
     transform:
-        translate(
-            2px,
-            -2px
-        );
+        translate(2px, -2px);
+
 }
 
 
@@ -1765,95 +1728,81 @@ body {
 .portal-list::-webkit-scrollbar {
 
     width: 6px;
+
 }
 
 
 .portal-list::-webkit-scrollbar-track {
 
-    background:
-        transparent;
+    background: transparent;
+
 }
 
 
 .portal-list::-webkit-scrollbar-thumb {
 
-    background:
-        #cbd5e1;
+    background: #cbd5e1;
 
-    border-radius:
-        10px;
+    border-radius: 10px;
+
 }
 
 
 .portal-list::-webkit-scrollbar-thumb:hover {
 
-    background:
-        #94a3b8;
+    background: #94a3b8;
+
 }
 
 
 /* ============================================
-   NO RESULTS
+   ASSISTENTE IA
 ============================================ */
 
-.no-results {
+.ai-box {
 
-    display: none;
+    padding: 21px;
 
-    text-align: center;
-
-    padding: 50px 20px;
-
-    margin-top: 20px;
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f8fbff
+        );
 
     border:
-        1px dashed
-        #cbd5e1;
+        1px solid
+        #dbeafe;
 
     border-radius: 16px;
 
-    background:
-        rgba(255,255,255,0.65);
+    box-shadow:
+        0 5px 18px
+        rgba(37,99,235,0.055);
+
 }
 
 
-.no-results.visible {
+.ai-box-header {
 
-    display: block;
+    display: flex;
 
-    animation:
-        fadeIn 0.2s ease;
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 17px;
+
 }
 
 
-@keyframes fadeIn {
+.ai-box-icon {
 
-    from {
+    width: 43px;
 
-        opacity: 0;
+    height: 43px;
 
-        transform:
-            translateY(5px);
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0);
-    }
-}
-
-
-.no-results-icon {
-
-    width: 46px;
-
-    height: 46px;
-
-    margin:
-        0 auto 13px;
+    flex-shrink: 0;
 
     display: flex;
 
@@ -1864,18 +1813,18 @@ body {
     border-radius: 12px;
 
     background:
-        #f8fafc;
+        linear-gradient(
+            145deg,
+            #eff6ff,
+            #dbeafe
+        );
 
-    border:
-        1px solid
-        #e2e8f0;
+    color: #2563eb;
 
-    color:
-        #94a3b8;
 }
 
 
-.no-results-icon svg {
+.ai-box-icon svg {
 
     width: 21px;
 
@@ -1888,14 +1837,380 @@ body {
     stroke-width: 1.7;
 
     stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+
+.ai-box-header strong {
+
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+}
+
+
+.ai-box-header span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 11px;
+
+    color: var(--text-secondary);
+
+}
+
+
+/* ============================================
+   AI FORM
+============================================ */
+
+.ai-form {
+
+    display: flex;
+
+    gap: 10px;
+
+}
+
+
+.ai-input {
+
+    flex: 1;
+
+    min-width: 0;
+
+    height: 46px;
+
+    padding:
+        0 14px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 11px;
+
+    background: #ffffff;
+
+    color: var(--text);
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 12.5px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.ai-input::placeholder {
+
+    color: #a1acbb;
+
+}
+
+
+.ai-input:focus {
+
+    border-color: #93c5fd;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(37,99,235,0.07);
+
+}
+
+
+/* ============================================
+   AI BUTTON
+============================================ */
+
+.ai-button {
+
+    height: 46px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding:
+        0 17px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 11.5px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 5px 13px
+        rgba(37,99,235,0.20);
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
+
+}
+
+
+.ai-button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px
+        rgba(37,99,235,0.25);
+
+}
+
+
+.ai-button:active {
+
+    transform: translateY(0);
+
+}
+
+
+.ai-button svg {
+
+    width: 17px;
+
+    height: 17px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+
+/* ============================================
+   SUGESTÕES
+============================================ */
+
+.ai-suggestions {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: 13px;
+
+}
+
+
+.suggestion-label {
+
+    margin-right: 2px;
+
+    font-size: 10px;
+
+    color: var(--text-muted);
+
+}
+
+
+.suggestion {
+
+    padding:
+        6px 9px;
+
+    border:
+        1px solid
+        #e2e8f0;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #64748b;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    transition:
+        border-color 0.18s ease,
+        background 0.18s ease,
+        color 0.18s ease;
+
+}
+
+
+.suggestion:hover {
+
+    border-color: #bfdbfe;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+}
+
+
+/* ============================================
+   AI NOTICE
+============================================ */
+
+.ai-notice {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 14px;
+
+    padding-top: 12px;
+
+    border-top:
+        1px solid
+        #edf1f5;
+
+    color: #94a3b8;
+
+    font-size: 9.5px;
+
+    line-height: 1.45;
+
+}
+
+
+.ai-notice svg {
+
+    width: 14px;
+
+    height: 14px;
+
+    flex-shrink: 0;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+
+/* ============================================
+   SEM RESULTADOS
+============================================ */
+
+.no-results {
+
+    display: none;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 55px 20px;
+
+    text-align: center;
+
+}
+
+
+.no-results-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: #f8fafc;
+
+    border:
+        1px solid
+        var(--border);
+
+    color: #94a3b8;
+
+}
+
+
+.no-results-icon svg {
+
+    width: 22px;
+
+    height: 22px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
 }
 
 
 .no-results h3 {
 
-    font-size: 14px;
+    margin-top: 13px;
 
-    font-weight: 750;
+    font-size: 15px;
+
 }
 
 
@@ -1905,8 +2220,8 @@ body {
 
     font-size: 12px;
 
-    color:
-        var(--text-secondary);
+    color: var(--text-secondary);
+
 }
 
 
@@ -1924,14 +2239,18 @@ footer {
 
     gap: 20px;
 
-    margin-top: 8px;
+    margin-top: 10px;
 
     padding: 25px 4px;
 
-    color:
-        var(--text-muted);
+    border-top:
+        1px solid
+        rgba(148,163,184,0.15);
 
-    font-size: 10px;
+    color: var(--text-muted);
+
+    font-size: 10.5px;
+
 }
 
 
@@ -1941,16 +2260,15 @@ footer {
 
     align-items: center;
 
-    gap: 8px;
+    gap: 9px;
+
 }
 
 
 .footer-left strong {
 
-    color:
-        #64748b;
+    color: #64748b;
 
-    font-weight: 750;
 }
 
 
@@ -1961,13 +2279,14 @@ footer {
     align-items: center;
 
     gap: 8px;
+
 }
 
 
 .separator {
 
-    color:
-        #cbd5e1;
+    color: #cbd5e1;
+
 }
 
 
@@ -1977,28 +2296,31 @@ footer {
 
 @media (max-width: 900px) {
 
+
     .tools-grid {
 
         grid-template-columns:
-            repeat(
-                2,
-                minmax(0, 1fr)
-            );
+            repeat(2, minmax(0, 1fr));
+
     }
+
 
     .intro {
 
-        align-items:
-            flex-start;
+        align-items: flex-start;
 
-        flex-direction:
-            column;
+        flex-direction: column;
+
     }
+
 
     .search-box {
 
         width: 100%;
+
     }
+
+
 }
 
 
@@ -2008,24 +2330,26 @@ footer {
 
 @media (max-width: 650px) {
 
+
     .container {
 
         width: 94%;
 
         padding-top: 20px;
+
     }
 
 
     .header {
 
-        flex-direction:
-            column;
+        flex-direction: column;
 
-        align-items:
-            flex-start;
+        align-items: flex-start;
 
-        padding:
-            18px;
+        gap: 17px;
+
+        padding: 19px;
+
     }
 
 
@@ -2033,125 +2357,185 @@ footer {
 
         width: 100%;
 
-        justify-content:
-            flex-start;
+        justify-content: space-between;
 
-        flex-wrap:
-            wrap;
     }
 
 
     .brand-info h1 {
 
-        font-size:
-            20px;
+        font-size: 20px;
+
     }
 
 
     .brand-info p {
 
-        font-size:
-            12px;
+        font-size: 12px;
+
     }
 
 
     .brand-logo {
 
-        width:
-            54px;
+        width: 54px;
 
-        height:
-            54px;
+        height: 54px;
+
     }
 
 
     .intro {
 
-        margin-top:
-            32px;
+        margin-top: 32px;
+
+        margin-bottom: 27px;
+
     }
 
 
     .intro h2 {
 
-        font-size:
-            27px;
+        font-size: 27px;
+
     }
 
 
     .tools-grid {
 
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
+
     }
 
 
     .tool-card {
 
-        min-height:
-            205px;
+        min-height: 205px;
+
     }
 
 
     .portal-button {
 
-        padding:
-            14px;
+        padding: 14px;
+
     }
 
 
     .portal-main-icon {
 
-        width:
-            43px;
+        width: 43px;
 
-        height:
-            43px;
+        height: 43px;
+
     }
 
 
     .portal-button-left strong {
 
-        font-size:
-            13px;
+        font-size: 13px;
+
     }
 
 
     .portal-button-left span {
 
-        font-size:
-            10px;
+        font-size: 10px;
+
     }
 
 
     .portal-list {
 
-        max-height:
-            360px;
+        max-height: 360px;
+
     }
 
 
     .portal-item {
 
-        min-height:
-            52px;
+        padding: 9px 8px;
 
-        padding:
-            8px;
+    }
+
+
+    .ai-box {
+
+        padding: 17px;
+
+    }
+
+
+    .ai-form {
+
+        flex-direction: column;
+
+    }
+
+
+    .ai-button {
+
+        width: 100%;
+
+    }
+
+
+    .ai-suggestions {
+
+        align-items: flex-start;
+
     }
 
 
     footer {
 
-        flex-direction:
-            column;
+        flex-direction: column;
 
-        align-items:
-            flex-start;
+        align-items: flex-start;
 
-        gap:
-            8px;
+        gap: 8px;
+
     }
+
+
+}
+
+
+/* ============================================
+   TELAS MUITO PEQUENAS
+============================================ */
+
+@media (max-width: 400px) {
+
+
+    .header-right {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .system-status,
+    .internal-badge {
+
+        width: 100%;
+
+        justify-content: center;
+
+    }
+
+
+    .category-title span {
+
+        max-width: 250px;
+
+        line-height: 1.45;
+
+    }
+
+
 }
 
 
@@ -2161,15 +2545,15 @@ footer {
 
 @media (prefers-reduced-motion: reduce) {
 
+
     * {
 
-        transition:
-            none !important;
+        transition: none !important;
 
-        scroll-behavior:
-            auto !important;
+        animation: none !important;
 
-        animation:
-            none !important;
+        scroll-behavior: auto !important;
+
     }
+
 }
