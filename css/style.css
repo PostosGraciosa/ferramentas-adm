@@ -1,18 +1,17 @@
 /* ============================================
    FERRAMENTAS ADM
    POSTOS GRACIOSA
-
    css/style.css
-   ============================================ */
-
-
-/* ============================================
-   VARIÁVEIS
 ============================================ */
+
+
+/* =========================================
+   VARIÁVEIS
+========================================= */
 
 :root {
 
-    --bg: #f4f7fb;
+    --bg: #eef2f7;
 
     --surface: #ffffff;
 
@@ -24,8 +23,6 @@
 
     --text: #0f172a;
 
-    --text-soft: #334155;
-
     --muted: #64748b;
 
     --primary: #0f172a;
@@ -34,23 +31,17 @@
 
     --accent: #0ea5e9;
 
-    --accent-dark: #0284c7;
+    --accent-soft: #e0f2fe;
 
     --green: #16a34a;
-
-    --purple: #7c3aed;
-
-    --orange: #ea580c;
-
-    --cyan: #0891b2;
 
     --radius: 16px;
 
     --shadow-sm:
-        0 1px 2px rgba(15, 23, 42, .04);
+        0 2px 8px rgba(15, 23, 42, .05);
 
     --shadow-md:
-        0 10px 30px rgba(15, 23, 42, .08);
+        0 12px 30px rgba(15, 23, 42, .09);
 
     --shadow-lg:
         0 20px 50px rgba(15, 23, 42, .12);
@@ -58,7 +49,6 @@
     --font:
         system-ui,
         -apple-system,
-        BlinkMacSystemFont,
         "Segoe UI",
         Roboto,
         Arial,
@@ -67,9 +57,9 @@
 }
 
 
-/* ============================================
+/* =========================================
    RESET
-============================================ */
+========================================= */
 
 * {
 
@@ -91,37 +81,13 @@ html {
 
 body {
 
-    min-height: 100vh;
-
     font-family: var(--font);
 
     color: var(--text);
 
-    background:
-        #f4f7fb;
-
     line-height: 1.5;
 
-    -webkit-font-smoothing: antialiased;
-
-    overflow-x: hidden;
-
-}
-
-
-/* ============================================
-   FUNDO PROFISSIONAL
-============================================ */
-
-.background {
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: -10;
-
-    overflow: hidden;
+    min-height: 100vh;
 
     background:
         radial-gradient(
@@ -130,16 +96,32 @@ body {
             transparent 28%
         ),
         radial-gradient(
-            circle at 85% 20%,
-            rgba(99, 102, 241, .06),
+            circle at 85% 85%,
+            rgba(99, 102, 241, .07),
             transparent 30%
         ),
-        linear-gradient(
-            135deg,
-            #f8fafc 0%,
-            #eef3f8 48%,
-            #f8fafc 100%
-        );
+        #eef2f7;
+
+    -webkit-font-smoothing: antialiased;
+
+}
+
+
+/* =========================================
+   FUNDO PROFISSIONAL
+========================================= */
+
+.background {
+
+    position: fixed;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: -1;
 
 }
 
@@ -150,16 +132,16 @@ body {
 
     inset: 0;
 
-    opacity: .42;
+    opacity: .35;
 
     background-image:
         linear-gradient(
-            rgba(148, 163, 184, .07) 1px,
+            rgba(148, 163, 184, .12) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(148, 163, 184, .07) 1px,
+            rgba(148, 163, 184, .12) 1px,
             transparent 1px
         );
 
@@ -173,27 +155,26 @@ body {
 
     position: absolute;
 
-    width: 520px;
+    width: 480px;
 
-    height: 520px;
+    height: 480px;
 
     border-radius: 50%;
 
-    filter: blur(70px);
+    filter: blur(80px);
 
-    opacity: .22;
+    opacity: .18;
 
 }
 
 
 .background-glow-one {
 
-    top: -260px;
+    top: -250px;
 
     left: -180px;
 
-    background:
-        rgba(14, 165, 233, .20);
+    background: #38bdf8;
 
 }
 
@@ -202,10 +183,9 @@ body {
 
     right: -220px;
 
-    bottom: -280px;
+    bottom: -250px;
 
-    background:
-        rgba(99, 102, 241, .18);
+    background: #6366f1;
 
 }
 
@@ -214,7 +194,7 @@ body {
 
     position: absolute;
 
-    width: 70vw;
+    width: 70%;
 
     height: 1px;
 
@@ -222,61 +202,62 @@ body {
         linear-gradient(
             90deg,
             transparent,
-            rgba(14, 165, 233, .14),
+            rgba(100, 116, 139, .18),
             transparent
         );
-
-    transform: rotate(-18deg);
 
 }
 
 
 .background-line-one {
 
-    top: 30%;
+    top: 25%;
 
-    left: -15%;
+    left: 15%;
+
+    transform: rotate(-8deg);
 
 }
 
 
 .background-line-two {
 
-    top: 70%;
+    bottom: 22%;
 
-    right: -15%;
+    right: 5%;
 
-    transform:
-        rotate(18deg);
+    transform: rotate(8deg);
 
 }
 
 
-/* ============================================
+/* =========================================
    HEADER
-============================================ */
+========================================= */
 
 .header {
 
     position: relative;
-
-    color: #fff;
 
     background:
         linear-gradient(
             135deg,
             #0b1220 0%,
             #111c31 55%,
-            #16243d 100%
+            #172554 100%
         );
 
+    color: white;
+
+    padding:
+        26px 24px
+        22px;
+
     border-bottom:
-        1px solid
-        rgba(255,255,255,.08);
+        1px solid rgba(255,255,255,.08);
 
     box-shadow:
-        0 8px 30px
-        rgba(15,23,42,.18);
+        0 8px 30px rgba(15,23,42,.16);
 
 }
 
@@ -299,7 +280,7 @@ body {
         linear-gradient(
             90deg,
             transparent,
-            rgba(14,165,233,.45),
+            rgba(56,189,248,.45),
             transparent
         );
 
@@ -310,10 +291,7 @@ body {
 
     max-width: 1180px;
 
-    margin: 0 auto;
-
-    padding:
-        24px;
+    margin: auto;
 
     display: flex;
 
@@ -323,8 +301,14 @@ body {
 
     gap: 24px;
 
+    flex-wrap: wrap;
+
 }
 
+
+/* =========================================
+   MARCA
+========================================= */
 
 .brand {
 
@@ -339,9 +323,9 @@ body {
 
 .brand-logo {
 
-    width: 50px;
+    width: 52px;
 
-    height: 50px;
+    height: 52px;
 
     border-radius: 14px;
 
@@ -357,8 +341,7 @@ body {
         rgba(255,255,255,.08);
 
     border:
-        1px solid
-        rgba(255,255,255,.14);
+        1px solid rgba(255,255,255,.12);
 
 }
 
@@ -378,19 +361,16 @@ body {
 
     display: none;
 
-    font-size: 13px;
+    font-size: 12px;
 
     font-weight: 900;
-
-    letter-spacing: 1px;
 
 }
 
 
-.brand-logo.logo-error
-.logo-fallback {
+.logo-error .logo-fallback {
 
-    display: flex;
+    display: block;
 
 }
 
@@ -399,17 +379,17 @@ body {
 
     display: block;
 
-    margin-bottom: 1px;
-
-    color: #94a3b8;
-
-    font-size: 10px;
+    font-size: 11px;
 
     font-weight: 800;
 
     letter-spacing: 2px;
 
     text-transform: uppercase;
+
+    color: #93c5fd;
+
+    margin-bottom: 2px;
 
 }
 
@@ -418,7 +398,7 @@ body {
 
     font-size: 25px;
 
-    line-height: 1.15;
+    line-height: 1.1;
 
     font-weight: 800;
 
@@ -431,12 +411,16 @@ body {
 
     margin-top: 3px;
 
-    color: #aebdce;
+    color: #cbd5e1;
 
     font-size: 13px;
 
 }
 
+
+/* =========================================
+   HEADER ACTIONS
+========================================= */
 
 .header-actions {
 
@@ -444,38 +428,33 @@ body {
 
     align-items: center;
 
-    justify-content: flex-end;
+    gap: 9px;
 
     flex-wrap: wrap;
-
-    gap: 8px;
 
 }
 
 
 .quick-link {
 
-    min-height: 38px;
-
     display: inline-flex;
 
     align-items: center;
 
-    gap: 7px;
+    gap: 6px;
 
     padding:
-        8px 12px;
+        8px 13px;
 
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
-    border-radius: 10px;
+    border-radius: 9px;
 
     color: #e2e8f0;
 
     background:
-        rgba(255,255,255,.055);
+        rgba(255,255,255,.07);
+
+    border:
+        1px solid rgba(255,255,255,.11);
 
     text-decoration: none;
 
@@ -491,72 +470,16 @@ body {
 
 .quick-link:hover {
 
+    background:
+        rgba(255,255,255,.14);
+
     transform:
         translateY(-1px);
-
-    background:
-        rgba(255,255,255,.11);
-
-    border-color:
-        rgba(255,255,255,.2);
-
-}
-
-
-.quick-icon {
-
-    width: 17px;
-
-    height: 17px;
-
-    display: flex;
-
-}
-
-
-.quick-icon svg {
-
-    width: 100%;
-
-    height: 100%;
-
-    fill: none;
-
-    stroke: currentColor;
-
-    stroke-width: 1.8;
-
-    stroke-linecap: round;
-
-    stroke-linejoin: round;
-
-}
-
-
-.quick-email:hover {
-
-    color: #bae6fd;
-
-}
-
-
-.quick-whatsapp:hover {
-
-    color: #86efac;
-
-}
-
-
-.quick-chatgpt:hover {
-
-    color: #cbd5e1;
 
 }
 
 
 .status {
-
-    min-height: 32px;
 
     display: inline-flex;
 
@@ -567,16 +490,15 @@ body {
     padding:
         6px 10px;
 
-    border:
-        1px solid
-        rgba(34,197,94,.28);
-
     border-radius: 999px;
 
     color: #bbf7d0;
 
     background:
-        rgba(22,163,74,.1);
+        rgba(22,163,74,.13);
+
+    border:
+        1px solid rgba(34,197,94,.3);
 
     font-size: 11px;
 
@@ -591,15 +513,12 @@ body {
 
     height: 7px;
 
-    flex: 0 0 7px;
-
     border-radius: 50%;
 
     background: #22c55e;
 
     box-shadow:
-        0 0 0 4px
-        rgba(34,197,94,.08);
+        0 0 0 4px rgba(34,197,94,.1);
 
     animation:
         pulse 2s infinite;
@@ -609,7 +528,8 @@ body {
 
 @keyframes pulse {
 
-    0%, 100% {
+    0%,
+    100% {
 
         opacity: 1;
 
@@ -631,18 +551,14 @@ body {
 .badge-internal {
 
     padding:
-        7px 10px;
+        5px 9px;
 
-    border:
-        1px solid
-        rgba(250,204,21,.35);
-
-    border-radius: 8px;
+    border-radius: 6px;
 
     color: #fef08a;
 
-    background:
-        rgba(250,204,21,.07);
+    border:
+        1px solid rgba(250,204,21,.55);
 
     font-size: 10px;
 
@@ -655,28 +571,26 @@ body {
 }
 
 
-/* ============================================
+/* =========================================
    CONTAINER
-============================================ */
+========================================= */
 
 .container {
 
-    width: min(
-        1180px,
-        calc(100% - 40px)
-    );
+    max-width: 1180px;
 
     margin: 0 auto;
 
     padding:
-        28px 0 42px;
+        28px 24px
+        50px;
 
 }
 
 
-/* ============================================
+/* =========================================
    BUSCA
-============================================ */
+========================================= */
 
 .search-wrap {
 
@@ -697,24 +611,21 @@ body {
         0 48px;
 
     border:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 
     border-radius: 14px;
 
     outline: none;
 
+    background:
+        rgba(255,255,255,.92);
+
     color: var(--text);
 
-    background:
-        rgba(255,255,255,.9);
+    font-size: 14px;
 
     box-shadow:
         var(--shadow-sm);
-
-    font-family: var(--font);
-
-    font-size: 14px;
 
     transition:
         .2s ease;
@@ -722,23 +633,14 @@ body {
 }
 
 
-.search-wrap input::placeholder {
-
-    color:
-        #94a3b8;
-
-}
-
-
 .search-wrap input:focus {
 
     border-color:
-        rgba(14,165,233,.6);
+        #38bdf8;
 
     box-shadow:
         0 0 0 4px
-        rgba(14,165,233,.09),
-        var(--shadow-sm);
+        rgba(14,165,233,.1);
 
 }
 
@@ -751,22 +653,12 @@ body {
 
     top: 50%;
 
-    width: 19px;
-
-    height: 19px;
-
     transform:
         translateY(-50%);
 
-    fill: none;
+    font-size: 17px;
 
-    stroke: #64748b;
-
-    stroke-width: 1.8;
-
-    stroke-linecap: round;
-
-    stroke-linejoin: round;
+    color: var(--muted);
 
     pointer-events: none;
 
@@ -784,47 +676,39 @@ body {
     transform:
         translateY(-50%);
 
-    min-width: 27px;
+    padding:
+        2px 8px;
 
-    height: 25px;
+    border-radius: 6px;
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
+    background: #f1f5f9;
 
     border:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 
-    border-radius: 7px;
+    color: var(--muted);
 
-    color:
-        #64748b;
-
-    background:
-        #f8fafc;
-
-    font-size: 12px;
+    font-size: 11px;
 
     font-weight: 800;
 
 }
 
 
-/* ============================================
-   GRADE
-============================================ */
+/* =========================================
+   GRID
+========================================= */
 
 .grid {
 
     display: grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(3, minmax(0, 1fr));
 
     gap: 16px;
+
+    margin-bottom: 28px;
 
 }
 
@@ -833,30 +717,26 @@ body {
 
     position: relative;
 
-    min-height: 220px;
-
-    padding: 20px;
+    background:
+        rgba(255,255,255,.95);
 
     border:
-        1px solid
-        rgba(226,232,240,.95);
+        1px solid var(--border);
 
     border-radius:
         var(--radius);
 
-    background:
-        rgba(255,255,255,.88);
+    padding: 20px;
+
+    min-height: 205px;
 
     box-shadow:
         var(--shadow-sm);
 
-    backdrop-filter:
-        blur(8px);
-
     transition:
-        transform .22s ease,
-        box-shadow .22s ease,
-        border-color .22s ease;
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
 
 }
 
@@ -864,10 +744,10 @@ body {
 .card:hover {
 
     transform:
-        translateY(-4px);
+        translateY(-3px);
 
     border-color:
-        #d5dee9;
+        #cbd5e1;
 
     box-shadow:
         var(--shadow-md);
@@ -875,43 +755,18 @@ body {
 }
 
 
-.card h3 {
+.card.search-hidden {
 
-    margin-bottom: 7px;
-
-    color: var(--text);
-
-    font-size: 16px;
-
-    line-height: 1.3;
-
-    font-weight: 800;
-
-}
-
-
-.card p {
-
-    min-height: 58px;
-
-    margin-bottom: 13px;
-
-    color: var(--muted);
-
-    font-size: 13px;
-
-    line-height: 1.55;
+    display: none;
 
 }
 
 
 .card-icon {
 
-    width: 48px;
+    width: 46px;
 
-    height: 48px;
-
-    margin-bottom: 13px;
+    height: 46px;
 
     display: flex;
 
@@ -919,37 +774,18 @@ body {
 
     justify-content: center;
 
-    border-radius: 13px;
+    border-radius: 12px;
+
+    margin-bottom: 13px;
+
+    font-size: 22px;
+
+    background: #f1f5f9;
 
 }
 
 
-.card-icon svg {
-
-    width: 24px;
-
-    height: 24px;
-
-    fill: none;
-
-    stroke: currentColor;
-
-    stroke-width: 1.7;
-
-    stroke-linecap: round;
-
-    stroke-linejoin: round;
-
-}
-
-
-/* ============================================
-   CORES DOS ÍCONES
-============================================ */
-
-.ai-icon {
-
-    color: #4f46e5;
+.assistant-icon {
 
     background:
         #eef2ff;
@@ -959,27 +795,21 @@ body {
 
 .chatgpt-icon {
 
-    color: #334155;
-
     background:
-        #f1f5f9;
+        #ecfeff;
 
 }
 
 
 .bank-icon {
 
-    color: #0369a1;
-
     background:
-        #e0f2fe;
+        #f0fdf4;
 
 }
 
 
-.blue-card-icon {
-
-    color: #2563eb;
+.conference-icon {
 
     background:
         #eff6ff;
@@ -989,17 +819,13 @@ body {
 
 .document-icon {
 
-    color: #16a34a;
-
     background:
-        #ecfdf5;
+        #f0fdf4;
 
 }
 
 
 .vale-icon {
-
-    color: #ea580c;
 
     background:
         #fff7ed;
@@ -1009,8 +835,6 @@ body {
 
 .operational-icon {
 
-    color: #7c3aed;
-
     background:
         #f5f3ff;
 
@@ -1019,17 +843,56 @@ body {
 
 .message-icon {
 
-    color: #0891b2;
-
     background:
         #ecfeff;
 
 }
 
 
-/* ============================================
-   AÇÃO DOS CARDS
-============================================ */
+.message-icon svg {
+
+    width: 25px;
+
+    height: 25px;
+
+    fill: none;
+
+    stroke: #0891b2;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+
+.card h3 {
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    margin-bottom: 6px;
+
+    color: var(--text);
+
+}
+
+
+.card p {
+
+    color: var(--muted);
+
+    font-size: 12.5px;
+
+    line-height: 1.6;
+
+    margin-bottom: 13px;
+
+}
+
 
 .card-action {
 
@@ -1041,21 +904,18 @@ body {
 
     border: 0;
 
+    background: transparent;
+
     padding: 0;
 
     color:
-        var(--accent-dark);
-
-    background:
-        transparent;
-
-    text-decoration: none;
-
-    font-family: inherit;
+        #0284c7;
 
     font-size: 12px;
 
     font-weight: 800;
+
+    text-decoration: none;
 
     cursor: pointer;
 
@@ -1070,95 +930,77 @@ body {
 }
 
 
-.portal-toggle {
+.card-button {
 
-    margin-top: 1px;
-
-}
-
-
-.portal-toggle span {
-
-    font-size: 13px;
+    font-family: inherit;
 
 }
 
 
-/* ============================================
+/* =========================================
    SELO LOCAL
-============================================ */
+========================================= */
 
 .selo-local {
 
     display: inline-flex;
 
-    align-items: center;
+    vertical-align: middle;
 
-    margin-left: 6px;
+    margin-left: 5px;
 
     padding:
-        3px 7px;
+        2px 7px;
 
     border-radius: 999px;
 
-    color:
-        #4338ca;
+    color: #4338ca;
 
-    background:
-        #eef2ff;
+    background: #e0e7ff;
 
-    font-size: 9px;
+    font-size: 8px;
 
     font-weight: 900;
 
     letter-spacing: .6px;
 
-    vertical-align: middle;
-
 }
 
 
-/* ============================================
-   DROPDOWN PORTAIS
-============================================ */
+/* =========================================
+   DROPDOWN
+========================================= */
 
 .dropdown {
 
-    z-index: 10;
-
-}
-
-
-.dropdown.open {
-
-    z-index: 100;
+    z-index: 20;
 
 }
 
 
 .dropdown-menu {
 
-    position: absolute;
-
-    top: calc(100% + 8px);
-
-    left: 12px;
-
-    right: 12px;
-
     display: none;
 
-    max-height: 430px;
+    position: absolute;
+
+    left: 10px;
+
+    right: 10px;
+
+    top:
+        calc(100% - 12px);
+
+    max-height: 410px;
 
     overflow-y: auto;
 
     padding: 8px;
 
     border:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 
-    border-radius: 14px;
+    border-radius: 13px;
 
     background:
         rgba(255,255,255,.98);
@@ -1166,8 +1008,7 @@ body {
     box-shadow:
         var(--shadow-lg);
 
-    backdrop-filter:
-        blur(12px);
+    z-index: 100;
 
 }
 
@@ -1176,52 +1017,26 @@ body {
 
     display: block;
 
-    animation:
-        dropdownIn .16s ease;
-
-}
-
-
-@keyframes dropdownIn {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(-5px);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0);
-
-    }
-
 }
 
 
 .dropdown-menu a {
 
-    min-height: 43px;
+    display: grid;
 
-    display: flex;
+    grid-template-columns:
+        30px 1fr auto;
 
     align-items: center;
 
-    gap: 10px;
+    gap: 9px;
 
     padding:
-        6px 9px;
+        7px 9px;
 
     border-radius: 9px;
 
-    color:
-        var(--text);
+    color: var(--text);
 
     text-decoration: none;
 
@@ -1230,7 +1045,7 @@ body {
     font-weight: 700;
 
     transition:
-        .15s ease;
+        background .15s ease;
 
 }
 
@@ -1243,13 +1058,18 @@ body {
 }
 
 
+/* =========================================
+   ÍCONES DOS PORTAIS
+   PADRONIZADOS
+========================================= */
+
 .portal-logo {
 
-    width: 30px;
+    width: 28px;
 
-    height: 30px;
+    height: 28px;
 
-    min-width: 30px;
+    min-width: 28px;
 
     display: flex;
 
@@ -1257,9 +1077,7 @@ body {
 
     justify-content: center;
 
-    border-radius: 8px;
-
-    color: #fff;
+    border-radius: 7px;
 
     font-size: 10px;
 
@@ -1267,48 +1085,33 @@ body {
 
     letter-spacing: -.3px;
 
-    box-shadow:
-        inset 0 0 0 1px
-        rgba(255,255,255,.12);
-
-}
-
-
-.portal-external {
-
-    margin-left: auto;
-
-    color:
-        #94a3b8;
-
-    font-size: 15px;
+    color: white;
 
 }
 
 
 /*
-   Os ícones abaixo são blocos padronizados.
-   Isso evita tamanhos diferentes entre
-   administradoras.
+   As classes abaixo deixam todos
+   os logos exatamente no mesmo tamanho.
 */
 
 .portal-cielo {
 
-    background: #00a9e0;
+    background: #ed1c24;
 
 }
 
 
 .portal-cs {
 
-    background: #263b80;
+    background: #334155;
 
 }
 
 
 .portal-getnet {
 
-    background: #ef4444;
+    background: #e11d48;
 
 }
 
@@ -1322,28 +1125,28 @@ body {
 
 .portal-maiscash {
 
-    background: #7c3aed;
+    background: #16a34a;
 
 }
 
 
 .portal-neo {
 
-    background: #0f766e;
+    background: #7c3aed;
 
 }
 
 
 .portal-payly {
 
-    background: #ea580c;
+    background: #0891b2;
 
 }
 
 
 .portal-frentista {
 
-    background: #dc2626;
+    background: #ea580c;
 
 }
 
@@ -1357,14 +1160,14 @@ body {
 
 .portal-rede {
 
-    background: #111827;
+    background: #dc2626;
 
 }
 
 
 .portal-semparar {
 
-    background: #16a34a;
+    background: #0f766e;
 
 }
 
@@ -1383,45 +1186,9 @@ body {
 }
 
 
-/* ============================================
-   SCROLL DO DROPDOWN
-============================================ */
-
-.dropdown-menu::-webkit-scrollbar {
-
-    width: 6px;
-
-}
-
-
-.dropdown-menu::-webkit-scrollbar-track {
-
-    background:
-        transparent;
-
-}
-
-
-.dropdown-menu::-webkit-scrollbar-thumb {
-
-    border-radius: 999px;
-
-    background:
-        #cbd5e1;
-
-}
-
-
-/* ============================================
-   BUSCA - ESCONDER CARD
-============================================ */
-
-.search-hidden {
-
-    display: none;
-
-}
-
+/* =========================================
+   EMPTY STATE
+========================================= */
 
 .hidden {
 
@@ -1430,62 +1197,14 @@ body {
 }
 
 
-/* ============================================
-   ESTADO VAZIO
-============================================ */
-
 .empty-state {
-
-    padding:
-        55px 20px;
 
     text-align: center;
 
-    color:
-        var(--muted);
+    padding:
+        35px 20px;
 
-}
-
-
-.empty-icon {
-
-    width: 54px;
-
-    height: 54px;
-
-    margin:
-        0 auto 12px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 15px;
-
-    color:
-        #64748b;
-
-    background:
-        #e2e8f0;
-
-}
-
-
-.empty-icon svg {
-
-    width: 25px;
-
-    height: 25px;
-
-    fill: none;
-
-    stroke: currentColor;
-
-    stroke-width: 1.7;
-
-    stroke-linecap: round;
+    color: var(--muted);
 
 }
 
@@ -1494,100 +1213,83 @@ body {
 
     display: block;
 
+    color: var(--text);
+
+    font-size: 15px;
+
     margin-bottom: 3px;
 
-    color:
-        var(--text);
-
-    font-size: 16px;
-
 }
 
 
-.empty-state span {
+/* =========================================
+   ASSISTENTES
+   LADO A LADO
+========================================= */
 
-    font-size: 13px;
+.assistants-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+    align-items: start;
 
 }
 
-
-/* ============================================
-   ASSISTENTE
-============================================ */
 
 .ai-panel {
 
-    margin-top: 28px;
+    min-width: 0;
 
-    padding: 24px;
+    background:
+        rgba(255,255,255,.96);
 
     border:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 
     border-radius:
         var(--radius);
 
-    background:
-        rgba(255,255,255,.92);
+    padding: 22px;
 
     box-shadow:
-        var(--shadow-md);
-
-    backdrop-filter:
-        blur(10px);
-
-    transition:
-        box-shadow .25s ease,
-        border-color .25s ease;
+        var(--shadow-sm);
 
 }
 
 
-.ai-highlight {
-
-    border-color:
-        rgba(14,165,233,.55);
+.ai-panel:hover {
 
     box-shadow:
-        0 0 0 5px
-        rgba(14,165,233,.08),
         var(--shadow-md);
 
 }
 
 
-.ai-header {
+.panel-heading {
 
     display: flex;
 
     align-items: center;
 
-    justify-content: space-between;
+    gap: 12px;
 
-    gap: 16px;
-
-    margin-bottom: 22px;
+    margin-bottom: 20px;
 
 }
 
 
-.ai-title-wrap {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 13px;
-
-}
-
-
-.ai-panel-icon {
+.panel-icon {
 
     width: 44px;
 
     height: 44px;
+
+    min-width: 44px;
 
     display: flex;
 
@@ -1597,8 +1299,12 @@ body {
 
     border-radius: 12px;
 
-    color:
-        #4f46e5;
+    font-size: 21px;
+
+}
+
+
+.local-panel-icon {
 
     background:
         #eef2ff;
@@ -1606,79 +1312,41 @@ body {
 }
 
 
-.ai-panel-icon svg {
+.chatgpt-panel-icon {
 
-    width: 22px;
-
-    height: 22px;
-
-    fill: none;
-
-    stroke: currentColor;
-
-    stroke-width: 1.7;
-
-    stroke-linecap: round;
-
-    stroke-linejoin: round;
+    background:
+        #ecfeff;
 
 }
 
 
-.ai-panel h2 {
+.panel-heading h2 {
 
-    margin-bottom: 2px;
-
-    font-size: 18px;
+    font-size: 17px;
 
     font-weight: 850;
 
-}
-
-
-.ai-panel .sub {
-
-    color:
-        var(--muted);
-
-    font-size: 12px;
+    margin-bottom: 2px;
 
 }
 
 
-.ai-local-badge {
+.panel-heading p {
 
-    padding:
-        6px 9px;
+    color: var(--muted);
 
-    border:
-        1px solid
-        #c7d2fe;
-
-    border-radius: 999px;
-
-    color:
-        #4338ca;
-
-    background:
-        #eef2ff;
-
-    font-size: 9px;
-
-    font-weight: 900;
-
-    letter-spacing: .8px;
+    font-size: 11.5px;
 
 }
 
 
-/* ============================================
-   FORMULÁRIO
-============================================ */
+/* =========================================
+   FORMULÁRIOS
+========================================= */
 
 .form-row {
 
-    margin-bottom: 16px;
+    margin-bottom: 15px;
 
 }
 
@@ -1687,10 +1355,9 @@ body {
 
     display: block;
 
-    margin-bottom: 7px;
+    margin-bottom: 6px;
 
-    color:
-        var(--text-soft);
+    color: var(--text);
 
     font-size: 12px;
 
@@ -1705,33 +1372,31 @@ textarea {
     width: 100%;
 
     border:
-        1px solid
-        var(--border);
+        1px solid var(--border);
 
-    border-radius: 11px;
-
-    outline: none;
-
-    color:
-        var(--text);
+    border-radius: 10px;
 
     background:
-        #fff;
+        #ffffff;
 
-    font-family:
-        var(--font);
+    color: var(--text);
+
+    font-family: inherit;
 
     font-size: 13px;
 
+    outline: none;
+
     transition:
-        .2s ease;
+        border-color .2s ease,
+        box-shadow .2s ease;
 
 }
 
 
 select {
 
-    height: 44px;
+    height: 43px;
 
     padding:
         0 12px;
@@ -1741,13 +1406,12 @@ select {
 
 textarea {
 
-    min-height: 105px;
+    min-height: 100px;
+
+    resize: vertical;
 
     padding:
-        12px;
-
-    resize:
-        vertical;
+        11px 12px;
 
     line-height: 1.5;
 
@@ -1758,28 +1422,27 @@ select:focus,
 textarea:focus {
 
     border-color:
-        rgba(14,165,233,.55);
+        #38bdf8;
 
     box-shadow:
-        0 0 0 4px
-        rgba(14,165,233,.08);
+        0 0 0 3px
+        rgba(14,165,233,.1);
 
 }
 
 
-textarea::placeholder {
+.chatgpt-textarea {
 
-    color:
-        #94a3b8;
+    min-height: 118px;
 
 }
 
 
-/* ============================================
+/* =========================================
    BOTÕES
-============================================ */
+========================================= */
 
-.ai-buttons {
+.button-row {
 
     display: flex;
 
@@ -1787,27 +1450,23 @@ textarea::placeholder {
 
     gap: 8px;
 
-    margin-bottom: 16px;
+    margin-bottom: 15px;
 
 }
 
 
 .btn {
 
-    min-height: 40px;
+    min-height: 38px;
+
+    border-radius: 9px;
 
     padding:
-        9px 14px;
+        8px 12px;
 
-    border-radius: 10px;
+    font-family: inherit;
 
-    border: 1px solid
-        transparent;
-
-    font-family:
-        var(--font);
-
-    font-size: 12px;
+    font-size: 11.5px;
 
     font-weight: 800;
 
@@ -1821,39 +1480,42 @@ textarea::placeholder {
 
 .btn-primary {
 
-    color: #fff;
+    color: white;
 
     background:
-        var(--primary);
+        linear-gradient(
+            135deg,
+            #0f172a,
+            #1e293b
+        );
 
-    box-shadow:
-        0 3px 8px
-        rgba(15,23,42,.12);
+    border:
+        1px solid #0f172a;
 
 }
 
 
 .btn-primary:hover {
 
-    background:
-        var(--primary-hover);
-
     transform:
         translateY(-1px);
+
+    box-shadow:
+        0 5px 14px
+        rgba(15,23,42,.18);
 
 }
 
 
 .btn-ghost {
 
-    color:
-        var(--text-soft);
+    color: #334155;
 
     background:
-        #fff;
+        #f8fafc;
 
-    border-color:
-        var(--border);
+    border:
+        1px solid var(--border);
 
 }
 
@@ -1861,7 +1523,7 @@ textarea::placeholder {
 .btn-ghost:hover {
 
     background:
-        #f8fafc;
+        #f1f5f9;
 
     border-color:
         var(--border-dark);
@@ -1869,46 +1531,45 @@ textarea::placeholder {
 }
 
 
-.btn-ghost.copied {
-
-    color:
-        #15803d;
-
-    border-color:
-        #bbf7d0;
+.button-success {
 
     background:
-        #f0fdf4;
+        #15803d !important;
+
+    color:
+        white !important;
+
+    border-color:
+        #15803d !important;
 
 }
 
 
-/* ============================================
+/* =========================================
    RESULTADO
-============================================ */
+========================================= */
 
 .result-box {
 
-    min-height: 90px;
+    min-height: 96px;
 
     padding:
-        15px;
+        13px;
 
     border:
-        1px dashed
-        #cbd5e1;
+        1px dashed #cbd5e1;
 
-    border-radius: 11px;
-
-    color:
-        #94a3b8;
+    border-radius: 10px;
 
     background:
         #f8fafc;
 
-    font-size: 13px;
+    color:
+        #94a3b8;
 
-    line-height: 1.65;
+    font-size: 12.5px;
+
+    line-height: 1.6;
 
     white-space: pre-wrap;
 
@@ -1918,7 +1579,7 @@ textarea::placeholder {
 .result-box.result-active {
 
     color:
-        var(--text-soft);
+        #334155;
 
     border-style:
         solid;
@@ -1932,9 +1593,127 @@ textarea::placeholder {
 }
 
 
-/* ============================================
+/* =========================================
+   SUGESTÕES CHATGPT
+========================================= */
+
+.prompt-title {
+
+    margin-bottom: 8px;
+
+    color:
+        #334155;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+}
+
+
+.prompt-suggestions {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    margin-bottom: 14px;
+
+}
+
+
+.prompt-suggestion {
+
+    border:
+        1px solid #dbeafe;
+
+    border-radius: 999px;
+
+    padding:
+        6px 9px;
+
+    background:
+        #f8fafc;
+
+    color:
+        #0369a1;
+
+    font-family: inherit;
+
+    font-size: 10.5px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        .2s ease;
+
+}
+
+
+.prompt-suggestion:hover {
+
+    background:
+        #e0f2fe;
+
+    border-color:
+        #bae6fd;
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+.chatgpt-buttons {
+
+    margin-top: 3px;
+
+}
+
+
+.chatgpt-info {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 7px;
+
+    padding:
+        10px;
+
+    border-radius: 9px;
+
+    background:
+        #f8fafc;
+
+    color:
+        #64748b;
+
+    font-size: 10.5px;
+
+    line-height: 1.5;
+
+}
+
+
+.chatgpt-info span {
+
+    color:
+        #0284c7;
+
+    font-weight: 900;
+
+}
+
+
+/* =========================================
    FOOTER
-============================================ */
+========================================= */
 
 .footer {
 
@@ -1944,7 +1723,8 @@ textarea::placeholder {
         0 auto;
 
     padding:
-        20px 24px 28px;
+        18px 24px
+        28px;
 
     display: flex;
 
@@ -1957,11 +1737,20 @@ textarea::placeholder {
     color:
         #64748b;
 
-    border-top:
-        1px solid
-        rgba(226,232,240,.8);
-
     font-size: 11px;
+
+}
+
+
+.footer div {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
 
 }
 
@@ -1974,10 +1763,7 @@ textarea::placeholder {
 }
 
 
-.footer .separator {
-
-    margin:
-        0 5px;
+.separator {
 
     color:
         #cbd5e1;
@@ -1985,69 +1771,44 @@ textarea::placeholder {
 }
 
 
-/* ============================================
+/* =========================================
    RESPONSIVIDADE
-============================================ */
+========================================= */
 
-@media (max-width: 1050px) {
-
-    .header-inner {
-
-        align-items:
-            flex-start;
-
-        flex-direction:
-            column;
-
-    }
-
-
-    .header-actions {
-
-        justify-content:
-            flex-start;
-
-    }
-
+@media (max-width: 900px) {
 
     .grid {
 
         grid-template-columns:
-            repeat(2, 1fr);
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+
+    .assistants-layout {
+
+        grid-template-columns:
+            1fr;
 
     }
 
 }
 
 
-@media (max-width: 700px) {
+@media (max-width: 650px) {
 
-    .container {
+    .header {
 
-        width:
-            min(
-                100% - 24px,
-                1180px
-            );
-
-        padding-top:
-            18px;
+        padding:
+            22px 18px;
 
     }
 
 
     .header-inner {
 
-        padding:
-            20px 16px;
-
-    }
-
-
-    .brand h1 {
-
-        font-size:
-            22px;
+        align-items:
+            flex-start;
 
     }
 
@@ -2059,21 +1820,11 @@ textarea::placeholder {
     }
 
 
-    .quick-link {
+    .container {
 
-        flex: 1;
-
-        justify-content:
-            center;
-
-    }
-
-
-    .status,
-    .badge-internal {
-
-        display:
-            none;
+        padding:
+            20px 16px
+            35px;
 
     }
 
@@ -2089,67 +1840,7 @@ textarea::placeholder {
     .card {
 
         min-height:
-            195px;
-
-    }
-
-
-    .card p {
-
-        min-height:
             auto;
-
-    }
-
-
-    .dropdown-menu {
-
-        position:
-            fixed;
-
-        left:
-            12px;
-
-        right:
-            12px;
-
-        top:
-            auto;
-
-        max-height:
-            70vh;
-
-    }
-
-
-    .ai-header {
-
-        align-items:
-            flex-start;
-
-    }
-
-
-    .ai-local-badge {
-
-        display:
-            none;
-
-    }
-
-
-    .ai-buttons {
-
-        flex-direction:
-            column;
-
-    }
-
-
-    .btn {
-
-        width:
-            100%;
 
     }
 
@@ -2157,7 +1848,8 @@ textarea::placeholder {
     .footer {
 
         padding:
-            18px 16px 25px;
+            15px 16px
+            25px;
 
         flex-direction:
             column;
@@ -2174,11 +1866,9 @@ textarea::placeholder {
 
     .brand-logo {
 
-        width:
-            44px;
+        width: 45px;
 
-        height:
-            44px;
+        height: 45px;
 
     }
 
@@ -2186,31 +1876,41 @@ textarea::placeholder {
     .brand h1 {
 
         font-size:
-            20px;
+            21px;
 
     }
 
 
-    .brand p {
+    .header-actions {
 
-        font-size:
-            12px;
+        gap: 6px;
 
     }
 
 
-    .quick-link span:last-child {
+    .quick-link {
 
         font-size:
             11px;
 
+        padding:
+            7px 9px;
+
     }
 
 
-    .search-wrap input {
+    .status {
 
-        height:
-            48px;
+        font-size:
+            10px;
+
+    }
+
+
+    .badge-internal {
+
+        font-size:
+            9px;
 
     }
 
@@ -2218,198 +1918,24 @@ textarea::placeholder {
     .ai-panel {
 
         padding:
-            18px;
+            17px;
 
     }
 
-}
-/* ============================================
-   ASSISTENTE CHATGPT
-============================================ */
 
-.chatgpt-card {
-    grid-column: span 1;
-}
+    .button-row {
 
-.chatgpt-icon {
-    background: #f1f5f9;
-    color: #0f172a;
-    font-size: 24px;
-}
+        flex-direction:
+            column;
 
-.chatgpt-box {
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px solid var(--border);
-}
-
-.chatgpt-box label {
-    display: block;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 6px;
-}
-
-#chatgptPrompt {
-    width: 100%;
-    min-height: 90px;
-    resize: vertical;
-    padding: 11px 12px;
-    font-family: var(--font);
-    font-size: 13px;
-    line-height: 1.5;
-    color: var(--text);
-    background: #f8fafc;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    outline: none;
-    transition:
-        border-color .2s ease,
-        box-shadow .2s ease,
-        background .2s ease;
-}
-
-#chatgptPrompt::placeholder {
-    color: #94a3b8;
-}
-
-#chatgptPrompt:focus {
-    background: #fff;
-    border-color: #64748b;
-    box-shadow: 0 0 0 3px rgba(15, 23, 42, .08);
-}
-
-
-/* ===== TÍTULO DAS SUGESTÕES ===== */
-
-.prompt-title {
-    margin-top: 14px;
-    margin-bottom: 8px;
-
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: .6px;
-    text-transform: uppercase;
-
-    color: #64748b;
-}
-
-
-/* ===== SUGESTÕES ===== */
-
-.prompt-suggestions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-}
-
-.prompt-suggestion {
-    appearance: none;
-
-    border: 1px solid #e2e8f0;
-    background: #f8fafc;
-    color: #334155;
-
-    padding: 7px 9px;
-
-    border-radius: 8px;
-
-    font-family: var(--font);
-    font-size: 11px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        background .2s ease,
-        border-color .2s ease,
-        color .2s ease,
-        transform .2s ease;
-}
-
-.prompt-suggestion:hover {
-    background: #fff;
-    border-color: #94a3b8;
-    color: #0f172a;
-    transform: translateY(-1px);
-}
-
-.prompt-suggestion:active {
-    transform: translateY(0);
-}
-
-
-/* ===== BOTÕES ===== */
-
-.chatgpt-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 14px;
-}
-
-.chatgpt-actions .btn {
-    cursor: pointer;
-}
-
-.btn-chatgpt {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-
-    border: 0;
-
-    padding: 10px 14px;
-
-    border-radius: 9px;
-
-    background: #0f172a;
-    color: #fff;
-
-    font-family: var(--font);
-    font-size: 12px;
-    font-weight: 700;
-
-    transition:
-        background .2s ease,
-        transform .2s ease,
-        box-shadow .2s ease;
-}
-
-.btn-chatgpt:hover {
-    background: #1e293b;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(15, 23, 42, .15);
-}
-
-.btn-chatgpt:active {
-    transform: translateY(0);
-}
-
-
-/* ============================================
-   RESPONSIVO
-============================================ */
-
-@media (max-width: 700px) {
-
-    .chatgpt-card {
-        grid-column: span 1;
     }
 
-    .prompt-suggestion {
-        width: 100%;
-        text-align: left;
-    }
 
-    .chatgpt-actions {
-        flex-direction: column;
-    }
+    .btn {
 
-    .chatgpt-actions .btn {
-        width: 100%;
+        width:
+            100%;
+
     }
 
 }
