@@ -1,236 +1,94 @@
 /* ============================================
    FERRAMENTAS ADM
    SISTEMA CORPORATIVO
+   JAVASCRIPT PRINCIPAL
 ============================================ */
 
-
-/* ============================================
-   INICIALIZAÇÃO
-============================================ */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+document.addEventListener("DOMContentLoaded", function () {
 
 
-        /* ========================================
-           ELEMENTOS
-        ======================================== */
+    /* ========================================
+       ELEMENTOS
+    ======================================== */
 
-        const portalButton =
-            document.getElementById("portalButton");
+    const portalButton =
+        document.getElementById("portalButton");
 
-        const portalDropdown =
-            document.querySelector(".portal-dropdown");
+    const portalDropdown =
+        document.querySelector(".portal-dropdown");
 
-        const portalList =
-            document.getElementById("portalList");
+    const portalList =
+        document.getElementById("portalList");
 
-        const searchInput =
-            document.getElementById("toolSearch");
+    const toolSearch =
+        document.getElementById("toolSearch");
 
-        const noResults =
-            document.getElementById("noResults");
+    const noResults =
+        document.getElementById("noResults");
 
-        const categories =
-            document.querySelectorAll(".category");
+    const aiQuestion =
+        document.getElementById("aiQuestion");
 
+    const aiButton =
+        document.getElementById("aiButton");
 
-        /* ========================================
-           DROPDOWN
-        ======================================== */
-
-        if (
-            portalButton &&
-            portalDropdown &&
-            portalList
-        ) {
+    const suggestions =
+        document.querySelectorAll(".suggestion");
 
 
-            /* ====================================
-               ABRIR / FECHAR
-            ==================================== */
+    /* ========================================
+       DROPDOWN
+    ======================================== */
 
-            portalButton.addEventListener(
-                "click",
-                function (event) {
-
-                    event.preventDefault();
-
-                    event.stopPropagation();
+    if (
+        portalButton &&
+        portalDropdown &&
+        portalList
+    ) {
 
 
-                    const isOpen =
-                        portalDropdown.classList.toggle(
-                            "active"
-                        );
+        portalButton.addEventListener(
+            "click",
+            function (event) {
 
+                event.preventDefault();
+
+                event.stopPropagation();
+
+                const isOpen =
+                    portalDropdown.classList.toggle("active");
+
+                portalButton.setAttribute(
+                    "aria-expanded",
+                    isOpen ? "true" : "false"
+                );
+
+            }
+        );
+
+
+        /* ====================================
+           FECHAR AO CLICAR FORA
+        ==================================== */
+
+        document.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    !portalDropdown.contains(
+                        event.target
+                    )
+                ) {
+
+                    portalDropdown.classList.remove(
+                        "active"
+                    );
 
                     portalButton.setAttribute(
                         "aria-expanded",
-                        String(isOpen)
+                        "false"
                     );
-
-                }
-            );
-
-
-            /* ====================================
-               FECHAR AO CLICAR FORA
-            ==================================== */
-
-            document.addEventListener(
-                "click",
-                function (event) {
-
-                    if (
-                        !portalDropdown.contains(
-                            event.target
-                        )
-                    ) {
-
-                        portalDropdown.classList.remove(
-                            "active"
-                        );
-
-                        portalButton.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-
-                    }
-
-                }
-            );
-
-
-            /* ====================================
-               ESC
-            ==================================== */
-
-            document.addEventListener(
-                "keydown",
-                function (event) {
-
-                    if (
-                        event.key === "Escape"
-                    ) {
-
-                        portalDropdown.classList.remove(
-                            "active"
-                        );
-
-                        portalButton.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-
-                        portalButton.focus();
-
-                    }
-
-                }
-            );
-
-
-            /* ====================================
-               CLICAR NO PORTAL
-            ==================================== */
-
-            const portalItems =
-                portalList.querySelectorAll(
-                    ".portal-item"
-                );
-
-
-            portalItems.forEach(
-                function (item) {
-
-                    item.addEventListener(
-                        "click",
-                        function () {
-
-                            setTimeout(
-                                function () {
-
-                                    portalDropdown.classList.remove(
-                                        "active"
-                                    );
-
-                                    portalButton.setAttribute(
-                                        "aria-expanded",
-                                        "false"
-                                    );
-
-                                },
-                                100
-                            );
-
-                        }
-                    );
-
-                }
-            );
-
-        }
-
-
-        /* ========================================
-           FAVICONS
-        ======================================== */
-
-        const portalImages =
-            document.querySelectorAll(
-                ".portal-item-icon img"
-            );
-
-
-        portalImages.forEach(
-            function (image) {
-
-                image.addEventListener(
-                    "error",
-                    function () {
-
-                        const parent =
-                            image.closest(
-                                ".portal-item-icon"
-                            );
-
-                        if (parent) {
-
-                            parent.classList.add(
-                                "icon-error"
-                            );
-
-                        }
-
-                    }
-                );
-
-
-                /*
-                    Se a imagem já tiver falhado
-                    antes do listener ser registrado.
-                */
-
-                if (
-                    image.complete &&
-                    image.naturalWidth === 0
-                ) {
-
-                    const parent =
-                        image.closest(
-                            ".portal-item-icon"
-                        );
-
-                    if (parent) {
-
-                        parent.classList.add(
-                            "icon-error"
-                        );
-
-                    }
 
                 }
 
@@ -238,309 +96,533 @@ document.addEventListener(
         );
 
 
-        /* ========================================
-           BUSCA
-        ======================================== */
-
-        if (searchInput) {
-
-
-            searchInput.addEventListener(
-                "input",
-                function () {
-
-                    const term =
-                        normalizeText(
-                            searchInput.value
-                        );
-
-
-                    let visibleCount = 0;
-
-
-                    categories.forEach(
-                        function (category) {
-
-
-                            /*
-                                A categoria dos portais
-                                possui itens próprios.
-                            */
-
-                            const categoryText =
-                                normalizeText(
-                                    category.innerText
-                                );
-
-
-                            const categoryData =
-                                normalizeText(
-                                    category.dataset.category || ""
-                                );
-
-
-                            const searchableText =
-                                categoryText +
-                                " " +
-                                categoryData;
-
-
-                            let itemMatches = 0;
-
-
-                            /*
-                                CARDS
-                            */
-
-                            const cards =
-                                category.querySelectorAll(
-                                    ".tool-card"
-                                );
-
-
-                            cards.forEach(
-                                function (card) {
-
-                                    const text =
-                                        normalizeText(
-                                            card.innerText +
-                                            " " +
-                                            (
-                                                card.dataset.search ||
-                                                ""
-                                            )
-                                        );
-
-
-                                    const match =
-                                        term === "" ||
-                                        text.includes(term);
-
-
-                                    card.style.display =
-                                        match
-                                            ? ""
-                                            : "none";
-
-
-                                    if (match) {
-
-                                        itemMatches++;
-
-                                    }
-
-                                }
-                            );
-
-
-                            /*
-                                PORTAIS
-                            */
-
-                            const portals =
-                                category.querySelectorAll(
-                                    ".portal-item"
-                                );
-
-
-                            portals.forEach(
-                                function (portal) {
-
-                                    const text =
-                                        normalizeText(
-                                            portal.innerText +
-                                            " " +
-                                            (
-                                                portal.dataset.search ||
-                                                ""
-                                            )
-                                        );
-
-
-                                    const match =
-                                        term === "" ||
-                                        text.includes(term);
-
-
-                                    portal.style.display =
-                                        match
-                                            ? ""
-                                            : "none";
-
-
-                                    if (match) {
-
-                                        itemMatches++;
-
-                                    }
-
-                                }
-                            );
-
-
-                            /*
-                                QUANDO NÃO HÁ BUSCA
-                                MOSTRA TUDO
-                            */
-
-                            if (term === "") {
-
-                                category.style.display =
-                                    "";
-
-                                return;
-
-                            }
-
-
-                            /*
-                                Se o termo estiver no
-                                título da categoria ou
-                                houver item encontrado.
-                            */
-
-                            const categoryMatch =
-                                searchableText.includes(
-                                    term
-                                );
-
-
-                            if (
-                                itemMatches > 0 ||
-                                categoryMatch
-                            ) {
-
-                                category.style.display =
-                                    "";
-
-                                visibleCount++;
-
-                            } else {
-
-                                category.style.display =
-                                    "none";
-
-                            }
-
-                        }
+        /* ====================================
+           ESC
+        ==================================== */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    portalDropdown.classList.remove(
+                        "active"
                     );
 
+                    portalButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
 
-                    /*
-                        Verifica se há algum
-                        resultado real.
-                    */
+                }
 
-                    const visibleCards =
-                        document.querySelectorAll(
-                            ".tool-card:not([style*='display: none'])"
-                        );
-
-
-                    const visiblePortals =
-                        document.querySelectorAll(
-                            ".portal-item:not([style*='display: none'])"
-                        );
+            }
+        );
 
 
-                    const hasResults =
-                        term === "" ||
-                        visibleCards.length > 0 ||
-                        visiblePortals.length > 0;
+        /* ====================================
+           PORTAL CLICADO
+        ==================================== */
+
+        const portalItems =
+            portalList.querySelectorAll(
+                ".portal-item"
+            );
 
 
-                    if (noResults) {
+        portalItems.forEach(
+            function (item) {
 
-                        noResults.classList.toggle(
-                            "visible",
-                            !hasResults
-                        );
+                item.addEventListener(
+                    "click",
+                    function () {
 
-                    }
+                        setTimeout(
+                            function () {
 
-
-                    /*
-                        Ao pesquisar uma administradora,
-                        abre automaticamente o dropdown.
-                    */
-
-                    const portalCategory =
-                        document.querySelector(
-                            ".category-portals"
-                        );
-
-
-                    if (
-                        portalCategory &&
-                        portalDropdown
-                    ) {
-
-                        const visiblePortal =
-                            portalCategory.querySelector(
-                                ".portal-item:not([style*='display: none'])"
-                            );
-
-
-                        const portalSearchMatch =
-                            term !== "" &&
-                            visiblePortal;
-
-
-                        if (
-                            portalSearchMatch
-                        ) {
-
-                            portalDropdown.classList.add(
-                                "active"
-                            );
-
-                            if (portalButton) {
+                                portalDropdown.classList.remove(
+                                    "active"
+                                );
 
                                 portalButton.setAttribute(
                                     "aria-expanded",
-                                    "true"
+                                    "false"
                                 );
 
-                            }
-
-                        }
+                            },
+                            100
+                        );
 
                     }
+                );
 
-                }
+            }
+        );
+
+    }
+
+
+
+    /* ========================================
+       BUSCA
+    ======================================== */
+
+    function normalizeText(text) {
+
+        return text
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(
+                /[\u0300-\u036f]/g,
+                ""
+            )
+            .trim();
+
+    }
+
+
+    function performSearch() {
+
+
+        if (!toolSearch) {
+            return;
+        }
+
+
+        const search =
+            normalizeText(
+                toolSearch.value
             );
 
 
-            /* ====================================
-               TECLA /
-            ==================================== */
-
-            document.addEventListener(
-                "keydown",
-                function (event) {
-
-                    const activeElement =
-                        document.activeElement;
+        const categories =
+            document.querySelectorAll(
+                ".category"
+            );
 
 
-                    const isTyping =
-                        activeElement &&
+        let totalVisible = 0;
+
+
+        categories.forEach(
+            function (category) {
+
+
+                const categoryText =
+                    normalizeText(
+                        category.innerText +
+                        " " +
                         (
-                            activeElement.tagName ===
-                                "INPUT" ||
-                            activeElement.tagName ===
-                                "TEXTAREA"
+                            category.dataset.category ||
+                            ""
+                        )
+                    );
+
+
+                const cards =
+                    category.querySelectorAll(
+                        ".tool-card"
+                    );
+
+
+                const portals =
+                    category.querySelectorAll(
+                        ".portal-item"
+                    );
+
+
+                let visibleItems = 0;
+
+
+                /* ==============================
+                   CARDS
+                ============================== */
+
+                cards.forEach(
+                    function (card) {
+
+                        const text =
+                            normalizeText(
+                                (
+                                    card.innerText ||
+                                    ""
+                                ) +
+                                " " +
+                                (
+                                    card.dataset.search ||
+                                    ""
+                                )
+                            );
+
+
+                        const match =
+                            !search ||
+                            text.includes(search);
+
+
+                        card.style.display =
+                            match
+                                ? ""
+                                : "none";
+
+
+                        if (match) {
+                            visibleItems++;
+                            totalVisible++;
+                        }
+
+                    }
+                );
+
+
+
+                /* ==============================
+                   PORTAIS
+                ============================== */
+
+                portals.forEach(
+                    function (portal) {
+
+                        const text =
+                            normalizeText(
+                                (
+                                    portal.innerText ||
+                                    ""
+                                ) +
+                                " " +
+                                (
+                                    portal.dataset.search ||
+                                    ""
+                                )
+                            );
+
+
+                        const match =
+                            !search ||
+                            text.includes(search);
+
+
+                        portal.style.display =
+                            match
+                                ? ""
+                                : "none";
+
+
+                        if (match) {
+                            visibleItems++;
+                            totalVisible++;
+                        }
+
+                    }
+                );
+
+
+
+                /* ==============================
+                   DROPDOWN
+                ============================== */
+
+                const portalDropdownElement =
+                    category.querySelector(
+                        ".portal-dropdown"
+                    );
+
+
+                if (
+                    portalDropdownElement &&
+                    search
+                ) {
+
+                    const portalMatches =
+                        Array.from(
+                            portals
+                        ).some(
+                            function (portal) {
+
+                                return (
+                                    portal.style.display !==
+                                    "none"
+                                );
+
+                            }
+                        );
+
+
+                    const categoryMatches =
+                        categoryText.includes(
+                            search
                         );
 
 
                     if (
-                        event.key === "/" &&
-                        !isTyping
+                        portalMatches ||
+                        categoryMatches
                     ) {
 
-                        event.preventDefault();
+                        category.style.display =
+                            "";
 
-                        searchInput.focus();
+                    }
+                    else {
+
+                        category.style.display =
+                            "none";
+
+                    }
+
+                }
+                else {
+
+                    category.style.display =
+                        visibleItems > 0 ||
+                        !search;
+
+                }
+
+            }
+        );
+
+
+
+        /* ====================================
+           RESULTADO VAZIO
+        ==================================== */
+
+        if (noResults) {
+
+            noResults.style.display =
+                totalVisible === 0 && search
+                    ? "flex"
+                    : "none";
+
+        }
+
+    }
+
+
+    if (toolSearch) {
+
+        toolSearch.addEventListener(
+            "input",
+            performSearch
+        );
+
+    }
+
+
+
+    /* ========================================
+       ATALHO /
+    ======================================== */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            const activeElement =
+                document.activeElement;
+
+
+            const isTyping =
+                activeElement &&
+                (
+                    activeElement.tagName === "INPUT" ||
+                    activeElement.tagName === "TEXTAREA"
+                );
+
+
+            if (
+                event.key === "/" &&
+                !isTyping &&
+                toolSearch
+            ) {
+
+                event.preventDefault();
+
+                toolSearch.focus();
+
+            }
+
+        }
+    );
+
+
+
+    /* ========================================
+       ASSISTENTE CHATGPT
+    ======================================== */
+
+    function openChatGPT(question) {
+
+
+        const cleanQuestion =
+            (question || "").trim();
+
+
+        /*
+         * Sem API.
+         *
+         * A pergunta é enviada para a página
+         * do ChatGPT através do parâmetro q.
+         *
+         * Não existe chave de API no código.
+         */
+
+
+        let url =
+            "https://chatgpt.com/";
+
+
+        if (cleanQuestion) {
+
+            url +=
+                "?q=" +
+                encodeURIComponent(
+                    cleanQuestion
+                );
+
+        }
+
+
+        window.open(
+            url,
+            "_blank",
+            "noopener,noreferrer"
+        );
+
+    }
+
+
+
+    /* ========================================
+       BOTÃO CHATGPT
+    ======================================== */
+
+    if (aiButton) {
+
+        aiButton.addEventListener(
+            "click",
+            function () {
+
+                const question =
+                    aiQuestion
+                        ? aiQuestion.value
+                        : "";
+
+
+                openChatGPT(
+                    question
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* ========================================
+       ENTER NA CAIXA DA IA
+    ======================================== */
+
+    if (aiQuestion) {
+
+        aiQuestion.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    event.preventDefault();
+
+                    openChatGPT(
+                        aiQuestion.value
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* ========================================
+       SUGESTÕES RÁPIDAS
+    ======================================== */
+
+    suggestions.forEach(
+        function (suggestion) {
+
+            suggestion.addEventListener(
+                "click",
+                function () {
+
+                    const question =
+                        suggestion.dataset.question ||
+                        "";
+
+
+                    if (aiQuestion) {
+
+                        aiQuestion.value =
+                            question;
+
+                    }
+
+
+                    openChatGPT(
+                        question
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+
+    /* ========================================
+       FALLBACK DOS FAVICONS
+    ======================================== */
+
+    const portalImages =
+        document.querySelectorAll(
+            ".portal-item-icon img"
+        );
+
+
+    portalImages.forEach(
+        function (image) {
+
+            image.addEventListener(
+                "error",
+                function () {
+
+                    const container =
+                        image.parentElement;
+
+
+                    if (
+                        container &&
+                        !container.classList.contains(
+                            "favicon-error"
+                        )
+                    ) {
+
+                        container.classList.add(
+                            "favicon-error"
+                        );
+
+                        image.style.display =
+                            "none";
 
                     }
 
@@ -548,33 +630,7 @@ document.addEventListener(
             );
 
         }
+    );
 
 
-        /* ========================================
-           FUNÇÃO DE NORMALIZAÇÃO
-        ======================================== */
-
-        function normalizeText(text) {
-
-            return String(text || "")
-                .toLowerCase()
-                .normalize("NFD")
-                .replace(
-                    /[\u0300-\u036f]/g,
-                    ""
-                )
-                .trim();
-
-        }
-
-
-        /* ========================================
-           LOG
-        ======================================== */
-
-        console.log(
-            "Ferramentas ADM carregado com sucesso."
-        );
-
-    }
-);
+});
