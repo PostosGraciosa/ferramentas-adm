@@ -1,7 +1,7 @@
 /* ============================================
-   FERRAMENTAS ADM | POSTOS GRACIOSA
+   FERRAMENTAS ADM
+   POSTOS GRACIOSA
    js/app.js
-   Sistema administrativo interno
 ============================================ */
 
 (function () {
@@ -9,11 +9,66 @@
     'use strict';
 
 
-    /* ============================================
-       TEMPLATES — ASSISTENTE DE RESPOSTAS LOCAL
-    ============================================ */
+    /* =========================================
+       ELEMENTOS
+    ========================================== */
+
+    var searchInput =
+        document.getElementById('searchInput');
+
+    var toolsGrid =
+        document.getElementById('toolsGrid');
+
+    var emptyState =
+        document.getElementById('emptyState');
+
+    var portaisToggle =
+        document.getElementById('portaisToggle');
+
+    var dropdownCard =
+        document.querySelector('.dropdown');
+
+    var tipoResposta =
+        document.getElementById('tipoResposta');
+
+    var infoExtra =
+        document.getElementById('infoExtra');
+
+    var resultado =
+        document.getElementById('resultado');
+
+    var btnGerar =
+        document.getElementById('btnGerar');
+
+    var btnLimpar =
+        document.getElementById('btnLimpar');
+
+    var btnCopiar =
+        document.getElementById('btnCopiar');
+
+    var chatgptPrompt =
+        document.getElementById('chatgptPrompt');
+
+    var btnCopiarPrompt =
+        document.getElementById('btnCopiarPrompt');
+
+    var btnAbrirChatGPT =
+        document.getElementById('btnAbrirChatGPT');
+
+    var promptSuggestions =
+        document.querySelectorAll('.prompt-suggestion');
+
+
+    var PLACEHOLDER =
+        'A resposta gerada aparecerá aqui.';
+
+
+    /* =========================================
+       TEMPLATES — ASSISTENTE LOCAL
+    ========================================== */
 
     var templates = {
+
 
         'Confirmação de pagamento': function (info) {
 
@@ -42,7 +97,7 @@
 
             return (
                 'Olá! Identificamos uma divergência nas informações ' +
-                (info ? 'referente a ' + info : 'informadas') +
+                (info || 'informadas') +
                 '. Pedimos, por gentileza, que verifique os dados ' +
                 'e nos retorne com as informações corretas.'
             );
@@ -53,10 +108,9 @@
         'Aguardando retorno': function (info) {
 
             return (
-                'Olá! Estamos aguardando o seu retorno referente a ' +
+                'Olá! Estamos aguardando o retorno referente a ' +
                 (info || 'sua solicitação') +
-                '. Assim que recebermos as informações, ' +
-                'daremos continuidade ao atendimento.'
+                '. Assim que tivermos novidades, entraremos em contato.'
             );
 
         },
@@ -66,7 +120,7 @@
 
             return (
                 'Olá! Sua solicitação foi encaminhada ao setor responsável' +
-                (info ? ' (' + info + ')' : '') +
+                (info ? ' para tratar ' + info : '') +
                 '. Em breve retornaremos com um posicionamento.'
             );
 
@@ -99,92 +153,199 @@
     };
 
 
-    /* ============================================
-       ELEMENTOS DO SISTEMA
-    ============================================ */
+    /* =========================================
+       BUSCA
+    ========================================== */
 
-    var tipoResposta =
-        document.getElementById('tipoResposta');
+    function realizarBusca() {
 
-    var infoExtra =
-        document.getElementById('infoExtra');
-
-    var resultado =
-        document.getElementById('resultado');
-
-    var btnGerar =
-        document.getElementById('btnGerar');
-
-    var btnLimpar =
-        document.getElementById('btnLimpar');
-
-    var btnCopiar =
-        document.getElementById('btnCopiar');
-
-    var searchInput =
-        document.getElementById('searchInput');
-
-    var emptyState =
-        document.getElementById('emptyState');
-
-    var dropdownCard =
-        document.querySelector('.dropdown');
-
-    var portaisToggle =
-        document.getElementById('portaisToggle');
-
-    var portaisMenu =
-        document.getElementById('portaisMenu');
+        if (!searchInput || !toolsGrid) {
+            return;
+        }
 
 
-    /* ============================================
-       CHATGPT
-    ============================================ */
-
-    var chatgptPrompt =
-        document.getElementById('chatgptPrompt');
-
-    var btnCopiarPrompt =
-        document.getElementById('btnCopiarPrompt');
-
-    var btnAbrirChatGPT =
-        document.getElementById('btnAbrirChatGPT');
-
-    var promptSuggestions =
-        document.querySelectorAll('.prompt-suggestion');
+        var termo =
+            searchInput.value
+                .toLowerCase()
+                .trim();
 
 
-    var PLACEHOLDER =
-        'A resposta gerada aparecerá aqui.';
+        var cards =
+            toolsGrid.querySelectorAll('.card');
 
 
-    /* ============================================
-       FUNÇÃO — MOSTRAR AVISO
-    ============================================ */
+        var encontrados = 0;
 
-    function mostrarAviso(elemento, mensagem) {
 
-        if (!elemento) return;
+        cards.forEach(function (card) {
 
-        var original =
-            elemento.innerHTML;
+            var texto =
+                (
+                    card.getAttribute('data-search') || ''
+                ).toLowerCase();
 
-        elemento.innerHTML =
-            mensagem;
 
-        setTimeout(function () {
+            var titulo =
+                card.querySelector('h3');
 
-            elemento.innerHTML =
-                original;
 
-        }, 1800);
+            if (titulo) {
+
+                texto += ' ' +
+                    titulo.textContent.toLowerCase();
+
+            }
+
+
+            var mostrar =
+                !termo ||
+                texto.indexOf(termo) !== -1;
+
+
+            if (mostrar) {
+
+                card.classList.remove('search-hidden');
+
+                encontrados++;
+
+            } else {
+
+                card.classList.add('search-hidden');
+
+            }
+
+        });
+
+
+        if (emptyState) {
+
+            if (encontrados === 0) {
+
+                emptyState.classList.remove('hidden');
+
+            } else {
+
+                emptyState.classList.add('hidden');
+
+            }
+
+        }
 
     }
 
 
-    /* ============================================
-       ASSISTENTE DE RESPOSTAS
-    ============================================ */
+    if (searchInput) {
+
+        searchInput.addEventListener(
+            'input',
+            realizarBusca
+        );
+
+    }
+
+
+    /* =========================================
+       TECLA /
+    ========================================== */
+
+    document.addEventListener(
+        'keydown',
+        function (event) {
+
+            if (
+                event.key === '/' &&
+                document.activeElement !== searchInput &&
+                document.activeElement.tagName !== 'INPUT' &&
+                document.activeElement.tagName !== 'TEXTAREA' &&
+                document.activeElement.tagName !== 'SELECT'
+            ) {
+
+                event.preventDefault();
+
+                searchInput.focus();
+
+            }
+
+        }
+    );
+
+
+    /* =========================================
+       DROPDOWN PORTAIS
+    ========================================== */
+
+    if (
+        portaisToggle &&
+        dropdownCard
+    ) {
+
+        portaisToggle.addEventListener(
+            'click',
+            function (event) {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+
+                var aberto =
+                    dropdownCard.classList.toggle('open');
+
+
+                portaisToggle.setAttribute(
+                    'aria-expanded',
+                    aberto ? 'true' : 'false'
+                );
+
+
+                portaisToggle.innerHTML =
+                    aberto
+                        ? 'Ocultar portais ▴'
+                        : 'Ver portais ▾';
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       FECHAR DROPDOWN AO CLICAR FORA
+    ========================================== */
+
+    document.addEventListener(
+        'click',
+        function (event) {
+
+            if (
+                dropdownCard &&
+                !dropdownCard.contains(event.target)
+            ) {
+
+                dropdownCard.classList.remove('open');
+
+
+                if (portaisToggle) {
+
+                    portaisToggle.setAttribute(
+                        'aria-expanded',
+                        'false'
+                    );
+
+                    portaisToggle.innerHTML =
+                        'Ver portais ▾';
+
+                }
+
+            }
+
+        }
+    );
+
+
+    /* =========================================
+       GERAR RESPOSTA LOCAL
+    ========================================== */
 
     if (btnGerar) {
 
@@ -192,119 +353,30 @@
             'click',
             function () {
 
-                if (!tipoResposta || !resultado) {
-                    return;
-                }
-
                 var tipo =
-                    tipoResposta.value;
+                    tipoResposta
+                        ? tipoResposta.value
+                        : 'Resposta personalizada';
+
 
                 var info =
-                    infoExtra ?
-                    infoExtra.value.trim() :
-                    '';
+                    infoExtra
+                        ? infoExtra.value.trim()
+                        : '';
 
-                if (templates[tipo]) {
+
+                if (
+                    templates[tipo]
+                ) {
 
                     resultado.textContent =
                         templates[tipo](info);
 
-                    resultado.classList.add(
-                        'result-filled'
-                    );
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /* ============================================
-       LIMPAR ASSISTENTE
-    ============================================ */
-
-    if (btnLimpar) {
-
-        btnLimpar.addEventListener(
-            'click',
-            function () {
-
-                if (infoExtra) {
-                    infoExtra.value = '';
-                }
-
-                if (resultado) {
-
-                    resultado.textContent =
-                        PLACEHOLDER;
-
-                    resultado.classList.remove(
-                        'result-filled'
-                    );
-
-                }
-
-                if (tipoResposta) {
-
-                    tipoResposta.selectedIndex =
-                        0;
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /* ============================================
-       COPIAR RESPOSTA
-    ============================================ */
-
-    if (btnCopiar) {
-
-        btnCopiar.addEventListener(
-            'click',
-            function () {
-
-                if (!resultado) return;
-
-                var texto =
-                    resultado.textContent.trim();
-
-                if (
-                    !texto ||
-                    texto === PLACEHOLDER
-                ) {
-
-                    return;
-
                 }
 
 
-                copiarTexto(
-                    texto,
-                    function () {
-
-                        var textoOriginal =
-                            btnCopiar.innerHTML;
-
-                        btnCopiar.innerHTML =
-                            '✓ Copiado';
-
-                        setTimeout(
-                            function () {
-
-                                btnCopiar.innerHTML =
-                                    textoOriginal;
-
-                            },
-                            1800
-                        );
-
-                    }
+                resultado.classList.add(
+                    'result-active'
                 );
 
             }
@@ -313,11 +385,221 @@
     }
 
 
-    /* ============================================
-       FUNÇÃO UNIVERSAL DE CÓPIA
-    ============================================ */
+    /* =========================================
+       LIMPAR ASSISTENTE
+    ========================================== */
 
-    function copiarTexto(texto, sucesso) {
+    if (btnLimpar) {
+
+        btnLimpar.addEventListener(
+            'click',
+            function () {
+
+                if (infoExtra) {
+
+                    infoExtra.value = '';
+
+                }
+
+
+                if (resultado) {
+
+                    resultado.textContent =
+                        PLACEHOLDER;
+
+                    resultado.classList.remove(
+                        'result-active'
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       COPIAR RESPOSTA
+    ========================================== */
+
+    if (btnCopiar) {
+
+        btnCopiar.addEventListener(
+            'click',
+            function () {
+
+                var texto =
+                    resultado
+                        ? resultado.textContent.trim()
+                        : '';
+
+
+                if (
+                    !texto ||
+                    texto === PLACEHOLDER
+                ) {
+
+                    if (infoExtra) {
+
+                        infoExtra.focus();
+
+                    }
+
+                    return;
+
+                }
+
+
+                copiarTexto(
+                    texto,
+                    btnCopiar,
+                    '✓ Copiado'
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       SUGESTÕES CHATGPT
+    ========================================== */
+
+    promptSuggestions.forEach(
+        function (button) {
+
+            button.addEventListener(
+                'click',
+                function () {
+
+                    var prompt =
+                        button.getAttribute(
+                            'data-prompt'
+                        );
+
+
+                    if (!prompt || !chatgptPrompt) {
+
+                        return;
+
+                    }
+
+
+                    chatgptPrompt.value =
+                        prompt;
+
+
+                    chatgptPrompt.focus();
+
+
+                    chatgptPrompt.setSelectionRange(
+                        chatgptPrompt.value.length,
+                        chatgptPrompt.value.length
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =========================================
+       COPIAR PROMPT
+    ========================================== */
+
+    if (btnCopiarPrompt) {
+
+        btnCopiarPrompt.addEventListener(
+            'click',
+            function () {
+
+                var texto =
+                    chatgptPrompt
+                        ? chatgptPrompt.value.trim()
+                        : '';
+
+
+                if (!texto) {
+
+                    if (chatgptPrompt) {
+
+                        chatgptPrompt.focus();
+
+                    }
+
+                    return;
+
+                }
+
+
+                copiarTexto(
+                    texto,
+                    btnCopiarPrompt,
+                    '✓ Prompt copiado'
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       ABRIR CHATGPT
+    ========================================== */
+
+    if (btnAbrirChatGPT) {
+
+        btnAbrirChatGPT.addEventListener(
+            'click',
+            function () {
+
+                var texto =
+                    chatgptPrompt
+                        ? chatgptPrompt.value.trim()
+                        : '';
+
+
+                /*
+                 * Não existe API aqui.
+                 *
+                 * O prompt é copiado automaticamente
+                 * e o ChatGPT é aberto em nova aba.
+                 */
+
+                if (texto) {
+
+                    copiarTextoSilencioso(
+                        texto
+                    );
+
+                }
+
+
+                window.open(
+                    'https://chatgpt.com/',
+                    '_blank',
+                    'noopener,noreferrer'
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       FUNÇÃO DE CÓPIA
+    ========================================== */
+
+    function copiarTexto(
+        texto,
+        botao,
+        mensagem
+    ) {
 
         if (
             navigator.clipboard &&
@@ -328,25 +610,28 @@
                 .writeText(texto)
                 .then(function () {
 
-                    if (sucesso) {
-                        sucesso();
-                    }
+                    mostrarFeedback(
+                        botao,
+                        mensagem
+                    );
 
                 })
                 .catch(function () {
 
-                    copiarTextoFallback(
+                    copiarFallback(
                         texto,
-                        sucesso
+                        botao,
+                        mensagem
                     );
 
                 });
 
         } else {
 
-            copiarTextoFallback(
+            copiarFallback(
                 texto,
-                sucesso
+                botao,
+                mensagem
             );
 
         }
@@ -354,35 +639,72 @@
     }
 
 
-    function copiarTextoFallback(
-        texto,
-        sucesso
+    /* =========================================
+       CÓPIA SILENCIOSA
+    ========================================== */
+
+    function copiarTextoSilencioso(
+        texto
     ) {
 
-        var textarea =
-            document.createElement(
-                'textarea'
+        if (
+            navigator.clipboard &&
+            window.isSecureContext
+        ) {
+
+            navigator.clipboard
+                .writeText(texto)
+                .catch(function () {
+
+                    copiarFallbackSilencioso(
+                        texto
+                    );
+
+                });
+
+        } else {
+
+            copiarFallbackSilencioso(
+                texto
             );
 
-        textarea.value =
+        }
+
+    }
+
+
+    /* =========================================
+       FALLBACK DE CÓPIA
+    ========================================== */
+
+    function copiarFallback(
+        texto,
+        botao,
+        mensagem
+    ) {
+
+        var area =
+            document.createElement('textarea');
+
+
+        area.value =
             texto;
 
-        textarea.style.position =
+
+        area.style.position =
             'fixed';
 
-        textarea.style.left =
+        area.style.left =
             '-9999px';
 
-        textarea.style.top =
-            '0';
 
         document.body.appendChild(
-            textarea
+            area
         );
 
-        textarea.focus();
 
-        textarea.select();
+        area.select();
+
 
         try {
 
@@ -390,541 +712,120 @@
                 'copy'
             );
 
-            if (sucesso) {
-                sucesso();
-            }
+
+            mostrarFeedback(
+                botao,
+                mensagem
+            );
 
         } catch (e) {
 
-            console.error(
-                'Não foi possível copiar:',
-                e
-            );
+            /* nada */
 
         }
+
 
         document.body.removeChild(
-            textarea
+            area
         );
 
     }
 
 
-    /* ============================================
-       DROPDOWN — ADMINISTRADORAS
-    ============================================ */
-
-    if (
-        dropdownCard &&
-        portaisToggle
+    function copiarFallbackSilencioso(
+        texto
     ) {
 
-        portaisToggle.addEventListener(
-            'click',
-            function (event) {
+        var area =
+            document.createElement('textarea');
 
-                event.stopPropagation();
 
-                var aberto =
-                    dropdownCard.classList.contains(
-                        'open'
-                    );
+        area.value =
+            texto;
 
-                dropdownCard.classList.toggle(
-                    'open'
-                );
 
-                portaisToggle.setAttribute(
-                    'aria-expanded',
-                    String(!aberto)
-                );
+        area.style.position =
+            'fixed';
 
-            }
+        area.style.left =
+            '-9999px';
+
+
+        document.body.appendChild(
+            area
         );
 
-    }
+
+        area.select();
 
 
-    /* ============================================
-       FECHAR DROPDOWN AO CLICAR FORA
-    ============================================ */
+        try {
 
-    document.addEventListener(
-        'click',
-        function (event) {
+            document.execCommand(
+                'copy'
+            );
 
-            if (
-                dropdownCard &&
-                !dropdownCard.contains(
-                    event.target
-                )
-            ) {
+        } catch (e) {
 
-                dropdownCard.classList.remove(
-                    'open'
-                );
-
-                if (portaisToggle) {
-
-                    portaisToggle.setAttribute(
-                        'aria-expanded',
-                        'false'
-                    );
-
-                }
-
-            }
+            /* nada */
 
         }
-    );
 
 
-    /* ============================================
-       NÃO FECHAR AO CLICAR DENTRO DO MENU
-    ============================================ */
-
-    if (portaisMenu) {
-
-        portaisMenu.addEventListener(
-            'click',
-            function (event) {
-
-                event.stopPropagation();
-
-            }
+        document.body.removeChild(
+            area
         );
 
     }
 
 
-    /* ============================================
-       BUSCA DAS FERRAMENTAS
-    ============================================ */
+    /* =========================================
+       FEEDBACK DOS BOTÕES
+    ========================================== */
 
-    function executarBusca() {
+    function mostrarFeedback(
+        botao,
+        mensagem
+    ) {
 
-        if (!searchInput) {
+        if (!botao) {
             return;
         }
 
-        var termo =
-            searchInput.value
-                .toLowerCase()
-                .trim();
 
-        var cards =
-            document.querySelectorAll(
-                '.grid .card'
-            );
-
-        var encontrados =
-            0;
+        var original =
+            botao.innerHTML;
 
 
-        cards.forEach(
-            function (card) {
-
-                var texto =
-                    (
-                        card.getAttribute(
-                            'data-search'
-                        ) || ''
-                    )
-                    .toLowerCase();
-
-                var titulo =
-                    card.querySelector('h3');
-
-                if (titulo) {
-
-                    texto +=
-                        ' ' +
-                        titulo.textContent
-                            .toLowerCase();
-
-                }
+        botao.innerHTML =
+            mensagem;
 
 
-                if (
-                    !termo ||
-                    texto.indexOf(
-                        termo
-                    ) !== -1
-                ) {
-
-                    card.classList.remove(
-                        'search-hidden'
-                    );
-
-                    card.style.display =
-                        '';
-
-                    encontrados++;
-
-                } else {
-
-                    card.classList.add(
-                        'search-hidden'
-                    );
-
-                    card.style.display =
-                        'none';
-
-                }
-
-            }
+        botao.classList.add(
+            'button-success'
         );
 
 
-        /* ========================================
-           ESTADO SEM RESULTADOS
-        ======================================== */
-
-        if (emptyState) {
-
-            if (
-                termo &&
-                encontrados === 0
-            ) {
-
-                emptyState.classList.remove(
-                    'hidden'
-                );
-
-            } else {
-
-                emptyState.classList.add(
-                    'hidden'
-                );
-
-            }
-
-        }
-
-
-        /* ========================================
-           FILTRAR SEÇÕES VAZIAS
-        ======================================== */
-
-        var secoes =
-            document.querySelectorAll(
-                '.category'
-            );
-
-        secoes.forEach(
-            function (secao) {
-
-                var cardsVisiveis =
-                    secao.querySelectorAll(
-                        '.card:not([style*="display: none"])'
-                    );
-
-                if (
-                    cardsVisiveis.length === 0 &&
-                    termo
-                ) {
-
-                    secao.classList.add(
-                        'search-empty'
-                    );
-
-                } else {
-
-                    secao.classList.remove(
-                        'search-empty'
-                    );
-
-                }
-
-            }
-        );
-
-    }
-
-
-    if (searchInput) {
-
-        searchInput.addEventListener(
-            'input',
-            executarBusca
-        );
-
-    }
-
-
-    /* ============================================
-       ATALHO "/" PARA PESQUISA
-    ============================================ */
-
-    document.addEventListener(
-        'keydown',
-        function (event) {
-
-            var elemento =
-                document.activeElement;
-
-            var digitando =
-                elemento &&
-                (
-                    elemento.tagName ===
-                        'INPUT' ||
-                    elemento.tagName ===
-                        'TEXTAREA' ||
-                    elemento.tagName ===
-                        'SELECT'
-                );
-
-
-            if (
-                event.key === '/' &&
-                !digitando &&
-                searchInput
-            ) {
-
-                event.preventDefault();
-
-                searchInput.focus();
-
-            }
-
-
-            /* ESC LIMPA A BUSCA */
-
-            if (
-                event.key === 'Escape' &&
-                searchInput &&
-                document.activeElement ===
-                    searchInput
-            ) {
-
-                searchInput.value = '';
-
-                executarBusca();
-
-                searchInput.blur();
-
-            }
-
-        }
-    );
-
-
-    /* ============================================
-       PROMPTS DO CHATGPT
-    ============================================ */
-
-    if (promptSuggestions.length) {
-
-        promptSuggestions.forEach(
-            function (button) {
-
-                button.addEventListener(
-                    'click',
-                    function () {
-
-                        if (!chatgptPrompt) {
-                            return;
-                        }
-
-                        var prompt =
-                            button.getAttribute(
-                                'data-prompt'
-                            );
-
-
-                        if (!prompt) {
-                            return;
-                        }
-
-
-                        chatgptPrompt.value =
-                            prompt;
-
-
-                        chatgptPrompt.focus();
-
-
-                        /* Cursor no final */
-
-                        try {
-
-                            chatgptPrompt.setSelectionRange(
-                                chatgptPrompt.value.length,
-                                chatgptPrompt.value.length
-                            );
-
-                        } catch (e) {}
-
-                    }
-                );
-
-            }
-        );
-
-    }
-
-
-    /* ============================================
-       COPIAR PROMPT DO CHATGPT
-    ============================================ */
-
-    if (btnCopiarPrompt) {
-
-        btnCopiarPrompt.addEventListener(
-            'click',
+        setTimeout(
             function () {
 
-                if (!chatgptPrompt) {
-                    return;
-                }
+                botao.innerHTML =
+                    original;
 
-                var texto =
-                    chatgptPrompt.value.trim();
-
-
-                if (!texto) {
-
-                    chatgptPrompt.focus();
-
-                    return;
-
-                }
-
-
-                copiarTexto(
-                    texto,
-                    function () {
-
-                        var original =
-                            btnCopiarPrompt.innerHTML;
-
-                        btnCopiarPrompt.innerHTML =
-                            '✓ Prompt copiado';
-
-                        setTimeout(
-                            function () {
-
-                                btnCopiarPrompt.innerHTML =
-                                    original;
-
-                            },
-                            1800
-                        );
-
-                    }
+                botao.classList.remove(
+                    'button-success'
                 );
 
-            }
+            },
+            1800
         );
 
     }
 
 
-    /* ============================================
-       ABRIR CHATGPT
-    ============================================ */
-
-    if (btnAbrirChatGPT) {
-
-        btnAbrirChatGPT.addEventListener(
-            'click',
-            function () {
-
-                var texto = '';
-
-                if (chatgptPrompt) {
-
-                    texto =
-                        chatgptPrompt.value.trim();
-
-                }
-
-
-                /*
-                 * SEM API
-                 *
-                 * Se houver um prompt:
-                 * 1. copia para área de transferência
-                 * 2. abre o ChatGPT
-                 *
-                 * O usuário pode usar CTRL + V.
-                 */
-
-
-                if (texto) {
-
-                    copiarTexto(
-                        texto,
-                        function () {
-
-                            abrirChatGPT();
-
-                        }
-                    );
-
-                } else {
-
-                    abrirChatGPT();
-
-                }
-
-            }
-        );
-
-    }
-
-
-    function abrirChatGPT() {
-
-        window.open(
-            'https://chatgpt.com/',
-            '_blank',
-            'noopener,noreferrer'
-        );
-
-    }
-
-
-    /* ============================================
-       ENTER NO CHATGPT
-       CTRL + ENTER = COPIAR PROMPT
-    ============================================ */
-
-    if (chatgptPrompt) {
-
-        chatgptPrompt.addEventListener(
-            'keydown',
-            function (event) {
-
-                /*
-                 * CTRL + ENTER
-                 * copia o prompt
-                 */
-
-                if (
-                    event.ctrlKey &&
-                    event.key === 'Enter'
-                ) {
-
-                    event.preventDefault();
-
-                    if (btnCopiarPrompt) {
-
-                        btnCopiarPrompt.click();
-
-                    }
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /* ============================================
-       LOCAL STORAGE
-    ============================================ */
+    /* =========================================
+       PERSISTÊNCIA
+    ========================================== */
 
     function salvarPreferencias() {
 
@@ -951,9 +852,7 @@
 
         } catch (e) {
 
-            console.warn(
-                'Não foi possível salvar preferências.'
-            );
+            /* localStorage indisponível */
 
         }
 
@@ -968,6 +867,7 @@
                 localStorage.getItem(
                     'ferramentasAdm.tipo'
                 );
+
 
             var buscaSalva =
                 localStorage.getItem(
@@ -987,17 +887,21 @@
             }
 
 
-            /*
-             * Não recuperamos automaticamente
-             * a busca para não esconder ferramentas
-             * quando o usuário abre a página.
-             */
+            if (
+                buscaSalva &&
+                searchInput
+            ) {
+
+                searchInput.value =
+                    buscaSalva;
+
+                realizarBusca();
+
+            }
 
         } catch (e) {
 
-            console.warn(
-                'Não foi possível carregar preferências.'
-            );
+            /* localStorage indisponível */
 
         }
 
@@ -1017,35 +921,18 @@
     if (searchInput) {
 
         searchInput.addEventListener(
-            'input',
+            'change',
             salvarPreferencias
         );
 
     }
 
 
-    /* ============================================
+    /* =========================================
        INICIALIZAÇÃO
-    ============================================ */
+    ========================================== */
 
     carregarPreferencias();
-
-
-    /* ============================================
-       GARANTIR ESTADO INICIAL
-    ============================================ */
-
-    if (resultado) {
-
-        resultado.textContent =
-            PLACEHOLDER;
-
-    }
-
-
-    console.log(
-        'Ferramentas ADM carregado com sucesso.'
-    );
 
 
 })();
