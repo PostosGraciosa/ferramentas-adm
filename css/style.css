@@ -1,2559 +1,1026 @@
 /* ============================================
    FERRAMENTAS ADM
    SISTEMA CORPORATIVO
-   LIGHT UI — PROFISSIONAL
+   JAVASCRIPT PRINCIPAL
 ============================================ */
 
-
-/* ============================================
-   RESET
-============================================ */
-
-* {
-
-    margin: 0;
-
-    padding: 0;
-
-    box-sizing: border-box;
-
-}
+document.addEventListener("DOMContentLoaded", function () {
 
 
-:root {
+    /* ========================================
+       DROPDOWN
+       ADMINISTRADORAS / PORTAIS
+    ======================================== */
 
-    --primary: #2563eb;
+    const portalButton =
+        document.getElementById("portalButton");
 
-    --primary-dark: #1d4ed8;
+    const portalDropdown =
+        document.querySelector(".portal-dropdown");
 
-    --primary-soft: #eff6ff;
-
-    --background: #f4f7fb;
-
-    --surface: #ffffff;
-
-    --surface-soft: #f8fafc;
-
-    --text: #172033;
-
-    --text-secondary: #64748b;
-
-    --text-muted: #94a3b8;
-
-    --border: #e2e8f0;
-
-    --border-soft: #edf1f5;
-
-    --shadow:
-        0 5px 18px
-        rgba(15,23,42,0.045);
-
-    --shadow-hover:
-        0 18px 38px
-        rgba(15,23,42,0.10);
-
-}
+    const portalList =
+        document.getElementById("portalList");
 
 
-/* ============================================
-   BODY
-============================================ */
-
-body {
-
-    min-height: 100vh;
-
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-
-    color: var(--text);
-
-    background:
-
-        radial-gradient(
-            circle at 15% 5%,
-            rgba(37,99,235,0.055),
-            transparent 28%
-        ),
-
-        radial-gradient(
-            circle at 85% 18%,
-            rgba(59,130,246,0.04),
-            transparent 25%
-        ),
-
-        #f4f7fb;
-
-    overflow-x: hidden;
-
-}
+    if (
+        portalButton &&
+        portalDropdown &&
+        portalList
+    ) {
 
 
-/* ============================================
-   FUNDO
-============================================ */
+        portalButton.addEventListener(
+            "click",
+            function (event) {
 
-.background {
+                event.preventDefault();
 
-    position: fixed;
+                event.stopPropagation();
 
-    inset: 0;
+                const isActive =
+                    portalDropdown.classList.toggle("active");
 
-    z-index: 0;
+                portalButton.setAttribute(
+                    "aria-expanded",
+                    isActive ? "true" : "false"
+                );
 
-    pointer-events: none;
-
-    overflow: hidden;
-
-}
-
-
-.background-grid {
-
-    position: absolute;
-
-    inset: 0;
-
-    opacity: 0.42;
-
-    background-image:
-
-        linear-gradient(
-            rgba(148,163,184,0.045) 1px,
-            transparent 1px
-        ),
-
-        linear-gradient(
-            90deg,
-            rgba(148,163,184,0.045) 1px,
-            transparent 1px
+            }
         );
 
-    background-size: 44px 44px;
 
-}
+        document.addEventListener(
+            "click",
+            function (event) {
 
+                if (
+                    !portalDropdown.contains(event.target)
+                ) {
 
-.background-glow {
+                    portalDropdown.classList.remove(
+                        "active"
+                    );
 
-    position: absolute;
+                    portalButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
 
-    border-radius: 50%;
+                }
 
-    filter: blur(2px);
-
-}
-
-
-.background-glow-one {
-
-    width: 420px;
-
-    height: 420px;
-
-    top: -260px;
-
-    right: -160px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(37,99,235,0.07),
-            transparent 70%
+            }
         );
 
-}
 
+        document.addEventListener(
+            "keydown",
+            function (event) {
 
-.background-glow-two {
+                if (
+                    event.key === "Escape"
+                ) {
 
-    width: 380px;
+                    portalDropdown.classList.remove(
+                        "active"
+                    );
 
-    height: 380px;
+                    portalButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
 
-    bottom: -260px;
+                }
 
-    left: -180px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(59,130,246,0.045),
-            transparent 70%
+            }
         );
 
-}
+
+        const portalItems =
+            portalList.querySelectorAll(
+                ".portal-item"
+            );
 
 
-.background-line {
+        portalItems.forEach(
+            function (item) {
 
-    position: absolute;
+                item.addEventListener(
+                    "click",
+                    function () {
 
-    height: 1px;
+                        setTimeout(
+                            function () {
 
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(148,163,184,0.16),
-            transparent
+                                portalDropdown.classList.remove(
+                                    "active"
+                                );
+
+                                portalButton.setAttribute(
+                                    "aria-expanded",
+                                    "false"
+                                );
+
+                            },
+                            100
+                        );
+
+                    }
+                );
+
+            }
         );
 
-}
+    }
 
 
-.background-line-one {
 
-    width: 420px;
+    /* ========================================
+       BUSCA DE FERRAMENTAS
+    ======================================== */
 
-    top: 28%;
+    const searchInput =
+        document.getElementById("toolSearch");
 
-    right: -100px;
-
-    transform: rotate(-25deg);
-
-}
-
-
-.background-line-two {
-
-    width: 350px;
-
-    bottom: 20%;
-
-    left: -80px;
-
-    transform: rotate(22deg);
-
-}
-
-
-.background-dot {
-
-    position: absolute;
-
-    width: 5px;
-
-    height: 5px;
-
-    border-radius: 50%;
-
-    background: #cbd5e1;
-
-    opacity: 0.45;
-
-}
-
-
-.background-dot-one {
-
-    top: 23%;
-
-    left: 7%;
-
-}
-
-
-.background-dot-two {
-
-    bottom: 18%;
-
-    right: 8%;
-
-}
-
-
-/* ============================================
-   LINHA SUPERIOR
-============================================ */
-
-.background::before {
-
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-
-    left: 0;
-
-    right: 0;
-
-    height: 3px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #1d4ed8,
-            #3b82f6,
-            #60a5fa,
-            #2563eb
+    const categories =
+        document.querySelectorAll(
+            ".category"
         );
 
-}
+    const noResults =
+        document.getElementById("noResults");
 
 
-/* ============================================
-   LINHA HEADER
-============================================ */
+    if (searchInput) {
 
-.background::after {
 
-    content: "";
+        searchInput.addEventListener(
+            "input",
+            function () {
 
-    position: absolute;
+                const search =
+                    this.value
+                        .toLowerCase()
+                        .trim();
 
-    top: 76px;
 
-    left: 0;
+                let totalResults = 0;
 
-    right: 0;
 
-    height: 1px;
+                categories.forEach(
+                    function (category) {
 
-    background:
-        rgba(148,163,184,0.18);
+                        const searchableCategory =
+                            (
+                                category.dataset.category ||
+                                ""
+                            ).toLowerCase();
 
-}
 
+                        const cards =
+                            category.querySelectorAll(
+                                ".tool-card, .portal-item"
+                            );
 
-/* ============================================
-   CONTAINER
-============================================ */
 
-.container {
+                        let categoryMatches = 0;
 
-    position: relative;
 
-    z-index: 1;
+                        /*
+                           Caso seja uma categoria especial,
+                           como Resposta Rápida.
+                        */
 
-    width: min(1180px, 92%);
+                        if (
+                            category.classList.contains(
+                                "ai-category"
+                            )
+                        ) {
 
-    margin: 0 auto;
+                            const categoryMatch =
+                                searchableCategory.includes(
+                                    search
+                                );
 
-    padding: 38px 0 30px;
+                            if (
+                                search === "" ||
+                                categoryMatch
+                            ) {
 
-}
+                                category.style.display =
+                                    "";
 
+                                totalResults++;
 
-/* ============================================
-   HEADER
-============================================ */
+                            } else {
 
-.header {
+                                category.style.display =
+                                    "none";
 
-    display: flex;
+                            }
 
-    align-items: center;
+                            return;
 
-    justify-content: space-between;
+                        }
 
-    gap: 30px;
 
-    padding: 20px 24px;
+                        /*
+                           Categorias sem cards.
+                        */
 
-    background:
-        rgba(255,255,255,0.94);
+                        if (
+                            cards.length === 0
+                        ) {
 
-    border:
-        1px solid
-        var(--border);
+                            if (
+                                search === "" ||
+                                searchableCategory.includes(search)
+                            ) {
 
-    border-radius: 18px;
+                                category.style.display =
+                                    "";
 
-    box-shadow:
-        0 8px 28px
-        rgba(15,23,42,0.055);
+                                totalResults++;
 
-    backdrop-filter:
-        blur(10px);
+                            } else {
 
-}
+                                category.style.display =
+                                    "none";
 
+                            }
 
-/* ============================================
-   BRAND
-============================================ */
+                            return;
 
-.brand {
+                        }
 
-    display: flex;
 
-    align-items: center;
+                        /*
+                           Verificação dos cards.
+                        */
 
-    gap: 16px;
+                        cards.forEach(
+                            function (card) {
 
-}
+                                const searchableText =
+                                    (
+                                        card.dataset.search ||
+                                        card.textContent ||
+                                        ""
+                                    ).toLowerCase();
 
 
-.brand-logo {
+                                const match =
+                                    search === "" ||
+                                    searchableText.includes(
+                                        search
+                                    );
 
-    width: 58px;
 
-    height: 58px;
+                                card.style.display =
+                                    match ? "" : "none";
 
-    flex-shrink: 0;
 
-    display: flex;
+                                if (match) {
 
-    align-items: center;
+                                    categoryMatches++;
 
-    justify-content: center;
+                                    totalResults++;
 
-    padding: 7px;
+                                }
 
-    background: #ffffff;
+                            }
+                        );
 
-    border:
-        1px solid
-        var(--border);
 
-    border-radius: 14px;
+                        /*
+                           Mostrar / esconder categoria.
+                        */
 
-    box-shadow:
-        0 4px 12px
-        rgba(15,23,42,0.06);
+                        if (
+                            categoryMatches > 0
+                        ) {
 
-    overflow: hidden;
+                            category.style.display =
+                                "";
 
-}
+                        } else {
 
+                            /*
+                               Pesquisa também no nome
+                               da categoria.
+                            */
 
-.brand-logo img {
+                            if (
+                                search !== "" &&
+                                searchableCategory.includes(
+                                    search
+                                )
+                            ) {
 
-    width: 100%;
+                                category.style.display =
+                                    "";
 
-    height: 100%;
+                                cards.forEach(
+                                    function (card) {
 
-    object-fit: contain;
+                                        card.style.display =
+                                            "";
 
-    display: block;
+                                    }
+                                );
 
-}
+                                totalResults +=
+                                    cards.length;
 
+                            } else {
 
-.logo-fallback {
+                                category.style.display =
+                                    "none";
 
-    display: none;
+                            }
 
-    align-items: center;
+                        }
 
-    justify-content: center;
+                    }
+                );
 
-    width: 100%;
 
-    height: 100%;
+                /*
+                   Resultado da pesquisa.
+                */
 
-    font-size: 13px;
+                if (
+                    noResults
+                ) {
 
-    font-weight: 800;
+                    noResults.classList.toggle(
+                        "visible",
+                        search !== "" &&
+                        totalResults === 0
+                    );
 
-    color: var(--primary);
+                }
 
-}
-
-
-.brand-logo.logo-error .logo-fallback {
-
-    display: flex;
-
-}
-
-
-/* ============================================
-   BRAND TEXT
-============================================ */
-
-.brand-overline {
-
-    display: block;
-
-    margin-bottom: 3px;
-
-    font-size: 9px;
-
-    font-weight: 800;
-
-    letter-spacing: 1.5px;
-
-    color: var(--primary);
-
-}
-
-
-.brand-info h1 {
-
-    font-size: 22px;
-
-    font-weight: 700;
-
-    letter-spacing: -0.6px;
-
-}
-
-
-.brand-info p {
-
-    margin-top: 4px;
-
-    font-size: 13px;
-
-    color: var(--text-secondary);
-
-}
-
-
-/* ============================================
-   HEADER RIGHT
-============================================ */
-
-.header-right {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-}
-
-
-.system-status {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    padding: 8px 13px;
-
-    background: #f0fdf4;
-
-    border: 1px solid #dcfce7;
-
-    color: #15803d;
-
-    border-radius: 50px;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    white-space: nowrap;
-
-}
-
-
-.status-dot {
-
-    width: 7px;
-
-    height: 7px;
-
-    border-radius: 50%;
-
-    background: #22c55e;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(34,197,94,0.10);
-
-}
-
-
-.internal-badge {
-
-    padding: 8px 12px;
-
-    border-radius: 50px;
-
-    background: #f8fafc;
-
-    border: 1px solid var(--border);
-
-    color: #64748b;
-
-    font-size: 10px;
-
-    font-weight: 800;
-
-    letter-spacing: 0.5px;
-
-}
-
-
-/* ============================================
-   INTRO
-============================================ */
-
-.intro {
-
-    display: flex;
-
-    align-items: flex-end;
-
-    justify-content: space-between;
-
-    gap: 30px;
-
-    margin: 43px 4px 31px;
-
-}
-
-
-.section-overline {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    font-size: 10px;
-
-    font-weight: 800;
-
-    letter-spacing: 1.7px;
-
-    color: var(--primary);
-
-}
-
-
-.section-overline::before {
-
-    content: "";
-
-    width: 18px;
-
-    height: 2px;
-
-    background: var(--primary);
-
-    border-radius: 5px;
-
-}
-
-
-.intro h2 {
-
-    margin-top: 8px;
-
-    font-size: 30px;
-
-    letter-spacing: -1.1px;
-
-}
-
-
-.intro p {
-
-    margin-top: 7px;
-
-    font-size: 14px;
-
-    color: var(--text-secondary);
-
-}
-
-
-/* ============================================
-   BUSCA
-============================================ */
-
-.search-box {
-
-    position: relative;
-
-    width: 310px;
-
-    flex-shrink: 0;
-
-}
-
-
-.search-box input {
-
-    width: 100%;
-
-    height: 47px;
-
-    padding:
-        0 48px
-        0 43px;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius: 13px;
-
-    background: #ffffff;
-
-    color: var(--text);
-
-    outline: none;
-
-    font-family: inherit;
-
-    font-size: 12.5px;
-
-    box-shadow:
-        0 4px 14px
-        rgba(15,23,42,0.035);
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-
-}
-
-
-.search-box input::placeholder {
-
-    color: #a1acbb;
-
-}
-
-
-.search-box input:focus {
-
-    border-color: #93c5fd;
-
-    box-shadow:
-        0 0 0 4px
-        rgba(37,99,235,0.08);
-
-}
-
-
-.search-icon {
-
-    position: absolute;
-
-    top: 50%;
-
-    left: 15px;
-
-    width: 17px;
-
-    height: 17px;
-
-    transform: translateY(-50%);
-
-    fill: none;
-
-    stroke: #94a3b8;
-
-    stroke-width: 1.8;
-
-    pointer-events: none;
-
-}
-
-
-.search-shortcut {
-
-    position: absolute;
-
-    top: 50%;
-
-    right: 12px;
-
-    transform: translateY(-50%);
-
-    width: 23px;
-
-    height: 23px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border:
-        1px solid
-        #e5eaf0;
-
-    border-radius: 6px;
-
-    background: #f8fafc;
-
-    color: #94a3b8;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-}
-
-
-/* ============================================
-   CATEGORY
-============================================ */
-
-.category {
-
-    margin-bottom: 39px;
-
-}
-
-
-.category-title {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    margin-bottom: 15px;
-
-}
-
-
-.category-icon {
-
-    width: 40px;
-
-    height: 40px;
-
-    flex-shrink: 0;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background: #ffffff;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius: 11px;
-
-    box-shadow:
-        0 3px 9px
-        rgba(15,23,42,0.035);
-
-}
-
-
-.category-icon svg {
-
-    width: 19px;
-
-    height: 19px;
-
-    fill: none;
-
-    stroke: currentColor;
-
-    stroke-width: 1.7;
-
-    stroke-linecap: round;
-
-    stroke-linejoin: round;
-
-}
-
-
-.category-title h3 {
-
-    font-size: 15px;
-
-    font-weight: 700;
-
-}
-
-
-.category-title span {
-
-    display: block;
-
-    margin-top: 3px;
-
-    font-size: 11px;
-
-    color: var(--text-muted);
-
-}
-
-
-.blue-icon {
-
-    color: #2563eb;
-
-    background: #eff6ff;
-
-    border-color: #dbeafe;
-
-}
-
-
-.green-icon {
-
-    color: #059669;
-
-    background: #ecfdf5;
-
-    border-color: #d1fae5;
-
-}
-
-
-.purple-icon {
-
-    color: #7c3aed;
-
-    background: #f5f3ff;
-
-    border-color: #ede9fe;
-
-}
-
-
-.cyan-icon {
-
-    color: #0891b2;
-
-    background: #ecfeff;
-
-    border-color: #cffafe;
-
-}
-
-
-.mail-icon {
-
-    color: #475569;
-
-    background: #f8fafc;
-
-}
-
-
-.portal-category-icon {
-
-    color: #2563eb;
-
-    background: #eff6ff;
-
-    border-color: #dbeafe;
-
-}
-
-
-.ai-icon {
-
-    color: #2563eb;
-
-    background:
-        linear-gradient(
-            145deg,
-            #eff6ff,
-            #dbeafe
+            }
         );
 
-    border-color: #dbeafe;
 
-}
+        /*
+           Atalho "/" para pesquisa.
+        */
 
+        document.addEventListener(
+            "keydown",
+            function (event) {
 
-/* ============================================
-   GRID
-============================================ */
+                const activeElement =
+                    document.activeElement;
 
-.tools-grid {
+                const isTyping =
+                    activeElement &&
+                    (
+                        activeElement.tagName === "INPUT" ||
+                        activeElement.tagName === "TEXTAREA" ||
+                        activeElement.tagName === "SELECT"
+                    );
 
-    display: grid;
 
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
+                if (
+                    event.key === "/" &&
+                    !isTyping
+                ) {
 
-    gap: 17px;
+                    event.preventDefault();
 
-}
+                    searchInput.focus();
 
+                }
 
-/* ============================================
-   TOOL CARD
-============================================ */
-
-.tool-card {
-
-    position: relative;
-
-    display: flex;
-
-    flex-direction: column;
-
-    min-height: 225px;
-
-    padding: 21px;
-
-    text-decoration: none;
-
-    color: inherit;
-
-    background:
-        rgba(255,255,255,0.97);
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius: 16px;
-
-    overflow: hidden;
-
-    box-shadow:
-        var(--shadow);
-
-    transition:
-        transform 0.22s ease,
-        box-shadow 0.22s ease,
-        border-color 0.22s ease;
-
-}
-
-
-.tool-card:hover {
-
-    transform: translateY(-5px);
-
-    border-color: #bfdbfe;
-
-    box-shadow:
-        var(--shadow-hover);
-
-}
-
-
-.tool-card::after {
-
-    content: "";
-
-    position: absolute;
-
-    bottom: 0;
-
-    left: 0;
-
-    right: 0;
-
-    height: 3px;
-
-    background: transparent;
-
-    transition:
-        background 0.2s ease;
-
-}
-
-
-.tool-card:hover::after {
-
-    background: var(--primary);
-
-}
-
-
-/* ============================================
-   TOOL TOPO
-============================================ */
-
-.tool-top {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-}
-
-
-.tool-icon {
-
-    width: 48px;
-
-    height: 48px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 13px;
-
-}
-
-
-.tool-icon svg {
-
-    width: 22px;
-
-    height: 22px;
-
-    fill: none;
-
-    stroke: currentColor;
-
-    stroke-width: 1.7;
-
-    stroke-linecap: round;
-
-    stroke-linejoin: round;
-
-}
-
-
-.tool-icon.blue {
-
-    color: #2563eb;
-
-    background: #eff6ff;
-
-}
-
-
-.tool-icon.green {
-
-    color: #059669;
-
-    background: #ecfdf5;
-
-}
-
-
-.tool-icon.orange {
-
-    color: #ea580c;
-
-    background: #fff7ed;
-
-}
-
-
-.tool-icon.purple {
-
-    color: #7c3aed;
-
-    background: #f5f3ff;
-
-}
-
-
-.tool-icon.whatsapp {
-
-    color: #059669;
-
-    background: #ecfdf5;
-
-}
-
-
-.tool-icon.mail {
-
-    color: #475569;
-
-    background: #f1f5f9;
-
-}
-
-
-/* ============================================
-   SETA
-============================================ */
-
-.arrow {
-
-    width: 31px;
-
-    height: 31px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: #f8fafc;
-
-    border:
-        1px solid
-        #edf1f5;
-
-    color: #94a3b8;
-
-    transition:
-        transform 0.2s ease,
-        color 0.2s ease,
-        background 0.2s ease;
-
-}
-
-
-.arrow svg {
-
-    width: 16px;
-
-    height: 16px;
-
-    fill: none;
-
-    stroke: currentColor;
-
-    stroke-width: 1.8;
-
-    stroke-linecap: round;
-
-    stroke-linejoin: round;
-
-}
-
-
-.tool-card:hover .arrow {
-
-    transform: translateX(4px);
-
-    color: var(--primary);
-
-    background: #eff6ff;
-
-}
-
-
-/* ============================================
-   TOOL CONTENT
-============================================ */
-
-.tool-content {
-
-    flex: 1;
-
-    padding-top: 20px;
-
-}
-
-
-.tool-content h4 {
-
-    font-size: 16px;
-
-    font-weight: 700;
-
-    letter-spacing: -0.2px;
-
-}
-
-
-.tool-content p {
-
-    margin-top: 7px;
-
-    max-width: 320px;
-
-    font-size: 12.5px;
-
-    line-height: 1.65;
-
-    color: var(--text-secondary);
-
-}
-
-
-/* ============================================
-   CARD FOOTER
-============================================ */
-
-.tool-footer {
-
-    padding-top: 15px;
-
-    border-top:
-        1px solid
-        var(--border-soft);
-
-    color: var(--primary);
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-}
-
-
-/* ============================================
-   PORTAIS
-============================================ */
-
-.portal-dropdown {
-
-    position: relative;
-
-    width: 100%;
-
-}
-
-
-.portal-button {
-
-    width: 100%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding: 16px 18px;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius: 15px;
-
-    background: #ffffff;
-
-    color: var(--text);
-
-    cursor: pointer;
-
-    font-family: inherit;
-
-    text-align: left;
-
-    box-shadow:
-        var(--shadow);
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        transform 0.2s ease;
-
-}
-
-
-.portal-button:hover {
-
-    border-color: #bfdbfe;
-
-    box-shadow:
-        0 10px 24px
-        rgba(15,23,42,0.08);
-
-    transform: translateY(-2px);
-
-}
-
-
-.portal-button-left {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-
-}
-
-
-.portal-main-icon {
-
-    width: 46px;
-
-    height: 46px;
-
-    flex-shrink: 0;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 13px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #eff6ff,
-            #dbeafe
+            }
         );
 
-    color: #2563eb;
-
-}
-
-
-.portal-main-icon svg {
-
-    width: 21px;
-
-    height: 21px;
-
-    fill: none;
-
-    stroke: currentColor;
-
-    stroke-width: 1.7;
-
-    stroke-linecap: round;
-
-    stroke-linejoin: round;
-
-}
-
-
-.portal-button-left strong {
-
-    display: block;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-}
-
-
-.portal-button-left span {
-
-    display: block;
-
-    margin-top: 3px;
-
-    font-size: 11px;
-
-    color: var(--text-muted);
-
-}
-
-
-/* ============================================
-   PORTAL ARROW
-============================================ */
-
-.portal-arrow {
-
-    width: 32px;
-
-    height: 32px;
-
-    flex-shrink: 0;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: #f8fafc;
-
-    border:
-        1px solid
-        #edf1f5;
-
-    color: #64748b;
-
-    transition:
-        transform 0.25s ease,
-        background 0.2s ease,
-        color 0.2s ease;
-
-}
-
-
-.portal-arrow svg {
-
-    width: 17px;
-
-    height: 17px;
-
-    fill: none;
-
-    stroke: currentColor;
-
-    stroke-width: 1.8;
-
-    stroke-linecap: round;
-
-    stroke-linejoin: round;
-
-}
-
-
-.portal-dropdown.active .portal-arrow {
-
-    transform: rotate(180deg);
-
-    background: #eff6ff;
-
-    color: #2563eb;
-
-}
-
-
-/* ============================================
-   PORTAL LIST
-============================================ */
-
-.portal-list {
-
-    display: none;
-
-    width: 100%;
-
-    margin-top: 8px;
-
-    padding: 7px;
-
-    background: #ffffff;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius: 15px;
-
-    box-shadow:
-        0 12px 30px
-        rgba(15,23,42,0.08),
-
-        0 3px 8px
-        rgba(15,23,42,0.04);
-
-    max-height: 430px;
-
-    overflow-y: auto;
-
-}
-
-
-.portal-dropdown.active .portal-list {
-
-    display: block;
-
-    animation:
-        portalDrop 0.18s ease;
-
-}
-
-
-@keyframes portalDrop {
-
-    from {
-
-        opacity: 0;
-
-        transform: translateY(-7px);
-
     }
 
-    to {
 
-        opacity: 1;
 
-        transform: translateY(0);
+    /* ========================================
+       FAVICONS
+       FALLBACK
+    ======================================== */
 
-    }
-
-}
-
-
-/* ============================================
-   PORTAL ITEM
-============================================ */
-
-.portal-item {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    width: 100%;
-
-    padding: 9px 10px;
-
-    border-radius: 10px;
-
-    text-decoration: none;
-
-    color: var(--text);
-
-    transition:
-        background 0.18s ease,
-        transform 0.18s ease;
-
-}
-
-
-.portal-item:hover {
-
-    background: #f5f8fc;
-
-    transform: translateX(3px);
-
-}
-
-
-/* ============================================
-   PORTAL ICON
-============================================ */
-
-.portal-item-icon {
-
-    width: 38px;
-
-    height: 38px;
-
-    flex-shrink: 0;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 10px;
-
-    background: #ffffff;
-
-    border:
-        1px solid
-        #e5eaf0;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 2px 5px
-        rgba(15,23,42,0.04);
-
-}
-
-
-.portal-item-icon img {
-
-    width: 24px;
-
-    height: 24px;
-
-    object-fit: contain;
-
-    display: block;
-
-}
-
-
-.portal-item-icon.favicon-error::after {
-
-    content: "•";
-
-    font-size: 22px;
-
-    line-height: 1;
-
-    color: #94a3b8;
-
-}
-
-
-/* ============================================
-   PORTAL NAME
-============================================ */
-
-.portal-item-name {
-
-    flex: 1;
-
-    font-size: 12.5px;
-
-    font-weight: 650;
-
-    color: #334155;
-
-}
-
-
-/* ============================================
-   PORTAL ARROW
-============================================ */
-
-.portal-item-arrow {
-
-    color: #94a3b8;
-
-    font-size: 15px;
-
-    transition:
-        color 0.18s ease,
-        transform 0.18s ease;
-
-}
-
-
-.portal-item:hover .portal-item-arrow {
-
-    color: #2563eb;
-
-    transform:
-        translate(2px, -2px);
-
-}
-
-
-/* ============================================
-   SCROLL
-============================================ */
-
-.portal-list::-webkit-scrollbar {
-
-    width: 6px;
-
-}
-
-
-.portal-list::-webkit-scrollbar-track {
-
-    background: transparent;
-
-}
-
-
-.portal-list::-webkit-scrollbar-thumb {
-
-    background: #cbd5e1;
-
-    border-radius: 10px;
-
-}
-
-
-.portal-list::-webkit-scrollbar-thumb:hover {
-
-    background: #94a3b8;
-
-}
-
-
-/* ============================================
-   ASSISTENTE IA
-============================================ */
-
-.ai-box {
-
-    padding: 21px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #f8fbff
+    const portalImages =
+        document.querySelectorAll(
+            ".portal-item-icon img"
         );
 
-    border:
-        1px solid
-        #dbeafe;
 
-    border-radius: 16px;
+    portalImages.forEach(
+        function (image) {
 
-    box-shadow:
-        0 5px 18px
-        rgba(37,99,235,0.055);
+            image.addEventListener(
+                "error",
+                function () {
 
-}
+                    const parent =
+                        image.parentElement;
 
-
-.ai-box-header {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 13px;
-
-    margin-bottom: 17px;
-
-}
+                    image.style.display =
+                        "none";
 
 
-.ai-box-icon {
+                    parent.classList.add(
+                        "favicon-error"
+                    );
 
-    width: 43px;
 
-    height: 43px;
+                    const fallback =
+                        document.createElement(
+                            "span"
+                        );
 
-    flex-shrink: 0;
 
-    display: flex;
+                    fallback.textContent =
+                        (
+                            image.alt ||
+                            "ADM"
+                        ).substring(
+                            0,
+                            2
+                        ).toUpperCase();
 
-    align-items: center;
 
-    justify-content: center;
+                    fallback.className =
+                        "favicon-fallback";
 
-    border-radius: 12px;
 
-    background:
-        linear-gradient(
-            145deg,
-            #eff6ff,
-            #dbeafe
+                    parent.appendChild(
+                        fallback
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+
+    /* ========================================
+       RESPOSTA RÁPIDA
+       SISTEMA LOCAL — SEM API
+    ======================================== */
+
+    const aiSituation =
+        document.getElementById(
+            "aiSituation"
         );
 
-    color: #2563eb;
-
-}
-
-
-.ai-box-icon svg {
-
-    width: 21px;
-
-    height: 21px;
-
-    fill: none;
-
-    stroke: currentColor;
-
-    stroke-width: 1.7;
-
-    stroke-linecap: round;
-
-    stroke-linejoin: round;
-
-}
-
-
-.ai-box-header strong {
-
-    display: block;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-}
-
-
-.ai-box-header span {
-
-    display: block;
-
-    margin-top: 3px;
-
-    font-size: 11px;
-
-    color: var(--text-secondary);
-
-}
-
-
-/* ============================================
-   AI FORM
-============================================ */
-
-.ai-form {
-
-    display: flex;
-
-    gap: 10px;
-
-}
-
-
-.ai-input {
-
-    flex: 1;
-
-    min-width: 0;
-
-    height: 46px;
-
-    padding:
-        0 14px;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius: 11px;
-
-    background: #ffffff;
-
-    color: var(--text);
-
-    outline: none;
-
-    font-family: inherit;
-
-    font-size: 12.5px;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-
-}
-
-
-.ai-input::placeholder {
-
-    color: #a1acbb;
-
-}
-
-
-.ai-input:focus {
-
-    border-color: #93c5fd;
-
-    box-shadow:
-        0 0 0 4px
-        rgba(37,99,235,0.07);
-
-}
-
-
-/* ============================================
-   AI BUTTON
-============================================ */
-
-.ai-button {
-
-    height: 46px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 8px;
-
-    padding:
-        0 17px;
-
-    border: none;
-
-    border-radius: 11px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #1d4ed8
+    const aiContext =
+        document.getElementById(
+            "aiContext"
         );
 
-    color: #ffffff;
+    const generateResponse =
+        document.getElementById(
+            "generateResponse"
+        );
+
+    const clearResponse =
+        document.getElementById(
+            "clearResponse"
+        );
 
-    cursor: pointer;
+    const aiResult =
+        document.getElementById(
+            "aiResult"
+        );
 
-    font-family: inherit;
+    const aiResultActions =
+        document.getElementById(
+            "aiResultActions"
+        );
+
+    const copyResponse =
+        document.getElementById(
+            "copyResponse"
+        );
+
+
+    let currentResponse = "";
 
-    font-size: 11.5px;
 
-    font-weight: 700;
 
-    box-shadow:
-        0 5px 13px
-        rgba(37,99,235,0.20);
+    /* ========================================
+       MODELOS DE RESPOSTA
+    ======================================== */
+
+    const responseTemplates = {
+
+
+        pagamento: function (context) {
+
+            return (
+                "Olá! " +
+                "Confirmamos o recebimento da informação referente ao pagamento." +
+                (context
+                    ? "\n\n" + context
+                    : "") +
+                "\n\n" +
+                "Caso seja necessário algum procedimento adicional, " +
+                "permanecemos à disposição.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
 
-    transition:
-        transform 0.18s ease,
-        box-shadow 0.18s ease;
+        },
 
-}
 
+        documento: function (context) {
 
-.ai-button:hover {
+            return (
+                "Olá!\n\n" +
+                "Para darmos continuidade ao atendimento, " +
+                "precisamos do documento ou das informações solicitadas." +
+                (context
+                    ? "\n\nInformações adicionais:\n" + context
+                    : "") +
+                "\n\n" +
+                "Assim que recebermos os dados, daremos sequência ao atendimento.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
 
-    transform: translateY(-2px);
+        },
 
-    box-shadow:
-        0 8px 18px
-        rgba(37,99,235,0.25);
 
-}
+        divergencia: function (context) {
 
+            return (
+                "Olá!\n\n" +
+                "Identificamos uma divergência nas informações apresentadas " +
+                "e estamos realizando a verificação necessária." +
+                (context
+                    ? "\n\nDetalhes:\n" + context
+                    : "") +
+                "\n\n" +
+                "Assim que tivermos a confirmação, retornaremos com as informações corretas.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
 
-.ai-button:active {
+        },
 
-    transform: translateY(0);
 
-}
+        retorno: function (context) {
 
+            return (
+                "Olá!\n\n" +
+                "Estamos aguardando o retorno das informações necessárias " +
+                "para dar continuidade ao atendimento." +
+                (context
+                    ? "\n\nReferente a:\n" + context
+                    : "") +
+                "\n\n" +
+                "Assim que recebermos o retorno, prosseguiremos com a solicitação.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
 
-.ai-button svg {
+        },
 
-    width: 17px;
 
-    height: 17px;
+        encaminhamento: function (context) {
 
-    fill: none;
+            return (
+                "Olá!\n\n" +
+                "Sua solicitação foi encaminhada ao setor responsável " +
+                "para análise e providências." +
+                (context
+                    ? "\n\nDetalhes da solicitação:\n" + context
+                    : "") +
+                "\n\n" +
+                "Assim que tivermos um retorno, entraremos em contato.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
 
-    stroke: currentColor;
+        },
 
-    stroke-width: 1.8;
 
-    stroke-linecap: round;
+        agradecimento: function (context) {
 
-    stroke-linejoin: round;
+            return (
+                "Olá!\n\n" +
+                "Agradecemos pelo contato e pelas informações encaminhadas." +
+                (context
+                    ? "\n\n" + context
+                    : "") +
+                "\n\n" +
+                "Permanecemos à disposição caso seja necessário algum auxílio adicional.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
 
-}
+        },
 
 
-/* ============================================
-   SUGESTÕES
-============================================ */
+        personalizada: function (context) {
 
-.ai-suggestions {
+            if (!context) {
 
-    display: flex;
+                return (
+                    "Olá!\n\n" +
+                    "Por favor, informe os detalhes que deverão constar na resposta."
+                );
 
-    align-items: center;
+            }
 
-    flex-wrap: wrap;
 
-    gap: 7px;
+            return (
+                "Olá!\n\n" +
+                context +
+                "\n\n" +
+                "Permanecemos à disposição para quaisquer esclarecimentos.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
 
-    margin-top: 13px;
+        }
 
-}
+    };
 
 
-.suggestion-label {
 
-    margin-right: 2px;
+    /* ========================================
+       GERAR RESPOSTA
+    ======================================== */
 
-    font-size: 10px;
+    if (
+        generateResponse &&
+        aiSituation &&
+        aiContext &&
+        aiResult
+    ) {
 
-    color: var(--text-muted);
 
-}
+        generateResponse.addEventListener(
+            "click",
+            function () {
 
+                const situation =
+                    aiSituation.value;
 
-.suggestion {
+                const context =
+                    aiContext.value.trim();
 
-    padding:
-        6px 9px;
 
-    border:
-        1px solid
-        #e2e8f0;
+                if (!situation) {
 
-    border-radius: 7px;
+                    showAIMessage(
+                        "Selecione o tipo de resposta."
+                    );
 
-    background: #ffffff;
+                    aiSituation.focus();
 
-    color: #64748b;
+                    return;
 
-    cursor: pointer;
+                }
 
-    font-family: inherit;
 
-    font-size: 10px;
+                const template =
+                    responseTemplates[
+                        situation
+                    ];
 
-    transition:
-        border-color 0.18s ease,
-        background 0.18s ease,
-        color 0.18s ease;
 
-}
+                if (
+                    typeof template !== "function"
+                ) {
 
+                    return;
 
-.suggestion:hover {
+                }
 
-    border-color: #bfdbfe;
 
-    background: #eff6ff;
+                currentResponse =
+                    template(context);
 
-    color: #2563eb;
 
-}
+                aiResult.innerHTML = "";
 
 
-/* ============================================
-   AI NOTICE
-============================================ */
+                const responseText =
+                    document.createElement(
+                        "div"
+                    );
 
-.ai-notice {
 
-    display: flex;
+                responseText.className =
+                    "ai-generated-text";
 
-    align-items: center;
 
-    gap: 7px;
+                responseText.textContent =
+                    currentResponse;
 
-    margin-top: 14px;
 
-    padding-top: 12px;
+                aiResult.appendChild(
+                    responseText
+                );
 
-    border-top:
-        1px solid
-        #edf1f5;
 
-    color: #94a3b8;
+                if (
+                    aiResultActions
+                ) {
 
-    font-size: 9.5px;
+                    aiResultActions.classList.add(
+                        "visible"
+                    );
 
-    line-height: 1.45;
+                }
 
-}
 
+                aiResult.classList.add(
+                    "has-result"
+                );
 
-.ai-notice svg {
-
-    width: 14px;
-
-    height: 14px;
-
-    flex-shrink: 0;
-
-    fill: none;
-
-    stroke: currentColor;
-
-    stroke-width: 1.7;
-
-    stroke-linecap: round;
-
-    stroke-linejoin: round;
-
-}
-
-
-/* ============================================
-   SEM RESULTADOS
-============================================ */
-
-.no-results {
-
-    display: none;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 55px 20px;
-
-    text-align: center;
-
-}
-
-
-.no-results-icon {
-
-    width: 50px;
-
-    height: 50px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 14px;
-
-    background: #f8fafc;
-
-    border:
-        1px solid
-        var(--border);
-
-    color: #94a3b8;
-
-}
-
-
-.no-results-icon svg {
-
-    width: 22px;
-
-    height: 22px;
-
-    fill: none;
-
-    stroke: currentColor;
-
-    stroke-width: 1.7;
-
-    stroke-linecap: round;
-
-    stroke-linejoin: round;
-
-}
-
-
-.no-results h3 {
-
-    margin-top: 13px;
-
-    font-size: 15px;
-
-}
-
-
-.no-results p {
-
-    margin-top: 5px;
-
-    font-size: 12px;
-
-    color: var(--text-secondary);
-
-}
-
-
-/* ============================================
-   FOOTER
-============================================ */
-
-footer {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 20px;
-
-    margin-top: 10px;
-
-    padding: 25px 4px;
-
-    border-top:
-        1px solid
-        rgba(148,163,184,0.15);
-
-    color: var(--text-muted);
-
-    font-size: 10.5px;
-
-}
-
-
-.footer-left {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-}
-
-
-.footer-left strong {
-
-    color: #64748b;
-
-}
-
-
-.footer-right {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-}
-
-
-.separator {
-
-    color: #cbd5e1;
-
-}
-
-
-/* ============================================
-   TABLET
-============================================ */
-
-@media (max-width: 900px) {
-
-
-    .tools-grid {
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
+            }
+        );
 
     }
 
 
-    .intro {
 
-        align-items: flex-start;
+    /* ========================================
+       MENSAGEM DE ERRO / AVISO
+    ======================================== */
 
-        flex-direction: column;
+    function showAIMessage(message) {
 
-    }
-
-
-    .search-box {
-
-        width: 100%;
-
-    }
+        if (!aiResult) {
+            return;
+        }
 
 
-}
+        aiResult.innerHTML = "";
 
 
-/* ============================================
-   CELULAR
-============================================ */
-
-@media (max-width: 650px) {
-
-
-    .container {
-
-        width: 94%;
-
-        padding-top: 20px;
-
-    }
+        const messageElement =
+            document.createElement(
+                "div"
+            );
 
 
-    .header {
-
-        flex-direction: column;
-
-        align-items: flex-start;
-
-        gap: 17px;
-
-        padding: 19px;
-
-    }
+        messageElement.className =
+            "ai-message";
 
 
-    .header-right {
+        messageElement.textContent =
+            message;
 
-        width: 100%;
 
-        justify-content: space-between;
+        aiResult.appendChild(
+            messageElement
+        );
+
+
+        aiResult.classList.remove(
+            "has-result"
+        );
+
+
+        if (aiResultActions) {
+
+            aiResultActions.classList.remove(
+                "visible"
+            );
+
+        }
 
     }
 
 
-    .brand-info h1 {
 
-        font-size: 20px;
+    /* ========================================
+       LIMPAR RESPOSTA
+    ======================================== */
 
-    }
+    if (
+        clearResponse
+    ) {
 
+        clearResponse.addEventListener(
+            "click",
+            function () {
 
-    .brand-info p {
+                if (aiSituation) {
 
-        font-size: 12px;
+                    aiSituation.value =
+                        "";
 
-    }
-
-
-    .brand-logo {
-
-        width: 54px;
-
-        height: 54px;
-
-    }
+                }
 
 
-    .intro {
+                if (aiContext) {
 
-        margin-top: 32px;
+                    aiContext.value =
+                        "";
 
-        margin-bottom: 27px;
-
-    }
-
-
-    .intro h2 {
-
-        font-size: 27px;
-
-    }
+                }
 
 
-    .tools-grid {
-
-        grid-template-columns: 1fr;
-
-    }
+                currentResponse =
+                    "";
 
 
-    .tool-card {
+                if (aiResult) {
 
-        min-height: 205px;
+                    aiResult.innerHTML = `
 
-    }
+                        <div class="ai-result-placeholder">
 
+                            <svg
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
 
-    .portal-button {
+                                <path d="M5 5h14v14H5z" />
 
-        padding: 14px;
+                                <path d="M8 9h8" />
 
-    }
+                                <path d="M8 13h5" />
 
+                            </svg>
 
-    .portal-main-icon {
+                            <span>
+                                A resposta gerada aparecerá aqui.
+                            </span>
 
-        width: 43px;
+                        </div>
 
-        height: 43px;
-
-    }
-
-
-    .portal-button-left strong {
-
-        font-size: 13px;
-
-    }
+                    `;
 
 
-    .portal-button-left span {
+                    aiResult.classList.remove(
+                        "has-result"
+                    );
 
-        font-size: 10px;
-
-    }
+                }
 
 
-    .portal-list {
+                if (aiResultActions) {
 
-        max-height: 360px;
+                    aiResultActions.classList.remove(
+                        "visible"
+                    );
+
+                }
+
+            }
+        );
 
     }
 
 
-    .portal-item {
 
-        padding: 9px 8px;
+    /* ========================================
+       COPIAR RESPOSTA
+    ======================================== */
 
-    }
+    if (
+        copyResponse
+    ) {
 
+        copyResponse.addEventListener(
+            "click",
+            async function () {
 
-    .ai-box {
-
-        padding: 17px;
-
-    }
-
-
-    .ai-form {
-
-        flex-direction: column;
-
-    }
+                if (!currentResponse) {
+                    return;
+                }
 
 
-    .ai-button {
+                try {
 
-        width: 100%;
-
-    }
-
-
-    .ai-suggestions {
-
-        align-items: flex-start;
-
-    }
+                    await navigator.clipboard.writeText(
+                        currentResponse
+                    );
 
 
-    footer {
-
-        flex-direction: column;
-
-        align-items: flex-start;
-
-        gap: 8px;
-
-    }
+                    const original =
+                        copyResponse.innerHTML;
 
 
-}
+                    copyResponse.innerHTML =
+                        "✓ Resposta copiada";
 
 
-/* ============================================
-   TELAS MUITO PEQUENAS
-============================================ */
-
-@media (max-width: 400px) {
+                    copyResponse.classList.add(
+                        "copied"
+                    );
 
 
-    .header-right {
+                    setTimeout(
+                        function () {
 
-        flex-direction: column;
+                            copyResponse.innerHTML =
+                                original;
 
-        align-items: flex-start;
+                            copyResponse.classList.remove(
+                                "copied"
+                            );
 
-    }
-
-
-    .system-status,
-    .internal-badge {
-
-        width: 100%;
-
-        justify-content: center;
-
-    }
+                        },
+                        1800
+                    );
 
 
-    .category-title span {
+                } catch (error) {
 
-        max-width: 250px;
+                    /*
+                       Fallback para navegadores
+                       que bloqueiam Clipboard API.
+                    */
 
-        line-height: 1.45;
-
-    }
-
-
-}
-
-
-/* ============================================
-   REDUÇÃO DE MOVIMENTO
-============================================ */
-
-@media (prefers-reduced-motion: reduce) {
+                    const temporary =
+                        document.createElement(
+                            "textarea"
+                        );
 
 
-    * {
+                    temporary.value =
+                        currentResponse;
 
-        transition: none !important;
 
-        animation: none !important;
+                    document.body.appendChild(
+                        temporary
+                    );
 
-        scroll-behavior: auto !important;
+
+                    temporary.select();
+
+
+                    try {
+
+                        document.execCommand(
+                            "copy"
+                        );
+
+                    } catch (e) {
+
+                        console.warn(
+                            "Não foi possível copiar a resposta."
+                        );
+
+                    }
+
+
+                    temporary.remove();
+
+                }
+
+            }
+        );
 
     }
 
-}
+
+
+    /* ========================================
+       ANIMAÇÃO DOS CARDS
+    ======================================== */
+
+    const toolCards =
+        document.querySelectorAll(
+            ".tool-card"
+        );
+
+
+    toolCards.forEach(
+        function (card) {
+
+            card.addEventListener(
+                "mouseenter",
+                function () {
+
+                    card.classList.add(
+                        "is-hovered"
+                    );
+
+                }
+            );
+
+
+            card.addEventListener(
+                "mouseleave",
+                function () {
+
+                    card.classList.remove(
+                        "is-hovered"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+});
