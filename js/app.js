@@ -65,79 +65,270 @@
 
 
     /* =========================================
-       TEMPLATES — ASSISTENTE LOCAL
+       TEMPLATES — ASSISTENTE DE RESPOSTAS
     ========================================== */
 
     var templates = {
 
+
+        /* =====================================
+           💳 CONFIRMAÇÃO DE PAGAMENTO
+        ====================================== */
 
         'Confirmação de pagamento': function (info) {
 
             return (
                 'Olá! Confirmamos o recebimento do seu pagamento.' +
                 (info ? ' ' + info : '') +
-                ' Qualquer dúvida, estamos à disposição.'
+                ' Agradecemos pelo contato e permanecemos à disposição.'
             );
 
         },
 
 
+        /* =====================================
+           💰 PAGAMENTO NÃO LOCALIZADO
+        ====================================== */
+
+        'Pagamento não localizado': function (info) {
+
+            return (
+                'Olá! Até o momento não localizamos o pagamento informado em nosso sistema.' +
+                (info ? ' ' + info : '') +
+                ' Pedimos, por gentileza, que verifique os dados da transação e, se possível, nos envie o comprovante para que possamos realizar uma nova conferência.'
+            );
+
+        },
+
+
+        /* =====================================
+           🔄 ESTORNO
+        ====================================== */
+
+        'Estorno': function (info) {
+
+            return (
+                'Olá! Sobre a solicitação de estorno, estamos verificando as informações necessárias para dar continuidade ao atendimento.' +
+                (info ? ' ' + info : '') +
+                ' Assim que tivermos uma atualização, retornaremos com um posicionamento.'
+            );
+
+        },
+
+
+        /* =====================================
+           ⚠️ DIVERGÊNCIA DE VALOR
+        ====================================== */
+
+        'Divergência de valor': function (info) {
+
+            return (
+                'Olá! Identificamos uma divergência em relação ao valor informado.' +
+                (info ? ' ' + info : '') +
+                ' Pedimos, por gentileza, que confirme os dados da transação para que possamos realizar a conferência.'
+            );
+
+        },
+
+
+        /* =====================================
+           📄 SOLICITAÇÃO DE DOCUMENTO
+        ====================================== */
+
         'Solicitação de documento': function (info) {
 
             return (
-                'Olá! Para darmos continuidade à sua solicitação, ' +
-                'pedimos o envio do seguinte documento: ' +
-                (info || 'documento pendente') +
+                'Olá! Para darmos continuidade à sua solicitação, pedimos, por gentileza, o envio do seguinte documento: ' +
+                (info || 'documento necessário') +
                 '. Assim que recebermos, daremos sequência ao atendimento.'
             );
 
         },
 
 
-        'Divergência de informação': function (info) {
+        /* =====================================
+           🧾 SOLICITAÇÃO DE COMPROVANTE
+        ====================================== */
+
+        'Solicitação de comprovante': function (info) {
 
             return (
-                'Olá! Identificamos uma divergência nas informações ' +
-                (info || 'informadas') +
-                '. Pedimos, por gentileza, que verifique os dados ' +
-                'e nos retorne com as informações corretas.'
+                'Olá! Para podermos verificar a situação informada, pedimos, por gentileza, o envio do comprovante da transação.' +
+                (info ? ' ' + info : '') +
+                ' Assim que recebermos o comprovante, realizaremos a conferência.'
             );
 
         },
 
+
+        /* =====================================
+           ⏳ AGUARDANDO RETORNO
+        ====================================== */
 
         'Aguardando retorno': function (info) {
 
             return (
-                'Olá! Estamos aguardando o retorno referente a ' +
-                (info || 'sua solicitação') +
-                '. Assim que tivermos novidades, entraremos em contato.'
+                'Olá! Estamos aguardando o retorno referente à sua solicitação.' +
+                (info ? ' ' + info : '') +
+                ' Assim que tivermos novas informações, entraremos em contato.'
             );
 
         },
 
+
+        /* =====================================
+           📞 RETORNO AO CLIENTE
+        ====================================== */
+
+        'Retorno ao cliente': function (info) {
+
+            return (
+                'Olá! Estamos entrando em contato para dar um retorno referente à sua solicitação.' +
+                (info ? ' ' + info : '') +
+                ' Permanecemos à disposição caso tenha alguma dúvida.'
+            );
+
+        },
+
+
+        /* =====================================
+           🏦 PROBLEMA COM CARTÃO
+        ====================================== */
+
+        'Problema com cartão': function (info) {
+
+            return (
+                'Olá! Identificamos uma situação relacionada ao cartão utilizado.' +
+                (info ? ' ' + info : '') +
+                ' Pedimos, por gentileza, que nos informe os detalhes da ocorrência para que possamos verificar a situação.'
+            );
+
+        },
+
+
+        /* =====================================
+           💳 CARTÃO RECUSADO
+        ====================================== */
+
+        'Cartão recusado': function (info) {
+
+            return (
+                'Olá! Verificamos que a transação com o cartão não foi aprovada.' +
+                (info ? ' ' + info : '') +
+                ' Recomendamos verificar os dados do cartão ou entrar em contato com a instituição responsável pelo cartão para obter mais informações.'
+            );
+
+        },
+
+
+        /* =====================================
+           🎫 TICKET / BENEFÍCIO
+        ====================================== */
+
+        'Ticket / benefício': function (info) {
+
+            return (
+                'Olá! Sobre a utilização do benefício informado, estamos verificando a situação.' +
+                (info ? ' ' + info : '') +
+                ' Caso necessário, pedimos que nos envie mais detalhes para que possamos realizar a conferência.'
+            );
+
+        },
+
+
+        /* =====================================
+           🚗 ABASTECIMENTO
+        ====================================== */
+
+        'Abastecimento': function (info) {
+
+            return (
+                'Olá! Sobre o abastecimento informado, estamos verificando os dados da operação.' +
+                (info ? ' ' + info : '') +
+                ' Pedimos, se possível, que nos informe a data, horário, valor e demais detalhes para facilitar a conferência.'
+            );
+
+        },
+
+
+        /* =====================================
+           🛒 LOJA / CONVENIÊNCIA
+        ====================================== */
+
+        'Loja / conveniência': function (info) {
+
+            return (
+                'Olá! Sobre a situação relacionada à loja/conveniência, estamos verificando as informações.' +
+                (info ? ' ' + info : '') +
+                ' Em breve retornaremos com um posicionamento.'
+            );
+
+        },
+
+
+        /* =====================================
+           📦 PRODUTO INDISPONÍVEL
+        ====================================== */
+
+        'Produto indisponível': function (info) {
+
+            return (
+                'Olá! No momento, o produto informado encontra-se indisponível.' +
+                (info ? ' ' + info : '') +
+                ' Pedimos desculpas pelo inconveniente e agradecemos pela compreensão.'
+            );
+
+        },
+
+
+        /* =====================================
+           🧑‍💼 ENCAMINHAMENTO
+        ====================================== */
 
         'Encaminhamento ao setor responsável': function (info) {
 
             return (
-                'Olá! Sua solicitação foi encaminhada ao setor responsável' +
-                (info ? ' para tratar ' + info : '') +
-                '. Em breve retornaremos com um posicionamento.'
+                'Olá! Sua solicitação foi encaminhada ao setor responsável para análise.' +
+                (info ? ' ' + info : '') +
+                ' Assim que tivermos um posicionamento, retornaremos com as informações.'
             );
 
         },
 
+
+        /* =====================================
+           🙏 AGRADECIMENTO
+        ====================================== */
 
         'Agradecimento': function (info) {
 
             return (
-                'Olá! Agradecemos o seu contato.' +
+                'Olá! Agradecemos pelo seu contato.' +
                 (info ? ' ' + info : '') +
-                ' Permanecemos à disposição para qualquer dúvida.'
+                ' Permanecemos à disposição para qualquer dúvida ou necessidade.'
             );
 
         },
 
+
+        /* =====================================
+           ❌ RECLAMAÇÃO
+        ====================================== */
+
+        'Reclamação': function (info) {
+
+            return (
+                'Olá! Lamentamos pela situação relatada e agradecemos por nos informar sobre o ocorrido.' +
+                (info ? ' ' + info : '') +
+                ' Vamos encaminhar as informações para análise e buscar a melhor solução possível.'
+            );
+
+        },
+
+
+        /* =====================================
+           📝 RESPOSTA PERSONALIZADA
+        ====================================== */
 
         'Resposta personalizada': function (info) {
 
@@ -145,7 +336,7 @@
                 'Olá! ' +
                 (
                     info ||
-                    'Informe os detalhes da resposta que deseja elaborar.'
+                    'Informe os detalhes da situação para elaborar uma resposta personalizada.'
                 )
             );
 
@@ -156,7 +347,7 @@
 
 
     /* =========================================
-       BUSCA
+       BUSCA DAS FERRAMENTAS
     ========================================== */
 
     function realizarBusca() {
@@ -422,7 +613,7 @@
 
 
     /* =========================================
-       LIMPAR ASSISTENTE
+       LIMPAR ASSISTENTE LOCAL
     ========================================== */
 
     if (btnLimpar) {
@@ -503,7 +694,7 @@
 
 
     /* =========================================
-       SUGESTÕES CHATGPT
+       SUGESTÕES DO CHATGPT
     ========================================== */
 
     promptSuggestions.forEach(
@@ -535,8 +726,6 @@
 
                     chatgptPrompt.focus();
 
-
-                    /* Coloca o cursor no final */
 
                     chatgptPrompt.setSelectionRange(
                         chatgptPrompt.value.length,
@@ -575,6 +764,11 @@
 
                     }
 
+                    mostrarFeedback(
+                        btnCopiarPrompt,
+                        'Digite um prompt primeiro'
+                    );
+
                     return;
 
                 }
@@ -594,7 +788,10 @@
 
 
     /* =========================================
-       ABRIR CHATGPT COM O TEXTO DIGITADO
+       ABRIR CHATGPT
+       
+       O TEXTO DIGITADO É ENVIADO PELA URL
+       PARA O CAMPO DO CHATGPT.
     ========================================== */
 
     if (btnAbrirChatGPT) {
@@ -610,7 +807,7 @@
 
 
                 /* =================================
-                   VERIFICAR SE O CAMPO ESTÁ VAZIO
+                   CAMPO VAZIO
                 ================================== */
 
                 if (!texto) {
@@ -634,26 +831,16 @@
 
 
                 /* =================================
-                   CODIFICAR O TEXTO
-                ================================== */
-
-                var promptCodificado =
-                    encodeURIComponent(
-                        texto
-                    );
-
-
-                /* =================================
-                   URL DO CHATGPT
+                   MONTAR URL
                 ================================== */
 
                 var urlChatGPT =
                     'https://chatgpt.com/?q=' +
-                    promptCodificado;
+                    encodeURIComponent(texto);
 
 
                 /* =================================
-                   ABRIR CHATGPT
+                   ABRIR NOVA ABA
                 ================================== */
 
                 window.open(
@@ -967,6 +1154,10 @@
 
 
 
+    /* =========================================
+       CARREGAR PREFERÊNCIAS
+    ========================================== */
+
     function carregarPreferencias() {
 
         try {
@@ -1017,6 +1208,10 @@
     }
 
 
+
+    /* =========================================
+       EVENTOS DE PREFERÊNCIAS
+    ========================================== */
 
     if (tipoResposta) {
 
