@@ -63,6 +63,7 @@
         'A resposta gerada aparecerá aqui.';
 
 
+
     /* =========================================
        TEMPLATES — ASSISTENTE LOCAL
     ========================================== */
@@ -153,6 +154,7 @@
     };
 
 
+
     /* =========================================
        BUSCA
     ========================================== */
@@ -160,7 +162,9 @@
     function realizarBusca() {
 
         if (!searchInput || !toolsGrid) {
+
             return;
+
         }
 
 
@@ -204,13 +208,17 @@
 
             if (mostrar) {
 
-                card.classList.remove('search-hidden');
+                card.classList.remove(
+                    'search-hidden'
+                );
 
                 encontrados++;
 
             } else {
 
-                card.classList.add('search-hidden');
+                card.classList.add(
+                    'search-hidden'
+                );
 
             }
 
@@ -221,11 +229,15 @@
 
             if (encontrados === 0) {
 
-                emptyState.classList.remove('hidden');
+                emptyState.classList.remove(
+                    'hidden'
+                );
 
             } else {
 
-                emptyState.classList.add('hidden');
+                emptyState.classList.add(
+                    'hidden'
+                );
 
             }
 
@@ -242,6 +254,7 @@
         );
 
     }
+
 
 
     /* =========================================
@@ -262,12 +275,18 @@
 
                 event.preventDefault();
 
-                searchInput.focus();
+
+                if (searchInput) {
+
+                    searchInput.focus();
+
+                }
 
             }
 
         }
     );
+
 
 
     /* =========================================
@@ -289,12 +308,16 @@
 
 
                 var aberto =
-                    dropdownCard.classList.toggle('open');
+                    dropdownCard.classList.toggle(
+                        'open'
+                    );
 
 
                 portaisToggle.setAttribute(
                     'aria-expanded',
-                    aberto ? 'true' : 'false'
+                    aberto
+                        ? 'true'
+                        : 'false'
                 );
 
 
@@ -309,6 +332,7 @@
     }
 
 
+
     /* =========================================
        FECHAR DROPDOWN AO CLICAR FORA
     ========================================== */
@@ -319,10 +343,14 @@
 
             if (
                 dropdownCard &&
-                !dropdownCard.contains(event.target)
+                !dropdownCard.contains(
+                    event.target
+                )
             ) {
 
-                dropdownCard.classList.remove('open');
+                dropdownCard.classList.remove(
+                    'open'
+                );
 
 
                 if (portaisToggle) {
@@ -331,6 +359,7 @@
                         'aria-expanded',
                         'false'
                     );
+
 
                     portaisToggle.innerHTML =
                         'Ver portais ▾';
@@ -341,6 +370,7 @@
 
         }
     );
+
 
 
     /* =========================================
@@ -366,7 +396,8 @@
 
 
                 if (
-                    templates[tipo]
+                    templates[tipo] &&
+                    resultado
                 ) {
 
                     resultado.textContent =
@@ -375,14 +406,19 @@
                 }
 
 
-                resultado.classList.add(
-                    'result-active'
-                );
+                if (resultado) {
+
+                    resultado.classList.add(
+                        'result-active'
+                    );
+
+                }
 
             }
         );
 
     }
+
 
 
     /* =========================================
@@ -407,6 +443,7 @@
                     resultado.textContent =
                         PLACEHOLDER;
 
+
                     resultado.classList.remove(
                         'result-active'
                     );
@@ -417,6 +454,7 @@
         );
 
     }
+
 
 
     /* =========================================
@@ -463,6 +501,7 @@
     }
 
 
+
     /* =========================================
        SUGESTÕES CHATGPT
     ========================================== */
@@ -480,7 +519,10 @@
                         );
 
 
-                    if (!prompt || !chatgptPrompt) {
+                    if (
+                        !prompt ||
+                        !chatgptPrompt
+                    ) {
 
                         return;
 
@@ -494,6 +536,8 @@
                     chatgptPrompt.focus();
 
 
+                    /* Coloca o cursor no final */
+
                     chatgptPrompt.setSelectionRange(
                         chatgptPrompt.value.length,
                         chatgptPrompt.value.length
@@ -504,6 +548,7 @@
 
         }
     );
+
 
 
     /* =========================================
@@ -547,74 +592,81 @@
     }
 
 
+
     /* =========================================
-   ABRIR CHATGPT
-========================================= */
+       ABRIR CHATGPT COM O TEXTO DIGITADO
+    ========================================== */
 
-if (btnAbrirChatGPT) {
+    if (btnAbrirChatGPT) {
 
-    btnAbrirChatGPT.addEventListener(
-        'click',
-        function () {
+        btnAbrirChatGPT.addEventListener(
+            'click',
+            function () {
 
-            var texto =
-                chatgptPrompt
-                    ? chatgptPrompt.value.trim()
-                    : '';
+                var texto =
+                    chatgptPrompt
+                        ? chatgptPrompt.value.trim()
+                        : '';
 
 
-            /* ==============================
-               VERIFICAÇÃO
-            =============================== */
+                /* =================================
+                   VERIFICAR SE O CAMPO ESTÁ VAZIO
+                ================================== */
 
-            if (!texto) {
+                if (!texto) {
 
-                if (chatgptPrompt) {
+                    if (chatgptPrompt) {
 
-                    chatgptPrompt.focus();
+                        chatgptPrompt.focus();
+
+                    }
+
+
+                    mostrarFeedback(
+                        btnAbrirChatGPT,
+                        'Digite um prompt primeiro'
+                    );
+
+
+                    return;
 
                 }
 
-                mostrarFeedback(
-                    btnAbrirChatGPT,
-                    'Digite um prompt primeiro'
+
+                /* =================================
+                   CODIFICAR O TEXTO
+                ================================== */
+
+                var promptCodificado =
+                    encodeURIComponent(
+                        texto
+                    );
+
+
+                /* =================================
+                   URL DO CHATGPT
+                ================================== */
+
+                var urlChatGPT =
+                    'https://chatgpt.com/?q=' +
+                    promptCodificado;
+
+
+                /* =================================
+                   ABRIR CHATGPT
+                ================================== */
+
+                window.open(
+                    urlChatGPT,
+                    '_blank'
                 );
 
-                return;
-
             }
+        );
+
+    }
 
 
-            /* ==============================
-               COPIAR PROMPT
-            =============================== */
-
-            copiarTextoSilencioso(texto);
-
-
-            /* ==============================
-               ABRIR CHATGPT
-            =============================== */
-
-            window.open(
-                'https://chatgpt.com/',
-                '_blank'
-            );
-
-
-            /* ==============================
-               FEEDBACK
-            =============================== */
-
-            mostrarFeedback(
-                btnAbrirChatGPT,
-                '✓ Prompt copiado'
-            );
-
-        }
-    );
-
-}
 
     /* =========================================
        FUNÇÃO DE CÓPIA
@@ -664,6 +716,7 @@ if (btnAbrirChatGPT) {
     }
 
 
+
     /* =========================================
        CÓPIA SILENCIOSA
     ========================================== */
@@ -698,6 +751,7 @@ if (btnAbrirChatGPT) {
     }
 
 
+
     /* =========================================
        FALLBACK DE CÓPIA
     ========================================== */
@@ -709,7 +763,9 @@ if (btnAbrirChatGPT) {
     ) {
 
         var area =
-            document.createElement('textarea');
+            document.createElement(
+                'textarea'
+            );
 
 
         area.value =
@@ -719,14 +775,21 @@ if (btnAbrirChatGPT) {
         area.style.position =
             'fixed';
 
+
         area.style.left =
             '-9999px';
+
+
+        area.style.top =
+            '0';
 
 
         document.body.appendChild(
             area
         );
 
+
+        area.focus();
 
         area.select();
 
@@ -757,12 +820,19 @@ if (btnAbrirChatGPT) {
     }
 
 
+
+    /* =========================================
+       FALLBACK CÓPIA SILENCIOSA
+    ========================================== */
+
     function copiarFallbackSilencioso(
         texto
     ) {
 
         var area =
-            document.createElement('textarea');
+            document.createElement(
+                'textarea'
+            );
 
 
         area.value =
@@ -772,14 +842,21 @@ if (btnAbrirChatGPT) {
         area.style.position =
             'fixed';
 
+
         area.style.left =
             '-9999px';
+
+
+        area.style.top =
+            '0';
 
 
         document.body.appendChild(
             area
         );
 
+
+        area.focus();
 
         area.select();
 
@@ -804,6 +881,7 @@ if (btnAbrirChatGPT) {
     }
 
 
+
     /* =========================================
        FEEDBACK DOS BOTÕES
     ========================================== */
@@ -814,7 +892,9 @@ if (btnAbrirChatGPT) {
     ) {
 
         if (!botao) {
+
             return;
+
         }
 
 
@@ -837,6 +917,7 @@ if (btnAbrirChatGPT) {
                 botao.innerHTML =
                     original;
 
+
                 botao.classList.remove(
                     'button-success'
                 );
@@ -846,6 +927,7 @@ if (btnAbrirChatGPT) {
         );
 
     }
+
 
 
     /* =========================================
@@ -884,6 +966,7 @@ if (btnAbrirChatGPT) {
     }
 
 
+
     function carregarPreferencias() {
 
         try {
@@ -920,6 +1003,7 @@ if (btnAbrirChatGPT) {
                 searchInput.value =
                     buscaSalva;
 
+
                 realizarBusca();
 
             }
@@ -931,6 +1015,7 @@ if (btnAbrirChatGPT) {
         }
 
     }
+
 
 
     if (tipoResposta) {
@@ -951,6 +1036,7 @@ if (btnAbrirChatGPT) {
         );
 
     }
+
 
 
     /* =========================================
