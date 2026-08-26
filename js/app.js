@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         portalList
     ) {
 
+
         portalButton.addEventListener(
             "click",
             function (event) {
@@ -75,7 +76,9 @@ document.addEventListener("DOMContentLoaded", function () {
             "keydown",
             function (event) {
 
-                if (event.key === "Escape") {
+                if (
+                    event.key === "Escape"
+                ) {
 
                     portalDropdown.classList.remove(
                         "active"
@@ -139,13 +142,16 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("toolSearch");
 
     const categories =
-        document.querySelectorAll(".category");
+        document.querySelectorAll(
+            ".category"
+        );
 
     const noResults =
         document.getElementById("noResults");
 
 
     if (searchInput) {
+
 
         searchInput.addEventListener(
             "input",
@@ -156,53 +162,126 @@ document.addEventListener("DOMContentLoaded", function () {
                         .toLowerCase()
                         .trim();
 
+
                 let totalResults = 0;
 
 
                 categories.forEach(
                     function (category) {
 
-                        const categoryText =
+                        const searchableCategory =
                             (
                                 category.dataset.category ||
                                 ""
                             ).toLowerCase();
 
 
-                        const items =
+                        const cards =
                             category.querySelectorAll(
                                 ".tool-card, .portal-item"
                             );
 
 
-                        let categoryResults = 0;
+                        let categoryMatches = 0;
 
 
-                        items.forEach(
-                            function (item) {
+                        /*
+                           Caso seja uma categoria especial,
+                           como Resposta Rápida.
+                        */
 
-                                const itemText =
+                        if (
+                            category.classList.contains(
+                                "ai-category"
+                            )
+                        ) {
+
+                            const categoryMatch =
+                                searchableCategory.includes(
+                                    search
+                                );
+
+                            if (
+                                search === "" ||
+                                categoryMatch
+                            ) {
+
+                                category.style.display =
+                                    "";
+
+                                totalResults++;
+
+                            } else {
+
+                                category.style.display =
+                                    "none";
+
+                            }
+
+                            return;
+
+                        }
+
+
+                        /*
+                           Categorias sem cards.
+                        */
+
+                        if (
+                            cards.length === 0
+                        ) {
+
+                            if (
+                                search === "" ||
+                                searchableCategory.includes(search)
+                            ) {
+
+                                category.style.display =
+                                    "";
+
+                                totalResults++;
+
+                            } else {
+
+                                category.style.display =
+                                    "none";
+
+                            }
+
+                            return;
+
+                        }
+
+
+                        /*
+                           Verificação dos cards.
+                        */
+
+                        cards.forEach(
+                            function (card) {
+
+                                const searchableText =
                                     (
-                                        item.dataset.search ||
-                                        item.textContent ||
+                                        card.dataset.search ||
+                                        card.textContent ||
                                         ""
                                     ).toLowerCase();
 
 
                                 const match =
-                                    !search ||
-                                    itemText.includes(search);
+                                    search === "" ||
+                                    searchableText.includes(
+                                        search
+                                    );
 
 
-                                item.style.display =
-                                    match
-                                        ? ""
-                                        : "none";
+                                card.style.display =
+                                    match ? "" : "none";
 
 
                                 if (match) {
 
-                                    categoryResults++;
+                                    categoryMatches++;
 
                                     totalResults++;
 
@@ -213,108 +292,70 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                         /*
-                            Se pesquisar pelo nome
-                            da categoria, mantém
-                            seus itens visíveis.
+                           Mostrar / esconder categoria.
                         */
 
                         if (
-                            search &&
-                            categoryText.includes(search)
+                            categoryMatches > 0
                         ) {
 
-                            items.forEach(
-                                function (item) {
+                            category.style.display =
+                                "";
 
-                                    item.style.display =
-                                        "";
+                        } else {
 
-                                }
-                            );
-
-                            categoryResults =
-                                items.length;
-
-                        }
-
-
-                        /*
-                            Dropdown de portais
-                        */
-
-                        const isPortal =
-                            category.classList.contains(
-                                "category-portals"
-                            );
-
-
-                        if (isPortal) {
-
-                            const portalItems =
-                                category.querySelectorAll(
-                                    ".portal-item"
-                                );
-
+                            /*
+                               Pesquisa também no nome
+                               da categoria.
+                            */
 
                             if (
-                                search &&
-                                categoryText.includes(search)
+                                search !== "" &&
+                                searchableCategory.includes(
+                                    search
+                                )
                             ) {
 
-                                portalItems.forEach(
-                                    function (item) {
+                                category.style.display =
+                                    "";
 
-                                        item.style.display =
-                                            "flex";
+                                cards.forEach(
+                                    function (card) {
+
+                                        card.style.display =
+                                            "";
 
                                     }
                                 );
+
+                                totalResults +=
+                                    cards.length;
+
+                            } else {
+
+                                category.style.display =
+                                    "none";
 
                             }
 
-
-                            const visiblePortals =
-                                Array.from(
-                                    portalItems
-                                ).filter(
-                                    function (item) {
-
-                                        return (
-                                            item.style.display !==
-                                            "none"
-                                        );
-
-                                    }
-                                );
-
-
-                            categoryResults =
-                                search
-                                    ? visiblePortals.length
-                                    : portalItems.length;
-
                         }
-
-
-                        category.style.display =
-                            categoryResults > 0
-                                ? ""
-                                : "none";
 
                     }
                 );
 
 
                 /*
-                    Sem resultados
+                   Resultado da pesquisa.
                 */
 
-                if (noResults) {
+                if (
+                    noResults
+                ) {
 
                     noResults.classList.toggle(
-                        "show",
-                        totalResults === 0 &&
-                        search !== ""
+                        "visible",
+                        search !== "" &&
+                        totalResults === 0
                     );
 
                 }
@@ -322,37 +363,31 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         );
 
-    }
 
+        /*
+           Atalho "/" para pesquisa.
+        */
 
+        document.addEventListener(
+            "keydown",
+            function (event) {
 
-    /* ========================================
-       ATALHO "/" PARA BUSCA
-    ======================================== */
-
-    document.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (
-                event.key === "/" &&
-                !event.ctrlKey &&
-                !event.altKey &&
-                !event.metaKey
-            ) {
-
-                const active =
+                const activeElement =
                     document.activeElement;
 
                 const isTyping =
-                    active &&
+                    activeElement &&
                     (
-                        active.tagName === "INPUT" ||
-                        active.tagName === "TEXTAREA"
+                        activeElement.tagName === "INPUT" ||
+                        activeElement.tagName === "TEXTAREA" ||
+                        activeElement.tagName === "SELECT"
                     );
 
 
-                if (!isTyping && searchInput) {
+                if (
+                    event.key === "/" &&
+                    !isTyping
+                ) {
 
                     event.preventDefault();
 
@@ -361,160 +396,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
             }
+        );
 
-        }
-    );
+    }
 
 
 
     /* ========================================
-       CHATGPT — RESPOSTA RÁPIDA
-       SEM API
-    ======================================== */
-
-    const aiQuestion =
-        document.getElementById("aiQuestion");
-
-    const aiAskButton =
-        document.getElementById("aiAskButton");
-
-    const aiSuggestions =
-        document.querySelectorAll(
-            ".ai-suggestion"
-        );
-
-
-    /*
-        Abre o ChatGPT com a pergunta
-        preenchida na URL.
-
-        Não utiliza API.
-        Não utiliza chave.
-        Não gera custo de API.
-    */
-
-    function abrirChatGPT() {
-
-        if (!aiQuestion) {
-            return;
-        }
-
-
-        const question =
-            aiQuestion.value.trim();
-
-
-        if (!question) {
-
-            aiQuestion.focus();
-
-            aiQuestion.classList.add(
-                "ai-input-error"
-            );
-
-
-            setTimeout(
-                function () {
-
-                    aiQuestion.classList.remove(
-                        "ai-input-error"
-                    );
-
-                },
-                800
-            );
-
-            return;
-
-        }
-
-
-        const url =
-            "https://chatgpt.com/?q=" +
-            encodeURIComponent(question);
-
-
-        window.open(
-            url,
-            "_blank",
-            "noopener,noreferrer"
-        );
-
-    }
-
-
-    if (aiAskButton) {
-
-        aiAskButton.addEventListener(
-            "click",
-            abrirChatGPT
-        );
-
-    }
-
-
-    /*
-        Ctrl + Enter também envia
-    */
-
-    if (aiQuestion) {
-
-        aiQuestion.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (
-                    event.key === "Enter" &&
-                    event.ctrlKey
-                ) {
-
-                    event.preventDefault();
-
-                    abrirChatGPT();
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /*
-        Sugestões rápidas
-    */
-
-    aiSuggestions.forEach(
-        function (button) {
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    const question =
-                        this.dataset.question || "";
-
-
-                    if (aiQuestion) {
-
-                        aiQuestion.value =
-                            question;
-
-                        aiQuestion.focus();
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-
-
-    /* ========================================
-       FALLBACK DOS ÍCONES
-       ADMINISTRADORAS
+       FAVICONS
+       FALLBACK
     ======================================== */
 
     const portalImages =
@@ -524,60 +414,611 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     portalImages.forEach(
-        function (img) {
+        function (image) {
 
-            img.addEventListener(
+            image.addEventListener(
                 "error",
                 function () {
 
-                    this.style.display =
+                    const parent =
+                        image.parentElement;
+
+                    image.style.display =
                         "none";
 
+
+                    parent.classList.add(
+                        "favicon-error"
+                    );
+
+
                     const fallback =
-                        this.parentElement.querySelector(
-                            ".portal-fallback"
+                        document.createElement(
+                            "span"
                         );
 
 
-                    if (fallback) {
+                    fallback.textContent =
+                        (
+                            image.alt ||
+                            "ADM"
+                        ).substring(
+                            0,
+                            2
+                        ).toUpperCase();
 
-                        fallback.style.display =
-                            "flex";
+
+                    fallback.className =
+                        "favicon-fallback";
+
+
+                    parent.appendChild(
+                        fallback
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+
+    /* ========================================
+       RESPOSTA RÁPIDA
+       SISTEMA LOCAL — SEM API
+    ======================================== */
+
+    const aiSituation =
+        document.getElementById(
+            "aiSituation"
+        );
+
+    const aiContext =
+        document.getElementById(
+            "aiContext"
+        );
+
+    const generateResponse =
+        document.getElementById(
+            "generateResponse"
+        );
+
+    const clearResponse =
+        document.getElementById(
+            "clearResponse"
+        );
+
+    const aiResult =
+        document.getElementById(
+            "aiResult"
+        );
+
+    const aiResultActions =
+        document.getElementById(
+            "aiResultActions"
+        );
+
+    const copyResponse =
+        document.getElementById(
+            "copyResponse"
+        );
+
+
+    let currentResponse = "";
+
+
+
+    /* ========================================
+       MODELOS DE RESPOSTA
+    ======================================== */
+
+    const responseTemplates = {
+
+
+        pagamento: function (context) {
+
+            return (
+                "Olá! " +
+                "Confirmamos o recebimento da informação referente ao pagamento." +
+                (context
+                    ? "\n\n" + context
+                    : "") +
+                "\n\n" +
+                "Caso seja necessário algum procedimento adicional, " +
+                "permanecemos à disposição.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
+
+        },
+
+
+        documento: function (context) {
+
+            return (
+                "Olá!\n\n" +
+                "Para darmos continuidade ao atendimento, " +
+                "precisamos do documento ou das informações solicitadas." +
+                (context
+                    ? "\n\nInformações adicionais:\n" + context
+                    : "") +
+                "\n\n" +
+                "Assim que recebermos os dados, daremos sequência ao atendimento.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
+
+        },
+
+
+        divergencia: function (context) {
+
+            return (
+                "Olá!\n\n" +
+                "Identificamos uma divergência nas informações apresentadas " +
+                "e estamos realizando a verificação necessária." +
+                (context
+                    ? "\n\nDetalhes:\n" + context
+                    : "") +
+                "\n\n" +
+                "Assim que tivermos a confirmação, retornaremos com as informações corretas.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
+
+        },
+
+
+        retorno: function (context) {
+
+            return (
+                "Olá!\n\n" +
+                "Estamos aguardando o retorno das informações necessárias " +
+                "para dar continuidade ao atendimento." +
+                (context
+                    ? "\n\nReferente a:\n" + context
+                    : "") +
+                "\n\n" +
+                "Assim que recebermos o retorno, prosseguiremos com a solicitação.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
+
+        },
+
+
+        encaminhamento: function (context) {
+
+            return (
+                "Olá!\n\n" +
+                "Sua solicitação foi encaminhada ao setor responsável " +
+                "para análise e providências." +
+                (context
+                    ? "\n\nDetalhes da solicitação:\n" + context
+                    : "") +
+                "\n\n" +
+                "Assim que tivermos um retorno, entraremos em contato.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
+
+        },
+
+
+        agradecimento: function (context) {
+
+            return (
+                "Olá!\n\n" +
+                "Agradecemos pelo contato e pelas informações encaminhadas." +
+                (context
+                    ? "\n\n" + context
+                    : "") +
+                "\n\n" +
+                "Permanecemos à disposição caso seja necessário algum auxílio adicional.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
+
+        },
+
+
+        personalizada: function (context) {
+
+            if (!context) {
+
+                return (
+                    "Olá!\n\n" +
+                    "Por favor, informe os detalhes que deverão constar na resposta."
+                );
+
+            }
+
+
+            return (
+                "Olá!\n\n" +
+                context +
+                "\n\n" +
+                "Permanecemos à disposição para quaisquer esclarecimentos.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
+
+        }
+
+    };
+
+
+
+    /* ========================================
+       GERAR RESPOSTA
+    ======================================== */
+
+    if (
+        generateResponse &&
+        aiSituation &&
+        aiContext &&
+        aiResult
+    ) {
+
+
+        generateResponse.addEventListener(
+            "click",
+            function () {
+
+                const situation =
+                    aiSituation.value;
+
+                const context =
+                    aiContext.value.trim();
+
+
+                if (!situation) {
+
+                    showAIMessage(
+                        "Selecione o tipo de resposta."
+                    );
+
+                    aiSituation.focus();
+
+                    return;
+
+                }
+
+
+                const template =
+                    responseTemplates[
+                        situation
+                    ];
+
+
+                if (
+                    typeof template !== "function"
+                ) {
+
+                    return;
+
+                }
+
+
+                currentResponse =
+                    template(context);
+
+
+                aiResult.innerHTML = "";
+
+
+                const responseText =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                responseText.className =
+                    "ai-generated-text";
+
+
+                responseText.textContent =
+                    currentResponse;
+
+
+                aiResult.appendChild(
+                    responseText
+                );
+
+
+                if (
+                    aiResultActions
+                ) {
+
+                    aiResultActions.classList.add(
+                        "visible"
+                    );
+
+                }
+
+
+                aiResult.classList.add(
+                    "has-result"
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* ========================================
+       MENSAGEM DE ERRO / AVISO
+    ======================================== */
+
+    function showAIMessage(message) {
+
+        if (!aiResult) {
+            return;
+        }
+
+
+        aiResult.innerHTML = "";
+
+
+        const messageElement =
+            document.createElement(
+                "div"
+            );
+
+
+        messageElement.className =
+            "ai-message";
+
+
+        messageElement.textContent =
+            message;
+
+
+        aiResult.appendChild(
+            messageElement
+        );
+
+
+        aiResult.classList.remove(
+            "has-result"
+        );
+
+
+        if (aiResultActions) {
+
+            aiResultActions.classList.remove(
+                "visible"
+            );
+
+        }
+
+    }
+
+
+
+    /* ========================================
+       LIMPAR RESPOSTA
+    ======================================== */
+
+    if (
+        clearResponse
+    ) {
+
+        clearResponse.addEventListener(
+            "click",
+            function () {
+
+                if (aiSituation) {
+
+                    aiSituation.value =
+                        "";
+
+                }
+
+
+                if (aiContext) {
+
+                    aiContext.value =
+                        "";
+
+                }
+
+
+                currentResponse =
+                    "";
+
+
+                if (aiResult) {
+
+                    aiResult.innerHTML = `
+
+                        <div class="ai-result-placeholder">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+
+                                <path d="M5 5h14v14H5z" />
+
+                                <path d="M8 9h8" />
+
+                                <path d="M8 13h5" />
+
+                            </svg>
+
+                            <span>
+                                A resposta gerada aparecerá aqui.
+                            </span>
+
+                        </div>
+
+                    `;
+
+
+                    aiResult.classList.remove(
+                        "has-result"
+                    );
+
+                }
+
+
+                if (aiResultActions) {
+
+                    aiResultActions.classList.remove(
+                        "visible"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* ========================================
+       COPIAR RESPOSTA
+    ======================================== */
+
+    if (
+        copyResponse
+    ) {
+
+        copyResponse.addEventListener(
+            "click",
+            async function () {
+
+                if (!currentResponse) {
+                    return;
+                }
+
+
+                try {
+
+                    await navigator.clipboard.writeText(
+                        currentResponse
+                    );
+
+
+                    const original =
+                        copyResponse.innerHTML;
+
+
+                    copyResponse.innerHTML =
+                        "✓ Resposta copiada";
+
+
+                    copyResponse.classList.add(
+                        "copied"
+                    );
+
+
+                    setTimeout(
+                        function () {
+
+                            copyResponse.innerHTML =
+                                original;
+
+                            copyResponse.classList.remove(
+                                "copied"
+                            );
+
+                        },
+                        1800
+                    );
+
+
+                } catch (error) {
+
+                    /*
+                       Fallback para navegadores
+                       que bloqueiam Clipboard API.
+                    */
+
+                    const temporary =
+                        document.createElement(
+                            "textarea"
+                        );
+
+
+                    temporary.value =
+                        currentResponse;
+
+
+                    document.body.appendChild(
+                        temporary
+                    );
+
+
+                    temporary.select();
+
+
+                    try {
+
+                        document.execCommand(
+                            "copy"
+                        );
+
+                    } catch (e) {
+
+                        console.warn(
+                            "Não foi possível copiar a resposta."
+                        );
 
                     }
+
+
+                    temporary.remove();
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* ========================================
+       ANIMAÇÃO DOS CARDS
+    ======================================== */
+
+    const toolCards =
+        document.querySelectorAll(
+            ".tool-card"
+        );
+
+
+    toolCards.forEach(
+        function (card) {
+
+            card.addEventListener(
+                "mouseenter",
+                function () {
+
+                    card.classList.add(
+                        "is-hovered"
+                    );
 
                 }
             );
 
 
-            /*
-                Caso a imagem já esteja
-                indisponível no carregamento.
-            */
+            card.addEventListener(
+                "mouseleave",
+                function () {
 
-            if (
-                img.complete &&
-                img.naturalWidth === 0
-            ) {
-
-                img.style.display =
-                    "none";
-
-
-                const fallback =
-                    img.parentElement.querySelector(
-                        ".portal-fallback"
+                    card.classList.remove(
+                        "is-hovered"
                     );
 
-
-                if (fallback) {
-
-                    fallback.style.display =
-                        "flex";
-
                 }
-
-            }
+            );
 
         }
     );
