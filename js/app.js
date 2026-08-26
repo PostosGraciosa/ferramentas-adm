@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* ========================================
-       ELEMENTOS
+       DROPDOWN
+       ADMINISTRADORAS / PORTAIS
     ======================================== */
 
     const portalButton =
@@ -20,25 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const portalList =
         document.getElementById("portalList");
 
-    const toolSearch =
-        document.getElementById("toolSearch");
-
-    const noResults =
-        document.getElementById("noResults");
-
-    const aiQuestion =
-        document.getElementById("aiQuestion");
-
-    const aiButton =
-        document.getElementById("aiButton");
-
-    const suggestions =
-        document.querySelectorAll(".suggestion");
-
-
-    /* ========================================
-       DROPDOWN
-    ======================================== */
 
     if (
         portalButton &&
@@ -55,30 +37,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 event.stopPropagation();
 
-                const isOpen =
+                const isActive =
                     portalDropdown.classList.toggle("active");
 
                 portalButton.setAttribute(
                     "aria-expanded",
-                    isOpen ? "true" : "false"
+                    isActive ? "true" : "false"
                 );
 
             }
         );
 
 
-        /* ====================================
-           FECHAR AO CLICAR FORA
-        ==================================== */
-
         document.addEventListener(
             "click",
             function (event) {
 
                 if (
-                    !portalDropdown.contains(
-                        event.target
-                    )
+                    !portalDropdown.contains(event.target)
                 ) {
 
                     portalDropdown.classList.remove(
@@ -95,10 +71,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         );
 
-
-        /* ====================================
-           ESC
-        ==================================== */
 
         document.addEventListener(
             "keydown",
@@ -122,10 +94,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         );
 
-
-        /* ====================================
-           PORTAL CLICADO
-        ==================================== */
 
         const portalItems =
             portalList.querySelectorAll(
@@ -167,382 +135,263 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* ========================================
-       BUSCA
+       BUSCA DE FERRAMENTAS
     ======================================== */
 
-    function normalizeText(text) {
+    const searchInput =
+        document.getElementById("toolSearch");
 
-        return text
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(
-                /[\u0300-\u036f]/g,
-                ""
-            )
-            .trim();
+    const categories =
+        document.querySelectorAll(
+            ".category"
+        );
 
-    }
+    const noResults =
+        document.getElementById("noResults");
 
 
-    function performSearch() {
+    if (searchInput) {
 
 
-        if (!toolSearch) {
-            return;
-        }
+        searchInput.addEventListener(
+            "input",
+            function () {
+
+                const search =
+                    this.value
+                        .toLowerCase()
+                        .trim();
 
 
-        const search =
-            normalizeText(
-                toolSearch.value
-            );
+                let totalResults = 0;
 
 
-        const categories =
-            document.querySelectorAll(
-                ".category"
-            );
+                categories.forEach(
+                    function (category) {
+
+                        const searchableCategory =
+                            (
+                                category.dataset.category ||
+                                ""
+                            ).toLowerCase();
 
 
-        let totalVisible = 0;
-
-
-        categories.forEach(
-            function (category) {
-
-
-                const categoryText =
-                    normalizeText(
-                        category.innerText +
-                        " " +
-                        (
-                            category.dataset.category ||
-                            ""
-                        )
-                    );
-
-
-                const cards =
-                    category.querySelectorAll(
-                        ".tool-card"
-                    );
-
-
-                const portals =
-                    category.querySelectorAll(
-                        ".portal-item"
-                    );
-
-
-                let visibleItems = 0;
-
-
-                /* ==============================
-                   CARDS
-                ============================== */
-
-                cards.forEach(
-                    function (card) {
-
-                        const text =
-                            normalizeText(
-                                (
-                                    card.innerText ||
-                                    ""
-                                ) +
-                                " " +
-                                (
-                                    card.dataset.search ||
-                                    ""
-                                )
+                        const cards =
+                            category.querySelectorAll(
+                                ".tool-card, .portal-item"
                             );
 
 
-                        const match =
-                            !search ||
-                            text.includes(search);
+                        let categoryMatches = 0;
 
 
-                        card.style.display =
-                            match
-                                ? ""
-                                : "none";
+                        /*
+                           Caso seja uma categoria especial,
+                           como Resposta Rápida.
+                        */
 
+                        if (
+                            category.classList.contains(
+                                "ai-category"
+                            )
+                        ) {
 
-                        if (match) {
-                            visibleItems++;
-                            totalVisible++;
-                        }
-
-                    }
-                );
-
-
-
-                /* ==============================
-                   PORTAIS
-                ============================== */
-
-                portals.forEach(
-                    function (portal) {
-
-                        const text =
-                            normalizeText(
-                                (
-                                    portal.innerText ||
-                                    ""
-                                ) +
-                                " " +
-                                (
-                                    portal.dataset.search ||
-                                    ""
-                                )
-                            );
-
-
-                        const match =
-                            !search ||
-                            text.includes(search);
-
-
-                        portal.style.display =
-                            match
-                                ? ""
-                                : "none";
-
-
-                        if (match) {
-                            visibleItems++;
-                            totalVisible++;
-                        }
-
-                    }
-                );
-
-
-
-                /* ==============================
-                   DROPDOWN
-                ============================== */
-
-                const portalDropdownElement =
-                    category.querySelector(
-                        ".portal-dropdown"
-                    );
-
-
-                if (
-                    portalDropdownElement &&
-                    search
-                ) {
-
-                    const portalMatches =
-                        Array.from(
-                            portals
-                        ).some(
-                            function (portal) {
-
-                                return (
-                                    portal.style.display !==
-                                    "none"
+                            const categoryMatch =
+                                searchableCategory.includes(
+                                    search
                                 );
+
+                            if (
+                                search === "" ||
+                                categoryMatch
+                            ) {
+
+                                category.style.display =
+                                    "";
+
+                                totalResults++;
+
+                            } else {
+
+                                category.style.display =
+                                    "none";
+
+                            }
+
+                            return;
+
+                        }
+
+
+                        /*
+                           Categorias sem cards.
+                        */
+
+                        if (
+                            cards.length === 0
+                        ) {
+
+                            if (
+                                search === "" ||
+                                searchableCategory.includes(search)
+                            ) {
+
+                                category.style.display =
+                                    "";
+
+                                totalResults++;
+
+                            } else {
+
+                                category.style.display =
+                                    "none";
+
+                            }
+
+                            return;
+
+                        }
+
+
+                        /*
+                           Verificação dos cards.
+                        */
+
+                        cards.forEach(
+                            function (card) {
+
+                                const searchableText =
+                                    (
+                                        card.dataset.search ||
+                                        card.textContent ||
+                                        ""
+                                    ).toLowerCase();
+
+
+                                const match =
+                                    search === "" ||
+                                    searchableText.includes(
+                                        search
+                                    );
+
+
+                                card.style.display =
+                                    match ? "" : "none";
+
+
+                                if (match) {
+
+                                    categoryMatches++;
+
+                                    totalResults++;
+
+                                }
 
                             }
                         );
 
 
-                    const categoryMatches =
-                        categoryText.includes(
-                            search
-                        );
+                        /*
+                           Mostrar / esconder categoria.
+                        */
 
+                        if (
+                            categoryMatches > 0
+                        ) {
 
-                    if (
-                        portalMatches ||
-                        categoryMatches
-                    ) {
+                            category.style.display =
+                                "";
 
-                        category.style.display =
-                            "";
+                        } else {
+
+                            /*
+                               Pesquisa também no nome
+                               da categoria.
+                            */
+
+                            if (
+                                search !== "" &&
+                                searchableCategory.includes(
+                                    search
+                                )
+                            ) {
+
+                                category.style.display =
+                                    "";
+
+                                cards.forEach(
+                                    function (card) {
+
+                                        card.style.display =
+                                            "";
+
+                                    }
+                                );
+
+                                totalResults +=
+                                    cards.length;
+
+                            } else {
+
+                                category.style.display =
+                                    "none";
+
+                            }
+
+                        }
 
                     }
-                    else {
-
-                        category.style.display =
-                            "none";
-
-                    }
-
-                }
-                else {
-
-                    category.style.display =
-                        visibleItems > 0 ||
-                        !search;
-
-                }
-
-            }
-        );
-
-
-
-        /* ====================================
-           RESULTADO VAZIO
-        ==================================== */
-
-        if (noResults) {
-
-            noResults.style.display =
-                totalVisible === 0 && search
-                    ? "flex"
-                    : "none";
-
-        }
-
-    }
-
-
-    if (toolSearch) {
-
-        toolSearch.addEventListener(
-            "input",
-            performSearch
-        );
-
-    }
-
-
-
-    /* ========================================
-       ATALHO /
-    ======================================== */
-
-    document.addEventListener(
-        "keydown",
-        function (event) {
-
-            const activeElement =
-                document.activeElement;
-
-
-            const isTyping =
-                activeElement &&
-                (
-                    activeElement.tagName === "INPUT" ||
-                    activeElement.tagName === "TEXTAREA"
                 );
 
 
-            if (
-                event.key === "/" &&
-                !isTyping &&
-                toolSearch
-            ) {
+                /*
+                   Resultado da pesquisa.
+                */
 
-                event.preventDefault();
+                if (
+                    noResults
+                ) {
 
-                toolSearch.focus();
+                    noResults.classList.toggle(
+                        "visible",
+                        search !== "" &&
+                        totalResults === 0
+                    );
+
+                }
 
             }
-
-        }
-    );
-
-
-
-    /* ========================================
-       ASSISTENTE CHATGPT
-    ======================================== */
-
-    function openChatGPT(question) {
-
-
-        const cleanQuestion =
-            (question || "").trim();
+        );
 
 
         /*
-         * Sem API.
-         *
-         * A pergunta é enviada para a página
-         * do ChatGPT através do parâmetro q.
-         *
-         * Não existe chave de API no código.
-         */
+           Atalho "/" para pesquisa.
+        */
 
-
-        let url =
-            "https://chatgpt.com/";
-
-
-        if (cleanQuestion) {
-
-            url +=
-                "?q=" +
-                encodeURIComponent(
-                    cleanQuestion
-                );
-
-        }
-
-
-        window.open(
-            url,
-            "_blank",
-            "noopener,noreferrer"
-        );
-
-    }
-
-
-
-    /* ========================================
-       BOTÃO CHATGPT
-    ======================================== */
-
-    if (aiButton) {
-
-        aiButton.addEventListener(
-            "click",
-            function () {
-
-                const question =
-                    aiQuestion
-                        ? aiQuestion.value
-                        : "";
-
-
-                openChatGPT(
-                    question
-                );
-
-            }
-        );
-
-    }
-
-
-
-    /* ========================================
-       ENTER NA CAIXA DA IA
-    ======================================== */
-
-    if (aiQuestion) {
-
-        aiQuestion.addEventListener(
+        document.addEventListener(
             "keydown",
             function (event) {
 
+                const activeElement =
+                    document.activeElement;
+
+                const isTyping =
+                    activeElement &&
+                    (
+                        activeElement.tagName === "INPUT" ||
+                        activeElement.tagName === "TEXTAREA" ||
+                        activeElement.tagName === "SELECT"
+                    );
+
+
                 if (
-                    event.key === "Enter"
+                    event.key === "/" &&
+                    !isTyping
                 ) {
 
                     event.preventDefault();
 
-                    openChatGPT(
-                        aiQuestion.value
-                    );
+                    searchInput.focus();
 
                 }
 
@@ -554,43 +403,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* ========================================
-       SUGESTÕES RÁPIDAS
-    ======================================== */
-
-    suggestions.forEach(
-        function (suggestion) {
-
-            suggestion.addEventListener(
-                "click",
-                function () {
-
-                    const question =
-                        suggestion.dataset.question ||
-                        "";
-
-
-                    if (aiQuestion) {
-
-                        aiQuestion.value =
-                            question;
-
-                    }
-
-
-                    openChatGPT(
-                        question
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-
-    /* ========================================
-       FALLBACK DOS FAVICONS
+       FAVICONS
+       FALLBACK
     ======================================== */
 
     const portalImages =
@@ -606,25 +420,41 @@ document.addEventListener("DOMContentLoaded", function () {
                 "error",
                 function () {
 
-                    const container =
+                    const parent =
                         image.parentElement;
 
+                    image.style.display =
+                        "none";
 
-                    if (
-                        container &&
-                        !container.classList.contains(
-                            "favicon-error"
-                        )
-                    ) {
 
-                        container.classList.add(
-                            "favicon-error"
+                    parent.classList.add(
+                        "favicon-error"
+                    );
+
+
+                    const fallback =
+                        document.createElement(
+                            "span"
                         );
 
-                        image.style.display =
-                            "none";
 
-                    }
+                    fallback.textContent =
+                        (
+                            image.alt ||
+                            "ADM"
+                        ).substring(
+                            0,
+                            2
+                        ).toUpperCase();
+
+
+                    fallback.className =
+                        "favicon-fallback";
+
+
+                    parent.appendChild(
+                        fallback
+                    );
 
                 }
             );
@@ -632,5 +462,565 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     );
 
+
+
+    /* ========================================
+       RESPOSTA RÁPIDA
+       SISTEMA LOCAL — SEM API
+    ======================================== */
+
+    const aiSituation =
+        document.getElementById(
+            "aiSituation"
+        );
+
+    const aiContext =
+        document.getElementById(
+            "aiContext"
+        );
+
+    const generateResponse =
+        document.getElementById(
+            "generateResponse"
+        );
+
+    const clearResponse =
+        document.getElementById(
+            "clearResponse"
+        );
+
+    const aiResult =
+        document.getElementById(
+            "aiResult"
+        );
+
+    const aiResultActions =
+        document.getElementById(
+            "aiResultActions"
+        );
+
+    const copyResponse =
+        document.getElementById(
+            "copyResponse"
+        );
+
+
+    let currentResponse = "";
+
+
+
+    /* ========================================
+       MODELOS DE RESPOSTA
+    ======================================== */
+
+    const responseTemplates = {
+
+
+        pagamento: function (context) {
+
+            return (
+                "Olá! " +
+                "Confirmamos o recebimento da informação referente ao pagamento." +
+                (context
+                    ? "\n\n" + context
+                    : "") +
+                "\n\n" +
+                "Caso seja necessário algum procedimento adicional, " +
+                "permanecemos à disposição.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
+
+        },
+
+
+        documento: function (context) {
+
+            return (
+                "Olá!\n\n" +
+                "Para darmos continuidade ao atendimento, " +
+                "precisamos do documento ou das informações solicitadas." +
+                (context
+                    ? "\n\nInformações adicionais:\n" + context
+                    : "") +
+                "\n\n" +
+                "Assim que recebermos os dados, daremos sequência ao atendimento.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
+
+        },
+
+
+        divergencia: function (context) {
+
+            return (
+                "Olá!\n\n" +
+                "Identificamos uma divergência nas informações apresentadas " +
+                "e estamos realizando a verificação necessária." +
+                (context
+                    ? "\n\nDetalhes:\n" + context
+                    : "") +
+                "\n\n" +
+                "Assim que tivermos a confirmação, retornaremos com as informações corretas.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
+
+        },
+
+
+        retorno: function (context) {
+
+            return (
+                "Olá!\n\n" +
+                "Estamos aguardando o retorno das informações necessárias " +
+                "para dar continuidade ao atendimento." +
+                (context
+                    ? "\n\nReferente a:\n" + context
+                    : "") +
+                "\n\n" +
+                "Assim que recebermos o retorno, prosseguiremos com a solicitação.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
+
+        },
+
+
+        encaminhamento: function (context) {
+
+            return (
+                "Olá!\n\n" +
+                "Sua solicitação foi encaminhada ao setor responsável " +
+                "para análise e providências." +
+                (context
+                    ? "\n\nDetalhes da solicitação:\n" + context
+                    : "") +
+                "\n\n" +
+                "Assim que tivermos um retorno, entraremos em contato.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
+
+        },
+
+
+        agradecimento: function (context) {
+
+            return (
+                "Olá!\n\n" +
+                "Agradecemos pelo contato e pelas informações encaminhadas." +
+                (context
+                    ? "\n\n" + context
+                    : "") +
+                "\n\n" +
+                "Permanecemos à disposição caso seja necessário algum auxílio adicional.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
+
+        },
+
+
+        personalizada: function (context) {
+
+            if (!context) {
+
+                return (
+                    "Olá!\n\n" +
+                    "Por favor, informe os detalhes que deverão constar na resposta."
+                );
+
+            }
+
+
+            return (
+                "Olá!\n\n" +
+                context +
+                "\n\n" +
+                "Permanecemos à disposição para quaisquer esclarecimentos.\n\n" +
+                "Atenciosamente,\n" +
+                "Postos Graciosa"
+            );
+
+        }
+
+    };
+
+
+
+    /* ========================================
+       GERAR RESPOSTA
+    ======================================== */
+
+    if (
+        generateResponse &&
+        aiSituation &&
+        aiContext &&
+        aiResult
+    ) {
+
+
+        generateResponse.addEventListener(
+            "click",
+            function () {
+
+                const situation =
+                    aiSituation.value;
+
+                const context =
+                    aiContext.value.trim();
+
+
+                if (!situation) {
+
+                    showAIMessage(
+                        "Selecione o tipo de resposta."
+                    );
+
+                    aiSituation.focus();
+
+                    return;
+
+                }
+
+
+                const template =
+                    responseTemplates[
+                        situation
+                    ];
+
+
+                if (
+                    typeof template !== "function"
+                ) {
+
+                    return;
+
+                }
+
+
+                currentResponse =
+                    template(context);
+
+
+                aiResult.innerHTML = "";
+
+
+                const responseText =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                responseText.className =
+                    "ai-generated-text";
+
+
+                responseText.textContent =
+                    currentResponse;
+
+
+                aiResult.appendChild(
+                    responseText
+                );
+
+
+                if (
+                    aiResultActions
+                ) {
+
+                    aiResultActions.classList.add(
+                        "visible"
+                    );
+
+                }
+
+
+                aiResult.classList.add(
+                    "has-result"
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* ========================================
+       MENSAGEM DE ERRO / AVISO
+    ======================================== */
+
+    function showAIMessage(message) {
+
+        if (!aiResult) {
+            return;
+        }
+
+
+        aiResult.innerHTML = "";
+
+
+        const messageElement =
+            document.createElement(
+                "div"
+            );
+
+
+        messageElement.className =
+            "ai-message";
+
+
+        messageElement.textContent =
+            message;
+
+
+        aiResult.appendChild(
+            messageElement
+        );
+
+
+        aiResult.classList.remove(
+            "has-result"
+        );
+
+
+        if (aiResultActions) {
+
+            aiResultActions.classList.remove(
+                "visible"
+            );
+
+        }
+
+    }
+
+
+
+    /* ========================================
+       LIMPAR RESPOSTA
+    ======================================== */
+
+    if (
+        clearResponse
+    ) {
+
+        clearResponse.addEventListener(
+            "click",
+            function () {
+
+                if (aiSituation) {
+
+                    aiSituation.value =
+                        "";
+
+                }
+
+
+                if (aiContext) {
+
+                    aiContext.value =
+                        "";
+
+                }
+
+
+                currentResponse =
+                    "";
+
+
+                if (aiResult) {
+
+                    aiResult.innerHTML = `
+
+                        <div class="ai-result-placeholder">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+
+                                <path d="M5 5h14v14H5z" />
+
+                                <path d="M8 9h8" />
+
+                                <path d="M8 13h5" />
+
+                            </svg>
+
+                            <span>
+                                A resposta gerada aparecerá aqui.
+                            </span>
+
+                        </div>
+
+                    `;
+
+
+                    aiResult.classList.remove(
+                        "has-result"
+                    );
+
+                }
+
+
+                if (aiResultActions) {
+
+                    aiResultActions.classList.remove(
+                        "visible"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* ========================================
+       COPIAR RESPOSTA
+    ======================================== */
+
+    if (
+        copyResponse
+    ) {
+
+        copyResponse.addEventListener(
+            "click",
+            async function () {
+
+                if (!currentResponse) {
+                    return;
+                }
+
+
+                try {
+
+                    await navigator.clipboard.writeText(
+                        currentResponse
+                    );
+
+
+                    const original =
+                        copyResponse.innerHTML;
+
+
+                    copyResponse.innerHTML =
+                        "✓ Resposta copiada";
+
+
+                    copyResponse.classList.add(
+                        "copied"
+                    );
+
+
+                    setTimeout(
+                        function () {
+
+                            copyResponse.innerHTML =
+                                original;
+
+                            copyResponse.classList.remove(
+                                "copied"
+                            );
+
+                        },
+                        1800
+                    );
+
+
+                } catch (error) {
+
+                    /*
+                       Fallback para navegadores
+                       que bloqueiam Clipboard API.
+                    */
+
+                    const temporary =
+                        document.createElement(
+                            "textarea"
+                        );
+
+
+                    temporary.value =
+                        currentResponse;
+
+
+                    document.body.appendChild(
+                        temporary
+                    );
+
+
+                    temporary.select();
+
+
+                    try {
+
+                        document.execCommand(
+                            "copy"
+                        );
+
+                    } catch (e) {
+
+                        console.warn(
+                            "Não foi possível copiar a resposta."
+                        );
+
+                    }
+
+
+                    temporary.remove();
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* ========================================
+       ANIMAÇÃO DOS CARDS
+    ======================================== */
+
+    const toolCards =
+        document.querySelectorAll(
+            ".tool-card"
+        );
+
+
+    toolCards.forEach(
+        function (card) {
+
+            card.addEventListener(
+                "mouseenter",
+                function () {
+
+                    card.classList.add(
+                        "is-hovered"
+                    );
+
+                }
+            );
+
+
+            card.addEventListener(
+                "mouseleave",
+                function () {
+
+                    card.classList.remove(
+                        "is-hovered"
+                    );
+
+                }
+            );
+
+        }
+    );
 
 });
