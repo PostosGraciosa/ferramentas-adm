@@ -20,7 +20,7 @@
         content="#0f172a"
     >
 
-    <title>Ferramentas ADM</title>
+    <title>Ferramentas ADM | Postos Graciosa</title>
 
 
     <!-- =========================================
@@ -43,17 +43,21 @@
         href="css/style.css"
     >
 
+
 </head>
 
 
 <body>
 
 
-    <!-- =========================================
-         FUNDO
-    ========================================== -->
+    <!-- =====================================================
+         FUNDO DECORATIVO
+    ====================================================== -->
 
-    <div class="background">
+    <div
+        class="background"
+        aria-hidden="true"
+    >
 
         <div class="background-grid"></div>
 
@@ -69,16 +73,16 @@
 
 
 
-    <!-- =========================================
-         CONTEÚDO
-    ========================================== -->
+    <!-- =====================================================
+         CONTEÚDO PRINCIPAL
+    ====================================================== -->
 
     <main class="container">
 
 
-        <!-- =====================================
+        <!-- =================================================
              HEADER
-        ====================================== -->
+        ================================================== -->
 
         <header class="header">
 
@@ -155,9 +159,9 @@
 
 
 
-        <!-- =====================================
+        <!-- =================================================
              INTRODUÇÃO
-        ====================================== -->
+        ================================================== -->
 
         <section class="intro">
 
@@ -166,9 +170,7 @@
 
 
                 <span class="section-overline">
-
                     CENTRAL ADMINISTRATIVA
-
                 </span>
 
 
@@ -186,7 +188,9 @@
 
 
 
-            <!-- BUSCA -->
+            <!-- =============================================
+                 BUSCA
+            ============================================== -->
 
             <div class="search-box">
 
@@ -194,11 +198,18 @@
                 <svg
                     class="search-icon"
                     viewBox="0 0 24 24"
+                    fill="none"
                     aria-hidden="true"
                 >
 
+                    <circle
+                        cx="11"
+                        cy="11"
+                        r="6.5"
+                    />
+
                     <path
-                        d="M21 21l-4.35-4.35m1.35-5.15a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"
+                        d="m16 16 4 4"
                     />
 
                 </svg>
@@ -213,7 +224,10 @@
                 >
 
 
-                <span class="search-shortcut">
+                <span
+                    class="search-shortcut"
+                    aria-hidden="true"
+                >
                     /
                 </span>
 
@@ -225,9 +239,9 @@
 
 
 
-        <!-- =====================================
-             CONTEÚDO DAS FERRAMENTAS
-        ====================================== -->
+        <!-- =================================================
+             FERRAMENTAS
+        ================================================== -->
 
         <section
             class="tools-section"
@@ -236,13 +250,13 @@
 
 
 
-            <!-- ==================================
+            <!-- =================================================
                  ADMINISTRADORAS E PORTAIS
-            =================================== -->
+            ================================================== -->
 
             <section
                 class="category category-portals"
-                data-category="administradoras portais"
+                data-category="administradoras portais cartões"
             >
 
 
@@ -251,9 +265,9 @@
 
                     <div class="category-icon portal-category-icon">
 
-
                         <svg
                             viewBox="0 0 24 24"
+                            fill="none"
                             aria-hidden="true"
                         >
 
@@ -275,7 +289,6 @@
 
                         </svg>
 
-
                     </div>
 
 
@@ -296,7 +309,9 @@
 
 
 
-                <!-- DROPDOWN -->
+                <!-- =================================================
+                     DROPDOWN
+                ================================================== -->
 
                 <div class="portal-dropdown">
 
@@ -315,9 +330,9 @@
 
                             <div class="portal-main-icon">
 
-
                                 <svg
                                     viewBox="0 0 24 24"
+                                    fill="none"
                                     aria-hidden="true"
                                 >
 
@@ -338,7 +353,6 @@
                                     />
 
                                 </svg>
-
 
                             </div>
 
@@ -362,9 +376,9 @@
 
                         <span class="portal-arrow">
 
-
                             <svg
                                 viewBox="0 0 24 24"
+                                fill="none"
                                 aria-hidden="true"
                             >
 
@@ -374,7 +388,6 @@
 
                             </svg>
 
-
                         </span>
 
 
@@ -382,9 +395,9 @@
 
 
 
-                    <!-- =================================
+                    <!-- =================================================
                          LISTA DE PORTAIS
-                    ================================== -->
+                    ================================================== -->
 
                     <div
                         class="portal-list"
@@ -392,18 +405,26 @@
                     >
 
 
-                        <!-- CIELO -->
+                        <!-- =============================================
+                             CIELO
+                        ============================================== -->
 
                         <a
                             href="https://minhaconta2.cielo.com.br/site/acessos/login"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="portal-item"
-                            data-search="cielo"
+                            data-search="cielo cartão administradora"
                         >
 
                             <span class="portal-item-icon">
-                                <span>C</span>
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=cielo.com.br&sz=64"
+                                    alt="Cielo"
+                                    loading="lazy"
+                                >
+
                             </span>
 
                             <span class="portal-item-name">
@@ -418,18 +439,26 @@
 
 
 
-                        <!-- CS ONLINE -->
+                        <!-- =============================================
+                             CS ONLINE
+                        ============================================== -->
 
                         <a
                             href="https://csonlinetenant.b2clogin.com/csonlinetenant.onmicrosoft.com/oauth2/v2.0/authorize?response_mode=query&client_id=9ee58843-cddd-427d-a2af-2911434ad880&nonce=defaultNonce&scope=openid&response_type=code&prompt=login&p=B2C_1A_SeamlessMigration_signuporsignin_UserName&ui_locales=pt-BR&redirect_uri=https%3A%2F%2Fportal.csonline.com.br%2F%2523%2Flogin%2Fhandler&code_challenge=d8Vf5H-O8MZ0zTJP5Jo6_XHNsPWttAl5Q9qbNacbXJ8&code_challenge_method=S256&state=%2F"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="portal-item"
-                            data-search="cs online"
+                            data-search="cs online cartão administradora"
                         >
 
                             <span class="portal-item-icon">
-                                <span>CS</span>
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=portal.csonline.com.br&sz=64"
+                                    alt="CS Online"
+                                    loading="lazy"
+                                >
+
                             </span>
 
                             <span class="portal-item-name">
@@ -444,18 +473,26 @@
 
 
 
-                        <!-- GETNET -->
+                        <!-- =============================================
+                             GETNET
+                        ============================================== -->
 
                         <a
                             href="https://minhaconta.getnet.com.br/login"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="portal-item"
-                            data-search="getnet"
+                            data-search="getnet cartão administradora"
                         >
 
                             <span class="portal-item-icon">
-                                <span>G</span>
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=getnet.com.br&sz=64"
+                                    alt="Getnet"
+                                    loading="lazy"
+                                >
+
                             </span>
 
                             <span class="portal-item-name">
@@ -470,18 +507,26 @@
 
 
 
-                        <!-- LINK -->
+                        <!-- =============================================
+                             LINK
+                        ============================================== -->
 
                         <a
                             href="https://linkbeneficios.com.br/Intranet/Credenciado/Login"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="portal-item"
-                            data-search="link"
+                            data-search="link benefícios cartão administradora"
                         >
 
                             <span class="portal-item-icon">
-                                <span>L</span>
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=linkbeneficios.com.br&sz=64"
+                                    alt="Link"
+                                    loading="lazy"
+                                >
+
                             </span>
 
                             <span class="portal-item-name">
@@ -496,18 +541,26 @@
 
 
 
-                        <!-- MAIS CASH -->
+                        <!-- =============================================
+                             MAIS CASH
+                        ============================================== -->
 
                         <a
                             href="https://maiscash.cartaodetodos.com.br/auth/login"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="portal-item"
-                            data-search="maiscash mais cash"
+                            data-search="maiscash mais cash cartão"
                         >
 
                             <span class="portal-item-icon">
-                                <span>M</span>
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=cartaodetodos.com.br&sz=64"
+                                    alt="MaisCash"
+                                    loading="lazy"
+                                >
+
                             </span>
 
                             <span class="portal-item-name">
@@ -522,18 +575,26 @@
 
 
 
-                        <!-- NEO -->
+                        <!-- =============================================
+                             NEO
+                        ============================================== -->
 
                         <a
                             href="https://neofacilidades.com.br/Intranet/Login?ReturnUrl=%2FIntranet%2FCredenciado"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="portal-item"
-                            data-search="neo"
+                            data-search="neo facilidades cartão"
                         >
 
                             <span class="portal-item-icon">
-                                <span>N</span>
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=neofacilidades.com.br&sz=64"
+                                    alt="Neo"
+                                    loading="lazy"
+                                >
+
                             </span>
 
                             <span class="portal-item-name">
@@ -548,18 +609,26 @@
 
 
 
-                        <!-- PAYLY -->
+                        <!-- =============================================
+                             PAYLY
+                        ============================================== -->
 
                         <a
                             href="https://www.payly.com.br/portal"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="portal-item"
-                            data-search="payly"
+                            data-search="payly cartão administradora"
                         >
 
                             <span class="portal-item-icon">
-                                <span>P</span>
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=payly.com.br&sz=64"
+                                    alt="Payly"
+                                    loading="lazy"
+                                >
+
                             </span>
 
                             <span class="portal-item-name">
@@ -574,18 +643,26 @@
 
 
 
-                        <!-- PORTAL DO FRENTISTA -->
+                        <!-- =============================================
+                             PORTAL DO FRENTISTA
+                        ============================================== -->
 
                         <a
                             href="https://cn.vibraenergia.com.br/premmia/revendedor/login"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="portal-item"
-                            data-search="portal frentista prem mia vibra"
+                            data-search="portal frentista prem mia premmia vibra"
                         >
 
                             <span class="portal-item-icon">
-                                <span>PF</span>
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=vibraenergia.com.br&sz=64"
+                                    alt="Portal do Frentista"
+                                    loading="lazy"
+                                >
+
                             </span>
 
                             <span class="portal-item-name">
@@ -600,18 +677,26 @@
 
 
 
-                        <!-- PRIME -->
+                        <!-- =============================================
+                             PRIME
+                        ============================================== -->
 
                         <a
                             href="https://www.primebeneficios.com.br/Intranet/Prime/Login"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="portal-item"
-                            data-search="prime"
+                            data-search="prime benefícios cartão administradora"
                         >
 
                             <span class="portal-item-icon">
-                                <span>P</span>
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=primebeneficios.com.br&sz=64"
+                                    alt="Prime"
+                                    loading="lazy"
+                                >
+
                             </span>
 
                             <span class="portal-item-name">
@@ -626,18 +711,26 @@
 
 
 
-                        <!-- REDE -->
+                        <!-- =============================================
+                             REDE
+                        ============================================== -->
 
                         <a
                             href="https://meu.userede.com.br/?redirect=%2Fhome"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="portal-item"
-                            data-search="rede userede"
+                            data-search="rede userede cartão administradora"
                         >
 
                             <span class="portal-item-icon">
-                                <span>R</span>
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=userede.com.br&sz=64"
+                                    alt="Rede"
+                                    loading="lazy"
+                                >
+
                             </span>
 
                             <span class="portal-item-name">
@@ -652,18 +745,26 @@
 
 
 
-                        <!-- SEM PARAR -->
+                        <!-- =============================================
+                             SEM PARAR
+                        ============================================== -->
 
                         <a
                             href="https://credenciados.semparar.com.br/login"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="portal-item"
-                            data-search="sem parar"
+                            data-search="sem parar cartão administradora"
                         >
 
                             <span class="portal-item-icon">
-                                <span>SP</span>
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=semparar.com.br&sz=64"
+                                    alt="Sem Parar"
+                                    loading="lazy"
+                                >
+
                             </span>
 
                             <span class="portal-item-name">
@@ -678,18 +779,26 @@
 
 
 
-                        <!-- SITEF -->
+                        <!-- =============================================
+                             SITEF
+                        ============================================== -->
 
                         <a
                             href="https://oauth.softwareexpress.com.br/auth/realms/sitefexpress/protocol/openid-connect/auth?response_type=code&client_id=sitefweb&redirect_uri=https%3A%2F%2Fsitefexpress1.softwareexpress.com.br%2Fsitefweb%2Fsso%2Flogin&state=36c646b0-f71b-4f4b-bfba-011e3464646e&login=true&scope=openid"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="portal-item"
-                            data-search="sitef software express"
+                            data-search="sitef software express cartão administradora"
                         >
 
                             <span class="portal-item-icon">
-                                <span>S</span>
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=softwareexpress.com.br&sz=64"
+                                    alt="Sitef"
+                                    loading="lazy"
+                                >
+
                             </span>
 
                             <span class="portal-item-name">
@@ -704,18 +813,26 @@
 
 
 
-                        <!-- TICKET -->
+                        <!-- =============================================
+                             TICKET
+                        ============================================== -->
 
                         <a
-                            href="https://sso.sa.edenred.io/web/session/step/password?returnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fresponse_type%3Dcode%26client_id%3De80f46481b09455a80471c8d880ae2ee%26state%3DS0piUlRZbzUzRFhSWi54Z2JzQkJRT2tQaUd6eklYZlhjUW14VnpnNjNkM0hw%26redirect_uri%3Dhttps%253A%252F%252Fparceiro.edenredmobilidade.com.br%252FEstabelecimentoSSL%252Fsso%252Flogin.cfm%26scope%3Dopenid%2520profile%2520email%2520offline_access%2520portal-fleet-and-mobility-ms_application%2520portal-fleet-and-mobility-ms_application-mfa%26code_challenge%3DvSVYofcn_HGpKqlr3OXBvYSPUjnepfx2blvsNjUIru0%26code_challenge_method%3DS256%26nonce%3DS0piUlRZbzUzRFhSWi54Z2JzQkJRT2tQaUd6eklYZlhjUW14VnpnNjNkM0hw%26acr_values%3Dtenant%253Afleet-br-merchant%26ui_locales%3Dpt-br"
+                            href="https://sso.sa.edenred.io/web/session/step/password?returnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fresponse_type%3Dcode%26client_id%3De80f46481b09455a80471c8d880ae2ee%26state%3DS0piUlRZbzUzRFhSWi54Z2JzQkJRT2tQaUd6eklYZlhjUW14VnpnNjNkM0hw%26redirect_uri%3Dhttps%253A%252F%252Fparceiro.edenredmobilidade.com.br%252FEstabelecimentoSSL%252Fsso%2Flogin.cfm%26scope%3Dopenid%2520profile%2520email%2520offline_access%2520portal-fleet-and-mobility-ms_application%2520portal-fleet-and-mobility-ms_application-mfa%26code_challenge%3DvSVYofcn_HGpKqlr3OXBvYSPUjnepfx2blvsNjUIru0%26code_challenge_method%3DS256%26nonce%3DS0piUlRZbzUzRFhSWi54Z2JzQkJRT2tQaUd6eklYZlhjUW14VnpnNjNkM0hw%26acr_values%3Dtenant%253Afleet-br-merchant%26ui_locales%3Dpt-br"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="portal-item"
-                            data-search="ticket edenred"
+                            data-search="ticket edenred cartão administradora"
                         >
 
                             <span class="portal-item-icon">
-                                <span>T</span>
+
+                                <img
+                                    src="https://www.google.com/s2/favicons?domain=edenredmobilidade.com.br&sz=64"
+                                    alt="Ticket"
+                                    loading="lazy"
+                                >
+
                             </span>
 
                             <span class="portal-item-name">
@@ -737,13 +854,13 @@
 
 
 
-            <!-- ==================================
+            <!-- =================================================
                  CONFERÊNCIAS
-            =================================== -->
+            ================================================== -->
 
             <section
                 class="category"
-                data-category="conferencias"
+                data-category="conferencias conferência análise"
             >
 
 
@@ -754,6 +871,7 @@
 
                         <svg
                             viewBox="0 0 24 24"
+                            fill="none"
                             aria-hidden="true"
                         >
 
@@ -819,7 +937,7 @@
                     <a
                         href="https://postosgraciosa.github.io/conferencia-premmia/"
                         class="tool-card"
-                        data-search="conferencia prem mia premia"
+                        data-search="conferencia premia premmia prem mia cartões"
                     >
 
 
@@ -830,6 +948,7 @@
 
                                 <svg
                                     viewBox="0 0 24 24"
+                                    fill="none"
                                     aria-hidden="true"
                                 >
 
@@ -858,6 +977,7 @@
 
                                 <svg
                                     viewBox="0 0 24 24"
+                                    fill="none"
                                     aria-hidden="true"
                                 >
 
@@ -891,6 +1011,11 @@
                         </div>
 
 
+                        <div class="tool-footer">
+                            Acessar conferência
+                        </div>
+
+
                     </a>
 
 
@@ -901,13 +1026,13 @@
 
 
 
-            <!-- ==================================
+            <!-- =================================================
                  DOCUMENTOS
-            =================================== -->
+            ================================================== -->
 
             <section
                 class="category"
-                data-category="documentos"
+                data-category="documentos recibo vale funcionário"
             >
 
 
@@ -918,6 +1043,7 @@
 
                         <svg
                             viewBox="0 0 24 24"
+                            fill="none"
                             aria-hidden="true"
                         >
 
@@ -978,6 +1104,7 @@
 
                                 <svg
                                     viewBox="0 0 24 24"
+                                    fill="none"
                                     aria-hidden="true"
                                 >
 
@@ -1006,6 +1133,7 @@
 
                                 <svg
                                     viewBox="0 0 24 24"
+                                    fill="none"
                                     aria-hidden="true"
                                 >
 
@@ -1039,6 +1167,11 @@
                         </div>
 
 
+                        <div class="tool-footer">
+                            Emitir recibo
+                        </div>
+
+
                     </a>
 
 
@@ -1059,19 +1192,24 @@
 
                                 <svg
                                     viewBox="0 0 24 24"
+                                    fill="none"
                                     aria-hidden="true"
                                 >
 
-                                    <path
-                                        d="M4 7h16v10H4z"
+                                    <rect
+                                        x="4"
+                                        y="6"
+                                        width="16"
+                                        height="12"
+                                        rx="2"
                                     />
 
                                     <path
-                                        d="M8 7v10"
+                                        d="M8 6v12"
                                     />
 
                                     <path
-                                        d="M16 7v10"
+                                        d="M16 6v12"
                                     />
 
                                     <path
@@ -1091,6 +1229,7 @@
 
                                 <svg
                                     viewBox="0 0 24 24"
+                                    fill="none"
                                     aria-hidden="true"
                                 >
 
@@ -1124,6 +1263,11 @@
                         </div>
 
 
+                        <div class="tool-footer">
+                            Emitir vale
+                        </div>
+
+
                     </a>
 
 
@@ -1134,13 +1278,13 @@
 
 
 
-            <!-- ==================================
+            <!-- =================================================
                  OPERACIONAL
-            =================================== -->
+            ================================================== -->
 
             <section
                 class="category"
-                data-category="operacional"
+                data-category="operacional ocorrências pdv ponto venda"
             >
 
 
@@ -1151,6 +1295,7 @@
 
                         <svg
                             viewBox="0 0 24 24"
+                            fill="none"
                             aria-hidden="true"
                         >
 
@@ -1204,7 +1349,7 @@
                     <a
                         href="https://postosgraciosa.github.io/ocorrencias-pdv/"
                         class="tool-card"
-                        data-search="ocorrencias ocorrências pdv ponto venda"
+                        data-search="ocorrencias ocorrência pdv ponto venda"
                     >
 
 
@@ -1215,6 +1360,7 @@
 
                                 <svg
                                     viewBox="0 0 24 24"
+                                    fill="none"
                                     aria-hidden="true"
                                 >
 
@@ -1247,6 +1393,7 @@
 
                                 <svg
                                     viewBox="0 0 24 24"
+                                    fill="none"
                                     aria-hidden="true"
                                 >
 
@@ -1280,6 +1427,11 @@
                         </div>
 
 
+                        <div class="tool-footer">
+                            Registrar ocorrência
+                        </div>
+
+
                     </a>
 
 
@@ -1290,13 +1442,13 @@
 
 
 
-            <!-- ==================================
+            <!-- =================================================
                  ATENDIMENTO
-            =================================== -->
+            ================================================== -->
 
             <section
                 class="category"
-                data-category="atendimento"
+                data-category="atendimento mensagem mensagens whatsapp cliente"
             >
 
 
@@ -1307,6 +1459,7 @@
 
                         <svg
                             viewBox="0 0 24 24"
+                            fill="none"
                             aria-hidden="true"
                         >
 
@@ -1351,12 +1504,14 @@
                 <div class="tools-grid">
 
 
-                    <!-- MENSAGENS -->
+                    <!-- =================================================
+                         GERADOR DE MENSAGENS
+                    ================================================== -->
 
                     <a
                         href="https://postosgraciosa.github.io/mensagem-whatsapp/"
                         class="tool-card"
-                        data-search="mensagem whatsapp cliente clientes gerador msg"
+                        data-search="mensagem whatsapp cliente clientes gerador msg comunicação atendimento"
                     >
 
 
@@ -1365,24 +1520,29 @@
 
                             <div class="tool-icon whatsapp">
 
+
+                                <!-- ÍCONE DE MENSAGEM CORRIGIDO -->
+
                                 <svg
                                     viewBox="0 0 24 24"
+                                    fill="none"
                                     aria-hidden="true"
                                 >
 
                                     <path
-                                        d="M20 11.5a7.5 7.5 0 0 1-8 7.5 8 8 0 0 1-3-.6L4 20l1.6-4A7.5 7.5 0 1 1 20 11.5Z"
+                                        d="M20 11.5a7.5 7.5 0 0 1-7.7 7.5 8 8 0 0 1-3.1-.6L4 20l1.6-4A7.5 7.5 0 1 1 20 11.5Z"
                                     />
 
                                     <path
-                                        d="M8.5 9.5c.4 2 2 3.6 4 4"
+                                        d="M8 10h8"
                                     />
 
                                     <path
-                                        d="M8.5 9.5c.2-.8.5-1.1.9-1.1"
+                                        d="M8 14h5"
                                     />
 
                                 </svg>
+
 
                             </div>
 
@@ -1391,6 +1551,7 @@
 
                                 <svg
                                     viewBox="0 0 24 24"
+                                    fill="none"
                                     aria-hidden="true"
                                 >
 
@@ -1413,14 +1574,19 @@
                         <div class="tool-content">
 
                             <h4>
-                                Gerador de MSG para Clientes
+                                Gerador de Mensagens
                             </h4>
 
                             <p>
                                 Gere mensagens padronizadas para
-                                confirmação de transações.
+                                comunicação e confirmação de transações.
                             </p>
 
+                        </div>
+
+
+                        <div class="tool-footer">
+                            Criar mensagem
                         </div>
 
 
@@ -1434,9 +1600,9 @@
 
 
 
-            <!-- ==================================
+            <!-- =================================================
                  SEM RESULTADOS
-            =================================== -->
+            ================================================== -->
 
             <div
                 class="no-results"
@@ -1448,6 +1614,7 @@
 
                     <svg
                         viewBox="0 0 24 24"
+                        fill="none"
                         aria-hidden="true"
                     >
 
@@ -1483,9 +1650,9 @@
 
 
 
-        <!-- =====================================
+        <!-- =================================================
              FOOTER
-        ====================================== -->
+        ================================================== -->
 
         <footer>
 
@@ -1527,9 +1694,9 @@
 
 
 
-    <!-- =========================================
+    <!-- =====================================================
          JAVASCRIPT
-    ========================================== -->
+    ====================================================== -->
 
     <script src="js/app.js"></script>
 
