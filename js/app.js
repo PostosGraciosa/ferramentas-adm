@@ -1,7 +1,7 @@
 /* ============================================
    FERRAMENTAS ADM
-   POSTOS GRACIOSA
    SISTEMA CORPORATIVO
+   APP.JS
 ============================================ */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -40,10 +40,6 @@ document.addEventListener("DOMContentLoaded", function () {
         portalList
     ) {
 
-        /* ------------------------------------
-           ABRIR / FECHAR
-        ------------------------------------ */
-
         portalButton.addEventListener(
             "click",
             function (event) {
@@ -63,9 +59,9 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-        /* ------------------------------------
+        /* ====================================
            FECHAR AO CLICAR FORA
-        ------------------------------------ */
+        ==================================== */
 
         document.addEventListener(
             "click",
@@ -75,7 +71,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     !portalDropdown.contains(event.target)
                 ) {
 
-                    fecharPortal();
+                    portalDropdown.classList.remove(
+                        "active"
+                    );
+
+                    portalButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
 
                 }
 
@@ -83,17 +86,28 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-        /* ------------------------------------
+        /* ====================================
            ESC
-        ------------------------------------ */
+        ==================================== */
 
         document.addEventListener(
             "keydown",
             function (event) {
 
-                if (event.key === "Escape") {
+                if (
+                    event.key === "Escape"
+                ) {
 
-                    fecharPortal();
+                    portalDropdown.classList.remove(
+                        "active"
+                    );
+
+                    portalButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                    portalButton.focus();
 
                 }
 
@@ -101,28 +115,14 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-        /* ------------------------------------
-           FECHAR FUNÇÃO
-        ------------------------------------ */
-
-        function fecharPortal() {
-
-            portalDropdown.classList.remove("active");
-
-            portalButton.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-        }
-
-
-        /* ------------------------------------
-           LINKS DOS PORTAIS
-        ------------------------------------ */
+        /* ====================================
+           FECHAR AO SELECIONAR PORTAL
+        ==================================== */
 
         const portalItems =
-            portalList.querySelectorAll(".portal-item");
+            portalList.querySelectorAll(
+                ".portal-item"
+            );
 
 
         portalItems.forEach(
@@ -133,7 +133,18 @@ document.addEventListener("DOMContentLoaded", function () {
                     function () {
 
                         setTimeout(
-                            fecharPortal,
+                            function () {
+
+                                portalDropdown.classList.remove(
+                                    "active"
+                                );
+
+                                portalButton.setAttribute(
+                                    "aria-expanded",
+                                    "false"
+                                );
+
+                            },
                             100
                         );
 
@@ -147,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* ========================================
-       BUSCA
+       BUSCA DE FERRAMENTAS
     ======================================== */
 
     if (searchInput) {
@@ -156,43 +167,181 @@ document.addEventListener("DOMContentLoaded", function () {
             "input",
             function () {
 
-                filtrarFerramentas(
-                    this.value
+                const search =
+                    searchInput.value
+                        .toLowerCase()
+                        .normalize("NFD")
+                        .replace(
+                            /[\u0300-\u036f]/g,
+                            ""
+                        )
+                        .trim();
+
+
+                let totalResults = 0;
+
+
+                /* =================================
+                   CADA CATEGORIA
+                ================================= */
+
+                categories.forEach(
+                    function (category) {
+
+                        const categoryText =
+                            category
+                                .innerText
+                                .toLowerCase()
+                                .normalize("NFD")
+                                .replace(
+                                    /[\u0300-\u036f]/g,
+                                    ""
+                                );
+
+
+                        const items =
+                            category.querySelectorAll(
+                                ".tool-card, .portal-item"
+                            );
+
+
+                        let categoryResults = 0;
+
+
+                        /* =============================
+                           SEM BUSCA
+                        ============================= */
+
+                        if (!search) {
+
+                            items.forEach(
+                                function (item) {
+
+                                    item.style.display = "";
+
+                                }
+                            );
+
+                            category.style.display = "";
+
+                            return;
+
+                        }
+
+
+                        /* =============================
+                           BUSCAR ITENS
+                        ============================= */
+
+                        items.forEach(
+                            function (item) {
+
+                                const itemText =
+                                    (
+                                        item.dataset.search ||
+                                        item.innerText ||
+                                        ""
+                                    )
+                                    .toLowerCase()
+                                    .normalize("NFD")
+                                    .replace(
+                                        /[\u0300-\u036f]/g,
+                                        ""
+                                    );
+
+
+                                const matches =
+                                    itemText.includes(search) ||
+                                    categoryText.includes(search);
+
+
+                                if (matches) {
+
+                                    item.style.display = "";
+                                    categoryResults++;
+                                    totalResults++;
+
+                                } else {
+
+                                    item.style.display = "none";
+
+                                }
+
+                            }
+                        );
+
+
+                        /* =============================
+                           CATEGORIA
+                        ============================= */
+
+                        if (categoryResults > 0) {
+
+                            category.style.display = "";
+
+                        } else {
+
+                            category.style.display = "none";
+
+                        }
+
+                    }
                 );
+
+
+                /* =================================
+                   RESULTADO
+                ================================= */
+
+                if (noResults) {
+
+                    if (
+                        search &&
+                        totalResults === 0
+                    ) {
+
+                        noResults.classList.add(
+                            "visible"
+                        );
+
+                    } else {
+
+                        noResults.classList.remove(
+                            "visible"
+                        );
+
+                    }
+
+                }
 
             }
         );
 
 
-        /* ------------------------------------
+        /* ====================================
            ATALHO /
-        ------------------------------------ */
+        ==================================== */
 
         document.addEventListener(
             "keydown",
             function (event) {
 
-                /*
-                    Não ativa o atalho quando
-                    o usuário já está digitando
-                    em outro campo.
-                */
-
-                const elemento =
+                const activeElement =
                     document.activeElement;
 
-                const estaDigitando =
-                    elemento &&
+
+                const isTyping =
+                    activeElement &&
                     (
-                        elemento.tagName === "INPUT" ||
-                        elemento.tagName === "TEXTAREA" ||
-                        elemento.tagName === "SELECT"
+                        activeElement.tagName === "INPUT" ||
+                        activeElement.tagName === "TEXTAREA" ||
+                        activeElement.isContentEditable
                     );
 
 
                 if (
                     event.key === "/" &&
-                    !estaDigitando
+                    !isTyping
                 ) {
 
                     event.preventDefault();
@@ -204,230 +353,44 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         );
 
-
-        /* ------------------------------------
-           ESC LIMPA BUSCA
-        ------------------------------------ */
-
-        searchInput.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (
-                    event.key === "Escape" &&
-                    this.value
-                ) {
-
-                    this.value = "";
-
-                    filtrarFerramentas("");
-
-                    this.focus();
-
-                }
-
-            }
-        );
-
     }
 
 
     /* ========================================
-       FUNÇÃO DE FILTRAGEM
+       FALLBACK DOS ÍCONES DOS PORTAIS
     ======================================== */
 
-    function filtrarFerramentas(termo) {
-
-        const busca =
-            normalizar(termo);
-
-
-        let encontrouResultado = false;
-
-
-        categories.forEach(
-            function (category) {
-
-                const categoriaTexto =
-                    normalizar(
-                        category.dataset.category || ""
-                    );
-
-
-                const items =
-                    category.querySelectorAll(
-                        ".tool-card, .portal-item"
-                    );
-
-
-                let encontrouNaCategoria =
-                    false;
-
-
-                /* --------------------------------
-                   CATEGORIA SEM ITENS
-                -------------------------------- */
-
-                if (!items.length) {
-
-                    if (
-                        !busca ||
-                        categoriaTexto.includes(busca)
-                    ) {
-
-                        category.style.display = "";
-
-                        encontrouResultado = true;
-
-                    } else {
-
-                        category.style.display = "none";
-
-                    }
-
-                    return;
-
-                }
-
-
-                /* --------------------------------
-                   FILTRAR ITENS
-                -------------------------------- */
-
-                items.forEach(
-                    function (item) {
-
-                        const texto =
-                            normalizar(
-                                item.innerText +
-                                " " +
-                                (item.dataset.search || "")
-                            );
-
-
-                        const corresponde =
-                            !busca ||
-                            texto.includes(busca);
-
-
-                        if (corresponde) {
-
-                            item.style.display = "";
-
-                            encontrouNaCategoria =
-                                true;
-
-                            encontrouResultado =
-                                true;
-
-                        } else {
-
-                            item.style.display = "none";
-
-                        }
-
-                    }
-                );
-
-
-                /* --------------------------------
-                   MOSTRAR / ESCONDER CATEGORIA
-                -------------------------------- */
-
-                if (encontrouNaCategoria) {
-
-                    category.style.display = "";
-
-                } else {
-
-                    category.style.display = "none";
-
-                }
-
-            }
-        );
-
-
-        /* =====================================
-           NENHUM RESULTADO
-        ===================================== */
-
-        if (noResults) {
-
-            noResults.classList.toggle(
-                "active",
-                !encontrouResultado
-            );
-
-        }
-
-    }
-
-
-    /* ========================================
-       NORMALIZA TEXTO
-    ======================================== */
-
-    function normalizar(texto) {
-
-        return String(texto)
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(
-                /[\u0300-\u036f]/g,
-                ""
-            )
-            .trim();
-
-    }
-
-
-    /* ========================================
-       ANIMAÇÃO DE ENTRADA
-    ======================================== */
-
-    const cards =
+    const portalIcons =
         document.querySelectorAll(
-            ".tool-card, .portal-dropdown"
+            ".portal-item-icon img"
         );
 
 
-    cards.forEach(
-        function (elemento, index) {
+    portalIcons.forEach(
+        function (img) {
 
-            elemento.style.setProperty(
-                "--animation-delay",
-                `${index * 35}ms`
+            img.addEventListener(
+                "error",
+                function () {
+
+                    this.style.display = "none";
+
+                    const fallback =
+                        this.parentElement.querySelector(
+                            ".portal-fallback"
+                        );
+
+                    if (fallback) {
+
+                        fallback.style.display = "flex";
+
+                    }
+
+                }
             );
 
         }
     );
-
-
-    /* ========================================
-       LOGO
-    ======================================== */
-
-    const logo =
-        document.querySelector(".brand-logo img");
-
-
-    if (logo) {
-
-        logo.addEventListener(
-            "error",
-            function () {
-
-                this.style.display = "none";
-
-                this.parentElement.classList.add(
-                    "logo-error"
-                );
-
-            }
-        );
-
-    }
 
 
 });
