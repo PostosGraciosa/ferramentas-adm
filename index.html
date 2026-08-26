@@ -155,7 +155,9 @@
 <main class="container">
 
 
-    <!-- BUSCA -->
+    <!-- =====================================
+         BUSCA
+    ====================================== -->
 
     <div class="search-wrap">
 
@@ -194,7 +196,7 @@
 
         <article
             class="card assistant-card"
-            data-search="resposta rápida assistente respostas ia local inteligencia artificial"
+            data-search="resposta rápida assistente respostas ia local inteligencia artificial atendimento cliente pagamento estorno cartão reclamação"
             id="cardAssistente"
         >
 
@@ -203,6 +205,7 @@
             </div>
 
             <h3>
+
                 Assistente de Respostas
 
                 <span class="selo-local">
@@ -213,7 +216,7 @@
 
             <p>
                 Gere respostas administrativas padronizadas
-                sem necessidade de API externa.
+                para diferentes situações de atendimento.
             </p>
 
             <span class="card-action">
@@ -290,7 +293,6 @@
                 id="portaisMenu"
                 aria-label="Portais"
             >
-
 
                 <a
                     href="https://minhaconta2.cielo.com.br/site/acessos/login"
@@ -683,7 +685,7 @@
 
 
         <!-- =================================
-             ASSISTENTE LOCAL
+             ASSISTENTE DE RESPOSTAS
         ================================== -->
 
         <section
@@ -704,8 +706,8 @@
                     </h2>
 
                     <p>
-                        IA local — respostas administrativas
-                        sem API externa.
+                        Respostas administrativas
+                        rápidas e padronizadas.
                     </p>
 
                 </div>
@@ -713,46 +715,94 @@
             </div>
 
 
+            <!-- TIPO DE ATENDIMENTO -->
+
             <div class="form-row">
 
                 <label for="tipoResposta">
-                    Tipo de resposta
+                    Tipo de atendimento
                 </label>
 
                 <select id="tipoResposta">
 
-                    <option>
-                        Confirmação de pagamento
+                    <option value="Confirmação de pagamento">
+                        💳 Confirmação de pagamento
                     </option>
 
-                    <option>
-                        Solicitação de documento
+                    <option value="Pagamento não localizado">
+                        💰 Pagamento não localizado
                     </option>
 
-                    <option>
-                        Divergência de informação
+                    <option value="Estorno">
+                        🔄 Estorno
                     </option>
 
-                    <option>
-                        Aguardando retorno
+                    <option value="Divergência de valor">
+                        ⚠️ Divergência de valor
                     </option>
 
-                    <option>
-                        Encaminhamento ao setor responsável
+                    <option value="Solicitação de documento">
+                        📄 Solicitação de documento
                     </option>
 
-                    <option>
-                        Agradecimento
+                    <option value="Solicitação de comprovante">
+                        🧾 Solicitação de comprovante
                     </option>
 
-                    <option>
-                        Resposta personalizada
+                    <option value="Aguardando retorno">
+                        ⏳ Aguardando retorno
+                    </option>
+
+                    <option value="Retorno ao cliente">
+                        📞 Retorno ao cliente
+                    </option>
+
+                    <option value="Problema com cartão">
+                        🏦 Problema com cartão
+                    </option>
+
+                    <option value="Cartão recusado">
+                        💳 Cartão recusado
+                    </option>
+
+                    <option value="Ticket / benefício">
+                        🎫 Ticket / benefício
+                    </option>
+
+                    <option value="Abastecimento">
+                        🚗 Abastecimento
+                    </option>
+
+                    <option value="Loja / conveniência">
+                        🛒 Loja / conveniência
+                    </option>
+
+                    <option value="Produto indisponível">
+                        📦 Produto indisponível
+                    </option>
+
+                    <option value="Encaminhamento ao setor responsável">
+                        🧑‍💼 Encaminhamento ao setor responsável
+                    </option>
+
+                    <option value="Agradecimento">
+                        🙏 Agradecimento
+                    </option>
+
+                    <option value="Reclamação">
+                        ❌ Reclamação
+                    </option>
+
+                    <option value="Resposta personalizada">
+                        📝 Resposta personalizada
                     </option>
 
                 </select>
 
             </div>
 
+
+            <!-- INFORMAÇÕES -->
 
             <div class="form-row">
 
@@ -762,11 +812,13 @@
 
                 <textarea
                     id="infoExtra"
-                    placeholder="Detalhes que deseja incluir na resposta..."
+                    placeholder="Digite os detalhes que devem aparecer na resposta..."
                 ></textarea>
 
             </div>
 
+
+            <!-- BOTÕES -->
 
             <div class="button-row">
 
@@ -796,6 +848,8 @@
 
             </div>
 
+
+            <!-- RESULTADO -->
 
             <div
                 class="result-box"
@@ -830,13 +884,16 @@
                     </h2>
 
                     <p>
-                        Prepare seu prompt e abra o ChatGPT.
+                        Digite sua solicitação ou escolha
+                        uma sugestão rápida.
                     </p>
 
                 </div>
 
             </div>
 
+
+            <!-- PROMPT -->
 
             <div class="form-row">
 
@@ -852,6 +909,8 @@
 
             </div>
 
+
+            <!-- SUGESTÕES -->
 
             <div class="prompt-title">
                 Sugestões rápidas
@@ -873,7 +932,7 @@
                 <button
                     type="button"
                     class="prompt-suggestion"
-                    data-prompt="Reescreva esta mensagem de forma mais profissional, clara e cordial para enviar ao cliente:"
+                    data-prompt="Reescreva esta mensagem de forma mais profissional, clara, objetiva e cordial para enviar ao cliente:"
                 >
                     Melhorar mensagem
                 </button>
@@ -882,7 +941,7 @@
                 <button
                     type="button"
                     class="prompt-suggestion"
-                    data-prompt="Crie uma mensagem curta e profissional solicitando ao cliente o envio de um documento necessário."
+                    data-prompt="Crie uma mensagem curta, profissional e cordial solicitando ao cliente o envio de um documento necessário."
                 >
                     Solicitar documento
                 </button>
@@ -909,6 +968,8 @@
             </div>
 
 
+            <!-- BOTÕES CHATGPT -->
+
             <div class="button-row chatgpt-buttons">
 
                 <button
@@ -930,6 +991,8 @@
             </div>
 
 
+            <!-- INFORMAÇÃO -->
+
             <div class="chatgpt-info">
 
                 <span>
@@ -937,8 +1000,8 @@
                 </span>
 
                 O sistema não utiliza API.
-                O prompt é copiado e o ChatGPT é aberto
-                em uma nova aba.
+                O prompt digitado é enviado para a abertura
+                do ChatGPT.
 
             </div>
 
@@ -992,4 +1055,5 @@
 <script src="js/app.js"></script>
 
 </body>
+
 </html>
