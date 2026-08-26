@@ -1,4 +1,3 @@
-```javascript
 /* ============================================
    FERRAMENTAS ADM
    SISTEMA CORPORATIVO
@@ -6,133 +5,147 @@
 
 
 /* ============================================
-   DROPDOWN
-   ADMINISTRADORAS / PORTAIS
+   INICIALIZAÇÃO
 ============================================ */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+document.addEventListener("DOMContentLoaded", function () {
 
 
-        const portalButton =
-            document.getElementById(
-                "portalButton"
-            );
+    /* ========================================
+       ELEMENTOS DO DROPDOWN
+       ADMINISTRADORAS / PORTAIS
+    ======================================== */
+
+    const portalButton =
+        document.getElementById("portalButton");
+
+    const portalDropdown =
+        document.querySelector(".portal-dropdown");
+
+    const portalList =
+        document.getElementById("portalList");
 
 
-        const portalDropdown =
-            document.querySelector(
-                ".portal-dropdown"
-            );
+    /* ========================================
+       VERIFICAÇÃO
+    ======================================== */
+
+    if (
+        !portalButton ||
+        !portalDropdown ||
+        !portalList
+    ) {
+
+        console.warn(
+            "Dropdown de administradoras não encontrado."
+        );
+
+        return;
+
+    }
 
 
-        /* ========================================
-           VERIFICAR ELEMENTOS
-        ======================================== */
+    /* ========================================
+       ABRIR / FECHAR DROPDOWN
+    ======================================== */
 
-        if (
-            !portalButton ||
-            !portalDropdown
-        ) {
+    portalButton.addEventListener(
+        "click",
+        function (event) {
 
-            return;
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            portalDropdown.classList.toggle("active");
 
         }
+    );
 
 
-        /* ========================================
-           ABRIR / FECHAR
-        ======================================== */
+    /* ========================================
+       FECHAR AO CLICAR FORA
+    ======================================== */
 
-        portalButton.addEventListener(
-            "click",
-            function (event) {
+    document.addEventListener(
+        "click",
+        function (event) {
 
-                event.stopPropagation();
+            if (
+                !portalDropdown.contains(event.target)
+            ) {
 
-                portalDropdown.classList.toggle(
+                portalDropdown.classList.remove(
                     "active"
                 );
 
             }
-        );
+
+        }
+    );
 
 
-        /* ========================================
-           FECHAR AO CLICAR FORA
-        ======================================== */
+    /* ========================================
+       FECHAR COM ESC
+    ======================================== */
 
-        document.addEventListener(
-            "click",
-            function (event) {
+    document.addEventListener(
+        "keydown",
+        function (event) {
 
-                if (
-                    !portalDropdown.contains(
-                        event.target
-                    )
-                ) {
+            if (
+                event.key === "Escape"
+            ) {
 
-                    portalDropdown.classList.remove(
-                        "active"
-                    );
-
-                }
-
-            }
-        );
-
-
-        /* ========================================
-           FECHAR COM ESC
-        ======================================== */
-
-        document.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (
-                    event.key === "Escape"
-                ) {
-
-                    portalDropdown.classList.remove(
-                        "active"
-                    );
-
-                }
-
-            }
-        );
-
-
-        /* ========================================
-           FECHAR AO ABRIR UM PORTAL
-        ======================================== */
-
-        const portalItems =
-            document.querySelectorAll(
-                ".portal-item"
-            );
-
-
-        portalItems.forEach(
-            function (item) {
-
-                item.addEventListener(
-                    "click",
-                    function () {
-
-                        portalDropdown.classList.remove(
-                            "active"
-                        );
-
-                    }
+                portalDropdown.classList.remove(
+                    "active"
                 );
 
             }
+
+        }
+    );
+
+
+    /* ========================================
+       PORTAIS
+    ======================================== */
+
+    const portalItems =
+        portalList.querySelectorAll(
+            ".portal-item"
         );
 
 
-    }
-);
-```
+    portalItems.forEach(
+        function (item) {
+
+            item.addEventListener(
+                "click",
+                function () {
+
+                    /*
+                        Pequeno atraso para permitir
+                        que o navegador abra o link
+                        normalmente.
+                    */
+
+                    setTimeout(
+                        function () {
+
+                            portalDropdown.classList.remove(
+                                "active"
+                            );
+
+                        },
+                        100
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+});
